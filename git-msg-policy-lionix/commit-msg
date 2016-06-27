@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+message_file = ARGV[0]
+message = File.read(message_file)
+
+$regex = /^(fix|feat|refactor|style|perf|docs|test|chore): .+$/
+
+if !$regex.match(message)
+  puts "
+[POLICY] Your message is not formatted correctly
+
+LioniX Evolve commit message style
+{type}: {commit description}
+
+Types list:
+fix: A bug fix.
+feat: A new feature.
+refactor: A code change that neither fixes a bug or adds a feature.
+style: Changes that do not affect the meaning of the code. (white-space, formatting, missing semi-colons, etc)
+perf: A code change that improves performance.
+docs: Documentation only changes.
+test: Adding missing tests.
+chore: Changes to the build process or auxiliary tools and libraries such a documentation generation.
+
+"
+  exit 1
+end
