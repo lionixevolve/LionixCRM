@@ -799,7 +799,7 @@ $mod_strings = array(
     'LBL_HISTORY_CONTACTS_EMAILS' => 'History Subpanel',
     'LBL_HISTORY_CONTACTS_EMAILS_DESC' => 'Enable/Disable contacts\' emails in history',
 
-    'LBL_USERS_DESC' => 'Create, edit, activate and deactivate users in SuiteCRM.',
+    'LBL_USERS_DESC' => 'Create, edit, activate and deactivate users in LionixCRM.',
 
 
     'LBL_UW_BTN_BACK_TO_MOD_LOADER' => 'Back to Module Loader',
@@ -907,7 +907,7 @@ $mod_strings = array(
     'WARN_VALIDATION_EXPIRED2' => " day(s). Please update information in the <a href='index.php?action=LicenseSettings&module=Administration'>'\"License Management\"</a> page in the Admin area.",
     'WARN_NO_SMTP_SERVER_AVAILABLE_ERROR' => "Note: To send record assignment notifications, an SMTP server must be configured in <a href='index.php?module=EmailMan&action=config'>Email Settings</a>.",
     'LBL_MODULEBUILDER' => 'Module Builder',
-    'LBL_MODULEBUILDER_DESC' => 'Build new modules to expand the functionality of SuiteCRM',
+    'LBL_MODULEBUILDER_DESC' => 'Build new modules to expand the functionality of LionixCRM',
     'LBL_SUGARPORTAL' => 'SuiteCRM Portal',
     'LBL_SUGARPORTAL_DESC' => 'Manage the SuiteCRM Portal',
     'LBL_CLEAR_TEMPLATE_DATA_CACHE_DESC' => 'Removes cached template files',
@@ -1261,4 +1261,3 @@ $mod_strings = array(
     'LBL_SECURITYGROUPS_SUGAROUTFITTERS' => "Grab the latest version of SecuritySuite and find other SuiteCRM modules, themes, and integrations along with reviews, docs, support, and community verified versions.",
 
 );
-
