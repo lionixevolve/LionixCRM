@@ -289,7 +289,7 @@ $mod_strings = array (
 
     'LBL_PSW_MODIFIED' => 'Password Last Changed',
     'LBL_PHONE' => 'Phone',
-    'LBL_PICK_TZ_WELCOME' => 'Welcome to SuiteCRM.',
+    'LBL_PICK_TZ_WELCOME' => 'Welcome to LionixCRM.',
     'LBL_PICK_TZ_DESCRIPTION' => 'Before continuing, please confirm your time zone.  Select the appropriate time zone from the list below, and click Save to continue. The time zone can be changed at any time in your user settings.',
     'LBL_PORTAL_ONLY_DESC' => 'Use for the Portal API. This type cannot login through the SuiteCRM web interface.',
     'LBL_PORTAL_ONLY_USER' => 'Portal API User',
@@ -512,7 +512,7 @@ $mod_strings = array (
     // Wizard
     'LBL_WIZARD_TITLE' => 'User Wizard',
     'LBL_WIZARD_WELCOME_TAB' => 'Welcome',
-    'LBL_WIZARD_WELCOME_TITLE' => 'Welcome to SuiteCRM!',
+    'LBL_WIZARD_WELCOME_TITLE' => 'Welcome to LionixCRM!',
     'LBL_WIZARD_WELCOME' => 'Click <b>Next</b> to configure a few basic settings for using SuiteCRM.',
     'LBL_WIZARD_WELCOME_NOSMTP' => 'Click <b>Next</b> to configure a few basic settings for using SuiteCRM.',
     'LBL_WIZARD_NEXT_BUTTON' => 'Next >',

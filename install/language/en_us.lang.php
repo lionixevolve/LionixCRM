@@ -437,7 +437,7 @@ $mod_strings = array(
 //	'LBL_NO_THANKS'						=> 'Continue to installer',
 	'LBL_CHOOSE_LANG'					=> '<b>Choose your language</b>',
 	'LBL_STEP'							=> 'Step',
-	'LBL_TITLE_WELCOME'					=> 'Welcome to the SuiteCRM ',
+	'LBL_TITLE_WELCOME'					=> 'Welcome to the LionixCRM ',
 	'LBL_WELCOME_1'						=> 'This installer creates the SuiteCRM database tables and sets the configuration variables that you need to start. The entire process should take about ten minutes.',
 	'LBL_WELCOME_2'						=> 'For installation documentation, please visit the <a href="http://www.SuiteCRM.com/" target="_blank">SuiteCRM</a>.  <BR><BR> You can also find help from the SuiteCRM Community in the <a href="http://www.SuiteCRM.com/" target="_blank">SuiteCRM Forums</a>.',
     //welcome page variables
@@ -524,7 +524,7 @@ $mod_strings = array(
 
 	'LBL_WELCOME_CHOOSE_LANGUAGE'		=> '<b>Choose your language</b>',
 	'LBL_WELCOME_SETUP_WIZARD'			=> 'Setup Wizard',
-	'LBL_WELCOME_TITLE_WELCOME'			=> 'Welcome to the SuiteCRM ',
+	'LBL_WELCOME_TITLE_WELCOME'			=> 'Welcome to the LionixCRM ',
 	'LBL_WELCOME_TITLE'					=> 'SuiteCRM Setup Wizard',
 	'LBL_WIZARD_TITLE'					=> 'SuiteCRM Setup Wizard: ',
 	'LBL_YES'							=> 'Yes',

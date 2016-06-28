@@ -179,7 +179,7 @@ $mod_strings = array (
 //SUGAR PORTAL
 'LBL_SW_SUGARPORTAL'=>'SuiteCRM Portal',
 'LBL_SMP_WELCOME'=>' Please select a module you would like to edit from the list below',
-'LBL_SP_WELCOME'=>'Welcome to Studio for SuiteCRM Portal. You can either choose to edit modules here or sync to a portal instance.<br> Please choose from the list below.',
+'LBL_SP_WELCOME'=>'Welcome to Studio for LionixCRM Portal. You can either choose to edit modules here or sync to a portal instance.<br> Please choose from the list below.',
 'LBL_SP_SYNC'=>'Portal Sync',
 'LBL_SYNCP_WELCOME'=>'Please enter the url to the portal instance you wish to update then press the Go button.<br> This will bring up a prompt for your user name and password.<br> Please enter your SuiteCRM user name and password and press the Begin Sync button.',
 'LBL_LISTVIEWP_DESCRIPTION'=>'There are two columns below: Default which are the fields that will be displayed and Available which are the fields that are not displayed, but are available for displaying. Just drag the fields between the two columns. You can also reorder the items in a column by dragging and dropping them.',
