@@ -58,6 +58,13 @@
     {/if}
 
     <div id="copyright_data">
+    <div id="dialogLionix" title="&copy; {$MOD.LBL_SUITE_EVOLVED_BY}">
+        <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_1}</p>
+        <br>
+        <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_2}</p>
+        <br>
+        <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_3}</p>
+    </div>
     <div id="dialogSuite" title="{$MOD.LBL_SUITE_SUPERCHARGED}">
         <p>{$MOD.LBL_SUITE_DESC1}</p>
         <br>
@@ -70,6 +77,7 @@
         <p>{$COPYRIGHT}</p>
     </div>
 
+    <button id="evolved_by" >&copy; {$MOD.LBL_SUITE_EVOLVED_BY}</button>
     <button id="admin_options">{$MOD.LBL_SUITE_SUPERCHARGED}</button>
     <button id="powered_by">&copy; {$MOD.LBL_SUITE_POWERED_BY}</button>
     </div>
@@ -138,7 +146,7 @@ function qe_init(){
         });
 
         $(function() {
-            $( "#dialogSugar, #dialogSuite" ).dialog({
+            $( "#dialogSugar, #dialogSuite", "#dialogLionix" ).dialog({
                 autoOpen: false,
                 show: {
                     effect: "blind",
@@ -155,6 +163,9 @@ function qe_init(){
             });
             $( "#admin_options" ).click(function() {
                 $( "#dialogSuite" ).dialog( "open" );
+            });
+            $( "#evolved_by" ).click(function() {
+                $( "#dialogLionix" ).dialog( "open" );
             });
         });
 

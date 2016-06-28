@@ -49,6 +49,13 @@
             {$BOTTOMLINKS}
         </div>
         <div id="copyright_data">
+            <div id="dialog3" title="&copy; {$MOD.LBL_SUITE_EVOLVED_BY}">
+                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_1}</p>
+                <br>
+                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_2}</p>
+                <br>
+                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_3}</p>
+            </div>
             <div id="dialog2" title="{$MOD.LBL_SUITE_SUPERCHARGED}">
                 <p>{$MOD.LBL_SUITE_DESC1}</p>
                 <br>
@@ -61,6 +68,7 @@
                 <p>{$COPYRIGHT}</p>
             </div>
             <div id="copyrightbuttons">
+            <a id="evolved_by" >&copy; {$MOD.LBL_SUITE_EVOLVED_BY}</a>
             <a id="admin_options">&copy; {$MOD.LBL_SUITE_SUPERCHARGED}</a>
             <a id="powered_by" >&copy; {$MOD.LBL_SUITE_POWERED_BY}</a>
             </div>
