@@ -44,6 +44,20 @@ global $sugar_config, $mod_strings;
 
 ?>
 <div class="about" id="about_header">
+    <h1><img src="include/images/lionixCRM.png" alt="LionixCRM"></h1><br/>
+    <h1><?php echo $mod_strings['LBL_CONTRIBUTOR_LIONIXCRM']; ?></h1>
+    <div class="about_suite">
+    <br/>
+    <h3><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM']; ?></h3><br/>
+    <ul id="about_lionixcrm">
+        <li><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM_1']; ?></li>
+        <li><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM_2']; ?></li>
+        <li><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM_3']; ?></li>
+        <li>More information on our website <a href="http://www.lionix.com/crm">http://www.lionix.com/crm</a></li>
+    </ul>
+</div>
+    <hr>
+
     <h1><img src="include/images/suite_logo.png" alt="SuiteCRM"></h1>
     <br>
     <b>

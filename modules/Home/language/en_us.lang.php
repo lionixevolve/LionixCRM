@@ -80,8 +80,8 @@ $mod_strings  = array(
     'LBL_NO_RESULTS' => '<h2>There were no results found. Please search again.</h2><br>',
     'LBL_NO_RESULTS_TIPS' => '<h3>Search Tips:</h3><ul><li>Make sure you have the proper categories selected above.</li><li>Broaden your search criteria.</li><li>If you still cannot find any results try the advanced search option.</li></ul>',
 
-  'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this SuiteCRM Dashlet.',
-  'LBL_ADD_DASHLETS' => 'Add SuiteCRM Dashlets',
+  'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this LionixCRM Dashlet.',
+  'LBL_ADD_DASHLETS' => 'Add LionixCRM Dashlets',
   'LBL_ADD_PAGE' => 'Add Page',
   'LBL_DEL_PAGE' => 'Delete Page',
   'LBL_WEBSITE_TITLE' => 'Website',
@@ -123,32 +123,32 @@ $mod_strings  = array(
       'Charts' => 'Charts',
       'Tools' => 'Tools',
       'Miscellaneous' => 'Miscellaneous'),
-  'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of SuiteCRM Dashlets your administrator has set. Please remove a SuiteCRM Dashlet to add a new one.',
-  'LBL_ADDING_DASHLET' => 'Adding SuiteCRM Dashlet ...',
-  'LBL_ADDED_DASHLET' => 'SuiteCRM Dashlet Added',
-  'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this SuiteCRM Dashlet?',
-  'LBL_REMOVING_DASHLET' => 'Removing SuiteCRM Dashlet ...',
-  'LBL_REMOVED_DASHLET' => 'SuiteCRM Dashlet Removed',
+  'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of LionixCRM Dashlets your administrator has set. Please remove a LionixCRM Dashlet to add a new one.',
+  'LBL_ADDING_DASHLET' => 'Adding LionixCRM Dashlet ...',
+  'LBL_ADDED_DASHLET' => 'LionixCRM Dashlet Added',
+  'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this LionixCRM Dashlet?',
+  'LBL_REMOVING_DASHLET' => 'Removing LionixCRM Dashlet ...',
+  'LBL_REMOVED_DASHLET' => 'LionixCRM Dashlet Removed',
   'LBL_DASHLET_CONFIGURE_GENERAL' => 'General',
   'LBL_DASHLET_CONFIGURE_FILTERS' => 'Filters',
   'LBL_DASHLET_CONFIGURE_MY_ITEMS_ONLY' => 'Only My Items',
   'LBL_DASHLET_CONFIGURE_TITLE' => 'Title',
   'LBL_DASHLET_CONFIGURE_DISPLAY_ROWS' => 'Display Rows',
 
-  'LBL_DASHLET_DELETE' => 'Delete SuiteCRM Dashlet',
-  'LBL_DASHLET_REFRESH' => 'Refresh SuiteCRM Dashlet',
-  'LBL_DASHLET_EDIT' => 'Edit SuiteCRM Dashlet',
+  'LBL_DASHLET_DELETE' => 'Delete LionixCRM Dashlet',
+  'LBL_DASHLET_REFRESH' => 'Refresh LionixCRM Dashlet',
+  'LBL_DASHLET_EDIT' => 'Edit LionixCRM Dashlet',
 
     'LBL_TRAINING_TITLE' => 'Training',
 
   'LBL_CREATING_NEW_PAGE' => 'Creating New Page...',
-  'LBL_NEW_PAGE_FEEDBACK' => 'You have created a new page. You can add new content with the Add SuiteCRM Dashlets option.',
+  'LBL_NEW_PAGE_FEEDBACK' => 'You have created a new page. You can add new content with the Add LionixCRM Dashlets option.',
   'LBL_DELETE_PAGE_CONFIRM' => 'Are you sure you want to delete this page?',
   'LBL_SAVING_PAGE_TITLE' => 'Saving Page Title...',
   'LBL_RETRIEVING_PAGE' => 'Retrieving Page...',
 
   // Default out-of-box names for tabs
-  'LBL_HOME_PAGE_1_NAME' => 'My SuiteCRM',
+  'LBL_HOME_PAGE_1_NAME' => 'My LionixCRM',
   'LBL_HOME_PAGE_2_NAME' => 'Sales',
   'LBL_HOME_PAGE_3_NAME' => 'Support',
   'LBL_HOME_PAGE_6_NAME' => 'Marketing',//bug 16510, separate the support and marketing page from each other
@@ -166,7 +166,7 @@ $mod_strings  = array(
     'LBL_MY_TEAM_REPORT_CHARTS' => 'My Team Reports',
     'LBL_MY_SAVED_REPORT_CHARTS' => 'My Saved Reports',
 
-  'LBL_DASHLET_SEARCH' => 'Find SuiteCRM Dashlet',
+  'LBL_DASHLET_SEARCH' => 'Find LionixCRM Dashlet',
 
 //ABOUT page
     'LBL_VERSION' => 'Version',
@@ -257,7 +257,7 @@ $mod_strings  = array(
     'LBL_TOUR_SEARCH' => 'Full Text Search',
     'LBL_TOUR_SEARCH_DESCRIPTION' => 'Search just got a whole lot better.',
     'LBL_TOUR_NOTIFICATIONS' => 'Notifications',
-    'LBL_TOUR_NOTIFICATIONS_DESCRIPTION' => 'SuiteCRM application notifications would go here.',
+    'LBL_TOUR_NOTIFICATIONS_DESCRIPTION' => 'LionixCRM application notifications would go here.',
     'LBL_TOUR_PROFILE' => 'Profile',
     'LBL_TOUR_PROFILE_DESCRIPTION' => 'Access profile, settings and logout.',
     'LBL_TOUR_QUICKCREATE' => 'Quick Create',
@@ -300,5 +300,11 @@ $mod_strings  = array(
     'LBL_ABOUT_SUITE_5' => 'SuiteCRM support is available in both free and paid-for options',
 
     'LBL_SUITE_PARTNERS' => 'We have loyal SuiteCRM partners who are passionate about open source. To view our full partner list, see our website.',
+
+    'LBL_CONTRIBUTOR_LIONIXCRM' => 'LionixCRM - Open source CRM for SMEs - CRM de código abierto para las PyMEs',
+    'LBL_ABOUT_LIONIXCRM' => 'About LionixCRM',
+    'LBL_ABOUT_LIONIXCRM_1' => 'LionixCRM is a fork of SuiteCRM.',
+    'LBL_ABOUT_LIONIXCRM_2' => 'LionixCRM is published under an open source licence - GPL3',
+    'LBL_ABOUT_LIONIXCRM_3' => 'All LionixCRM code managed and developed by the project will be released as open source - GPL3',
 
 );
