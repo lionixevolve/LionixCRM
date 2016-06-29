@@ -1569,7 +1569,7 @@ $app_strings = array(
     'ERR_NOTHING_SELECTED' => 'Please make a selection before proceeding.',
     'ERR_OPPORTUNITY_NAME_DUPE' => 'An opportunity with the name %s already exists.  Please enter another name below.',
     'ERR_OPPORTUNITY_NAME_MISSING' => 'An opportunity name was not entered.  Please enter an opportunity name below.',
-    'ERR_POTENTIAL_SEGFAULT' => 'A potential Apache segmentation fault was detected.  Please notify your system administrator to confirm this problem and have her/him report it to SuiteCRM.',
+    'ERR_POTENTIAL_SEGFAULT' => 'A potential Apache segmentation fault was detected.  Please notify your system administrator to confirm this problem and have her/him report it to LionixCRM.',
     'ERR_SELF_REPORTING' => 'User cannot report to him or herself.',
     'ERR_SINGLE_QUOTE' => 'Using the single quote is not supported for this field.  Please change the value.',
     'ERR_SQS_NO_MATCH_FIELD' => 'No match for field: ',
@@ -1614,7 +1614,7 @@ $app_strings = array(
     'LBL_BILL_TO_CONTACT' => 'Bill to Contact',
     'LBL_BILLING_ADDRESS' => 'Billing Address',
     'LBL_QUICK_CREATE_TITLE' => 'Quick Create',
-    'LBL_BROWSER_TITLE' => 'SuiteCRM - Open Source CRM',
+    'LBL_BROWSER_TITLE' => ' LionixCRM - Open source CRM for SMEs - CRM de código abierto para las PyMEs',
     'LBL_BUGS' => 'Bugs',
     'LBL_BY' => 'by',
     'LBL_CALLS' => 'Calls',
@@ -2020,7 +2020,7 @@ $app_strings = array(
     'NTC_TIME_FORMAT' => '(24:00)',
     'NTC_WELCOME' => 'Welcome',
     'NTC_YEAR_FORMAT' => '(yyyy)',
-    'LOGIN_LOGO_ERROR' => 'Please replace the SuiteCRM logos.',
+    'LOGIN_LOGO_ERROR' => 'Please replace the LionixCRM logos.',
     'WARN_ONLY_ADMINS' => 'Only admins may log in.',
     'WARN_UNSAVED_CHANGES' => 'You are about to leave this record without saving any changes you may have made to the record. Are you sure you want to navigate away from this record?',
     'ERROR_NO_RECORD' => 'Error retrieving record.  This record may be deleted or you may not be authorized to view it.',
@@ -2136,12 +2136,12 @@ $app_strings = array(
     'LBL_DELETE_PAGE_CONFIRM' => 'Are you sure you want to delete this page?',
     'LBL_SAVING_PAGE_TITLE' => 'Saving Page Title ...',
     'LBL_RETRIEVING_PAGE' => 'Retrieving Page ...',
-    'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of SuiteCRM Dashlets your adminstrator has set. Please remove a SuiteCRM Dashlet to add more.',
-    'LBL_ADDING_DASHLET' => 'Adding SuiteCRM Dashlet ...',
-    'LBL_ADDED_DASHLET' => 'SuiteCRM Dashlet Added',
-    'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this SuiteCRM Dashlet?',
-    'LBL_REMOVING_DASHLET' => 'Removing SuiteCRM Dashlet ...',
-    'LBL_REMOVED_DASHLET' => 'SuiteCRM Dashlet Removed',
+    'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of LionixCRM Dashlets your adminstrator has set. Please remove a LionixCRM Dashlet to add more.',
+    'LBL_ADDING_DASHLET' => 'Adding LionixCRM Dashlet ...',
+    'LBL_ADDED_DASHLET' => 'LionixCRM Dashlet Added',
+    'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this LionixCRM Dashlet?',
+    'LBL_REMOVING_DASHLET' => 'Removing LionixCRM Dashlet ...',
+    'LBL_REMOVED_DASHLET' => 'LionixCRM Dashlet Removed',
 
     // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Add Page',
@@ -2151,7 +2151,7 @@ $app_strings = array(
 
     'LBL_LOADING_PAGE' => 'Loading page, please wait...',
 
-    'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this SuiteCRM Dashlet.',
+    'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this LionixCRM Dashlet.',
     'LBL_ADD_DASHLETS' => 'Add Dashlets',
     'LBL_CLOSE_DASHLETS' => 'Close',
     'LBL_OPTIONS' => 'Options',
@@ -2212,7 +2212,7 @@ $app_strings = array(
     'MSG_OR_GREATER' => 'or greater',
 
     'LBL_PORTAL_WELCOME_TITLE' => 'Welcome to LionixCRM Portal',
-    'LBL_PORTAL_WELCOME_INFO' => 'SuiteCRM Portal is a framework which provides real-time view of cases, bugs & newsletters etc to customers. This is an external facing interface to SuiteCRM that can be deployed within any website.',
+    'LBL_PORTAL_WELCOME_INFO' => 'LionixCRM Portal is a framework which provides real-time view of cases, bugs & newsletters etc to customers. This is an external facing interface to LionixCRM that can be deployed within any website.',
     'LBL_LIST' => 'List',
     'LBL_CREATE_BUG' => 'Create Bug',
     'LBL_NO_RECORDS_FOUND' => '- 0 Records Found -',
@@ -3164,7 +3164,7 @@ $app_list_strings['timezone_dom'] = array(
 
 $app_list_strings['moduleList']['Sugar_Favorites'] = 'Favorites';
 $app_list_strings['eapm_list'] = array(
-    'Sugar' => 'SuiteCRM',
+    'Sugar' => 'LionixCRM',
     'WebEx' => 'WebEx',
     'GoToMeeting' => 'GoToMeeting',
     'IBMSmartCloud' => 'IBM SmartCloud',
@@ -3895,7 +3895,7 @@ $app_strings['LBL_QUICK_TASK'] = 'Create Task';
 $app_strings['LBL_COLLECTION_TYPE'] = 'Type';
 
 $app_strings['LBL_ADD_TAB'] = 'Add Tab';
-$app_strings['LBL_SUITE_DASHBOARD'] = 'SuiteCRM Dashboard';
+$app_strings['LBL_SUITE_DASHBOARD'] = 'LionixCRM Dashboard';
 $app_strings['LBL_ENTER_DASHBOARD_NAME'] = 'Enter Dashboard Name:';
 $app_strings['LBL_NUMBER_OF_COLUMNS'] = 'Number of Columns:';
 $app_strings['LBL_DELETE_DASHBOARD1'] = 'Are you sure you want to delete the';
@@ -3904,7 +3904,7 @@ $app_strings['LBL_ADD_DASHBOARD_PAGE'] = 'Add a Dashboard Page';
 $app_strings['LBL_DELETE_DASHBOARD_PAGE'] = 'Remove Current Dashboard Page';
 $app_strings['LBL_RENAME_DASHBOARD_PAGE'] = 'Rename Dashboard Page';
 
-$app_strings['LBL_DISCOVER_SUITECRM'] = 'Discover SuiteCRM';
+$app_strings['LBL_DISCOVER_SUITECRM'] = 'Discover LionixCRM';
 
 $app_list_strings['collection_temp_list'] = array('Tasks' => 'Tasks', 'Meetings' => 'Meetings', 'Calls' => 'Calls', 'Notes' => 'Notes', 'Emails' => 'Emails');
 
