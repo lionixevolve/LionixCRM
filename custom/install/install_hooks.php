@@ -26,7 +26,7 @@ function post_installModules()
     $result = $db->query($query);
 
     while (($row = $db->fetchByAssoc($result)) != null) {
-        $query = "ALTER TABLE {$row['table_name']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
+        $query = "ALTER TABLE {$row['TABLE_NAME']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
         $db->query($query);
     }
     installLog('LionixCRM added lxcode_c to all custom and audit tables');
