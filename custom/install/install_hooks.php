@@ -14,8 +14,9 @@ function post_installModules()
 {
     global $sugar_config;
     $db = DBManagerFactory::getInstance();
-
     $database = $sugar_config['dbconfig']['db_name'];
+
+    installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
         SELECT TABLE_NAME
         FROM information_schema.tables
@@ -29,7 +30,7 @@ function post_installModules()
         $query = "ALTER TABLE {$row['TABLE_NAME']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
         $db->query($query);
     }
-    installLog('LionixCRM added lxcode_c to all custom and audit tables');
+    installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
 
     installLog('LionixCRM install finished');
 
