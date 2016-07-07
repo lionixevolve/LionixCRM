@@ -113,7 +113,7 @@ $out =<<<EOQ
     <div id="install_box">
     <header id="install_header">
                 <div id="steps"><p>{$mod_strings['LBL_STEP7']}</p><i class="icon-progress-0" id="complete"></i><i class="icon-progress-1" id="complete"></i><i class="icon-progress-2" id="complete"></i><i class="icon-progress-3" id="complete"></i><i class="icon-progress-4" id="complete"></i><i class="icon-progress-5" id="complete"></i><i class="icon-progress-6" id="complete"></i><i class="icon-progress-7"></i></div>
-                <div class="install_img"><a href="https://suitecrm.com"><img src="{$sugar_md}" alt="SuiteCRM"></a></div>
+                <div class="install_img"><a href="http://lionix.com/crm"><img src="{$sugar_md}" alt="LionixCRM"></a></div>
     </header>
         <form action="install.php" method="post" name="setConfig" id="form">
         <div id="install_content">

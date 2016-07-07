@@ -86,7 +86,7 @@ $out =<<<EOQ
     <div id="install_box">
         <div id='licenseDiv'>
         <header id="install_header">
-            <div class="install_img"><a href="https://suitecrm.com" target="_blank"><img src="{$sugar_md}" alt="SuiteCRM"></a></div>
+            <div class="install_img"><a href="http://lionix.com/crm" target="_blank"><img src="{$sugar_md}" alt="LionixCRM"></a></div>
             <div id="steps"><p>{$mod_strings['LBL_STEP2']}</p><i class="icon-progress-0" id="complete"></i><i class="icon-progress-1"></i><i class="icon-progress-2"></i><i class="icon-progress-3"></i><i class="icon-progress-4"></i><i class="icon-progress-5"></i><i class="icon-progress-6"></i><i class="icon-progress-7"></i></div>        <form action="install.php" method="post" name="setConfig" id="form">
         </header>
             <textarea class="licensetext" cols="80" rows="20" readonly>{$license_file}</textarea>
