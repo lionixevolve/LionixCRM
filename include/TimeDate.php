@@ -436,7 +436,7 @@ class TimeDate
 
         if( $this->isAlwaysDb() )
             $cacheKey .= '_asdb';
-        
+
         return $cacheKey;
     }
 
@@ -1346,6 +1346,7 @@ class TimeDate
 		    return '';
 	    }
 	    $defaultZones= array(
+            'America/Costa_Rica',
 	        'America/Anchorage', 'America/Los_Angeles', 'America/Phoenix', 'America/Chicago',
 	    	'America/New_York', 'America/Argentina/Buenos_Aires', 'America/Montevideo',
 	        'Europe/London', 'Europe/Amsterdam', 'Europe/Athens', 'Europe/Moscow',
