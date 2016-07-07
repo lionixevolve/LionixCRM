@@ -85,10 +85,11 @@ if(typeof(SimpleList) == 'undefined'){
     	var drop_value = document.getElementById('drop_value');
     	//Validate the dropdown key manually
     	removeFromValidate('dropdown_form', 'drop_name');
-    	if(!SimpleList.isValidDropDownKey(escape(drop_name.value))) {
+        //Lionix: Qma - Removed escape function to allow spaces
+        if(!SimpleList.isValidDropDownKey(drop_name.value)) {
 			addToValidate('dropdown_form', 'drop_name', 'error', false, SUGAR.language.get("ModuleBuilder", "LBL_JS_VALIDATE_KEY"));
     	}
-    	
+
     	if (!check_form("dropdown_form")) return;
 
         var ul1=YAHOO.util.Dom.get("ul1");
@@ -110,7 +111,8 @@ if(typeof(SimpleList) == 'undefined'){
         if(escape(drop_name.value) == '' || !escape(drop_name.value)){
             liObj.id = SUGAR.language.get('ModuleBuilder', 'LBL_BLANK');
         }else{
-            liObj.id = escape(drop_name.value);
+            //Lionix: Qma - Removed escape function to allow spaces
+            liObj.id = drop_name.value;
         }
 
         var text1 = document.createElement('input');
