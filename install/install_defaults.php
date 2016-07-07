@@ -37,7 +37,7 @@
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
  ********************************************************************************/
 
-   
+
 
        $installer_defaults = array(
             'language' => 'en_us',
@@ -53,7 +53,7 @@
             'setup_db_type' => 'mysql',
             'setup_db_host_name' => '',
             'setup_db_host_instance' => 'SQLEXPRESS',
-            'setup_db_database_name' => 'suitecrm',
+            'setup_db_database_name' => 'lionixcrm',
             'setup_db_sugarsales_user' => '',
             'setup_db_sugarsales_password' => '',
             'setup_db_sugarsales_password_retype' => '',
@@ -67,7 +67,7 @@
             'dbConfig_submitted' => false,
             'demoData' => 'no',
             'setup_site_url' => '',
-            'setup_system_name' => 'SuiteCRM',
+            'setup_system_name' => 'LionixCRM',
             'setup_site_sugarbeet' => true,
             'setup_site_defaults' => true,
             'setup_site_custom_session_path' => false,
@@ -99,5 +99,5 @@
             'dbUSRData' => 'same',
 
         );
-        
+
 ?>
