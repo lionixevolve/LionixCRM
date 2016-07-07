@@ -32,6 +32,21 @@ function post_installModules()
     }
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
 
+    installLog('LionixCRM starting to add roles...');
+    $roles = array(
+                array('id' => 'audit-role', 'name' => 'Audit', 'description' => 'Read only access to all data.'),
+                array('id' => 'manager-role', 'name' => 'Manager', 'description' => 'Full access to all data.'),
+                array('id' => 'sales-role', 'name' => 'Sales', 'description' => 'Partial access to some data.'),
+            );
+    foreach ($roles as $role) {
+        $query = "
+        INSERT INTO acl_roles (`id`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `name`, `description`, `deleted`)
+        VALUES ('{$role['id']}', utc_timestamp(), utc_timestamp(), '1', '1', '{$role['name']}', '{$role['description']}', '0')
+        ";
+        $result = $db->query($query);
+    }
+    installLog('...LionixCRM added roles successfully.');
+
     installLog('LionixCRM install finished');
 
     return 'LionixCRM install finished';
