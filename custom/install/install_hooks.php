@@ -15,7 +15,7 @@ function post_installModules()
     global $sugar_config;
     $db = DBManagerFactory::getInstance();
     $database = $sugar_config['dbconfig']['db_name'];
-
+    // lxcode_c
     installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
         SELECT TABLE_NAME
@@ -25,13 +25,12 @@ function post_installModules()
                  OR TABLE_NAME LIKE '%audit')
     ";
     $result = $db->query($query);
-
     while (($row = $db->fetchByAssoc($result)) != null) {
         $query = "ALTER TABLE {$row['TABLE_NAME']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
         $db->query($query);
     }
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
-
+    // acl_roles
     installLog('LionixCRM starting to add roles...');
     $roles = array(
                 array('id' => 'audit-role', 'name' => 'Audit', 'description' => 'Read only access to all data.'),
@@ -40,14 +39,106 @@ function post_installModules()
             );
     foreach ($roles as $role) {
         $query = "
-        INSERT INTO acl_roles (`id`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `name`, `description`, `deleted`)
-        VALUES ('{$role['id']}', utc_timestamp(), utc_timestamp(), '1', '1', '{$role['name']}', '{$role['description']}', '0')
+            INSERT INTO acl_roles (`id`, `date_entered`, `date_modified`, `modified_user_id`, `created_by`, `name`, `description`, `deleted`)
+            VALUES ('{$role['id']}', utc_timestamp(), utc_timestamp(), '1', '1', '{$role['name']}', '{$role['description']}', '0')
         ";
-        $result = $db->query($query);
+        $db->query($query);
+        $query = "
+            INSERT INTO acl_roles_actions (id, role_id, action_id, access_override, date_modified, deleted)
+            SELECT uuid(),
+                   '{$role['id']}',
+                   id,
+                   aclaccess,
+                   utc_timestamp(),
+                   0
+            FROM acl_actions
+            WHERE id NOT IN
+                    (SELECT action_id
+                     FROM acl_roles_actions
+                     WHERE role_id = '{$role['id']}')
+        ";
+        $db->query($query);
+        switch ($role['id']) {
+            case 'audit-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '-99'
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('delete',
+                                            'edit',
+                                            'export',
+                                            'import',
+                                            'massupdate'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '89'
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('access'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '90'
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('list',
+                                            'view' ))
+                ";
+                $db->query($query);
+                break;
+                case 'sales-role':
+                    $query = "
+                        UPDATE acl_roles_actions
+                        SET access_override = '-99'
+                        WHERE role_id = '{$role['id']}'
+                            AND action_id IN
+                                (SELECT id
+                                 FROM acl_actions
+                                 WHERE name IN ('export',
+                                                'massupdate'))
+                    ";
+                    $db->query($query);
+                    $query = "
+                        UPDATE acl_roles_actions
+                        SET access_override = '89'
+                        WHERE role_id = '{$role['id']}'
+                            AND action_id IN
+                                (SELECT id
+                                 FROM acl_actions
+                                 WHERE name IN ('access'))
+                    ";
+                    $db->query($query);
+                    $query = "
+                        UPDATE acl_roles_actions
+                        SET access_override = '90'
+                        WHERE role_id = '{$role['id']}'
+                            AND action_id IN
+                                (SELECT id
+                                 FROM acl_actions
+                                 WHERE name IN ('delete',
+                                                'edit',
+                                                'import',
+                                                'list',
+                                                'view' ))
+                    ";
+                    $db->query($query);
+                    break;
+        }
     }
     installLog('...LionixCRM added roles successfully.');
+    // el fin
+    $finmsg = 'LionixCRM install finished';
+    installLog($finmsg);
 
-    installLog('LionixCRM install finished');
-
-    return 'LionixCRM install finished';
+    return $finmsg;
 }
