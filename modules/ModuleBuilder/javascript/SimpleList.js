@@ -85,7 +85,7 @@ if(typeof(SimpleList) == 'undefined'){
     	var drop_value = document.getElementById('drop_value');
     	//Validate the dropdown key manually
     	removeFromValidate('dropdown_form', 'drop_name');
-        //Lionix: Qma - Removed escape function to allow espaces
+        //Lionix: Qma - Removed escape function to allow spaces
         if(!SimpleList.isValidDropDownKey(drop_name.value)) {
 			addToValidate('dropdown_form', 'drop_name', 'error', false, SUGAR.language.get("ModuleBuilder", "LBL_JS_VALIDATE_KEY"));
     	}
@@ -111,7 +111,7 @@ if(typeof(SimpleList) == 'undefined'){
         if(escape(drop_name.value) == '' || !escape(drop_name.value)){
             liObj.id = SUGAR.language.get('ModuleBuilder', 'LBL_BLANK');
         }else{
-            //Lionix: Qma - Removed escape function to allow espaces
+            //Lionix: Qma - Removed escape function to allow spaces
             liObj.id = drop_name.value;
         }
 
