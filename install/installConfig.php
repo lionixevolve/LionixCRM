@@ -199,8 +199,8 @@ EOQ;
                 <div id='licenseDiv'></div>
                 <header id="install_header">
                     <div class="install_img">
-                        <a href="https://suitecrm.com" target="_blank">
-                            <img src="{$sugar_md}" alt="SuiteCRM">
+                        <a href="http://lionix.com/crm" target="_blank">
+                            <img src="{$sugar_md}" alt="LionixCRM">
                         </a>
                     </div>
                     <div id="steps">
