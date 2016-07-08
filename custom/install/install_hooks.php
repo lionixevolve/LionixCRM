@@ -107,6 +107,7 @@ function post_installModules()
                                  WHERE name IN ('export',
                                                 'massupdate'))
                     ";
+                    $db->query($query);
                     $query = "
                         UPDATE acl_roles_actions
                         SET access_override = '75'
@@ -117,7 +118,6 @@ function post_installModules()
                                  WHERE name IN ('delete',
                                                 'edit'))
                     ";
-                    $db->query($query);
                     $db->query($query);
                     $query = "
                         UPDATE acl_roles_actions
