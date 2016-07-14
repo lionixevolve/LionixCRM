@@ -161,6 +161,14 @@ function post_installModules()
     $db->query($query);
     installLog('...LionixCRM added custom fields on campaigns module successfully.');
 
+    installLog('LionixCRM starting to add custom fields on contacts module...');
+    $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
+    $db->query($query);
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    VALUES ('Contactssoundex_c','soundex_c','LBL_SOUNDEX','Allowed values are AAA,AA,A,B,C,D,NER,MAL,SIN','','Contacts','varchar',3,0,'',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    $db->query($query);
+    installLog('...LionixCRM added custom fields on contacts module successfully.');
+
     // el fin
     $finmsg = 'LionixCRM install finished';
     installLog($finmsg);
