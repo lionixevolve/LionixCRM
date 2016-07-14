@@ -73,7 +73,7 @@ $mod_strings = array (
 	'ERR_TIME_SENT'				=> 'Time Sent',
 	'LBL_ACCOUNTS_SUBPANEL_TITLE'=> 'Accounts',
 	'LBL_ADD_ANOTHER_FILE'		=> 'Add Another File',
-    'LBL_ADD_DASHLETS'          => 'Add SuiteCRM Dashlets',
+    'LBL_ADD_DASHLETS'          => 'Add LionixCRM Dashlets',
 	'LBL_ADD_DOCUMENT'			=> 'Add Documents',
 	'LBL_ADD_ENTRIES'           => 'Add Entries',
 	'LBL_ADD_FILE'				=> 'Add Files',
@@ -348,11 +348,11 @@ $mod_strings = array (
     'LBL_ADDRESS_BOOK_SEARCH_HELP' => 'Enter an email address, First Name, Last Name or Account Name to find recipients.',
     'LBL_TEST_SETTINGS'     => 'Test Settings',
     'LBL_EMPTY_EMAIL_BODY'  => '<p><span style="color: #888888;"><em>This Message Has No Content</em></span></p>',
-    'LBL_TEST_EMAIL_SUBJECT' => 'Test Email from SuiteCRM',
+    'LBL_TEST_EMAIL_SUBJECT' => 'Test Email from LionixCRM',
     'LBL_NO_SUBJECT' =>'(no subject)',
     'LBL_CHECKING_ACCOUNT'	=> 'Checking Account',
     'LBL_OF'	=> 'of',
-    'LBL_TEST_EMAIL_BODY' => 'This email was sent in order to test the outgoing mail server information provided in the SuiteCRM application.  A successful receipt of this email indicates that the outgoing mail server information provided is valid.',
+    'LBL_TEST_EMAIL_BODY' => 'This email was sent in order to test the outgoing mail server information provided in the LionixCRM application.  A successful receipt of this email indicates that the outgoing mail server information provided is valid.',
 
     // for outbound email dialog
 	'LBL_SMTP_SERVER_HELP' => 'This SMTP Mail Server can be used for outgoing mail. Provide a username and password for your email account in order to use the mail server.',
@@ -399,4 +399,3 @@ $mod_strings = array (
 	'LBL_DATE_CREATED' => 'Date Created',
 	'LBL_DATE_MODIFIED' => 'Date Modified',
 );
-
