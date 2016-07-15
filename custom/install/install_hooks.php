@@ -161,6 +161,21 @@ function post_installModules()
     $db->query($query);
     installLog('...LionixCRM added custom fields on campaigns module successfully.');
 
+    installLog('LionixCRM starting to add custom fields on prospect_lists module...');
+    $query = 'CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
+    $db->query($query);
+    $query = "ALTER TABLE prospect_lists_cstm add COLUMN autofill_c bool DEFAULT '0' NULL";
+    $db->query($query);
+    $query = "ALTER TABLE prospect_lists_cstm add COLUMN autoclean_c bool DEFAULT '0' NULL";
+    $db->query($query);
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    VALUES ('ProspectListsautofill_c','autofill_c','LBL_AUTOFILL','autofill must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    $db->query($query);
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    $db->query($query);
+    installLog('...LionixCRM added custom fields on prospect_lists module successfully.');
+
     installLog('LionixCRM starting to add custom fields on contacts module...');
     $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
     $db->query($query);
