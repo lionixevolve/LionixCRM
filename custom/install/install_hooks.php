@@ -189,6 +189,21 @@ function post_installModules()
     $db->query($query);
     installLog('...LionixCRM added custom fields on contacts module successfully.');
 
+    installLog('LionixCRM starting to add custom store procedures and views into database...');
+    $queries_array = array(
+        '../custom/lionix/query/store_procedures/sp_infoticos.sql',
+        '../custom/lionix/query/prospect_list/vista_cron_pl_daily_email_birthday_congratulations_contacts.sql'
+    );
+    foreach ($queries_array as $current_file) {
+        installLog("Before exists {$current_file}");
+        if (file_exists($current_file)) {
+            $query = file_get_contents($current_file);
+            $db->query($query);
+            installLog("After execute query {$current_file}");
+        }
+    }
+    installLog('...LionixCRM added custom store procedures and views into database successfully.');
+
     // el fin
     $finmsg = 'LionixCRM install finished';
     installLog($finmsg);
