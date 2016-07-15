@@ -161,7 +161,7 @@ function post_installModules()
     $db->query($query);
     installLog('...LionixCRM added custom fields on campaigns module successfully.');
 
-    installLog('LionixCRM starting to add custom fields on prospect_lists module...');
+    installLog('LionixCRM starting to add custom fields and records on prospect_lists module...');
     $query = 'CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
     $db->query($query);
     $query = "ALTER TABLE prospect_lists_cstm add COLUMN autofill_c bool DEFAULT '0' NULL";
@@ -174,7 +174,12 @@ function post_installModules()
     $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
     VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
     $db->query($query);
-    installLog('...LionixCRM added custom fields on prospect_lists module successfully.');
+    $query = "INSERT INTO prospect_lists_cstm (id_c ,autoclean_c ,autofill_c ) VALUES ('daily-email-bday-congrats-contacts' ,'1' ,'1' )";
+    $db->query($query);
+    $query = "INSERT INTO prospect_lists (assigned_user_id,id,name,list_type,date_entered,date_modified,modified_user_id,created_by,deleted,description,domain_name)
+    VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratulations_contacts','default',utc_timestamp(),utc_timestamp(),'1','1',0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.','')";
+    $db->query($query);
+    installLog('...LionixCRM added custom fields and records on prospect_lists module successfully.');
 
     installLog('LionixCRM starting to add custom fields on contacts module...');
     $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
