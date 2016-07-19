@@ -145,7 +145,7 @@ function post_installModules()
         }
     }
     installLog('...LionixCRM added roles successfully.');
-
+    // campaigns
     installLog('LionixCRM starting to add custom fields on campaigns module...');
     $query = 'CREATE TABLE campaigns_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
     $db->query($query);
@@ -160,7 +160,7 @@ function post_installModules()
     VALUES ('Campaignsclearcamplogdaily_c','clearcamplogdaily_c','LBL_CLEARCAMPLOGDAILY','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','')";
     $db->query($query);
     installLog('...LionixCRM added custom fields on campaigns module successfully.');
-
+    // prospect_lists
     installLog('LionixCRM starting to add custom fields and records on prospect_lists module...');
     $query = 'CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
     $db->query($query);
@@ -180,7 +180,7 @@ function post_installModules()
     VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratulations_contacts','default',utc_timestamp(),utc_timestamp(),'1','1',0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.','')";
     $db->query($query);
     installLog('...LionixCRM added custom fields and records on prospect_lists module successfully.');
-
+    // contacts
     installLog('LionixCRM starting to add custom fields on contacts module...');
     $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
     $db->query($query);
@@ -193,7 +193,19 @@ function post_installModules()
     VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','','','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
     $db->query($query);
     installLog('...LionixCRM added custom fields on contacts module successfully.');
-
+    // schedulers
+    installLog('LionixCRM starting to add custom schedulers...');
+    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
+    VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '2005-01-01 07:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0')";
+    $db->query($query);
+    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('updateprospectlistprospects', '0', utc_timestamp(), utc_timestamp(), '1', '1', '01- LionixCRM - Prospect List Prospects Update 2:00am', 'function::updateProspectListProspects', '2005-01-01 07:00:00', '00::02::*::*::*', utc_timestamp(), 'Active', '0')";
+    $db->query($query);
+    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('campaignlogdeleter', '0', utc_timestamp(), utc_timestamp(), '1', '1', '02- LionixCRM - CampaignLogDeletEr - 8:00am', 'function::campaignLogDeletEr', '2005-01-01 07:00:00', '00::08::*::*::*', utc_timestamp(), 'Active', '0')";
+    $db->query($query);
+    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('emailmaner', '0', utc_timestamp(), utc_timestamp(), '1', '1', '03- LionixCRM - EmailManEr - 9:00am', 'function::emailManEr', '2005-01-01 07:00:00', '00::09::*::*::*', utc_timestamp(), 'Active', '0')";
+    installLog('...LionixCRM added custom schedulers successfully.');
+    $db->query($query);
+    // views and store procedures
     installLog('LionixCRM starting to add custom store procedures and views into database...');
     $queries_array = array(
         'custom/lionix/query/prospect_list/vista_cron_pl_daily_email_birthday_congratulations_contacts.sql',
