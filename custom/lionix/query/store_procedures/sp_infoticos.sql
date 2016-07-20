@@ -1,5 +1,6 @@
 -- DROP PROCEDURE IF EXISTS sp_infoticos;
 -- DELIMITER //
+-- Delimiter isn't need on php
 CREATE PROCEDURE sp_infoticos
 (IN p_contact_id varchar(36))
 BEGIN
