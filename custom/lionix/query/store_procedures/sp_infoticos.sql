@@ -1,5 +1,5 @@
-#DROP PROCEDURE IF EXISTS sp_infoticos;
-DELIMITER //
+-- DROP PROCEDURE IF EXISTS sp_infoticos;
+-- DELIMITER //
 CREATE PROCEDURE sp_infoticos
 (IN p_contact_id varchar(36))
 BEGIN
@@ -239,5 +239,5 @@ BEGIN
     and c.id = p_contact_id
     ;
 
-END //
-DELIMITER ;
+END
+-- // DELIMITER ;
