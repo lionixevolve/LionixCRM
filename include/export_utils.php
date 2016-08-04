@@ -1,11 +1,12 @@
 <?php
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2016 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -36,7 +37,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 /*********************************************************************************
 
@@ -185,7 +186,13 @@ function export($type, $records = null, $members = false, $sample=false) {
         //Remove fields that are only used for logic
         if($members && (in_array($dbname, $remove_from_members)))
             continue;
-        
+
+        //If labels should not be exportable skip them
+        if (isset($focus->field_name_map[$key])  && isset( $focus->field_name_map[$key]['exportable'])
+            && $focus->field_name_map[$key]['exportable'] === false) {
+            continue;
+        }
+
         //default to the db name of label does not exist
         $field_labels[$key] = translateForExport($dbname,$focus);
     }
@@ -241,6 +248,12 @@ function export($type, $records = null, $members = false, $sample=false) {
 		{
             //getting content values depending on their types
             $fieldNameMapKey = $fields_array[$key];
+
+            //Dont export fields that have been explicitly marked not to be exportable
+            if (isset($focus->field_name_map[$fieldNameMapKey])  && isset($focus->field_name_map[$fieldNameMapKey]['exportable']) &&
+                $focus->field_name_map[$fieldNameMapKey]['exportable'] === false) {
+                continue;
+            }
 
             if (isset($focus->field_name_map[$fieldNameMapKey])  && $focus->field_name_map[$fieldNameMapKey]['type'])
             {
@@ -563,7 +576,7 @@ function generateSearchWhere($module, $query) {//this function is similar with f
          $content = export($type, null, false, true);
 
          // Add a new row and add details on removing the sample data
-         // Our Importer will stop after he gets to the new row, ignoring the text below 
+         // Our Importer will stop after he gets to the new row, ignoring the text below
          return $content . "\n" . $app_strings['LBL_IMPORT_SAMPLE_FILE_TEXT'];
 
      }

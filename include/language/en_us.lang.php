@@ -55,6 +55,8 @@ $app_list_strings = array(
     'language_pack_name' => 'US English',
     'moduleList' => array(
             'Home' => 'Home',
+			'ResourceCalendar' => 'Resource Calendar',
+			'AOBH_BusinessHours' => 'BusinessHours',
             'Contacts' => 'Contacts',
             'Accounts' => 'Accounts',
             'Opportunities' => 'Opportunities',
@@ -105,9 +107,9 @@ $app_list_strings = array(
             'TrackerQueries' => 'Tracker Queries',
             'FAQ' => 'FAQ',
             'Newsletters' => 'Newsletters',
-            'SugarFeed' => 'SuiteCRM Feed',
+            'SugarFeed' => 'LionixCRM Feed',
             'KBDocuments' => 'Knowledge Base',
-            'SugarFavorites' => 'SuiteCRM Favorites',
+            'SugarFavorites' => 'LionixCRM Favorites',
 
             'OAuthKeys' => 'OAuth Consumer Keys',
             'OAuthTokens' => 'OAuth Tokens',
@@ -138,10 +140,10 @@ $app_list_strings = array(
             'Prospects' => 'Target',
             'Campaigns' => 'Campaign',
             'Documents' => 'Document',
-            'SugarFollowing' => 'SuiteCRM Following',
+            'SugarFollowing' => 'LionixCRM Following',
             'Sync' => 'Sync',
             'Users' => 'User',
-            'SugarFavorites' => 'SuiteCRM Favorites',
+            'SugarFavorites' => 'LionixCRM Favorites',
 
         ),
 
@@ -256,11 +258,11 @@ $app_list_strings = array(
             'Net 15' => 'Net 15',
             'Net 30' => 'Net 30',
         ),
-    'sales_stage_default_key' => 'Prospecting',
     'fts_type' => array(
         '' => '',
         'Elastic' => 'elasticsearch',
     ),
+    'sales_stage_default_key' => 'Prospecting',
     'sales_stage_dom' => array(
             'Prospecting' => 'Prospecting',
             'Qualification' => 'Qualification',
@@ -350,7 +352,7 @@ $app_list_strings = array(
         ),
     'meeting_type_dom' => array(
             'Other' => 'Other',
-            'Sugar' => 'SuiteCRM',
+            'Sugar' => 'LionixCRM',
         ),
     'call_status_default' => 'Planned',
     'call_status_dom' => array(
@@ -446,6 +448,11 @@ $app_list_strings = array(
     'project_duration_units_dom' => array(
         'Days' => 'Days',
         'Hours' => 'Hours',
+    ),
+
+    'activity_status_type_dom' => array(''=>'--None--',
+        'active' => 'Active',
+        'inactive' => 'Inactive',
     ),
 
     'project_priority_options' => array(
@@ -762,7 +769,7 @@ $app_list_strings = array(
         'off' => 'No',
         '' => 'No', ),
 
-    'dom_email_link_type' => array('sugar' => 'SuiteCRM Email Client',
+    'dom_email_link_type' => array('sugar' => 'LionixCRM Email Client',
         'mailto' => 'External Email Client', ),
 
     'dom_email_editor_option' => array('' => 'Default Email Format',
@@ -1101,6 +1108,7 @@ $app_strings = array(
     'LBL_OUTBOUND_EMAIL_ADD_SERVER' => 'Add Server...',
     'LBL_EMAIL_SMTP_SSL_OR_TLS' => 'Enable SMTP over SSL or TLS?',
     'LBL_NO_ACTION' => 'There is no action by that name.',
+    'LBL_NO_SHORTCUT_MENU' => 'There are no actions available.',
     'LBL_NO_DATA' => 'No Data',
     'LBL_ROUTING_ADD_RULE' => 'Add Rule',
     'LBL_ROUTING_ALL' => 'At Least',
@@ -1110,7 +1118,7 @@ $app_strings = array(
     'LBL_ROUTING_BUTTON_SAVE' => 'Save Rule',
 
     'LBL_ROUTING_ACTIONS_COPY_MAIL' => 'Copy Mail',
-    'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Delete SuiteCRM Object',
+    'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Delete LionixCRM Object',
     'LBL_ROUTING_ACTIONS_DELETE_FILE' => 'Delete File',
     'LBL_ROUTING_ACTIONS_DELETE_MAIL' => 'Delete Email',
     'LBL_ROUTING_ACTIONS_FORWARD' => 'Forward Email',
@@ -1203,12 +1211,12 @@ $app_strings = array(
     'LBL_EMAIL_ADDRESSES' => 'Email',
     'LBL_EMAIL_ADDRESS_PRIMARY' => 'Email Address',
     'LBL_EMAIL_ADDRESSES_TITLE' => 'Email Addresses',
-    'LBL_EMAIL_ARCHIVE_TO_SUGAR' => 'Import to SuiteCRM',
+    'LBL_EMAIL_ARCHIVE_TO_SUGAR' => 'Import to LionixCRM',
     'LBL_EMAIL_ASSIGNMENT' => 'Assignment',
     'LBL_EMAIL_ATTACH_FILE_TO_EMAIL' => 'Attach',
     'LBL_EMAIL_ATTACHMENT' => 'Attach',
     'LBL_EMAIL_ATTACHMENTS' => 'From Local System',
-    'LBL_EMAIL_ATTACHMENTS2' => 'From SuiteCRM Documents',
+    'LBL_EMAIL_ATTACHMENTS2' => 'From LionixCRM Documents',
     'LBL_EMAIL_ATTACHMENTS3' => 'Template Attachments',
     'LBL_EMAIL_ATTACHMENTS_FILE' => 'File',
     'LBL_EMAIL_ATTACHMENTS_DOCUMENT' => 'Document',
@@ -1274,7 +1282,7 @@ $app_strings = array(
     'LBL_EMAIL_ERROR_CONTACT_NAME' => 'Please make sure you enter a last name.',
     'LBL_EMAIL_ERROR_DESC' => 'Errors were detected: ',
     'LBL_EMAIL_DELETE_ERROR_DESC' => 'You do not have access to this area. Contact your site administrator to obtain access.',
-    'LBL_EMAIL_ERROR_DUPE_FOLDER_NAME' => 'SuiteCRM Folder names must be unique.',
+    'LBL_EMAIL_ERROR_DUPE_FOLDER_NAME' => 'LionixCRM Folder names must be unique.',
     'LBL_EMAIL_ERROR_EMPTY' => 'Please enter some search criteria.',
     'LBL_EMAIL_ERROR_GENERAL_TITLE' => 'An error has occurred',
     'LBL_EMAIL_ERROR_LIST_NAME' => 'An email list with that name already exists',
@@ -1328,7 +1336,7 @@ $app_strings = array(
     'LBL_EMAIL_IE_DELETE_SUCCESSFUL' => 'Deletion successful.',
     'LBL_EMAIL_IE_SAVE' => 'Saving Mail Account Information',
     'LBL_EMAIL_IMPORTING_EMAIL' => 'Importing Email',
-    'LBL_EMAIL_IMPORT_EMAIL' => 'Import to SuiteCRM',
+    'LBL_EMAIL_IMPORT_EMAIL' => 'Import to LionixCRM',
     'LBL_EMAIL_IMPORT_SETTINGS' => 'Import Settings',
     'LBL_EMAIL_INVALID' => 'Invalid',
     'LBL_EMAIL_LOADING' => 'Loading...',
@@ -1352,13 +1360,13 @@ $app_strings = array(
     'LBL_EMAIL_MENU_RENAMING_FOLDER' => 'Renaming Folder',
     'LBL_EMAIL_MENU_MAKE_SELECTION' => 'Please make a selection before trying this operation.',
 
-    'LBL_EMAIL_MENU_HELP_ADD_FOLDER' => 'Create a Folder (remote or in SuiteCRM)',
-    'LBL_EMAIL_MENU_HELP_ARCHIVE' => 'Archive these email(s) to SuiteCRM',
+    'LBL_EMAIL_MENU_HELP_ADD_FOLDER' => 'Create a Folder (remote or in LionixCRM)',
+    'LBL_EMAIL_MENU_HELP_ARCHIVE' => 'Archive these email(s) to LionixCRM',
     'LBL_EMAIL_MENU_HELP_COMPOSE_TO_LIST' => 'Email selected Mailing Lists',
     'LBL_EMAIL_MENU_HELP_CONTACT_COMPOSE' => 'Email this Contact',
     'LBL_EMAIL_MENU_HELP_CONTACT_REMOVE' => 'Remove a Contact',
     'LBL_EMAIL_MENU_HELP_DELETE' => 'Delete these email(s)',
-    'LBL_EMAIL_MENU_HELP_DELETE_FOLDER' => 'Delete a Folder (remote or in SuiteCRM)',
+    'LBL_EMAIL_MENU_HELP_DELETE_FOLDER' => 'Delete a Folder (remote or in LionixCRM)',
     'LBL_EMAIL_MENU_HELP_EDIT_CONTACT' => 'Edit a Contact',
     'LBL_EMAIL_MENU_HELP_EDIT_LIST' => 'Edit a Mailing List',
     'LBL_EMAIL_MENU_HELP_EMPTY_TRASH' => 'Empties all Trash folders for your mail accounts',
@@ -1367,7 +1375,7 @@ $app_strings = array(
     'LBL_EMAIL_MENU_HELP_MARK_UNFLAGGED' => 'Mark these email(s) unflagged',
     'LBL_EMAIL_MENU_HELP_MARK_UNREAD' => 'Mark these email(s) unread',
     'LBL_EMAIL_MENU_HELP_REMOVE_LIST' => 'Removes Mailing Lists',
-    'LBL_EMAIL_MENU_HELP_RENAME_FOLDER' => 'Rename a Folder (remote or in SuiteCRM)',
+    'LBL_EMAIL_MENU_HELP_RENAME_FOLDER' => 'Rename a Folder (remote or in LionixCRM)',
     'LBL_EMAIL_MENU_HELP_REPLY' => 'Reply to these email(s)',
     'LBL_EMAIL_MENU_HELP_REPLY_ALL' => 'Reply to all recipients for these email(s)',
 
@@ -1501,10 +1509,10 @@ $app_strings = array(
     'LBL_SMTPTYPE_EXCHANGE' => 'Microsoft Exchange',
     'LBL_SMTPTYPE_OTHER' => 'Other',
     'LBL_EMAIL_SPACER_MAIL_SERVER' => '[ Remote Folders ]',
-    'LBL_EMAIL_SPACER_LOCAL_FOLDER' => '[ SuiteCRM Folders ]',
+    'LBL_EMAIL_SPACER_LOCAL_FOLDER' => '[ LionixCRM Folders ]',
     'LBL_EMAIL_SUBJECT' => 'Subject',
     'LBL_EMAIL_SUCCESS' => 'Success',
-    'LBL_EMAIL_SUGAR_FOLDER' => 'SuiteCRM Folder',
+    'LBL_EMAIL_SUGAR_FOLDER' => 'LionixCRM Folder',
     'LBL_EMAIL_TEMPLATE_EDIT_PLAIN_TEXT' => 'Email template body is empty',
     'LBL_EMAIL_TEMPLATES' => 'Templates',
     'LBL_EMAIL_TEXT_FIRST' => 'First Page',
@@ -1583,7 +1591,7 @@ $app_strings = array(
     'ERR_DB_FAIL' => 'Database failure. Please refer to suitecrm.log for details.',
     'ERR_EXTERNAL_API_403' => 'Permission Denied. File type is not supported.',
     'ERR_EXTERNAL_API_NO_OAUTH_TOKEN' => 'OAuth Access Token is missing.',
-    'ERR_DB_VERSION' => 'SuiteCRM {0} Files May Only Be Used With A SuiteCRM {1} Database.',
+    'ERR_DB_VERSION' => 'LionixCRM {0} Files May Only Be Used With A LionixCRM {1} Database.',
 
     'LBL_ACCOUNT' => 'Account',
     'LBL_OLD_ACCOUNT_LINK' => 'Old Account',
@@ -1937,6 +1945,13 @@ $app_strings = array(
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' => '&copy; 2004-2013 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br />SugarCRM is a trademark of SugarCRM, Inc. All other company and product names may be trademarks of the respective companies with which they are associated.',
+
+
+    'LBL_SCENARIO_SALES_DESCRIPTION'=>'This scenario facilitates the management of sales items',
+    'LBL_SCENARIO_MAKETING_DESCRIPTION'=>'This scenario facilitates the management of marketing items',
+    'LBL_SCENARIO_FINANCE_DESCRIPTION'=>'This scenario facilitates the management of finance related items',
+    'LBL_SCENARIO_SERVICE_DESCRIPTION'=>'This scenario facilitates the management of service related items',
+    'LBL_SCENARIO_PROJECT_DESCRIPTION'=>'This scenario faciliates the management of project related items',
 
     'LBL_SYNC' => 'Sync',
     'LBL_TABGROUP_ALL' => 'All',
@@ -3250,12 +3265,12 @@ $app_list_strings['moduleList']['AOP_Case_Updates'] = 'Case Updates';
 $app_strings['LBL_AOP_EMAIL_REPLY_DELIMITER'] = '========== Please reply above this line ==========';
 
 //aop
+$app_list_strings['case_state_default_key'] = 'Open';
 $app_list_strings['case_state_dom'] =
     array(
         'Open' => 'Open',
         'Closed' => 'Closed',
     );
-$app_list_strings['case_state_default_key'] = 'Open';
 $app_list_strings['case_status_default_key'] = 'Open_New';
 $app_list_strings['case_status_dom'] =
     array(
@@ -3889,6 +3904,7 @@ $app_strings['LBL_QUICK_TASK'] = 'Create Task';
 $app_strings['LBL_COLLECTION_TYPE'] = 'Type';
 
 $app_strings['LBL_ADD_TAB'] = 'Add Tab';
+$app_strings['LBL_EDIT_TAB'] = 'Edit Tabs';
 $app_strings['LBL_SUITE_DASHBOARD'] = 'LionixCRM Dashboard';
 $app_strings['LBL_ENTER_DASHBOARD_NAME'] = 'Enter Dashboard Name:';
 $app_strings['LBL_NUMBER_OF_COLUMNS'] = 'Number of Columns:';
@@ -3905,3 +3921,50 @@ $app_list_strings['collection_temp_list'] = array('Tasks' => 'Tasks', 'Meetings'
 $app_list_strings['moduleList']['TemplateEditor'] = 'Template Part Editor';
 $app_strings['LBL_CONFIRM_CANCEL_INLINE_EDITING'] = "You have clicked away from the field you were editing without saving it. Click ok if you're happy to lose your change, or cancel if you would like to continue editing";
 $app_strings['LBL_LOADING_ERROR_INLINE_EDITING'] = "There was an error loading the field. Your session may have timed out. Please log in again to fix this";
+
+//SuiteSpots
+$app_list_strings['spots_areas'] = array(
+    'getSalesSpotsData' => 'Sales',
+    'getAccountsSpotsData' => 'Accounts',
+    'getLeadsSpotsData' => 'Leads',
+    'getServiceSpotsData' => 'Service',
+    'getMarketingSpotsData' => 'Marketing',
+    'getMarketingActivitySpotsData' => 'Marketing Activity',
+    'getActivitiesSpotsData' => 'Activities',
+    'getQuotesSpotsData' => 'Quotes'
+);
+
+$app_list_strings['moduleList']['Spots'] = 'Spots';
+
+$app_list_strings['moduleList']['AOBH_BusinessHours'] = 'Business Hours';
+$app_list_strings['business_hours_list']['0'] = '12am';
+$app_list_strings['business_hours_list']['1'] = '1am';
+$app_list_strings['business_hours_list']['2'] = '2am';
+$app_list_strings['business_hours_list']['3'] = '3am';
+$app_list_strings['business_hours_list']['4'] = '4am';
+$app_list_strings['business_hours_list']['5'] = '5am';
+$app_list_strings['business_hours_list']['6'] = '6am';
+$app_list_strings['business_hours_list']['7'] = '7am';
+$app_list_strings['business_hours_list']['8'] = '8am';
+$app_list_strings['business_hours_list']['9'] = '9am';
+$app_list_strings['business_hours_list']['10'] = '10am';
+$app_list_strings['business_hours_list']['11'] = '11am';
+$app_list_strings['business_hours_list']['12'] = '12pm';
+$app_list_strings['business_hours_list']['13'] = '1pm';
+$app_list_strings['business_hours_list']['14'] = '2pm';
+$app_list_strings['business_hours_list']['15'] = '3pm';
+$app_list_strings['business_hours_list']['16'] = '4pm';
+$app_list_strings['business_hours_list']['17'] = '5pm';
+$app_list_strings['business_hours_list']['18'] = '6pm';
+$app_list_strings['business_hours_list']['19'] = '7pm';
+$app_list_strings['business_hours_list']['20'] = '8pm';
+$app_list_strings['business_hours_list']['21'] = '9pm';
+$app_list_strings['business_hours_list']['22'] = '10pm';
+$app_list_strings['business_hours_list']['23'] = '11pm';
+$app_list_strings['day_list']['Monday'] = 'Monday';
+$app_list_strings['day_list']['Tuesday'] = 'Tuesday';
+$app_list_strings['day_list']['Wednesday'] = 'Wednesday';
+$app_list_strings['day_list']['Thursday'] = 'Thursday';
+$app_list_strings['day_list']['Friday'] = 'Friday';
+$app_list_strings['day_list']['Saturday'] = 'Saturday';
+$app_list_strings['day_list']['Sunday'] = 'Sunday';
