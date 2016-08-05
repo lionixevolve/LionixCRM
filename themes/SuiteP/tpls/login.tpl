@@ -50,14 +50,14 @@
 <div class="p_login">
 
 	<div class="p_login_top">
-		
+
 		<a title="SuiteCRM" href="http://www.suitecrm.com">SuiteCRM</a>
-		
+
 	</div>
-    
+
     <div class="p_login_middle">
     <div id="loginform">
-        
+
         <form class="form-signin" role="form" action="index.php" method="post" name="DetailView" id="form"
               onsubmit="return document.getElementById('cant_login').value == ''">
             <div class="companylogo">{$LOGIN_IMAGE}</div>
@@ -110,7 +110,7 @@
                 <a href='javascript:void(0)'>{sugar_translate module="Users" label="LBL_LOGIN_FORGOT_PASSWORD"}</a>
             </div>
         </form>
-        
+
         <form class="form-signin passform" role="form" action="index.php" method="post" name="DetailView" id="form"
               name="fp_form" id="fp_form">
             <div id="forgot_password_dialog" style="display:none">
@@ -138,19 +138,15 @@
                        value="{sugar_translate module="Users" label="LBL_LOGIN_SUBMIT"}">
             </div>
         </form>
-        
-    </div>
-    </div>
-    
-    <div class="p_login_bottom">
 
+    </div>
+    </div>
+
+    <div class="p_login_bottom">
+            <a id="evolved_by" >&copy; Evolved by LionixCRM</a>
     		<a id="admin_options">&copy; Supercharged by SuiteCRM</a>
             <a id="powered_by">&copy; Powered By SugarCRM</a>
-    	
 	</div>
-    
+
 </div>
 <!-- End login container -->
-
-
-
