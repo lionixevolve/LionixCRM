@@ -100,7 +100,7 @@ div.p_login .p_login_bottom {
     }
 }
 
-div.p_login .p_login_bottom a#powered_by {
+div.p_login .p_login_bottom a#powered_by a#evolved_by {
     margin-left: 20px;
 }
 
@@ -575,17 +575,17 @@ footer {
     width: 48%;
 }
 
-a#powered_by {
+a#powered_by, a#evolved_by, a#admin_options {
     margin-left: 4%;
 }
 
-a#admin_options, a#powered_by {
+a#admin_options, a#powered_by, a#evolved_by {
     color: #534D64;
     font-size: 12px;
     cursor: pointer;
 }
 
-a#admin_options:hover, a#powered_by:hover {
+a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
     color: #D66C60;
     text-decoration: none;
 }
@@ -7532,7 +7532,7 @@ div.list-view-rounded-corners > table th:last-of-type {
         padding: 10px 3% 10px 3%;
     }
 
-    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#admin_options {
+    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#evolved_by, div.p_login .p_login_bottom a#admin_options {
         font-size: 10px;
         margin-left: 0px;
         text-align: center;
@@ -7944,7 +7944,7 @@ div.list-view-rounded-corners > table th:last-of-type {
 }
 
 @media (max-width: 350px) {
-    .footer_left a#admin_options, .footer_left a#powered_by {
+    .footer_left a#admin_options, .footer_left a#powered_by, .footer_left a#evolved_by {
         display: block;
     }
 

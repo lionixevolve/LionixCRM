@@ -592,7 +592,7 @@ $mod_strings = array (
     'LBL_SUITE_EVOLVED_BY' => "Evolved by LionixCRM",
     'LBL_SUITE_EVOLVED_BY_DESC_1' => 'LionixCRM - Open source CRM for SMEs',
     'LBL_SUITE_EVOLVED_BY_DESC_2' => 'LionixCRM - CRM de código abierto para las PyMEs',
-    'LBL_SUITE_EVOLVED_BY_DESC_3' => '<a href="http://www.lionix.com/crm">http://www.lionix.com/crm</a>',
+    'LBL_SUITE_EVOLVED_BY_DESC_3' => '<a href="http://www.lionix.com/crm" target="_blank">http://www.lionix.com/crm</a>',
     'LBL_SUITE_TOP' => "Back to top",
     'LBL_SUITE_PRINT' => "Print this page",
     'LBL_SUITE_DESC1' => 'SuiteCRM has been written and assembled by SalesAgility, one of the worlds most knowledgeable SugarCRM consultancies.',

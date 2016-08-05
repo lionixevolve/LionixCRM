@@ -235,7 +235,7 @@ $( "button" ).click(function() {
 
 // Custom JavaScript for copyright pop-ups
 $(function() {
-    $( "#dialog, #dialog2" ).dialog({
+    $( "#dialog, #dialog2, #dialog3" ).dialog({
         autoOpen: false,
         show: {
             effect: "blind",
@@ -252,6 +252,9 @@ $(function() {
     });
     $( "#admin_options" ).click(function() {
         $( "#dialog2" ).dialog( "open" );
+    });
+    $( "#evolved_by" ).click(function() {
+        $( "#dialog3" ).dialog( "open" );
     });
 });
 
