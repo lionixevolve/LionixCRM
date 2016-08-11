@@ -18,7 +18,8 @@ function post_installModules()
     // lxcode_c
     installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
-        SELECT TABLE_NAME
+        SELECT TABLE_NAME,
+               IF(TABLE_NAME LIKE '%_cstm',REPLACE(CONCAT(UPPER(MID(TABLE_NAME, 1, 1)),MID(REPLACE(TABLE_NAME, '_cstm', ''), 2)),'_lists','Lists'),'') AS 'MODULE_NAME'
         FROM information_schema.tables
         WHERE table_schema = '{$database}'
             AND (TABLE_NAME LIKE '%cstm'
@@ -28,6 +29,10 @@ function post_installModules()
     while (($row = $db->fetchByAssoc($result)) != null) {
         $query = "ALTER TABLE {$row['TABLE_NAME']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
         $db->query($query);
+        if(!empty($row['MODULE_NAME'])){
+            $query = "INSERT INTO `fields_meta_data` (`id`, `name`, `vname`, `custom_module`, `type`, `len`, `required`, `date_modified`, `deleted`, `audited`, `massupdate`, `duplicate_merge`, `reportable`, `importable`, `ext3`) VALUES ('{$row['MODULE_NAME']}lxcode_c', 'lxcode_c', 'LBL_LXCODE', '{$row['MODULE_NAME']}', 'int', '255', '0', utc_timestamp(), '0', '0', '0', '0', '1', 'false', '1')";
+            $db->query($query);
+        }
     }
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
     // acl_roles
