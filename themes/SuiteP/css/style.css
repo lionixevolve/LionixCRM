@@ -48,7 +48,7 @@ body {
     background: #e6e6e6;
     background: #f5f5f5;
     font-family: 'Lato', Lato, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     margin: 0;
     overflow: auto;
     color: #534D64;
@@ -444,7 +444,7 @@ div#pageContainer td.dashletcontainer div.hd .icon {
     background-color: #94A6B5;
     color: #f5f5f5;
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     margin: 0 0 1px 0;
     line-height: 48px;
     padding-left: 55px;
@@ -500,7 +500,7 @@ div#pageContainer td.dashletcontainer div.hd .icon {
 }
 
 .recently_viewed_link_container_sidebar {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 li.recentlinks_edit {
@@ -547,7 +547,7 @@ li.recentlinks img {
 
 #content {
     width: 100%;
-    padding: 30px 3% 40px 3%;
+    padding: 15px 3% 20px 3%;
 }
 
 #bootstrap-container.col-md-offset-2 {
@@ -586,7 +586,7 @@ a#powered_by, a#evolved_by, a#admin_options {
 
 a#admin_options, a#powered_by, a#evolved_by {
     color: #534D64;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -610,7 +610,7 @@ a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
     background-repeat: no-repeat;
     background-position: right 3px;
     padding-right: 20px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .footer_right a:hover {
@@ -884,7 +884,7 @@ th, td {
 }
 
 .detail-view-row, .detail-view-row-item, .edit-view-row, .edit-view-row-item {
-    margin: 0 0 16px 0;
+    margin: 0 0 1px 0;
     min-width: 48px;
 }
 
@@ -894,7 +894,7 @@ th, td {
     padding: 0 0 0 8px;
     font-size: 14px;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 40px;
     text-align: left;
     white-space: nowrap;
     vertical-align: baseline;
@@ -921,11 +921,11 @@ slot, #lead_queries_Div td {
 .detail-view-field {
     color: #534D64;
     display: inline;
-    padding:  0px 16px 0px 16px;
-    font-size: 12px;
+    padding:  0px 8px 0px 8px;
+    font-size: 14px;
     font-weight: 700;
-    min-height: 48px;
-    line-height: 48px;
+    min-height: 40px;
+    line-height: 40px;
     text-align: left;
     white-space: nowrap;
     vertical-align: baseline;
@@ -1017,7 +1017,7 @@ slot, #lead_queries_Div td {
 
 #EditView input[type="button"] {
     margin: 4px;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 fieldset {
@@ -1222,7 +1222,7 @@ button#listViewEndButton_top img, button#listViewEndButton_bottom img {
     border-left: none;
     border-right: none;
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .list tr td {
@@ -1624,7 +1624,7 @@ ul.subpanelTablist li {
 
 ul#dashletCategories {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     height: 28px;
     border-bottom-color: #778591  !important;
 
@@ -1632,7 +1632,7 @@ ul#dashletCategories {
 
 ul#dashletCategories > li {
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 
@@ -1724,7 +1724,7 @@ table.subpanelTabForm {
     padding: 20px !important;
     background-color: #E6E6E6;
     border-radius: 3px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #sitemap {
@@ -1776,7 +1776,7 @@ table.subpanelTabForm {
 
 div#responseTime {
     width: 50%;
-    font-size: 12px;
+    font-size: 14px;
     color: #888888;
 }
 
@@ -1869,7 +1869,7 @@ td.fc-widget-header table > thead > tr > th {
 
 
 .fc-title {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 24px;
 }
 
@@ -2316,11 +2316,20 @@ li.noBullet {
     color: #ff0000;
 }
 
-.required, .error {
-    background-color: #f08377;
+.required {
+    background-color: #651007;
     color: #fff;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 2px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.error {
+    background-color: #651007;
+    color: #fff;
+    padding: 5px;
+    margin-bottom: 10px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
@@ -2371,7 +2380,7 @@ div#content p.error {
 }
 
 .date {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
     border-bottom: 1px solid;
     padding-right: 10px;
@@ -2931,7 +2940,7 @@ a:link, a:visited, a:hover {
     color: #534D64;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 0px 0 40px 0;
+    margin: 0px 0 20px 0;
     font-weight: 300;
 }
 
@@ -3072,7 +3081,7 @@ ul.subpanelTablist li a.current, ul.subpanelTablist li a.current:hover {
 #colorPicker #themepickerLinkSpan {
     color: #444444;
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -3379,7 +3388,7 @@ ul.nav-tabs {
 ul.nav-tabs > li > a, ul.nav-tabs > li.active > a:focus {
     font-weight: 400;
     letter-spacing: 2px;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
     background-color: #BFCAD3;
     margin: 0 2px 0 2px;
@@ -3521,7 +3530,7 @@ li#tab-actions > ul.dropdown-menu li:last-of-type a {
 
 div.tab-content {
     background-color: #ffffff;
-    padding: 24px;
+    padding: 14px;
     border: 1px solid transparent;
     border-bottom-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -3870,7 +3879,7 @@ ul#globalLinksSubnav, ul#quickCreateULSubnav,
 #globalLinksSubnav li a, #quickCreateULSubnav li a,
 #quickCreate ul.clickMenu li ul.subnav li a, #globalLinksModule ul.clickMenu li ul.subnav li a {
     padding: 4px 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: #666666;
     line-height: 1.45;
 }
@@ -3905,7 +3914,7 @@ ul.clickMenu li ul.subnav li a:hover .showLessArrow, ul.clickMenu li ul.subnav l
     padding: 4px 8px 5px 8px;
     margin: 0 3px 0 0px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 a#create_link.utilsLink {
@@ -4448,7 +4457,7 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn .btn:hover {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     padding: 0 20px 0 20px;
     border-radius: 4px;
     text-transform: uppercase;
@@ -4496,7 +4505,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 #EditView_tabs .edit [type="radio"], #EditView_tabs .edit [type="checkbox"]  {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #EditView_tabs .id-ff-remove img,
@@ -4825,7 +4834,7 @@ ul.nav li.topnav li a, ul.nav li.topnav li a:hover {
 li.topnav {
     margin: 0;
     font-size: 1.1em;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     height: 90px;
     letter-spacing: 2px;
@@ -4976,7 +4985,7 @@ input[type=text], input[type=password], input:not([type]), textarea {
     border: 1px solid #a5e8d6;
     border-radius: 4px;
     padding: 5px;
-    line-height: 40px;
+    line-height: 20px;
 }
 
 .search_form input[type=text], .search_form textarea {
@@ -5221,7 +5230,7 @@ ul::-webkit-resizer
 
 .list tr th a:link {
     font-weight: 700;
-    font-size: 13px;
+    font-size: 14px;
     padding-right: 10px;
 }
 
@@ -5277,7 +5286,7 @@ ul::-webkit-resizer
 }
 
 table {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 table legend {
@@ -5289,11 +5298,11 @@ table legend {
 }
 
 .list tr th {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .list {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #tabs {
@@ -6082,7 +6091,7 @@ hr {
 
 .dashletPanel .h3Row h3 {
     color: #ffffff;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 0 10px;
@@ -6259,7 +6268,7 @@ h3 span {
     padding: 13px 32px 13px 12px;
     border-radius: 3px;
     background-color: #94A6B5;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
     display: inline-block;
@@ -6383,7 +6392,7 @@ h3 span {
     color: #fff;
     margin: 0;
     padding: 8px;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 0px;
     text-align: center;
 }
@@ -6641,7 +6650,7 @@ object {
 
 .qtip {
     font-family: 'Lato', Lato, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     background: #ffffff;
     border: 1px solid #cccccc;
     -webkit-border-radius: 0px;
