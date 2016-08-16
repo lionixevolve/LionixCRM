@@ -47,7 +47,7 @@
         {{foreach name=colIteration from=$rowData key=col item=colData}}
                 {*column*}
                 <!-- COLUMN -->
-                {{if $smarty.foreach.colIteration.total > 1 && $colData.colspan != 3}}
+                {{if $smarty.foreach.colIteration.total > 1}}
                     <div class="col-xs-12 col-sm-6 detail-view-row-item">
                 {{else}}
                     <div class="col-xs-12 col-sm-12 detail-view-row-item">
