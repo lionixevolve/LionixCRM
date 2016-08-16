@@ -143,9 +143,9 @@
     </div>
 
     <div class="p_login_bottom">
-            <a id="evolved_by" >&copy; Evolved by LionixCRM</a>
-    		<a id="admin_options">&copy; Supercharged by SuiteCRM</a>
             <a id="powered_by">&copy; Powered By SugarCRM</a>
+            <a id="admin_options">&copy; Supercharged by SuiteCRM</a>
+            <a id="evolved_by" >&copy; Evolved by LionixCRM</a>
 	</div>
 
 </div>

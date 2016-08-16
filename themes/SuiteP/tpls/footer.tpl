@@ -46,9 +46,9 @@
     <!-- Start generic footer -->
     <footer>
     	<div class="footer_left">
-            <a id="evolved_by" >&copy; {$MOD.LBL_SUITE_EVOLVED_BY}</a>
-    		<a id="admin_options">&copy; {$MOD.LBL_SUITE_SUPERCHARGED}</a>
             <a id="powered_by">&copy; {$MOD.LBL_SUITE_POWERED_BY}</a>
+            <a id="admin_options">&copy; {$MOD.LBL_SUITE_SUPERCHARGED}</a>
+            <a id="evolved_by" >&copy; {$MOD.LBL_SUITE_EVOLVED_BY}</a>
     	</div>
     	<div class="footer_right">
 
