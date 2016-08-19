@@ -547,7 +547,7 @@ li.recentlinks img {
 
 #content {
     width: 100%;
-    padding: 15px 3% 20px 3%;
+    padding: 10px 3% 10px 3%;
 }
 
 #bootstrap-container.col-md-offset-2 {
@@ -1218,7 +1218,7 @@ button#listViewEndButton_top img, button#listViewEndButton_bottom img {
 .td_alt, .list tr th, .list tr td[scope=col], .edit .list tr th, .edit .list tr td[scope=col] {
     font-weight: 800;
     text-align: left;
-    padding: 20px 10px 20px 10px !important;
+    padding: 8px 10px 8px 10px !important;
     border-left: none;
     border-right: none;
     white-space: nowrap;
@@ -1715,13 +1715,16 @@ table.subpanelTabForm {
 .search_form {
     overflow: visible;
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .search_form .view {
     width: 100%;
     margin: 0;
-    padding: 20px !important;
+    padding-top: 10px !important;
+    padding-right: 20px !important;
+    padding-bottom: 10px !important;
+    padding-left: 20px !important;
     background-color: #E6E6E6;
     border-radius: 3px;
     font-size: 14px;
@@ -2357,7 +2360,7 @@ p.error {
 }
 
 div#content p.error {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     border-radius: 3px;
 }
 
@@ -2940,7 +2943,7 @@ a:link, a:visited, a:hover {
     color: #534D64;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 0px 0 20px 0;
+    margin: 0px 0 10px 0;
     font-weight: 300;
 }
 
@@ -3530,7 +3533,7 @@ li#tab-actions > ul.dropdown-menu li:last-of-type a {
 
 div.tab-content {
     background-color: #ffffff;
-    padding: 14px;
+    padding: 10px;
     border: 1px solid transparent;
     border-bottom-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -6120,8 +6123,8 @@ hr {
 }
 
 .list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
-    padding-top: 15px !important;
-    padding-bottom: 12px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
 }
