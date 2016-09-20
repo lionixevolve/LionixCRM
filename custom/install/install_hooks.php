@@ -191,10 +191,12 @@ function post_installModules()
     installLog('...LionixCRM added custom schedulers successfully.');
     $db->query($query);
     // views and store procedures
-    installLog('LionixCRM starting to add custom store procedures and views into database...');
+    installLog('LionixCRM starting to add custom store procedures, functions and views into database...');
     $queries_array = array(
         'custom/lionix/query/prospect_list/vista_cron_pl_daily_email_birthday_congratulations_contacts.sql',
         'custom/lionix/query/store_procedures/sp_infoticos.sql',
+        'custom/lionix/query/store_functions/fn_create_holiday_table.sql',
+        'custom/lionix/query/store_functions/fn_workday_time_diff_holiday_table.sql',
     );
     foreach ($queries_array as $current_file) {
         if (file_exists($current_file)) {
