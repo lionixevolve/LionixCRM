@@ -663,20 +663,16 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					urlVars[urlVar[0]] = urlVar[1];
 				}
 
-				//Fix for issue #707: check if action is not clone. This condition is for 'Add Field' button.
-				// OR This condition is for ListView.
-				if( (typeof document.popup_form !== 'undefined' && !(document.popup_form.action.value == 'CloneField'))
-					|| typeof document.popup_form == 'undefined' ) {
-					// check where we are and do it if we are in field editor in module builder
-					if (
-							formname != "dropdown_form" && formname != "popup_form" &&
-								// user came from studio/fields layout by ajax urls
-							((urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefields' && urlVars.view_package == 'studio') ||
-								// user refresh the page or came from direct url
-							(urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefield' && urlVars.view_package == ''))
-					) {
-						// switch on the preloader message
-						ModuleBuilder.preloader.on();
+				// check where we are and do it if we are in field editor in module builder
+				if(
+					formname != "dropdown_form" && formname != "popup_form" &&
+					// user came from studio/fields layout by ajax urls
+					((urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefields' && urlVars.view_package == 'studio') ||
+					// user refresh the page or came from direct url
+					(urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefield' && urlVars.view_package == ''))
+				) {
+					// switch on the preloader message
+					ModuleBuilder.preloader.on();
 
 					// set callback functions
 					onSuccess = function(o){
@@ -721,7 +717,6 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					}
 			);
 		},
-
 
 		/**
 		 * show/hide preload message for user
