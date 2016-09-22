@@ -1,5 +1,6 @@
 <?php
-// created: 2016-07-14 14:08:17
+// created: 2016-09-21 18:59:34
 $mod_strings = array (
   'LBL_LXCODE' => 'Code',
+  'LBL_ELAPSEDTIMEINSECS' => 'elapsedtimeinsecs',
 );

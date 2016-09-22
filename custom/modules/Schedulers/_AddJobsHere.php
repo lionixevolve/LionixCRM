@@ -5,7 +5,10 @@ $job_strings[] = 'campaignLogDeletEr';
 //Jobs that sends mail.
 $job_strings[] = 'updateProspectListProspects';
 $job_strings[] = 'emailManEr';
+//Jobs for cases module.
+$job_strings[] = 'updateElapsepTimeInSecs';
 //Jobs required for LARGE reports tables.
+//none.
 
 function infoticos()
 {
