@@ -132,9 +132,9 @@ function post_installModules()
     installLog('...LionixCRM added roles successfully.');
     // cases
     installLog('LionixCRM starting to add custom fields on cases module...');
-    $query = "ALTER TABLE cases_cstm add COLUMN elapsedtimeinsecs_c int(255) DEFAULT '0' NULL";
+    $query = "ALTER TABLE cases_cstm add COLUMN elapsedtimeinmins_c int(255) DEFAULT '0' NULL";
     $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Caseselapsedtimeinsecs_c','elapsedtimeinsecs_c','LBL_ELAPSEDTIMEINSECS','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','Cases','varchar','255','0','0',utc_timestamp(),'0','0','0','0','1','false','','','1','')";
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Caseselapsedtimeinmins_c','elapsedtimeinmins_c','LBL_ELAPSEDTIMEINMINS','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','Cases','int','255','0','0',utc_timestamp(),'0','0','0','0','1','false','','','1','')";
     $db->query($query);
     installLog('...LionixCRM added custom fields on cases module successfully.');
     // campaigns
@@ -205,6 +205,7 @@ function post_installModules()
         'custom/lionix/query/store_functions/fn_create_holiday_table.sql',
         'custom/lionix/query/store_functions/fn_workday_time_diff_holiday_table.sql',
     );
+    //TODO: call terminal with mysql database < file.sql
     foreach ($queries_array as $current_file) {
         if (file_exists($current_file)) {
             $query = file_get_contents($current_file);
@@ -432,6 +433,18 @@ function post_installModules()
         }
     }
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
+    // LionixCRM configuration values
+    // TODO: Ask values on installation
+    installLog('LionixCRM starting to add sugar_config values...');
+    global $sugar_config;
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['country'] = 'CR';
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttime'] = '09:00';
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime'] = '18:00';
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend'] = '09:00';
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend'] = '12:00';
+    ksort($sugar_config);
+    write_array_to_file('sugar_config', $sugar_config, 'config.php');
+    installLog('...LionixCRM added sugar_config values successfully.');
     // el fin
     $finmsg = 'LionixCRM install finished';
     installLog($finmsg);
