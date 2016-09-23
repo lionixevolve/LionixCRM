@@ -3,4 +3,5 @@
 $mod_strings = array (
   'LBL_LXCODE' => 'Code',
   'LBL_ELAPSEDTIMEINSECS' => 'elapsedtimeinsecs',
+  'LBL_ELAPSEDTIME' => 'Elapsed Time',
 );
