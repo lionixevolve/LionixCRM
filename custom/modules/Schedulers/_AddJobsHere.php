@@ -6,7 +6,7 @@ $job_strings[] = 'campaignLogDeletEr';
 $job_strings[] = 'updateProspectListProspects';
 $job_strings[] = 'emailManEr';
 //Jobs for cases module.
-$job_strings[] = 'updateelapsedTimeInMins';
+$job_strings[] = 'updateElapsedTimeInMins';
 //Jobs required for LARGE reports tables.
 //none.
 
@@ -36,6 +36,7 @@ function infoticos()
         $query = "call sp_infoticos('{$row['contact_id']}')";
         $db->query($query);
     }
+
     return true;
 }//fin infoticos
 
@@ -164,12 +165,12 @@ function emailManEr()
     return true;
 }//emailManEr
 
-function updateelapsedTimeInMins()
+function updateElapsedTimeInMins()
 {
     global $db;
     global $sugar_config;
 
-    $query="
+    $query = '
     INSERT INTO cases_cstm (id_c)
     SELECT id
     FROM cases
@@ -177,7 +178,7 @@ function updateelapsedTimeInMins()
         AND id NOT IN
             (SELECT id_c
              FROM cases_cstm)
-     ";
+     ';
     $db->query($query);
 
     $query = "
@@ -197,5 +198,6 @@ function updateelapsedTimeInMins()
     AND state = 'open'
     ";
     $db->query($query);
+
     return true;
 }//updateelapsedTimeInMins
