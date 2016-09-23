@@ -190,6 +190,9 @@ function post_installModules()
     $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
     VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '2005-01-01 07:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0')";
     $db->query($query);
+    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
+    VALUES ('updateelapseptimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateElapsepTimeInMins', 'function::updateElapsepTimeInMins', '2005-01-01 07:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0')";
+    $db->query($query);
     $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('updateprospectlistprospects', '0', utc_timestamp(), utc_timestamp(), '1', '1', '01- LionixCRM - Prospect List Prospects Update 2:00am', 'function::updateProspectListProspects', '2005-01-01 07:00:00', '00::02::*::*::*', utc_timestamp(), 'Active', '0')";
     $db->query($query);
     $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('campaignlogdeleter', '0', utc_timestamp(), utc_timestamp(), '1', '1', '02- LionixCRM - CampaignLogDeletEr - 8:00am', 'function::campaignLogDeletEr', '2005-01-01 07:00:00', '00::08::*::*::*', utc_timestamp(), 'Active', '0')";

@@ -6,7 +6,7 @@ $job_strings[] = 'campaignLogDeletEr';
 $job_strings[] = 'updateProspectListProspects';
 $job_strings[] = 'emailManEr';
 //Jobs for cases module.
-$job_strings[] = 'updateElapsepTimeInSecs';
+$job_strings[] = 'updateElapsepTimeInMins';
 //Jobs required for LARGE reports tables.
 //none.
 
@@ -163,3 +163,39 @@ function emailManEr()
 
     return true;
 }//emailManEr
+
+function updateElapsepTimeInMins()
+{
+    global $db;
+    global $sugar_config;
+
+    $query="
+    INSERT INTO cases_cstm (id_c)
+    SELECT id
+    FROM cases
+    WHERE deleted = 0
+        AND id NOT IN
+            (SELECT id_c
+             FROM cases_cstm)
+     ";
+    $db->query($query);
+
+    $query = "
+    UPDATE cases ca
+    LEFT JOIN cases_cstm cac ON ca.id = cac.id_c
+    SET cac.elapsedtimeinmins_c = `WORKDAY_TIME_DIFF_HOLIDAY_TABLE`(
+        '{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['country']}'
+        ,date_add(ca.date_entered, interval {$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['utchourstimediff']} hour)
+        ,date_add(utc_timestamp(),interval {$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['utchourstimediff']} hour)
+        ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttime']}'
+        ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime']}'
+        ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend']}'
+        ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend']}'
+
+    )
+    WHERE ca.deleted = 0
+    AND state = 'open'
+    ";
+    $db->query($query);
+    return true;
+}//updateElapsepTimeInMins
