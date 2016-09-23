@@ -6,7 +6,7 @@ $job_strings[] = 'campaignLogDeletEr';
 $job_strings[] = 'updateProspectListProspects';
 $job_strings[] = 'emailManEr';
 //Jobs for cases module.
-$job_strings[] = 'updateElapsepTimeInMins';
+$job_strings[] = 'updateelapsedTimeInMins';
 //Jobs required for LARGE reports tables.
 //none.
 
@@ -164,7 +164,7 @@ function emailManEr()
     return true;
 }//emailManEr
 
-function updateElapsepTimeInMins()
+function updateelapsedTimeInMins()
 {
     global $db;
     global $sugar_config;
@@ -198,4 +198,4 @@ function updateElapsepTimeInMins()
     ";
     $db->query($query);
     return true;
-}//updateElapsepTimeInMins
+}//updateelapsedTimeInMins
