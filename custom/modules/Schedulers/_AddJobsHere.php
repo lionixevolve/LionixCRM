@@ -167,8 +167,7 @@ function emailManEr()
 
 function updateElapsedTimeInMins()
 {
-    global $db;
-    global $sugar_config;
+    global $db,$sugar_config;
 
     $query = '
     INSERT INTO cases_cstm (id_c)
