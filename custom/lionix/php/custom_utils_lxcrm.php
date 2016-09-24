@@ -48,6 +48,46 @@ function getRelationshipByModules($m1, $m2)
     return array('relationship' => "Not found a relationship between {$m1} and {$m2}", 'module' => 'none');
 }
 
+function lxHumanReadableElapsedTime($minutes, $lang = 'en_us', $levels = 7)
+{
+    //Change "$levels = 2;" to whatever you want. A value of 1 will limit to only one number in the result ("3 days ago"). A value of 3 would result in up to three ("3 days 1 hour 2 minutes ago")
+    $blocks = array(
+        array('en_us' => 'year', 'es_es' => 'año', 'amount' => 60 * 60 * 24 * 365),
+        array('en_us' => 'month', 'es_es' => 'mes', 'amount' => 60 * 60 * 24 * 31),
+        array('en_us' => 'week', 'es_es' => 'semana', 'amount' => 60 * 60 * 24 * 7),
+        array('en_us' => 'day', 'es_es' => 'día', 'amount' => 60 * 60 * 24),
+        array('en_us' => 'hour', 'es_es' => 'hora', 'amount' => 60 * 60),
+        array('en_us' => 'minute', 'es_es' => 'minuto', 'amount' => 60),
+        array('en_us' => 'second', 'es_es' => 'segundo', 'amount' => 1),
+        );
+
+    $seconds = $minutes * 60;
+
+    $current_level = 1;
+    $result = array();
+    foreach ($blocks as $block) {
+        if ($current_level > $levels) {
+            break;
+        }
+        if ($seconds / $block['amount'] >= 1) {
+            $amount = floor($seconds / $block['amount']);
+            if ($amount > 1) {
+                $plural = 's';
+                if ($block[$lang] == 'mes') {
+                    $plural = 'es';
+                }
+            } else {
+                $plural = '';
+            }
+            $result[] = $amount.' '.$block[$lang].$plural;
+            $seconds -= $amount * $block['amount'];
+            ++$current_level;
+        }
+    }
+
+    return ($lang == 'es_es') ? 'Hace '.implode(' ', $result) : implode(' ', $result).' ago';
+}
+
  // This function send an email within emailman functionality
 function lxSendEmail2($dataMail)
 {

@@ -79,6 +79,11 @@ array (
             'name' => 'elapsedtime',
             'label' => 'LBL_ELAPSEDTIME',
           ),
+          1 =>
+          array (
+            'name' => 'elapsedtimeinmins_c',
+            'label' => 'LBL_ELAPSEDTIMEINMINS',
+          ),
         ),
         4 =>
         array (

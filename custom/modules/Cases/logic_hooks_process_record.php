@@ -1,6 +1,6 @@
 <?php
 
-class LXCasesAfterRetrieveMethods
+class LXCasesProcessRecordMethods
 {
     public function setElapsedTime(&$bean, $event, $arguments)
     {

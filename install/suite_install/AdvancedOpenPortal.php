@@ -42,7 +42,7 @@ function installAOPHooks()
             'function' => 'updateUser',
         ),
         // Cases
-        // Hooks LionixCRM
+        // LionixCRM Hooks
         array(
             'module' => 'Cases',
             'hook' => 'after_retrieve',
@@ -50,6 +50,15 @@ function installAOPHooks()
             'description' => 'setElapsedTime',
             'file' => 'custom/modules/Cases/logic_hooks_after_retrieve.php',
             'class' => 'LXCasesAfterRetrieveMethods',
+            'function' => 'setElapsedTime',
+        ),
+        array(
+            'module' => 'Cases',
+            'hook' => 'process_record',
+            'order' => 1,
+            'description' => 'setElapsedTime',
+            'file' => 'custom/modules/Cases/logic_hooks_process_record.php',
+            'class' => 'LXCasesProcessRecordMethods',
             'function' => 'setElapsedTime',
         ),
         // Hooks SuiteCRM
