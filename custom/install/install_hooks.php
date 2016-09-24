@@ -441,6 +441,7 @@ function post_installModules()
     installLog('LionixCRM starting to add sugar_config values...');
     global $sugar_config;
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['country'] = 'CR';
+    $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['utchourstimediff'] = '-6';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttime'] = '09:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime'] = '18:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend'] = '09:00';
