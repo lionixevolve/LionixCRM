@@ -28,7 +28,7 @@ array (
       0 => 'account_id',
     ),
   ),
-  'PRIORITY' => 
+  'PRIORITY' =>
   array (
     'width' => '10%',
     'label' => 'LBL_LIST_PRIORITY',
@@ -40,13 +40,6 @@ array (
     'label' => 'LBL_LIST_STATUS',
     'default' => true,
   ),
-  'ELAPSEDTIMEINMINS_C' =>
-  array (
-    'type' => 'int',
-    'default' => true,
-    'label' => 'LBL_ELAPSEDTIMEINMINS',
-    'width' => '10%',
-  ),
   'ELAPSEDTIME' =>
   array (
     'type' => 'text',
@@ -54,6 +47,13 @@ array (
     'sortable' => false,
     'width' => '10%',
     'default' => true,
+  ),
+  'ELAPSEDTIMEINMINS_C' =>
+  array (
+    'type' => 'int',
+    'default' => true,
+    'label' => 'LBL_ELAPSEDTIMEINMINS',
+    'width' => '10%',
   ),
   'ASSIGNED_USER_NAME' =>
   array (
