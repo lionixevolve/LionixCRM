@@ -82,6 +82,14 @@ $mod_strings = array(
     'LBL_WEEKS' => 'Weeks',
     'LBL_MONTHS' => 'Months',
 
+    'LBL_MONDAY' => 'Monday',
+    'LBL_TUESDAY' => 'Tuesday',
+    'LBL_WEDNESDAY' => 'Wednesday',
+    'LBL_THURSDAY' => 'Thursday',
+    'LBL_FRIDAY' => 'Friday',
+    'LBL_SATURDAY' => 'Saturday',
+    'LBL_SUNDAY' => 'Sunday',
+
     'LBL_PUBLIC_KEY' => 'Public Key',
     'LBL_PRIVATE_KEY' => 'Private Key',
 
@@ -415,6 +423,7 @@ $mod_strings = array(
     'LBL_LOGIN_SUGAR_SERVER_DESC' => '- The User Name of the person who will operate this offline client',
     'LBL_LOGIN_SUGAR_SERVER' => 'End User Name:',
     'LBL_MAILBOX_DESC' => 'Set up group mail accounts for monitoring inbound email and manage personal inbound mail account information for users',
+    'LBL_MAILBOX_OUTBOUND_DESC' => 'Configure outbound email settings',
     'LBL_MANAGE_CONTRACTEMPLATES_TITLE' => 'Contract Types',
     'LBL_MANAGE_CURRENCIES' => 'Currencies',
     'LBL_MANAGE_GROUPS_TITLE' => 'Manage Groups',
@@ -425,6 +434,7 @@ $mod_strings = array(
     'LBL_MANAGE_LICENSE' => 'Manage license properties',
     'LBL_MANAGE_LOCALE' => 'Locale',
     'LBL_MANAGE_MAILBOX' => 'Inbound Email',
+    'LBL_MANAGE_MAILBOX_OUTBOUND' => 'Outbound Email',
     'LBL_MANAGE_OFFLINE_CLIENT' => 'View Offline Clients',
     'LBL_MANAGE_OPPORTUNITIES' => 'Opportunities',
     'LBL_MANAGE_PASSWORD_TITLE' => 'Password Management',
@@ -1207,6 +1217,7 @@ $mod_strings = array(
     'LBL_AOP_JOOMLA_ACCOUNT_CREATION_EMAIL_TEMPLATE' => 'Joomla Support Portal Account Creation Template',
 
     'LBL_AOP_BUSINESS_HOURS_SETTINGS' => 'Business Hours',
+    'LBL_AOP_BUSINESS_HOURS_DESC' => 'Change the business hours',
     'LBL_AOP_OPENING_DAYS' => 'Opening Days',
     'LBL_AOP_OPENING_HOURS' => 'Opening Hours',
     'LBL_AOP_CLOSING_HOURS' => 'Closing Hours',
@@ -1259,6 +1270,12 @@ $mod_strings = array(
     'LBL_SECURITYGROUPS_HOOKUP' => "Hookup Security Suite to work with your custom modules",
     'LBL_SECURITYGROUPS_SUGAROUTFITTERS_TITLE' => "SugarOutfitters",
     'LBL_SECURITYGROUPS_SUGAROUTFITTERS' => "Grab the latest version of SecuritySuite and find other SuiteCRM modules, themes, and integrations along with reviews, docs, support, and community verified versions.",
+
+    'LBL_BUSINESS_HOURS' => 'Business hours',
+    'LBL_BUSINESS_HOURS_DESC' => "Manage Business Hours",
+	'LBL_BUSINESS_HOURS_FROM' => 'From',
+	'LBL_BUSINESS_HOURS_TO' => 'To',
+	'LBL_BUSINESS_HOURS_OPEN' => "Open",
 
 );
 
