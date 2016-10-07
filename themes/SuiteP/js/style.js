@@ -234,7 +234,7 @@ $( "button" ).click(function() {
 });
 
 var initFooterPopups = function() {
-    $( "#dialog, #dialog2", "#dialog3" ).dialog({
+    $( "#dialog, #dialog2, #dialog3" ).dialog({
         autoOpen: false,
         show: {
             effect: "blind",
