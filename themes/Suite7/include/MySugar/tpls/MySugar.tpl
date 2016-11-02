@@ -35,7 +35,7 @@
  * these Appropriate Legal Notices must retain the display of the "Powered by
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
+ * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  ********************************************************************************/
 
 
@@ -91,7 +91,7 @@
                         <a id="pageNum_{$tabNum}_anchor" style='cursor: pointer;' {if !$lock_homepage}ondblclick="renameTab({$tabNum})"{/if} onClick=retrievePage({$tabNum});>
                             <span id="name_{$tabNum}">{$tab.pageTitle}</span>
                         </a>
-                        {if !$lock_homepage}<a id="removeTab_anchor"  onClick=removeDashboardForm({$tabNum});><img src="themes/default/images/id-ff-clear.png"></a>{/if}
+                        {if !$lock_homepage}<a id="removeTab_anchor"  onClick=removeDashboardForm({$tabNum});><img src="themes/Suite7/images/id-ff-clear.png"></a>{/if}
 
                         </li>{/if}
                 {/foreach}
@@ -244,7 +244,7 @@
                 });
                 mySugarLoader.insert();
                 $(function(){
-                    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded == false) { retrievePage(0)};
+                    if (SUGAR.ajaxUI && SUGAR.ajaxUI.hist_loaded == false) retrievePage(0);
                 });
                 {/literal}
             </script>
