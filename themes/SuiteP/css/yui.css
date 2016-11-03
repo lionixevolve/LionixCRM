@@ -52,7 +52,7 @@
 .yui-ac-content {
     position: absolute;
     border: 1px solid #808080;
-    width: 160px;
+    width: 500px; /*LionixCRM*/
     background: #fff;
     overflow: hidden;
     z-index: 9050;

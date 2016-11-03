@@ -236,7 +236,7 @@ li#usermenu a span.user_icon {
     background-position: 0 -1;
     display: block;
     float: left;
-    margin-top: -12px;
+    margin-top: -10px;
 }
 
 li#usermenu a:hover span.user_icon {
@@ -836,7 +836,7 @@ a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
 .menuItem:active, .menuItemHilite:active, .menuItem:link, .menuItemHilite:link,
 .menuItemX:visited, .menuItemHiliteX:visited, .menuItemX:hover, .menuItemHiliteX:hover,
 .menuItemX:active, .menuItemHiliteX:active, .menuItemX:link, .menuItemHiliteX:link {
-    line-height: 24px;
+    line-height: 18px;
     color: #000;
     text-decoration: none;
     width: 120px;
@@ -2277,6 +2277,7 @@ td.fc-widget-header table > thead > tr > th {
 .fc-day-top {
     cursor: pointer;
 }
+
 .monthFooter td {
     padding-left: 7px;
     padding-right: 7px;
@@ -3535,8 +3536,8 @@ ul.subpanelTablist li a.activeSubTab:hover {
 #search input[name=query_string] {
     border-color: #6fb0e4;
     background-color: #f6fafd;
-    line-height: 20px;
-    min-height: 44px;
+    line-height: 10px;
+    min-height: 20px;
 }
 
 #newRecord form a:link, #newRecord form a:visited {
@@ -5453,8 +5454,18 @@ table#lineItems tr td table tfoot tr td span input[type="text"] {
     width: 75px;
 }
 
+/*LionixCRM (Column es_es Producto)*/
+#lineItems #product_head > td:nth-of-type(2) {
+    width: 500px;
+}
+
+/*LionixCRM (Column es_es Número de Parte)*/
+#lineItems #product_head > td:nth-of-type(3) {
+    width: 100px;
+}
+
 #lineItems  .product_group {
-    width: 1000px;
+    width: 1400px;
 }
 
 #lineItems  .product_group  > tbody > tr:nth-of-type(1) > td {
@@ -5468,7 +5479,7 @@ table#lineItems tr td table tfoot tr td span input[type="text"] {
 }
 
 #lineItems .product_qty {
-    width: 40px;
+    width: 75px;
     margin: 0 5px 0 0;
 }
 #lineItems .product_name {
@@ -5836,8 +5847,8 @@ li.topnav {
     font-size: 14px;
     height: 90px;
     letter-spacing: 2px;
-    line-height: 95px;
-    padding: 0 7px 0 7px;
+    line-height: 90px;
+    padding: 0 5px 0 5px;
     text-transform: uppercase;
 }
 
@@ -6669,7 +6680,7 @@ form#MassAssign_SecurityGroups {
     border: 3px solid #65697A;
     padding: 12px 12px 12px 12px;
     color: #A2A5AF;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 1px;
     width: 200px;
     border-radius: 3px;
@@ -7670,7 +7681,7 @@ h3 span {
 }
 
 #desktop_notifications div.has-alerts p {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
     background-color: #F5F5F5;
     color: #534D64;
@@ -8841,7 +8852,7 @@ div.list-view-rounded-corners > table th:last-of-type {
         padding: 10px 3% 10px 3%;
     }
 
-    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#evolved_by, div.p_login .p_login_bottom a#admin_options {
+    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#admin_options, div.p_login .p_login_bottom a#evolved_by {
         font-size: 10px;
         margin-left: 0px;
         text-align: center;
