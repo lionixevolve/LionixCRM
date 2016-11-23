@@ -73,7 +73,7 @@ div.p_login {
 }
 
 div.p_login .p_login_top {
-    background-color: #534D64;
+    background-color: #66727D; /*LionixCRM lighter color*/ /*old color => #534D64;*/
     float: left;
     width: 100%;
     padding: 20px 2% 20px 2%;
