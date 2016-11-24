@@ -1,11 +1,11 @@
 <?php
-if ( !defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2016 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -36,9 +36,12 @@ if ( !defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
- 
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
+
 require_once("modules/Meetings/Meeting.php");
 require_once("modules/Calls/Call.php");
 require_once("modules/Users/User.php");
@@ -47,21 +50,21 @@ require_once("modules/Leads/Lead.php");
 
 /**
  * Class for sending email reminders of meetings and call to invitees
- * 
+ *
  */
 class EmailReminder
 {
-    
+
     /**
      * string db datetime of now
      */
     protected $now;
-    
+
     /**
      * string db datetime will be fetched till
      */
     protected $max;
-    
+
     /**
      * constructor
      */
@@ -80,7 +83,7 @@ class EmailReminder
         $this->now = $GLOBALS['timedate']->nowDb();
         $this->max = $GLOBALS['timedate']->getNow()->modify("+{$max_time} seconds")->asDb();
     }
-    
+
     /**
      * main method that runs reminding process
      * @return boolean
@@ -92,18 +95,18 @@ class EmailReminder
         $admin->retrieveSettings();
 
         Reminder::sendEmailReminders($this, $admin);
-        
+
         $meetings = $this->getMeetingsForRemind();
         foreach($meetings as $id ) {
             $recipients = $this->getRecipients($id,'Meetings');
             $bean = new Meeting();
-            $bean->retrieve($id);			
+            $bean->retrieve($id);
 			if ( $this->sendReminders($bean, $admin, $recipients) ) {
                 $bean->email_reminder_sent = 1;
                 $bean->save();
-            }            
+            }
         }
-        
+
         $calls = $this->getCallsForRemind();
         foreach($calls as $id ) {
             $recipients = $this->getRecipients($id,'Calls');
@@ -114,10 +117,10 @@ class EmailReminder
                 $bean->save();
             }
         }
-        
+
         return true;
     }
-	
+
     /**
      * send reminders
      * @param SugarBean $bean
@@ -127,81 +130,88 @@ class EmailReminder
      */
     public function sendReminders(SugarBean $bean, Administration $admin, $recipients)
     {
-
-        if ( empty($_SESSION['authenticated_user_language']) ) {
+        if (empty($_SESSION['authenticated_user_language'])) {
             $current_language = $GLOBALS['sugar_config']['default_language'];
-        }else{
-            $current_language = $_SESSION['authenticated_user_language'];
-        }            
-
-        if ( !empty($bean->created_by) ) {
-            $user_id = $bean->created_by;
-        }else if ( !empty($bean->assigned_user_id) ) {
-            $user_id = $bean->assigned_user_id;
-        }else {
-            $user_id = $GLOBALS['current_user']->id;
         }
-        $user = new User();
-        $user->retrieve($bean->created_by);
-            
+        else {
+            $current_language = $_SESSION['authenticated_user_language'];
+        }
+
+        if (!empty($bean->created_by)) {
+            $user_id = $bean->created_by;
+        }
+        else {
+            if (!empty($bean->assigned_user_id)) {
+                $user_id = $bean->assigned_user_id;
+            }
+            else {
+                $user_id = $GLOBALS['current_user']->id;
+            }
+        }
+        $user = BeanFactory::getBean('Users', $user_id);
+
         $OBCharset = $GLOBALS['locale']->getPrecedentPreference('default_email_charset');
         require_once("include/SugarPHPMailer.php");
         $mail = new SugarPHPMailer();
         $mail->setMailerForSystem();
-        
-        if(empty($admin->settings['notify_send_from_assigning_user']))
-        {
+
+        if (empty($admin->settings['notify_send_from_assigning_user'])) {
             $from_address = $admin->settings['notify_fromaddress'];
             $from_name = $admin->settings['notify_fromname'] ? "" : $admin->settings['notify_fromname'];
         }
-        else
-        {
+        else {
             $from_address = $user->emailAddress->getReplyToAddress($user);
             $from_name = $user->full_name;
         }
 
         $mail->From = $from_address;
         $mail->FromName = $from_name;
-        
+
         $xtpl = new XTemplate(get_notify_template_file($current_language));
         $xtpl = $this->setReminderBody($xtpl, $bean, $user);
-        
-        $template_name = $GLOBALS['beanList'][$bean->module_dir].'Reminder';
+
+        $template_name = $GLOBALS['beanList'][$bean->module_dir] . 'Reminder';
         $xtpl->parse($template_name);
         $xtpl->parse($template_name . "_Subject");
-        
-        $mail->Body = from_html(trim($xtpl->text($template_name)));
-        $mail->Subject = from_html($xtpl->text($template_name . "_Subject"));
+
+        $tempBody = from_html(trim($xtpl->text($template_name)));
+        $mail->msgHTML($tempBody);
+
+        $tempBody = preg_replace('/<a href=([\"\']?)(.*?)\1>(.*?)<\/a>/', "\\3 [\\2]", $tempBody);
+
+        $mail->AltBody = strip_tags($tempBody);
+        $mail->Subject = strip_tags(from_html($xtpl->text($template_name . "_Subject")));
 
         $oe = new OutboundEmail();
         $oe = $oe->getSystemMailerSettings();
-        if ( empty($oe->mail_smtpserver) ) {
+        if (empty($oe->mail_smtpserver)) {
             $GLOBALS['log']->fatal("Email Reminder: error sending email, system smtp server is not set");
-            return;
+
+            return false;
         }
-				
-        foreach($recipients as $r ) {
-            $mail->ClearAddresses();
-            $mail->AddAddress($r['email'],$GLOBALS['locale']->translateCharsetMIME(trim($r['name']), 'UTF-8', $OBCharset));    
+
+        foreach ($recipients as $r) {
+            $mail->clearAddresses();
+            $mail->addAddress($r['email'], $GLOBALS['locale']->translateCharsetMIME(trim($r['name']), 'UTF-8', $OBCharset));
             $mail->prepForOutbound();
-            if ( !$mail->Send() ) {
+            if (!$mail->send()) {
                 $GLOBALS['log']->fatal("Email Reminder: error sending e-mail (method: {$mail->Mailer}), (error: {$mail->ErrorInfo})");
             }
         }
-		
+
         return true;
     }
-    
+
     /**
      * set reminder body
      * @param XTemplate $xtpl
      * @param SugarBean $bean
      * @param User $user
-     * @return XTemplate 
+     * @return XTemplate
     */
     protected function setReminderBody(XTemplate $xtpl, SugarBean $bean, User $user)
     {
-    
+
         $object = strtoupper($bean->object_name);
 
         $xtpl->assign("{$object}_SUBJECT", $bean->name);
@@ -215,7 +225,7 @@ class EmailReminder
 
         return $xtpl;
     }
-    
+
     /**
      * get meeting ids list for remind
      * @return array
@@ -243,7 +253,7 @@ class EmailReminder
         }
         return $meetings;
     }
-    
+
     /**
      * get calls ids list for remind
      * @return array
@@ -271,7 +281,7 @@ class EmailReminder
         }
         return $calls;
     }
-    
+
     /**
      * get recipients of reminding email for specific activity
      * @param string $id
@@ -281,7 +291,7 @@ class EmailReminder
     protected function getRecipients($id, $module = "Meetings")
     {
         global $db;
-    
+
         switch($module ) {
             case "Meetings":
                 $field_part = "meeting";
@@ -292,7 +302,7 @@ class EmailReminder
             default:
                 return array();
         }
-    
+
         $emails = array();
         // fetch users
         $query = "SELECT user_id FROM {$field_part}s_users WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0
@@ -309,7 +319,7 @@ class EmailReminder
                 );
                 $emails[] = $arr;
             }
-        }        
+        }
         // fetch contacts
         $query = "SELECT contact_id FROM {$field_part}s_contacts WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0";
         $re = $db->query($query);
@@ -324,7 +334,7 @@ class EmailReminder
                 );
                 $emails[] = $arr;
             }
-        }        
+        }
         // fetch leads
         $query = "SELECT lead_id FROM {$field_part}s_leads WHERE {$field_part}_id = '{$id}' AND accept_status != 'decline' AND deleted = 0";
         $re = $db->query($query);
@@ -343,4 +353,3 @@ class EmailReminder
         return $emails;
     }
 }
-
