@@ -48,7 +48,7 @@ body {
     background: #e6e6e6;
     background: #f5f5f5;
     font-family: 'Lato', Lato, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     margin: 0;
     overflow: auto;
     color: #534D64;
@@ -111,7 +111,7 @@ div.p_login .p_login_bottom {
     }
 }
 
-div.p_login .p_login_bottom a#powered_by a#evolved_by {
+div.p_login .p_login_bottom a#powered_by a#evolved_by { /*LionixCRM*/
     margin-left: 20px;
 }
 
@@ -236,7 +236,7 @@ li#usermenu a span.user_icon {
     background-position: 0 -1;
     display: block;
     float: left;
-    margin-top: -10px;
+    margin-top: -10px; /*LionixCRM*/
 }
 
 li#usermenu a:hover span.user_icon {
@@ -463,7 +463,7 @@ div#pageContainer td.dashletcontainer div.hd .icon {
     background-color: #94A6B5;
     color: #f5f5f5;
     display: block;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     margin: 0 0 1px 0;
     clear: both;
 }
@@ -679,7 +679,7 @@ ul.dropdown-menu,
 }
 
 .recently_viewed_link_container_sidebar {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 
@@ -744,7 +744,7 @@ li.favoritelinks img {
 
 #content {
     width: 100%;
-    padding: 10px 3% 10px 3%;
+    padding: 10px 3% 10px 3%; /*LionixCRM*/
 }
 
 #bootstrap-container.col-md-offset-2 {
@@ -783,17 +783,17 @@ footer.collapsedSidebar {
     width: 48%;
 }
 
-a#powered_by, a#evolved_by, a#admin_options {
+a#powered_by, a#evolved_by, a#admin_options { /*LionixCRM*/
     margin-left: 4%;
 }
 
-a#admin_options, a#powered_by, a#evolved_by {
+a#admin_options, a#powered_by, a#evolved_by { /*LionixCRM*/
     color: #534D64;
     font-size: 14px;
     cursor: pointer;
 }
 
-a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
+a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover { /*LionixCRM*/
     color: #D66C60;
     text-decoration: none;
 }
@@ -817,7 +817,7 @@ a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
     background-repeat: no-repeat;
     background-position: right 3px;
     padding-right: 20px;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 .footer_right a:hover {
@@ -836,7 +836,7 @@ a#admin_options:hover, a#powered_by:hover, a#evolved_by:hover {
 .menuItem:active, .menuItemHilite:active, .menuItem:link, .menuItemHilite:link,
 .menuItemX:visited, .menuItemHiliteX:visited, .menuItemX:hover, .menuItemHiliteX:hover,
 .menuItemX:active, .menuItemHiliteX:active, .menuItemX:link, .menuItemHiliteX:link {
-    line-height: 18px;
+    line-height: 18px; /*LionixCRM*/
     color: #000;
     text-decoration: none;
     width: 120px;
@@ -1113,7 +1113,7 @@ th, td {
     padding: 0 0 0 8px;
     font-size: 14px;
     font-weight: 700;
-    line-height: 40px;
+    line-height: 40px; /*LionixCRM*/
     text-align: left;
     white-space: nowrap;
     vertical-align: baseline;
@@ -1283,7 +1283,7 @@ option[selected],
 
 #EditView input[type="button"] {
     margin: 4px;
-    padding: 0 5px;
+    padding: 0 5px; /*LionixCRM*/
 }
 
 fieldset {
@@ -1484,11 +1484,11 @@ button#listViewEndButton_top img, button#listViewEndButton_bottom img {
 .td_alt, .list tr th, .list tr td[scope=col], .edit .list tr th, .edit .list tr td[scope=col] {
     font-weight: 800;
     text-align: left;
-    padding: 8px 10px 8px 10px !important;
+    padding: 8px 10px 8px 10px !important; /*LionixCRM*/
     border-left: none;
     border-right: none;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 .list tr td {
@@ -2014,7 +2014,7 @@ ul.subpanelTablist li {
 
 ul#dashletCategories {
     display: block;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     height: 28px;
     border-bottom-color: #778591  !important;
 
@@ -2022,7 +2022,7 @@ ul#dashletCategories {
 
 ul#dashletCategories > li {
     display: inline-block;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 
@@ -2105,19 +2105,19 @@ table.subpanelTabForm {
 .search_form {
     overflow: visible;
     text-align: left;
-    margin-bottom: 5px;
+    margin-bottom: 5px; /*LionixCRM*/
 }
 
 .search_form .view {
     width: 100%;
     margin: 0;
-    padding-top: 10px !important;
-    padding-right: 20px !important;
-    padding-bottom: 10px !important;
-    padding-left: 20px !important;
+    padding-top: 10px !important; /*LionixCRM*/
+    padding-right: 20px !important; /*LionixCRM*/
+    padding-bottom: 10px !important; /*LionixCRM*/
+    padding-left: 20px !important; /*LionixCRM*/
     background-color: #E6E6E6;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 #sitemap {
@@ -2169,7 +2169,7 @@ table.subpanelTabForm {
 
 div#responseTime {
     width: 50%;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     color: #888888;
 }
 
@@ -2262,7 +2262,7 @@ td.fc-widget-header table > thead > tr > th {
 
 
 .fc-title {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     line-height: 24px;
 }
 
@@ -2277,7 +2277,6 @@ td.fc-widget-header table > thead > tr > th {
 .fc-day-top {
     cursor: pointer;
 }
-
 .monthFooter td {
     padding-left: 7px;
     padding-right: 7px;
@@ -2742,19 +2741,19 @@ li.noBullet {
 }
 
 .required {
-    background-color: #651007;
-    color: #fff;
-    padding: 2px;
-    margin-bottom: 10px;
+    background-color: #651007; /*LionixCRM*/
+    color: #fff; /*LionixCRM*/
+    padding: 2px; /*LionixCRM*/
+    margin-bottom: 10px; /*LionixCRM*/
     border: 1px solid transparent;
     border-radius: 4px;
 }
 
 .error {
-    background-color: #651007;
-    color: #fff;
-    padding: 5px;
-    margin-bottom: 10px;
+    background-color: #651007; /*LionixCRM*/
+    color: #fff; /*LionixCRM*/
+    padding: 5px; /*LionixCRM*/
+    margin-bottom: 10px; /*LionixCRM*/
     border: 1px solid transparent;
     border-radius: 4px;
 }
@@ -2783,7 +2782,7 @@ p.error {
 }
 
 div#content p.error {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px 0; /*LionixCRM*/
     border-radius: 3px;
 }
 
@@ -2806,7 +2805,7 @@ div#content p.error {
 }
 
 .date {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     font-weight: bold;
     border-bottom: 1px solid;
     padding-right: 10px;
@@ -3366,7 +3365,7 @@ a:link, a:visited, a:hover {
     color: #534D64;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin: 0px 0 10px 0;
+    margin: 0px 0 10px 0; /*LionixCRM*/
     font-weight: 300;
 }
 
@@ -3507,7 +3506,7 @@ ul.subpanelTablist li a.current, ul.subpanelTablist li a.current:hover {
 #colorPicker #themepickerLinkSpan {
     color: #444444;
     text-decoration: underline;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     font-weight: 400;
 }
 
@@ -3536,8 +3535,8 @@ ul.subpanelTablist li a.activeSubTab:hover {
 #search input[name=query_string] {
     border-color: #6fb0e4;
     background-color: #f6fafd;
-    line-height: 10px;
-    min-height: 20px;
+    line-height: 10px; /*LionixCRM*/
+    min-height: 20px; /*LionixCRM*/
 }
 
 #newRecord form a:link, #newRecord form a:visited {
@@ -3823,7 +3822,7 @@ ul.nav-tabs {
 ul.nav-tabs > li > a, ul.nav-tabs > li.active > a:focus {
     font-weight: 400;
     letter-spacing: 2px;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     text-transform: uppercase;
     background-color: #BFCAD3;
     margin: 0 2px 0 2px;
@@ -3993,7 +3992,7 @@ li#tab-actions > ul.dropdown-menu li:last-of-type a {
 
 div.tab-content {
     background-color: #ffffff;
-    padding: 10px;
+    padding: 10px; /*LionixCRM*/
     border: 1px solid transparent;
     border-bottom-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -4370,7 +4369,7 @@ ul#globalLinksSubnav, ul#quickCreateULSubnav,
 #globalLinksSubnav li a, #quickCreateULSubnav li a,
 #quickCreate ul.clickMenu li ul.subnav li a, #globalLinksModule ul.clickMenu li ul.subnav li a {
     padding: 4px 10px;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     color: #666666;
     line-height: 1.45;
 }
@@ -4414,7 +4413,7 @@ ul.clickMenu.SugarActionMenu li.single a:hover {
     padding: 4px 8px 5px 8px;
     margin: 0 3px 0 0px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 a#create_link.utilsLink {
@@ -5174,7 +5173,7 @@ fieldset[disabled] .btn-primary.active {
 .buttonOn,
 .btn .btn:hover {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     padding: 0 20px 0 20px;
     border-radius: 4px;
     text-transform: uppercase;
@@ -5230,7 +5229,7 @@ input[type=button].btn-info:active, input[type=button].btn-info:focus {
 }
 
 #EditView_tabs .edit [type="radio"], #EditView_tabs .edit [type="checkbox"]  {
-    margin-top: 10px;
+    margin-top: 10px; /*LionixCRM*/
 }
 
 #EditView_tabs .id-ff-remove img,
@@ -5468,7 +5467,7 @@ table#lineItems tr td table tfoot tr td span input[type="text"] {
 }
 
 #lineItems  .product_group {
-    width: 1400px;
+    width: 1400px; /*LionixCRM (better display width)*/
 }
 
 #lineItems  .product_group  > tbody > tr:nth-of-type(1) > td {
@@ -5482,7 +5481,7 @@ table#lineItems tr td table tfoot tr td span input[type="text"] {
 }
 
 #lineItems .product_qty {
-    width: 75px;
+    width: 75px; /*LionixCRM*/
     margin: 0 5px 0 0;
 }
 #lineItems .product_name {
@@ -5847,11 +5846,11 @@ ul.nav li.topnav li a, ul.nav li.topnav li a:hover {
 li.topnav {
     margin: 0;
     font-size: 1.1em;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     height: 90px;
     letter-spacing: 2px;
-    line-height: 90px;
-    padding: 0 5px 0 5px;
+    line-height: 90px; /*LionixCRM*/
+    padding: 0 5px 0 5px; /*LionixCRM*/
     text-transform: uppercase;
 }
 
@@ -6519,7 +6518,7 @@ ul::-webkit-resizer
 
 .list tr th a:link {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     padding-right: 10px;
 }
 
@@ -6575,7 +6574,7 @@ ul::-webkit-resizer
 }
 
 table {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 table legend {
@@ -6587,11 +6586,11 @@ table legend {
 }
 
 .list tr th {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 .list {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
 }
 
 #tabs {
@@ -6715,7 +6714,7 @@ form#MassAssign_SecurityGroups {
     border: 3px solid #65697A;
     padding: 12px 12px 12px 12px;
     color: #A2A5AF;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     letter-spacing: 1px;
     width: 200px;
     border-radius: 3px;
@@ -7330,7 +7329,7 @@ hr {
 
 .dashletPanel .h3Row h3 {
     color: #ffffff;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 0 10px;
@@ -7359,8 +7358,8 @@ hr {
 }
 
 .list tr.oddListRowS1 td, .list tr.evenListRowS1 td {
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
+    padding-top: 5px !important; /*LionixCRM*/
+    padding-bottom: 5px !important; /*LionixCRM*/
     padding-left: 10px !important;
     padding-right: 10px !important;
 }
@@ -7539,7 +7538,7 @@ h3 span {
     padding: 11px 32px 12px 12px;
     border-radius: 3px;
     background-color: #94A6B5;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     text-transform: uppercase;
     letter-spacing: 2px;
     display: inline-block;
@@ -7690,7 +7689,7 @@ h3 span {
     color: #fff;
     margin: 0;
     padding: 8px;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     border-radius: 0px;
 }
 
@@ -7716,7 +7715,7 @@ h3 span {
 }
 
 #desktop_notifications div.has-alerts p {
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     line-height: 20px;
     background-color: #F5F5F5;
     color: #534D64;
@@ -8001,7 +8000,7 @@ object {
 
 .qtip {
     font-family: 'Lato', Lato, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 14px; /*LionixCRM*/
     background: #ffffff;
     border: none;
     -webkit-border-radius: 0px;
@@ -8883,7 +8882,7 @@ div.list-view-rounded-corners > table th:last-of-type {
         padding: 10px 3% 10px 3%;
     }
 
-    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#admin_options, div.p_login .p_login_bottom a#evolved_by {
+    div.p_login .p_login_bottom a#powered_by, div.p_login .p_login_bottom a#admin_options, div.p_login .p_login_bottom a#evolved_by { /*LionixCRM*/
         font-size: 10px;
         margin-left: 0px;
         text-align: center;
@@ -9347,7 +9346,7 @@ div.list-view-rounded-corners > table th:last-of-type {
 }
 
 @media (max-width: 350px) {
-    .footer_left a#admin_options, .footer_left a#powered_by, .footer_left a#evolved_by {
+    .footer_left a#admin_options, .footer_left a#powered_by, .footer_left a#evolved_by { /*LionixCRM*/
         display: block;
     }
 
