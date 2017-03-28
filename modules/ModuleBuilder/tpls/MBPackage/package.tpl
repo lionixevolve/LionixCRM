@@ -1,10 +1,11 @@
 {*
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,7 +36,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 *}
 <form name='CreatePackage' id='CreatePackage'>
@@ -68,9 +69,9 @@
 	<tr>
 		<td class='mbLBL' ><b>{$mod_strings.LBL_AUTHOR}</b></td><td><input type='text' name='author' size='36' maxlength='36' value='{$package->author}'></td>
 	</tr>
-	
+
 	<tr>
-	
+
 		<td class='mbLBL' ><font color="#ff0000"> * </font><b>{$mod_strings.LBL_KEY}</b></td>
 		<td>
 		{if empty($package->key)}
@@ -85,7 +86,7 @@
 		<td class='mbLBL'  ><b>{$mod_strings.LBL_DESCRIPTION}</b></td><td><textarea name='description' cols='60' rows='5'>{$package->description}</textarea></td>
 	</tr>
 
-	<tr>	
+	<tr>
 		<td></td><td id='readme'>{sugar_getimage name="advanced_search" ext=".gif" alt=$mod_strings.LBL_HIDEOPTIONS other_attributes='border="0" id="options" '}<a style="text-decoration:none" href="javascript: void(0)" onclick ="toggleEl('readmefield');"><b>{$mod_strings.LBL_ADD_README}</b></a></td>
 	</tr>
 	<tr>
@@ -95,9 +96,9 @@
 		<td></td>
 		<td ><textarea name='readme' cols='60' rows='10'>{$package->readme}</textarea></td>
 	</tr>
-	
+
 	{if !empty($package->name)}
-	
+
 	<tr>
 		<td class='mbLBL'><b>{$mod_strings.LBL_MODULES}</b></td>
 		<td >
@@ -114,8 +115,8 @@
 						      {$mod_strings.LBL_NEW_MODULE}</a>
 						</td></tr>
 						</table>
-						
-						
+
+
 					</td>
 					{foreach from=$package->moduleTypes key='name' item='type'}
 					{assign var='imgurl' value=$type|cat:'_32'}
@@ -131,16 +132,16 @@
 				              {$name}</a>
 				          </td></tr>
 				        </table></td>
-					{counter name='items'}	
+					{counter name='items'}
 					{/foreach}
-					   
+
 					</tr>
 	</table>
 		</td>
 	</tr>
-	
+
 	{/if}
-	
+
 	<tr>
 		<td height='100%'>&nbsp;</td><td>&nbsp;</td>
 	</tr>

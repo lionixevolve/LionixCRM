@@ -1,10 +1,11 @@
 {*
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,7 +36,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 *}
 <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000"></div>
@@ -54,12 +55,16 @@ addForm('popup_form');
 {if isset($package->name)}
     <input type='hidden' name='view_package' value='{$package->name}'>
 {/if}
-<input type='hidden' name='is_update' value='true'>
+{if $is_update}
+	<input type='hidden' name='is_update' value='true'>
+{else}
+	<input type='hidden' name='is_update' value='false'>
+{/if}
 	{if $hideLevel < 5}
 	    &nbsp;
-	    <input type='button' class='button' name='fsavebtn' value='{$mod_strings.LBL_BTN_SAVE}' 
+	    <input type='button' class='button' name='fsavebtn' value='{$mod_strings.LBL_BTN_SAVE}'
 			onclick='{literal}if(validate_type_selection() && check_form("popup_form")){ {/literal}{$preSave} {literal}ModuleBuilder.submitForm("popup_form_id"); }{/literal}'>
-	    <input type='button' name='cancelbtn' value='{$mod_strings.LBL_BTN_CANCEL}' 
+	    <input type='button' name='cancelbtn' value='{$mod_strings.LBL_BTN_CANCEL}'
 			onclick='ModuleBuilder.tabPanel.removeTab(ModuleBuilder.findTabById("east"));' class='button'>
 	    {if !empty($vardef.name)}
 	        {if $hideLevel < 3}
@@ -73,7 +78,7 @@ addForm('popup_form');
 	        {/literal}
 	    {/if}
 	    {/if}
-	
+
 	{else}
 	    {literal}
 	     <input type='button' class='button' name='lsavebtn' value='{/literal}{$mod_strings.LBL_BTN_SAVE}{literal}' onclick='if(check_form("popup_form")){this.form.action.value = "{/literal}{$action}{literal}";ModuleBuilder.submitForm("popup_form_id")};'>
@@ -84,7 +89,7 @@ addForm('popup_form');
 		 {literal}
 	        &nbsp;<input type='button' class='button' name='cancel' value='{/literal}{$mod_strings.LBL_BTN_CANCEL}{literal}' onclick='ModuleBuilder.tabPanel.get("activeTab").close()'>
 	        {/literal}
-	        
+
 {/if}
 <hr>
 
@@ -116,7 +121,7 @@ function validate_type_selection(){
         }
     }
     if (document.getElementById("customTypeValidate")){
-        return document.getElementById("customTypeValidate").onchange(); 
+        return document.getElementById("customTypeValidate").onchange();
     }
     return true;
 }

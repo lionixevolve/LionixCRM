@@ -1,10 +1,11 @@
 <?php
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,7 +36,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 
 require_once 'data/BeanFactory.php';
@@ -119,12 +120,12 @@ class StudioModule
 
     	// If a standard module then just look up its type - type is implicit for standard modules. Perhaps one day we will make it explicit, just as we have done for custom modules...
 		$types = array (
-		'Accounts' => 'company' , 
-		'Bugs' => 'issue' , 
-		'Cases' => 'issue' , 
-		'Contacts' => 'person' , 
-		'Documents' => 'file' , 
-		'Leads' => 'person' , 
+		'Accounts' => 'company' ,
+		'Bugs' => 'issue' ,
+		'Cases' => 'issue' ,
+		'Contacts' => 'person' ,
+		'Documents' => 'file' ,
+		'Leads' => 'person' ,
 		'Opportunities' => 'sale'
 		) ;
 		if ( isset ( $types [ $this->module ] ) )
@@ -177,7 +178,7 @@ class StudioModule
 
         return $nodes ;
     }
-    
+
     function getViews() {
         $views = array () ;
         foreach ( $this->sources as $file => $def )
@@ -197,7 +198,7 @@ class StudioModule
 
         // Now add in the QuickCreates - quickcreatedefs can be created by Studio from editviewdefs if they are absent, so just add them in regardless of whether the quickcreatedefs file exists
 
-        $hideQuickCreateForModules = array ( 'kbdocuments' , 'projecttask' , 
+        $hideQuickCreateForModules = array ( 'kbdocuments' , 'projecttask' ,
             'campaigns'
             ) ;
         // Some modules should not have a QuickCreate form at all, so do not add them to the list
@@ -215,19 +216,19 @@ class StudioModule
 			$dashlets = array( );
 	        $dashlets [] = array('name' => translate('LBL_DASHLETLISTVIEW') , 'type' => 'dashlet' , 'action' => 'module=ModuleBuilder&action=editLayout&view=dashlet&view_module=' . $this->module );
 			$dashlets [] = array('name' => translate('LBL_DASHLETSEARCHVIEW') , 'type' => 'dashletsearch' , 'action' => 'module=ModuleBuilder&action=editLayout&view=dashletsearch&view_module=' . $this->module );
-			$layouts [ translate('LBL_DASHLET') ] = array ( 'name' => translate('LBL_DASHLET') , 'type' => 'Folder', 'children' => $dashlets,  'imageTitle' => 'Dashlet',  'action' => 'module=ModuleBuilder&action=wizard&view=dashlet&view_module=' . $this->module);        	
+			$layouts [ translate('LBL_DASHLET') ] = array ( 'name' => translate('LBL_DASHLET') , 'type' => 'Folder', 'children' => $dashlets,  'imageTitle' => 'Dashlet',  'action' => 'module=ModuleBuilder&action=wizard&view=dashlet&view_module=' . $this->module);
         }
-		
+
         //For popup tree node
         $popups = array( );
         $popups [] = array('name' => translate('LBL_POPUPLISTVIEW') , 'type' => 'popuplistview' , 'action' => 'module=ModuleBuilder&action=editLayout&view=popuplist&view_module=' . $this->module );
 		$popups [] = array('name' => translate('LBL_POPUPSEARCH') , 'type' => 'popupsearch' , 'action' => 'module=ModuleBuilder&action=editLayout&view=popupsearch&view_module=' . $this->module );
-		$layouts [ translate('LBL_POPUP') ] = array ( 'name' => translate('LBL_POPUP') , 'type' => 'Folder', 'children' => $popups, 'imageTitle' => 'Popup', 'action' => 'module=ModuleBuilder&action=wizard&view=popup&view_module=' . $this->module);  
-			
+		$layouts [ translate('LBL_POPUP') ] = array ( 'name' => translate('LBL_POPUP') , 'type' => 'Folder', 'children' => $popups, 'imageTitle' => 'Popup', 'action' => 'module=ModuleBuilder&action=wizard&view=popup&view_module=' . $this->module);
+
         $nodes = $this->getSearch () ;
         if ( !empty ( $nodes ) )
         {
-        	$layouts [ translate('LBL_SEARCH') ] = array ( 'name' => translate('LBL_SEARCH') , 'type' => 'Folder' , 'children' => $nodes , 'action' => "module=ModuleBuilder&action=wizard&view=search&view_module={$this->module}" , 'imageTitle' => 'BasicSearch' , 'help' => 'searchBtn' , 'size' => '48') ;
+        	$layouts [ translate('LBL_FILTER') ] = array ( 'name' => translate('LBL_FILTER') , 'type' => 'Folder' , 'children' => $nodes , 'action' => "module=ModuleBuilder&action=wizard&view=search&view_module={$this->module}" , 'imageTitle' => 'BasicSearch' , 'help' => 'searchBtn' , 'size' => '48') ;
         }
 
     	return $layouts ;
@@ -238,7 +239,7 @@ class StudioModule
 		$fileName = "My{$moduleName}Dashlet";
 		$customFileName = "{$moduleName}Dashlet";
 		if (file_exists ( "modules/{$moduleName}/Dashlets/{$fileName}/{$fileName}.php" )
-			|| file_exists ( "custom/modules/{$moduleName}/Dashlets/{$fileName}/{$fileName}.php" ) 
+			|| file_exists ( "custom/modules/{$moduleName}/Dashlets/{$fileName}/{$fileName}.php" )
 			|| file_exists ( "modules/{$moduleName}/Dashlets/{$customFileName}/{$customFileName}.php" )
 			|| file_exists ( "custom/modules/{$moduleName}/Dashlets/{$customFileName}/{$customFileName}.php" ))
         {
@@ -246,7 +247,7 @@ class StudioModule
         }
         return false;
 	}
-	
+
 
     function getSearch ()
     {
@@ -313,13 +314,13 @@ class StudioModule
                 //  bug47452 - adding a unique number to the $nodes[ key ] so if you have 2+ panels
                 //  with the same subname they will not cancel each other out
                 $nodes [ $subname . $ct++ ] = array (
-                	'name' => $name , 
-                	'label' => $subname , 
+                	'name' => $name ,
+                	'label' => $subname ,
                 	'action' =>  $action,
-                	'imageTitle' => $subname , 
-                	'imageName' => 'icon_' . ucfirst($name) . '_32', 
-                	'altImageName' => 'Subpanels', 
-                	'size' => '48' 
+                	'imageTitle' => $subname ,
+                	'imageName' => 'icon_' . ucfirst($name) . '_32',
+                	'altImageName' => 'Subpanels',
+                	'size' => '48'
                 ) ;
             }
 
@@ -344,7 +345,7 @@ class StudioModule
 	            foreach(scandir($dir) as $fileName)
 	            {
 	            	// sanity check to confirm that this is a usable subpanel...
-	                if (substr ( $fileName, 0, 1 ) != '.' && substr ( strtolower($fileName), -4 ) == ".php" 
+	                if (substr ( $fileName, 0, 1 ) != '.' && substr ( strtolower($fileName), -4 ) == ".php"
 	                	&& AbstractRelationships::validSubpanel ( "$dir/$fileName" ))
 	                {
 	                    $subname = str_replace ( '.php', '', $fileName ) ;
@@ -357,10 +358,10 @@ class StudioModule
 		return $this->providedSubpanels;
     }
 
-    
+
     function getParentModulesOfSubpanel($subpanel){
         global $moduleList, $beanFiles, $beanList, $module;
-    
+
         //use tab controller function to get module list with named keys
         require_once("modules/MySettings/TabController.php");
         require_once("include/SubPanel/SubPanelDefinitions.php");
@@ -368,19 +369,19 @@ class StudioModule
 
         //change case to match subpanel processing later on
         $modules_to_check = array_change_key_case($modules_to_check);
-    
+
         $spd = '';
         $spd_arr = array();
-        //iterate through modules and build subpanel array  
+        //iterate through modules and build subpanel array
         foreach($modules_to_check as $mod_name){
-            
+
             //skip if module name is not in bean list, otherwise get the bean class name
             if(!isset($beanList[$mod_name])) continue;
             $class = $beanList[$mod_name];
 
             //skip if class name is not in file list, otherwise require the bean file and create new class
             if(!isset($beanFiles[$class]) || !file_exists($beanFiles[$class])) continue;
-            
+
             //retrieve subpanels for this bean
             require_once($beanFiles[$class]);
             $bean_class = new $class();
@@ -401,8 +402,8 @@ class StudioModule
         $sources = $this->getViewMetadataSources();
         $sources[] = array('type'  => MB_BASICSEARCH);
         $sources[] = array('type'  => MB_ADVANCEDSEARCH);
-        $sources[] = array('type'  => MB_POPUPSEARCH);        
-        
+        $sources[] = array('type'  => MB_POPUPSEARCH);
+
         $GLOBALS [ 'log' ]->debug ( print_r( $sources,true) ) ;
         foreach ( $sources as $name => $defs )
         {
@@ -413,7 +414,7 @@ class StudioModule
                     $parser->handleSave(false) ; // don't populate from $_REQUEST, just save as is...
             } catch(Exception $e){}
         }
-        
+
         //Remove the fields in subpanel
         $data = $this->getParentModulesOfSubpanel($this->module);
         foreach($data as $parentModule){
@@ -426,8 +427,8 @@ class StudioModule
         }
     }
 
-	
-	
+
+
 	public function getViewMetadataSources() {
 		$sources = $this->getViews();
         $sources[] = array('type'  => MB_BASICSEARCH);
@@ -436,7 +437,7 @@ class StudioModule
         $sources[] = array('type'  => MB_DASHLETSEARCH);
         $sources[] = array('type'  => MB_POPUPLIST);
         $sources[] = array('type'  => MB_QUICKCREATE);
-		
+
 		return $sources;
 	}
 
@@ -451,7 +452,7 @@ class StudioModule
         }
         return $view;
     }
-	
-	
+
+
 }
 ?>

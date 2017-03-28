@@ -1,11 +1,12 @@
 {*
 
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -36,7 +37,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 
 
@@ -112,7 +113,7 @@ studiotabs.reset();
                 {/if}
                 {* END SUGARCRM flav=pro ONLY *}
                 <img src="{sugar_getimagepath file='edit_inline.gif'}" style="cursor: pointer;"
-				onclick="var value_label = document.getElementById('subslot{$modCounter}label').innerHTML.replace(/^\s+|\s+$/g,''); 
+				onclick="var value_label = document.getElementById('subslot{$modCounter}label').innerHTML.replace(/^\s+|\s+$/g,'');
 				    {if !($view|substr:-6 == "search") }
 					var value_width = document.getElementById('subslot{$modCounter}width').innerHTML;
 					{/if}
@@ -205,7 +206,7 @@ resizeDDLists = function() {
 
 function countListFields() {
 	var count = 0;
-	var divs = document.getElementById( 'ul0' ).getElementsByTagName( 'li' ) ;		
+	var divs = document.getElementById( 'ul0' ).getElementsByTagName( 'li' ) ;
 	for ( var j=0;j<divs.length;j++) {
 		if (divs[j].className == 'draggable') count++;
 	}
@@ -232,5 +233,3 @@ ModuleBuilder.MBpackage = '{$view_package}';
 {$additionalFormData}
 
 </form>
-
-

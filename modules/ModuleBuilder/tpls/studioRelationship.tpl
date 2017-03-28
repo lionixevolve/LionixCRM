@@ -1,10 +1,11 @@
 {*
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,7 +36,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 *}
 
@@ -137,7 +138,7 @@
                     <td></td><td><input type="hidden" name="lhs_label" id="lhs_label" value="{$rel.lhs_label}"  ></td>
                 {/if}
                 <td></td>
-                {if $rel.relationship_type != 'many-to-one'} 
+                {if $rel.relationship_type != 'many-to-one'}
                 <td align="right" scope="row">{sugar_translate label="LBL_REL_LABEL"}:</td>
                 <td><input name="rhs_label" id="rhs_label" value="{$rel.rhs_label}"  ></td>
                 {else}
@@ -155,7 +156,7 @@
                 </td>
                 {else}<td></td><td></td>{/if}
                 <td></td>
-                {if $rel.relationship_type != 'many-to-one'} 
+                {if $rel.relationship_type != 'many-to-one'}
                 <td align="right" scope="row">{$mod_strings.LBL_SUBPANEL_FROM} {sugar_translate label=$rel.rhs_module}:</td>
                 <td>
                 {if $rel.readonly}
@@ -165,8 +166,8 @@
                 {/if}
 				</td>
 				{/if}
-				
-				
+
+
             </tr>
 			<tr>
                 {* add in the extended relationship condition *}
@@ -210,7 +211,7 @@ ModuleBuilder.deleteRel = function()
 	    type:'confirm',
 		width: 300,
 	    {/literal}
-	    msg:'<b>{sugar_translate label="LBL_CONFIRM_RELATIONSHIP_DELETE"}</b>' + 
+	    msg:'<b>{sugar_translate label="LBL_CONFIRM_RELATIONSHIP_DELETE"}</b>' +
 	       "<div style='height:1em;'>&nbsp;</div><p><input type='checkbox' onclick='YAHOO.util.Dom.get(\"rel_remove_tables\").value = this.checked ? \"\" : true;' />" +
 		   "&nbsp;{sugar_translate label="ML_LBL_DO_NOT_REMOVE_TABLES" module="Administration"}</p>",
 	    {literal}
@@ -221,9 +222,9 @@ ModuleBuilder.deleteRel = function()
 			    ModuleBuilder.tabPanel.removeTab(ModuleBuilder.findTabById("relEditor"));
 			}
 		}
-	});		
+	});
 }
-{/literal}	
+{/literal}
 addForm('relform');
 addToValidate('relform', 'label', 'varchar', true, '{$mod_strings.LBL_JS_VALIDATE_REL_LABEL}');
 {if $fromModuleBuilder}

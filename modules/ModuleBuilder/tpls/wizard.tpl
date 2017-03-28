@@ -1,10 +1,11 @@
 {*
-/*********************************************************************************
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
+ *
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -35,7 +36,7 @@
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
  * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
  * display the words "Powered by SugarCRM", "Supercharged by SuiteCRM" and "Evolved by LionixCRM".
- ********************************************************************************/
+ */
 
 *}
 <div class='wizard' width='100%' >
@@ -57,7 +58,7 @@
 				{assign var='buttonsize' value=$button.size}
 			{/if}
 			<td {if isset($button.help)}id="{$button.help}"{/if} width="16%" name=helpable" style="padding: 5px;"  valign="top" align="center">
-			     <table onclick='{if $button.action|substr:0:11 == "javascript:"}{$button.action|substr:11}{else}ModuleBuilder.getContent("{$button.action}");{/if}' 
+			     <table onclick='{if $button.action|substr:0:11 == "javascript:"}{$button.action|substr:11}{else}ModuleBuilder.getContent("{$button.action}");{/if}'
 			         class='wizardButton' onmousedown="ModuleBuilder.buttonDown(this);return false;" onmouseout="ModuleBuilder.buttonOut(this);">
 			         <tr>
 						<td align="center"><a class='studiolink' href="javascript:void(0)" >
@@ -65,7 +66,7 @@
                             {if isset($button.altImageName)}
                                 {sugar_image name=$button.imageTitle width=$button.size height=$button.size image=$button.imageName altimage=$button.altImageName}
                             {else}
-                                {sugar_image name=$button.imageTitle width=$button.size height=$button.size image=$button.imageName}                            
+                                {sugar_image name=$button.imageTitle width=$button.size height=$button.size image=$button.imageName}
                             {/if}
 						{else}
 							{sugar_image name=$button.imageTitle width=$button.size height=$button.size}
