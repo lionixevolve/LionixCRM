@@ -110,8 +110,8 @@ $app_list_strings = array(
             'TrackerQueries' => 'Tracker Queries',
             'FAQ' => 'FAQ',
             'Newsletters' => 'Newsletters',
-            'SugarFeed' => 'LionixCRM Feed',
-            'SugarFavorites' => 'LionixCRM Favorites',
+            'SugarFeed' => 'SuiteCRM Feed',
+            'SugarFavorites' => 'SuiteCRM Favorites',
             'OAuthKeys' => 'OAuth Consumer Keys',
             'OAuthTokens' => 'OAuth Tokens',
         ),
@@ -141,10 +141,10 @@ $app_list_strings = array(
             'Prospects' => 'Target',
             'Campaigns' => 'Campaign',
             'Documents' => 'Document',
-            'SugarFollowing' => 'LionixCRM Following',
+            'SugarFollowing' => 'SuiteCRM Following',
             'Sync' => 'Sync',
             'Users' => 'User',
-            'SugarFavorites' => 'LionixCRM Favorites',
+            'SugarFavorites' => 'SuiteCRM Favorites',
 
         ),
 
@@ -353,7 +353,7 @@ $app_list_strings = array(
         ),
     'meeting_type_dom' => array(
             'Other' => 'Other',
-            'Sugar' => 'LionixCRM',
+            'Sugar' => 'SuiteCRM',
         ),
     'call_status_default' => 'Planned',
     'call_status_dom' => array(
@@ -750,7 +750,7 @@ $app_list_strings = array(
         'off' => 'No',
         '' => 'No', ),
 
-    'dom_email_link_type' => array('sugar' => 'LionixCRM Email Client',
+    'dom_email_link_type' => array('sugar' => 'SuiteCRM Email Client',
         'mailto' => 'External Email Client', ),
 
     'dom_email_editor_option' => array('' => 'Default Email Format',
@@ -1098,7 +1098,7 @@ $app_strings = array(
     'LBL_ROUTING_BUTTON_SAVE' => 'Save Rule',
 
     'LBL_ROUTING_ACTIONS_COPY_MAIL' => 'Copy Mail',
-    'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Delete LionixCRM Object',
+    'LBL_ROUTING_ACTIONS_DELETE_BEAN' => 'Delete SuiteCRM Object',
     'LBL_ROUTING_ACTIONS_DELETE_FILE' => 'Delete File',
     'LBL_ROUTING_ACTIONS_DELETE_MAIL' => 'Delete Email',
     'LBL_ROUTING_ACTIONS_FORWARD' => 'Forward Email',
@@ -1191,12 +1191,12 @@ $app_strings = array(
     'LBL_EMAIL_ADDRESSES' => 'Email',
     'LBL_EMAIL_ADDRESS_PRIMARY' => 'Email Address',
     'LBL_EMAIL_ADDRESSES_TITLE' => 'Email Addresses',
-    'LBL_EMAIL_ARCHIVE_TO_SUGAR' => 'Import to LionixCRM',
+    'LBL_EMAIL_ARCHIVE_TO_SUGAR' => 'Import to SuiteCRM',
     'LBL_EMAIL_ASSIGNMENT' => 'Assignment',
     'LBL_EMAIL_ATTACH_FILE_TO_EMAIL' => 'Attach',
     'LBL_EMAIL_ATTACHMENT' => 'Attach',
     'LBL_EMAIL_ATTACHMENTS' => 'From Local System',
-    'LBL_EMAIL_ATTACHMENTS2' => 'From LionixCRM Documents',
+    'LBL_EMAIL_ATTACHMENTS2' => 'From SuiteCRM Documents',
     'LBL_EMAIL_ATTACHMENTS3' => 'Template Attachments',
     'LBL_EMAIL_ATTACHMENTS_FILE' => 'File',
     'LBL_EMAIL_ATTACHMENTS_DOCUMENT' => 'Document',
@@ -1262,7 +1262,7 @@ $app_strings = array(
     'LBL_EMAIL_ERROR_CONTACT_NAME' => 'Please make sure you enter a last name.',
     'LBL_EMAIL_ERROR_DESC' => 'Errors were detected: ',
     'LBL_EMAIL_DELETE_ERROR_DESC' => 'You do not have access to this area. Contact your site administrator to obtain access.',
-    'LBL_EMAIL_ERROR_DUPE_FOLDER_NAME' => 'LionixCRM Folder names must be unique.',
+    'LBL_EMAIL_ERROR_DUPE_FOLDER_NAME' => 'SuiteCRM Folder names must be unique.',
     'LBL_EMAIL_ERROR_EMPTY' => 'Please enter some search criteria.',
     'LBL_EMAIL_ERROR_GENERAL_TITLE' => 'An error has occurred',
     'LBL_EMAIL_ERROR_LIST_NAME' => 'An email list with that name already exists',
@@ -1316,7 +1316,7 @@ $app_strings = array(
     'LBL_EMAIL_IE_DELETE_SUCCESSFUL' => 'Deletion successful.',
     'LBL_EMAIL_IE_SAVE' => 'Saving Mail Account Information',
     'LBL_EMAIL_IMPORTING_EMAIL' => 'Importing Email',
-    'LBL_EMAIL_IMPORT_EMAIL' => 'Import to LionixCRM',
+    'LBL_EMAIL_IMPORT_EMAIL' => 'Import to SuiteCRM',
     'LBL_EMAIL_IMPORT_SETTINGS' => 'Import Settings',
     'LBL_EMAIL_INVALID' => 'Invalid',
     'LBL_EMAIL_LOADING' => 'Loading...',
@@ -1340,13 +1340,13 @@ $app_strings = array(
     'LBL_EMAIL_MENU_RENAMING_FOLDER' => 'Renaming Folder',
     'LBL_EMAIL_MENU_MAKE_SELECTION' => 'Please make a selection before trying this operation.',
 
-    'LBL_EMAIL_MENU_HELP_ADD_FOLDER' => 'Create a Folder (remote or in LionixCRM)',
-    'LBL_EMAIL_MENU_HELP_ARCHIVE' => 'Archive these email(s) to LionixCRM',
+    'LBL_EMAIL_MENU_HELP_ADD_FOLDER' => 'Create a Folder (remote or in SuiteCRM)',
+    'LBL_EMAIL_MENU_HELP_ARCHIVE' => 'Archive these email(s) to SuiteCRM',
     'LBL_EMAIL_MENU_HELP_COMPOSE_TO_LIST' => 'Email selected Mailing Lists',
     'LBL_EMAIL_MENU_HELP_CONTACT_COMPOSE' => 'Email this Contact',
     'LBL_EMAIL_MENU_HELP_CONTACT_REMOVE' => 'Remove a Contact',
     'LBL_EMAIL_MENU_HELP_DELETE' => 'Delete these email(s)',
-    'LBL_EMAIL_MENU_HELP_DELETE_FOLDER' => 'Delete a Folder (remote or in LionixCRM)',
+    'LBL_EMAIL_MENU_HELP_DELETE_FOLDER' => 'Delete a Folder (remote or in SuiteCRM)',
     'LBL_EMAIL_MENU_HELP_EDIT_CONTACT' => 'Edit a Contact',
     'LBL_EMAIL_MENU_HELP_EDIT_LIST' => 'Edit a Mailing List',
     'LBL_EMAIL_MENU_HELP_EMPTY_TRASH' => 'Empties all Trash folders for your mail accounts',
@@ -1355,7 +1355,7 @@ $app_strings = array(
     'LBL_EMAIL_MENU_HELP_MARK_UNFLAGGED' => 'Mark these email(s) unflagged',
     'LBL_EMAIL_MENU_HELP_MARK_UNREAD' => 'Mark these email(s) unread',
     'LBL_EMAIL_MENU_HELP_REMOVE_LIST' => 'Removes Mailing Lists',
-    'LBL_EMAIL_MENU_HELP_RENAME_FOLDER' => 'Rename a Folder (remote or in LionixCRM)',
+    'LBL_EMAIL_MENU_HELP_RENAME_FOLDER' => 'Rename a Folder (remote or in SuiteCRM)',
     'LBL_EMAIL_MENU_HELP_REPLY' => 'Reply to these email(s)',
     'LBL_EMAIL_MENU_HELP_REPLY_ALL' => 'Reply to all recipients for these email(s)',
 
@@ -1489,10 +1489,10 @@ $app_strings = array(
     'LBL_SMTPTYPE_EXCHANGE' => 'Microsoft Exchange',
     'LBL_SMTPTYPE_OTHER' => 'Other',
     'LBL_EMAIL_SPACER_MAIL_SERVER' => '[ Remote Folders ]',
-    'LBL_EMAIL_SPACER_LOCAL_FOLDER' => '[ LionixCRM Folders ]',
+    'LBL_EMAIL_SPACER_LOCAL_FOLDER' => '[ SuiteCRM Folders ]',
     'LBL_EMAIL_SUBJECT' => 'Subject',
     'LBL_EMAIL_SUCCESS' => 'Success',
-    'LBL_EMAIL_SUGAR_FOLDER' => 'LionixCRM Folder',
+    'LBL_EMAIL_SUGAR_FOLDER' => 'SuiteCRM Folder',
     'LBL_EMAIL_TEMPLATE_EDIT_PLAIN_TEXT' => 'Email template body is empty',
     'LBL_EMAIL_TEMPLATES' => 'Templates',
     'LBL_EMAIL_TEXT_FIRST' => 'First Page',
@@ -1557,7 +1557,7 @@ $app_strings = array(
     'ERR_NOTHING_SELECTED' => 'Please make a selection before proceeding.',
     'ERR_OPPORTUNITY_NAME_DUPE' => 'An opportunity with the name %s already exists.  Please enter another name below.',
     'ERR_OPPORTUNITY_NAME_MISSING' => 'An opportunity name was not entered.  Please enter an opportunity name below.',
-    'ERR_POTENTIAL_SEGFAULT' => 'A potential Apache segmentation fault was detected.  Please notify your system administrator to confirm this problem and have her/him report it to LionixCRM.',
+    'ERR_POTENTIAL_SEGFAULT' => 'A potential Apache segmentation fault was detected.  Please notify your system administrator to confirm this problem and have her/him report it to SuiteCRM.',
     'ERR_SELF_REPORTING' => 'User cannot report to him or herself.',
     'ERR_SINGLE_QUOTE' => 'Using the single quote is not supported for this field.  Please change the value.',
     'ERR_SQS_NO_MATCH_FIELD' => 'No match for field: ',
@@ -1571,7 +1571,7 @@ $app_strings = array(
     'ERR_DB_FAIL' => 'Database failure. Please refer to suitecrm.log for details.',
     'ERR_EXTERNAL_API_403' => 'Permission Denied. File type is not supported.',
     'ERR_EXTERNAL_API_NO_OAUTH_TOKEN' => 'OAuth Access Token is missing.',
-    'ERR_DB_VERSION' => 'LionixCRM {0} Files May Only Be Used With A LionixCRM {1} Database.',
+    'ERR_DB_VERSION' => 'SuiteCRM {0} Files May Only Be Used With A SuiteCRM {1} Database.',
 
     'LBL_ACCOUNT' => 'Account',
     'LBL_OLD_ACCOUNT_LINK' => 'Old Account',
@@ -2022,7 +2022,7 @@ $app_strings = array(
     'NTC_TIME_FORMAT' => '(24:00)',
     'NTC_WELCOME' => 'Welcome',
     'NTC_YEAR_FORMAT' => '(yyyy)',
-    'LOGIN_LOGO_ERROR' => 'Please replace the LionixCRM logos.',
+    'LOGIN_LOGO_ERROR' => 'Please replace the SuiteCRM logos.',
     'WARN_ONLY_ADMINS' => 'Only admins may log in.',
     'WARN_UNSAVED_CHANGES' => 'You are about to leave this record without saving any changes you may have made to the record. Are you sure you want to navigate away from this record?',
     'ERROR_NO_RECORD' => 'Error retrieving record.  This record may be deleted or you may not be authorized to view it.',
@@ -2142,12 +2142,12 @@ $app_strings = array(
     'LBL_DELETE_PAGE_CONFIRM' => 'Are you sure you want to delete this page?',
     'LBL_SAVING_PAGE_TITLE' => 'Saving Page Title ...',
     'LBL_RETRIEVING_PAGE' => 'Retrieving Page ...',
-    'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of LionixCRM Dashlets your adminstrator has set. Please remove a LionixCRM Dashlet to add more.',
-    'LBL_ADDING_DASHLET' => 'Adding LionixCRM Dashlet ...',
-    'LBL_ADDED_DASHLET' => 'LionixCRM Dashlet Added',
-    'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this LionixCRM Dashlet?',
-    'LBL_REMOVING_DASHLET' => 'Removing LionixCRM Dashlet ...',
-    'LBL_REMOVED_DASHLET' => 'LionixCRM Dashlet Removed',
+    'LBL_MAX_DASHLETS_REACHED' => 'You have reached the maximum number of SuiteCRM Dashlets your adminstrator has set. Please remove a SuiteCRM Dashlet to add more.',
+    'LBL_ADDING_DASHLET' => 'Adding SuiteCRM Dashlet ...',
+    'LBL_ADDED_DASHLET' => 'SuiteCRM Dashlet Added',
+    'LBL_REMOVE_DASHLET_CONFIRM' => 'Are you sure you want to remove this SuiteCRM Dashlet?',
+    'LBL_REMOVING_DASHLET' => 'Removing SuiteCRM Dashlet ...',
+    'LBL_REMOVED_DASHLET' => 'SuiteCRM Dashlet Removed',
 
     // MySugar Menu Options
     'LBL_ADD_PAGE' => 'Add Page',
@@ -2157,7 +2157,7 @@ $app_strings = array(
 
     'LBL_LOADING_PAGE' => 'Loading page, please wait...',
 
-    'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this LionixCRM Dashlet.',
+    'LBL_RELOAD_PAGE' => 'Please <a href="javascript: window.location.reload()">reload the window</a> to use this SuiteCRM Dashlet.',
     'LBL_ADD_DASHLETS' => 'Add Dashlets',
     'LBL_CLOSE_DASHLETS' => 'Close',
     'LBL_OPTIONS' => 'Options',
@@ -2216,8 +2216,8 @@ $app_strings = array(
     'MSG_SHOULD_BE' => 'should be',
     'MSG_OR_GREATER' => 'or greater',
 
-    'LBL_PORTAL_WELCOME_TITLE' => 'Welcome to LionixCRM Portal',
-    'LBL_PORTAL_WELCOME_INFO' => 'LionixCRM Portal is a framework which provides real-time view of cases, bugs & newsletters etc to customers. This is an external facing interface to LionixCRM that can be deployed within any website.',
+    'LBL_PORTAL_WELCOME_TITLE' => 'Welcome to SuiteCRM Portal',
+    'LBL_PORTAL_WELCOME_INFO' => 'SuiteCRM Portal is a framework which provides real-time view of cases, bugs & newsletters etc to customers. This is an external facing interface to SuiteCRM that can be deployed within any website.',
     'LBL_LIST' => 'List',
     'LBL_CREATE_BUG' => 'Create Bug',
     'LBL_NO_RECORDS_FOUND' => '- 0 Records Found -',
@@ -3184,7 +3184,7 @@ $app_list_strings['timezone_dom'] = array(
 
 $app_list_strings['moduleList']['Sugar_Favorites'] = 'Favorites';
 $app_list_strings['eapm_list'] = array(
-    'Sugar' => 'LionixCRM',
+    'Sugar' => 'SuiteCRM',
     'WebEx' => 'WebEx',
     'GoToMeeting' => 'GoToMeeting',
     'IBMSmartCloud' => 'IBM SmartCloud',
@@ -3913,7 +3913,7 @@ $app_strings['LBL_DELETE_DASHBOARD_PAGE'] = 'Remove Current Dashboard Page';
 $app_strings['LBL_RENAME_DASHBOARD_PAGE'] = 'Rename Dashboard Page';
 $app_strings['LBL_SUITE_DASHBOARD_ACTIONS'] = 'ACTIONS';
 
-$app_strings['LBL_DISCOVER_SUITECRM'] = 'Discover LionixCRM';
+$app_strings['LBL_DISCOVER_SUITECRM'] = 'Discover SuiteCRM';
 
 $app_list_strings['collection_temp_list'] = array('Tasks' => 'Tasks', 'Meetings' => 'Meetings', 'Calls' => 'Calls', 'Notes' => 'Notes', 'Emails' => 'Emails');
 
