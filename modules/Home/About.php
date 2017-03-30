@@ -45,11 +45,10 @@ global $sugar_config, $mod_strings;
 
 ?>
 <div class="about" id="about_header">
-    <h1><img src="include/images/lionixCRM.png" alt="LionixCRM"></h1><br/>
+    <h1><img src="include/images/lionixCRM.png" alt="LionixCRM" width="397" height="42"></h1>
     <h1><?php echo $mod_strings['LBL_CONTRIBUTOR_LIONIXCRM']; ?></h1>
     <div class="about_suite">
-    <br/>
-    <h3><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM']; ?></h3><br/>
+    <h3><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM']; ?></h3>
     <ul id="about_lionixcrm">
         <li><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM_1']; ?></li>
         <li><?php echo $mod_strings['LBL_ABOUT_LIONIXCRM_2']; ?></li>

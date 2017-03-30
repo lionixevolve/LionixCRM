@@ -150,7 +150,7 @@
     <div class="p_login_bottom">
             <a id="powered_by">&copy; Powered By SugarCRM</a>
             <a id="admin_options">&copy; Supercharged by SuiteCRM</a>
-            <a id="evolved_by" >&copy; Evolved by LionixCRM</a>
+            <a id="evolved_by" style="cursor:pointer; text-decoration:none; color:#EE3523; font-size:14px;">&copy; Evolved by LionixCRM</a>
 	</div>
 
 </div>

@@ -1,0 +1,1 @@
+../../../../themes/SuiteP/tpls/footer.tpl

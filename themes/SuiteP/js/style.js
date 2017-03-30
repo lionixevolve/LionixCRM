@@ -257,12 +257,12 @@ var initFooterPopups = function() {
             duration: 1000
         }
     });
-    $( "#powered_by" ).click(function() {
-        $( "#dialog" ).dialog( "open" );
+    $("#powered_by").click(function() {
+        $( "#dialog").dialog("open");
         $("#overlay").show().css({"opacity": "0.5"});
     });
-    $( "#admin_options" ).click(function() {
-        $( "#dialog2" ).dialog( "open" );
+    $("#admin_options").click(function() {
+        $("#dialog2").dialog("open");
     });
     $( "#evolved_by" ).click(function() {
         $( "#dialog3" ).dialog( "open" );
