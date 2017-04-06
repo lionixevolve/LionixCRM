@@ -11,6 +11,8 @@ script.onload = function() {
         scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
         scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
         scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
+        scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
+        scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 
         function load(i) {
             if (i < scripts.length) {
@@ -19,6 +21,9 @@ script.onload = function() {
                 });
             } else {
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
+                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
+                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
+                $('head').append('<style type="text/css">.select2-results__option[aria-selected=true] {display: none;}</style>');
                 $(document).ready(function() { //Primer document ready
                     console.log("You are running jQuery version:", $.fn.jquery);
                     // Add "Metas" option on main nav menu
