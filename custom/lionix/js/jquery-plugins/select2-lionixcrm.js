@@ -20,6 +20,12 @@
                     })
                 }
             });
+            var crmDetailView = document.forms['DetailView'];
+            if (crmDetailView) {
+                if (crmDetailView.module.value == 'AOW_WorkFlow') {
+                    $('select').select2('destroy');
+                }
+            }
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
         }
