@@ -14,7 +14,7 @@
                     $(this).select2({
                         closeOnSelect: false,
                         dropdownAutoWidth: 'true',
-                        // width: 'auto', //mucho más ancho
+                        width: 'auto', //mucho más ancho
                         theme: "bootstrap",
                         dropdownParent: $(this).closest('div')
                     })
