@@ -20,16 +20,24 @@
                     });
                 }
             });
-            // select2 disabled for specific view
+            // select2 disabled for specific detailview
             var crmDetailView = document.forms["DetailView"];
             if (crmDetailView) {
                 if (crmDetailView.module.value == "AOW_WorkFlow") {
                     $("select").select2("destroy");
                 }
             }
+            // select2 disabled for specific editview
+            var crmDetailView = document.forms["EditView"];
+            if (crmDetailView) {
+                if (crmDetailView.module.value == "AOS_Quotes") {
+                    $("select").select2("destroy");
+                }
+            }
             // select2 disabled for a whole module
             if (
                 /module=ModuleBuilder/.test(window.location.search) ||
+                /module=Studio/.test(window.location.search) ||
                 /module=Administration/.test(window.location.search)
             ) {
                 $("select").select2("destroy");
