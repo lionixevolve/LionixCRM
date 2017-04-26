@@ -9,29 +9,19 @@
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            $('select:not([class^="select2"])').each(function(index) {
-                if (!$(this).hasClass("select2-hidden-accessible")) {
-                    $(this).select2({
-                        closeOnSelect: false,
-                        dropdownAutoWidth: "true",
-                        width: "auto", //mucho más ancho
-                        theme: "bootstrap",
-                        dropdownParent: $(this).closest("div")
-                    });
-                }
-            });
             // select2 disabled for specific detailview
+            let applySelect2 = true;
             var crmDetailView = document.forms["DetailView"];
             if (crmDetailView) {
                 if (crmDetailView.module.value == "AOW_WorkFlow") {
-                    $("select").select2("destroy");
+                    applySelect2 = false;
                 }
             }
             // select2 disabled for specific editview
-            var crmDetailView = document.forms["EditView"];
-            if (crmDetailView) {
-                if (crmDetailView.module.value == "AOS_Quotes") {
-                    $("select").select2("destroy");
+            var crmEditView = document.forms["EditView"];
+            if (crmEditView) {
+                if (crmEditView.module.value == "AOS_Quotes") {
+                    applySelect2 = false;
                 }
             }
             // select2 disabled for a whole module
@@ -40,7 +30,20 @@
                 /module=Studio/.test(window.location.search) ||
                 /module=Administration/.test(window.location.search)
             ) {
-                $("select").select2("destroy");
+                applySelect2 = false;
+            }
+            if (applySelect2) {
+                $('select:not([class^="select2"])').each(function(index) {
+                    if (!$(this).hasClass("select2-hidden-accessible")) {
+                        $(this).select2({
+                            closeOnSelect: false,
+                            dropdownAutoWidth: "true",
+                            width: "auto", //mucho más ancho
+                            theme: "bootstrap",
+                            dropdownParent: $(this).closest("div")
+                        });
+                    }
+                });
             }
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
@@ -59,15 +62,15 @@
         // });
     });
     // Observer target
-    var target = document.querySelector("body"); //uncomment to run
+    var target = document.querySelector("body");
 
     // configuration of the observer:
     // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
     var config = {
         attributes: true,
-        childList: true
+        childList: true,
         // characterData: true,
-        // subtree: true
+        subtree: true
     };
     // pass in the target node, as well as the observer options
     observer.observe(target, config); // uncomment to run
