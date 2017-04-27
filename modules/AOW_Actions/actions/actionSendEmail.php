@@ -245,7 +245,7 @@ class actionSendEmail extends actionBase {
                         }
                         if($linkedBeans){
                             foreach($linkedBeans as $linkedBean) {
-                                if(!empty($linkedBean)){
+                                if(!empty($linkedBean)){ //LionixCRM
                                     $rel_email = $linkedBean->emailAddress->getPrimaryAddress($linkedBean);
                                     if (trim($rel_email) != '') {
                                         $emails[$params['email_to_type'][$key]][] = $rel_email;
