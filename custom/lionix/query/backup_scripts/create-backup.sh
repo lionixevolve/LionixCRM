@@ -64,12 +64,17 @@ fi
 cd ../..
 tar -czvf backup-${DATABASE}-${DATE}.tar.gz backup-${DATABASE}-${DATE}/
 echo "Backup for database ${DATABASE} completed."
-echo "To restore files you can do:"
-echo 'for f in *.sql; do echo $f && mysql -uanuser -papassword adatabase < "$f" ; done'
-echo "In MySQL: UPDATE \`mysql\`.\`proc\` p SET definer = 'root@localhost' WHERE definer LIKE 'root@%';"
 echo ""
 echo "To unzip table files:"
 echo 'for f in *.bz2; do bunzip2 "$f" ; done'
+# for f in *.bz2; do bunzip2 "$f" ; done
+echo ""
+echo "To restore table files you can do:"
+echo 'for f in *.sql; do echo $f && mysql -uanuser -papassword adatabase < "$f" ; done'
+# for f in *.sql; do echo $f && mysql -u -p adatabase < "$f" ; done
+echo "In MySQL: UPDATE \`mysql\`.\`proc\` p SET definer = 'root@localhost' WHERE definer LIKE 'root@%';"
+#echo UPDATE mysql.proc p SET definer = 'root@localhost' WHERE definer LIKE 'root@%';
+#
 #In MySQL in another process: FLUSH TABLES WITH READ LOCK; SELECT SLEEP(86400);
 # All tables on view definitions must exists on target database contrary the view won't be recreated.
 #fin
