@@ -9,6 +9,7 @@ stty -echo          # turn-off echoing.
 read PASSWORD       # read the password
 stty $stty_orig     # restore terminal setting.
 read -e -p "MySQL database: " -i "lionixcrm" DATABASE
+read -e -p "Don't make backup of these tables: " -i "'',''" DONTBACKUP
 
 #Creating backup directory
 DATE=`date +%Y-%m-%d-%H-%M`
@@ -36,7 +37,7 @@ mysql -h${SERVER} -u${USERNAME} -p"${PASSWORD}" --skip-column-names -A -e"SELECT
 #Start by creating a list of tables and views
 cd tables/
 echo "Backing up tables individually..."
-mysql -h${SERVER} -u${USERNAME} -p"${PASSWORD}" -A --skip-column-names -e"SELECT CONCAT(table_schema, '.', table_name) FROM information_schema.tables WHERE table_schema NOT IN ('information_schema' , 'mysql') AND table_schema = '${DATABASE}' AND table_name NOT IN ('emails_beans' , 'campaign_log', 'emails_email_addr_rel', 'emails_text', 'emails') ORDER BY table_rows ASC" > ${DATABASE}_listOfTables.txt
+mysql -h${SERVER} -u${USERNAME} -p"${PASSWORD}" -A --skip-column-names -e"SELECT CONCAT(table_schema, '.', table_name) FROM information_schema.tables WHERE table_schema NOT IN ('information_schema' , 'mysql') AND table_schema = '${DATABASE}' AND table_name NOT IN ('',${DONTBACKUP}) ORDER BY table_rows ASC" > ${DATABASE}_listOfTables.txt
 
 #Then dump all tables and views in groups of 10
 COMMIT_COUNT=0
