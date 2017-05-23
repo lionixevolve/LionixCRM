@@ -13,15 +13,20 @@
             let applySelect2 = true;
             var crmDetailView = document.forms["DetailView"];
             if (crmDetailView) {
-                if (crmDetailView.module.value == "AOW_WorkFlow") {
-                    applySelect2 = false;
+                switch (crmDetailView.module.value) {
+                    case "AOW_WorkFlow":
+                        applySelect2 = false;
+                        break;
                 }
             }
             // select2 disabled for specific editview
             var crmEditView = document.forms["EditView"];
             if (crmEditView) {
-                if (crmEditView.module.value == "AOS_Quotes") {
-                    applySelect2 = false;
+                switch (crmEditView.module.value) {
+                    case "AOW_WorkFlow":
+                    case "AOS_Quotes":
+                        applySelect2 = false;
+                        break;
                 }
             }
             // select2 disabled for a whole module
