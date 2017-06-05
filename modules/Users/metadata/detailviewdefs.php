@@ -50,7 +50,7 @@ $viewdefs['Users']['DetailView'] = array (
                      * Then override UsersViewDetail::preDisplay().
                      */
                     'buttons' => array (
-                        array('customCode' => '<input title="'.translate('LBL_GENERATE_PASSWORD_BUTTON_TITLE','Users').'" class="button" LANGUAGE=javascript onclick="generatepwd(\'{$fields.id.value}\');" type="button" name="password" value="'.translate('LBL_GENERATE_PASSWORD_BUTTON_LABEL','Users').'">"')
+                        array('customCode' => '<input title="'.translate('LBL_GENERATE_PASSWORD_BUTTON_TITLE','Users').'" class="button" LANGUAGE=javascript onclick="generatepwd(\'{$fields.id.value}\');" type="button" name="password" value="'.translate('LBL_GENERATE_PASSWORD_BUTTON_LABEL','Users').'">"') // LionixCRM
                     ),
                 ),
             'maxColumns' => '2',
