@@ -18,9 +18,9 @@ function post_installModules()
     // acl_roles
     installLog('LionixCRM starting to add roles...');
     $roles = array(
-                array('id' => 'audit-role', 'name' => 'Audit', 'description' => 'Read only access to all data.'),
-                array('id' => 'manager-role', 'name' => 'Manager', 'description' => 'Full access to all data.'),
-                array('id' => 'sales-role', 'name' => 'Sales', 'description' => 'Partial access to some data.'),
+                array('id' => 'none-role', 'name' => 'None', 'description' => 'Read only access to all data.'),
+                array('id' => 'all-role', 'name' => 'All', 'description' => 'Full access to all data.'),
+                array('id' => 'owner-role', 'name' => 'Owner', 'description' => 'Partial access to some data.'),
             );
     foreach ($roles as $role) {
         $query = "
@@ -44,7 +44,7 @@ function post_installModules()
         ";
         $db->query($query);
         switch ($role['id']) {
-            case 'audit-role':
+            case 'none-role':
                 $query = "
                     UPDATE acl_roles_actions
                     SET access_override = '-99'
@@ -81,7 +81,7 @@ function post_installModules()
                 ";
                 $db->query($query);
                 break;
-                case 'sales-role':
+                case 'owner-role':
                     $query = "
                         UPDATE acl_roles_actions
                         SET access_override = '-99'
