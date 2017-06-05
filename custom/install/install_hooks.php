@@ -185,6 +185,19 @@ function post_installModules()
     VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','','','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
     $db->query($query);
     installLog('...LionixCRM added custom fields on contacts module successfully.');
+    // accounts
+    installLog('LionixCRM starting to add custom fields on accounts module...');
+    $query = 'ALTER TABLE accounts_cstm add COLUMN tipocedula_c varchar(100) NULL';
+    $db->query($query);
+    $query = 'ALTER TABLE accounts_cstm add COLUMN cedula_c varchar(255) NULL';
+    $db->query($query);
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    VALUES ('Accountstipocedula_c','tipocedula_c','LBL_TIPOCEDULA','','','Accounts','enum',100,0,'',utc_timestamp(),0,0,0,0,1,'true','account_tipocedula_list','','','')";
+    $db->query($query);
+    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    VALUES ('Accountscedula_c','cedula_c','LBL_CEDULA','','','Accounts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
+    $db->query($query);
+    installLog('...LionixCRM added custom fields on contacts module successfully.');
     // schedulers
     installLog('LionixCRM starting to add custom schedulers...');
     $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
