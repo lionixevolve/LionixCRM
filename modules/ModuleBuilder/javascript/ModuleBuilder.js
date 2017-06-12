@@ -527,10 +527,10 @@ if (typeof(ModuleBuilder) == 'undefined') {
 				var ajaxResponse = YAHOO.lang.JSON.parse((o.responseText));
 			} catch (err) {
 				YAHOO.SUGAR.MessageBox.show({
-					title: SUGAR.language.get('ModuleBuilder', 'ERROR_GENERIC_TITLE'),
-					msg: o.responseText,
-					width: 500
-				});
+                    title: SUGAR.language.get('ModuleBuilder', 'ERROR_GENERIC_TITLE'),
+                    msg: o.responseText,
+                    width: 500
+                });
 				return false;
 			}
 
@@ -607,52 +607,22 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			if (SUGAR.util.isLoginPage(o.responseText))
 				return true;
 			if (o.responseText.substr(0, 1) == "<") {
-				YAHOO.SUGAR.MessageBox.show({
+                YAHOO.SUGAR.MessageBox.show({
 					title: SUGAR.language.get('ModuleBuilder', 'ERROR_GENERIC_TITLE'),
 					msg: o.responseText,
-					width: 500,
-					close: false
+					width: 500
 				});
 				return true;
-			}
+            }
 
 
 			return false;
 		},
 		submitForm: function(formname, successCall){
-			var onSuccess = function() {console.log('No success binding function')};
-			var onFailure =  function() {console.log('No success binding function')};
 			var failureCall = ModuleBuilder.failed;
 			ajaxStatus.showStatus(SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_LOADING'));
-			YAHOO.SUGAR.MessageBox.show({
-				title: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_LOADING'),
-				msg:  SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_LOADING_TITLE'),
-				width: 500,
-				close: false
-			});
-
 			if (typeof(successCall) == 'undefined') {
-				onSuccess = function(o) {
-					YAHOO.SUGAR.MessageBox.hide();
-					YAHOO.SUGAR.MessageBox.show({
-						title: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_TITLE'),
-						msg:  SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_MESSAGE'),
-						width: 500,
-						close: true
-					});
-					ModuleBuilder.updateContent(o);
-				}
-
-				onFailure = function(o) {
-					YAHOO.SUGAR.MessageBox.hide();
-					YAHOO.SUGAR.MessageBox.show({
-						title: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_TITLE'),
-						msg:  SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_FAILED_MESSAGE'),
-						width: 500,
-						close: true
-					});
-					ModuleBuilder.updateContent(o);
-				}
+				successCall = ModuleBuilder.updateContent;
 
 				// get bookmarked url state
 				var YUI_HistoryBookmarkedState = YAHOO.util.History.getBookmarkedState('mbContent');
@@ -662,61 +632,60 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					var urlVar = splits[key].split('=');
 					urlVars[urlVar[0]] = urlVar[1];
 				}
+				//LionixCRM - whole file must be kept
+				//Fix for issue #707: check if action is not clone. This condition is for 'Add Field' button.
+				// OR This condition is for ListView.
+				if( (typeof document.popup_form !== 'undefined' && !(document.popup_form.action.value == 'CloneField'))
+					|| typeof document.popup_form == 'undefined' ) {
+					// check where we are and do it if we are in field editor in module builder
+					if (
+							formname != "dropdown_form" && formname != "popup_form" &&
+								// user came from studio/fields layout by ajax urls
+							((urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefields' && urlVars.view_package == 'studio') ||
+								// user refresh the page or came from direct url
+							(urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefield' && urlVars.view_package == ''))
+					) {
+						// switch on the preloader message
+						ModuleBuilder.preloader.on();
 
-				// check where we are and do it if we are in field editor in module builder
-				if(
-					formname != "dropdown_form" && formname != "popup_form" &&
-					// user came from studio/fields layout by ajax urls
-					((urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefields' && urlVars.view_package == 'studio') ||
-					// user refresh the page or came from direct url
-					(urlVars.module == 'ModuleBuilder' && urlVars.action == 'modulefield' && urlVars.view_package == ''))
-				) {
-					// switch on the preloader message
-					ModuleBuilder.preloader.on();
-
-					// set callback functions
-					onSuccess = function(o){
-						// switch off preloader
-						ModuleBuilder.preloader.off();
-						// call the original callback
-						if(ModuleBuilder.updateContent(o)) {
+						// set callback functions
+						successCall = function (o) {
+							// switch off preloader
+							ModuleBuilder.preloader.off();
+							// call the original callback
+							if (ModuleBuilder.updateContent(o)) {
+								// show results
+								YAHOO.SUGAR.MessageBox.show({
+									title: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_TITLE'), // Result
+									msg: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_MESSAGE'), // This operation is completed successfully
+									width: 500
+								});
+							}
 							// refresh page content
 							ModuleBuilder.asyncRequest(YUI_HistoryBookmarkedState, ModuleBuilder.updateContent);
-						}
-					};
-					onFailure = function(o) {
-						// switch off preloader
-						ModuleBuilder.preloader.off();
-						// call the original callback
-						ModuleBuilder.failed(o);
-						// refresh page content
-						ModuleBuilder.asyncRequest(YUI_HistoryBookmarkedState, ModuleBuilder.updateContent);
-					};
+						};
+						failureCall = function (o) {
+							// switch off preloader
+							ModuleBuilder.preloader.off();
+							// call the original callback
+							ModuleBuilder.failed(o);
+							// refresh page content
+							ModuleBuilder.asyncRequest(YUI_HistoryBookmarkedState, ModuleBuilder.updateContent);
+						};
+					}
 				}
 			}
 			else {
 				ModuleBuilder.callLock = true;
-				onSuccess = function(o) {
-						YAHOO.SUGAR.MessageBox.hide();
-						YAHOO.SUGAR.MessageBox.show({
-							title: SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_TITLE'),
-							msg:  SUGAR.language.get('ModuleBuilder', 'LBL_AJAX_RESPONSE_MESSAGE'),
-							width: 500,
-							close: true
-						});
-						successCall(o);
-				}
 			}
 			Connect.setForm(document.getElementById(formname) || document.forms[formname]);
 			Connect.asyncRequest(
 			    Connect.method,
 			    Connect.url,
-			    {
-						success: onSuccess,
-						failure: onFailure
-					}
+			    {success: successCall, failure: failureCall}
 			);
 		},
+
 
 		/**
 		 * show/hide preload message for user
@@ -743,7 +712,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 					title: title,
 					msg: message,
 					width: 500,
-
+					close: false
 				});
 			},
 
