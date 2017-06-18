@@ -21,6 +21,8 @@ function post_installModules()
                 array('id' => 'none-role', 'name' => 'None', 'description' => 'Read only access to all data.'),
                 array('id' => 'all-role', 'name' => 'All', 'description' => 'Full access to all data.'),
                 array('id' => 'owner-role', 'name' => 'Owner', 'description' => 'Partial access to some data.'),
+                //agregar role de no mass update no export
+                //explicar los números -99, 99, 75 etc
             );
     foreach ($roles as $role) {
         $query = "
@@ -131,288 +133,293 @@ function post_installModules()
     }
     installLog('...LionixCRM added roles successfully.');
     // cases
-    installLog('LionixCRM starting to add custom fields on cases module...');
-    $query = "ALTER TABLE cases_cstm add COLUMN elapsedtimeinmins_c int(255) DEFAULT '0' NULL";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Caseselapsedtimeinmins_c','elapsedtimeinmins_c','LBL_ELAPSEDTIMEINMINS','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','Cases','int','255','0','0',utc_timestamp(),'0','0','0','0','1','false','','','1','')";
-    $db->query($query);
-    installLog('...LionixCRM added custom fields on cases module successfully.');
+    // installLog('LionixCRM starting to add custom fields on cases module...');
+    // $query = "ALTER TABLE cases_cstm add COLUMN elapsedtimeinmins_c int(255) DEFAULT '0' NULL";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Caseselapsedtimeinmins_c','elapsedtimeinmins_c','LBL_ELAPSEDTIMEINMINS','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','Cases','int','255','0','0',utc_timestamp(),'0','0','0','0','1','false','','','1','')";
+    // $db->query($query);
+    // installLog('...LionixCRM added custom fields on cases module successfully.');
     // campaigns
-    installLog('LionixCRM starting to add custom fields on campaigns module...');
-    $query = 'CREATE TABLE campaigns_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
-    $db->query($query);
-    $query = "ALTER TABLE campaigns_cstm add COLUMN emailmaner_c bool DEFAULT '0' NULL";
-    $db->query($query);
-    $query = "ALTER TABLE campaigns_cstm add COLUMN clearcamplogdaily_c bool DEFAULT '0' NULL";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Campaignsemailmaner_c','emailmaner_c','LBL_EMAILMANER','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','')";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Campaignsclearcamplogdaily_c','clearcamplogdaily_c','LBL_CLEARCAMPLOGDAILY','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','')";
-    $db->query($query);
-    installLog('...LionixCRM added custom fields on campaigns module successfully.');
+    // installLog('LionixCRM starting to add custom fields on campaigns module...');
+    // $query = 'CREATE TABLE campaigns_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
+    // $db->query($query);
+    // $query = "ALTER TABLE campaigns_cstm add COLUMN emailmaner_c bool DEFAULT '0' NULL";
+    // $db->query($query);
+    // $query = "ALTER TABLE campaigns_cstm add COLUMN clearcamplogdaily_c bool DEFAULT '0' NULL";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Campaignsemailmaner_c','emailmaner_c','LBL_EMAILMANER','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','')";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Campaignsclearcamplogdaily_c','clearcamplogdaily_c','LBL_CLEARCAMPLOGDAILY','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','')";
+    // $db->query($query);
+    // installLog('...LionixCRM added custom fields on campaigns module successfully.');
     // prospect_lists
-    installLog('LionixCRM starting to add custom fields and records on prospect_lists module...');
-    $query = 'CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
-    $db->query($query);
-    $query = "ALTER TABLE prospect_lists_cstm add COLUMN autofill_c bool DEFAULT '0' NULL";
-    $db->query($query);
-    $query = "ALTER TABLE prospect_lists_cstm add COLUMN autoclean_c bool DEFAULT '0' NULL";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('ProspectListsautofill_c','autofill_c','LBL_AUTOFILL','autofill must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
-    $db->query($query);
-    $query = "INSERT INTO prospect_lists_cstm (id_c ,autoclean_c ,autofill_c ) VALUES ('daily-email-bday-congrats-contacts' ,'1' ,'1' )";
-    $db->query($query);
-    $query = "INSERT INTO prospect_lists (assigned_user_id,id,name,list_type,date_entered,date_modified,modified_user_id,created_by,deleted,description,domain_name)
-    VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratulations_contacts','default',utc_timestamp(),utc_timestamp(),'1','1',0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.','')";
-    $db->query($query);
-    installLog('...LionixCRM added custom fields and records on prospect_lists module successfully.');
+    // installLog('LionixCRM starting to add custom fields and records on prospect_lists module...');
+    // $query = 'CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci';
+    // $db->query($query);
+    // $query = "ALTER TABLE prospect_lists_cstm add COLUMN autofill_c bool DEFAULT '0' NULL";
+    // $db->query($query);
+    // $query = "ALTER TABLE prospect_lists_cstm add COLUMN autoclean_c bool DEFAULT '0' NULL";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('ProspectListsautofill_c','autofill_c','LBL_AUTOFILL','autofill must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    // $db->query($query);
+    // $query = "INSERT INTO prospect_lists_cstm (id_c ,autoclean_c ,autofill_c ) VALUES ('daily-email-bday-congrats-contacts' ,'1' ,'1' )";
+    // $db->query($query);
+    // $query = "INSERT INTO prospect_lists (assigned_user_id,id,name,list_type,date_entered,date_modified,modified_user_id,created_by,deleted,description,domain_name)
+    // VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratulations_contacts','default',utc_timestamp(),utc_timestamp(),'1','1',0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.','')";
+    // $db->query($query);
+    // installLog('...LionixCRM added custom fields and records on prospect_lists module successfully.');
     // contacts
-    installLog('LionixCRM starting to add custom fields on contacts module...');
-    $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
-    $db->query($query);
-    $query = 'ALTER TABLE contacts_cstm add COLUMN cedula_c varchar(255) NULL';
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Contactssoundex_c','soundex_c','LBL_SOUNDEX','Allowed values are AAA,AA,A,B,C,D,NER,MAL,SIN','','Contacts','varchar',3,0,'',utc_timestamp(),0,0,0,0,1,'true','','','','')";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','','','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
-    $db->query($query);
-    installLog('...LionixCRM added custom fields on contacts module successfully.');
+    // installLog('LionixCRM starting to add custom fields on contacts module...');
+    // $query = 'ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL';
+    // $db->query($query);
+    // $query = 'ALTER TABLE contacts_cstm add COLUMN cedula_c varchar(255) NULL';
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Contactssoundex_c','soundex_c','LBL_SOUNDEX','Allowed values are AAA,AA,A,B,C,D,NER,MAL,SIN','','Contacts','varchar',3,0,'',utc_timestamp(),0,0,0,0,1,'true','','','','')";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','','','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
+    // $db->query($query);
+    // installLog('...LionixCRM added custom fields on contacts module successfully.');
     // accounts
-    installLog('LionixCRM starting to add custom fields on accounts module...');
-    $query = 'ALTER TABLE accounts_cstm add COLUMN tipocedula_c varchar(100) NULL';
-    $db->query($query);
-    $query = 'ALTER TABLE accounts_cstm add COLUMN cedula_c varchar(255) NULL';
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Accountstipocedula_c','tipocedula_c','LBL_TIPOCEDULA','','','Accounts','enum',100,0,'',utc_timestamp(),0,0,0,0,1,'true','account_tipocedula_list','','','')";
-    $db->query($query);
-    $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-    VALUES ('Accountscedula_c','cedula_c','LBL_CEDULA','','','Accounts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
-    $db->query($query);
-    installLog('...LionixCRM added custom fields on contacts module successfully.');
+    // installLog('LionixCRM starting to add custom fields on accounts module...');
+    // $query = 'ALTER TABLE accounts_cstm add COLUMN tipocedula_c varchar(100) NULL';
+    // $db->query($query);
+    // $query = 'ALTER TABLE accounts_cstm add COLUMN cedula_c varchar(255) NULL';
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Accountstipocedula_c','tipocedula_c','LBL_TIPOCEDULA','','','Accounts','enum',100,0,'',utc_timestamp(),0,0,0,0,1,'true','account_tipocedula_list','','','')";
+    // $db->query($query);
+    // $query = "INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+    // VALUES ('Accountscedula_c','cedula_c','LBL_CEDULA','','','Accounts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','')";
+    // $db->query($query);
+    // installLog('...LionixCRM added custom fields on contacts module successfully.');
     // schedulers
-    installLog('LionixCRM starting to add custom schedulers...');
-    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
-    VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '1980-02-01 06:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0')";
-    $db->query($query);
-    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
-    VALUES ('updateelapsedtimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateElapsedTimeInMins', 'function::updateElapsedTimeInMins', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0')";
-    $db->query($query);
-    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('updateprospectlistprospects', '0', utc_timestamp(), utc_timestamp(), '1', '1', '01- LionixCRM - Prospect List Prospects Update 2:00am', 'function::updateProspectListProspects', '1980-02-01 06:00:00', '00::02::*::*::*', utc_timestamp(), 'Active', '0')";
-    $db->query($query);
-    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('campaignlogdeleter', '0', utc_timestamp(), utc_timestamp(), '1', '1', '02- LionixCRM - CampaignLogDeletEr - 8:00am', 'function::campaignLogDeletEr', '1980-02-01 06:00:00', '00::08::*::*::*', utc_timestamp(), 'Active', '0')";
-    $db->query($query);
-    $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('emailmaner', '0', utc_timestamp(), utc_timestamp(), '1', '1', '03- LionixCRM - EmailManEr - 9:00am', 'function::emailManEr', '1980-02-01 06:00:00', '00::09::*::*::*', utc_timestamp(), 'Active', '0')";
-    installLog('...LionixCRM added custom schedulers successfully.');
-    $db->query($query);
-    // views and store procedures
-    installLog('LionixCRM starting to add custom store procedures, functions and views into database...');
+    // installLog('LionixCRM starting to add custom schedulers...');
+    // $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
+    // VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '1980-02-01 06:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0')";
+    // $db->query($query);
+    // $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
+    // VALUES ('updateelapsedtimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateElapsedTimeInMins', 'function::updateElapsedTimeInMins', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0')";
+    // $db->query($query);
+    // $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('updateprospectlistprospects', '0', utc_timestamp(), utc_timestamp(), '1', '1', '01- LionixCRM - Prospect List Prospects Update 2:00am', 'function::updateProspectListProspects', '1980-02-01 06:00:00', '00::02::*::*::*', utc_timestamp(), 'Active', '0')";
+    // $db->query($query);
+    // $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('campaignlogdeleter', '0', utc_timestamp(), utc_timestamp(), '1', '1', '02- LionixCRM - CampaignLogDeletEr - 8:00am', 'function::campaignLogDeletEr', '1980-02-01 06:00:00', '00::08::*::*::*', utc_timestamp(), 'Active', '0')";
+    // $db->query($query);
+    // $query = "INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('emailmaner', '0', utc_timestamp(), utc_timestamp(), '1', '1', '03- LionixCRM - EmailManEr - 9:00am', 'function::emailManEr', '1980-02-01 06:00:00', '00::09::*::*::*', utc_timestamp(), 'Active', '0')";
+    // installLog('...LionixCRM added custom schedulers successfully.');
+    // $db->query($query);
+    // // views and store procedures
+    // installLog('LionixCRM starting to add custom store procedures, functions and views into database...');
     $queries_array = array(
         'custom/lionix/query/prospect_list/vista_cron_pl_daily_email_birthday_congratulations_contacts.sql',
         'custom/lionix/query/store_procedures/sp_infoticos.sql',
         'custom/lionix/query/store_functions/fn_create_holiday_table.sql',
         'custom/lionix/query/store_functions/fn_workday_time_diff_holiday_table.sql',
+        'custom/lionix/query/install_scripts/install_routines.sql', //must be the last one to run
     );
     //TODO: call terminal with mysql database < file.sql
     foreach ($queries_array as $current_file) {
         if (file_exists($current_file)) {
             $query = file_get_contents($current_file);
             $db->query($query);
+            if($current_file=='custom/lionix/query/install_scripts/install_routines.sql'){
+                $db->query("call sp_install_routines");
+                installLog("sp_install_routines executed");
+            }
             installLog("...{$current_file} executed");
         }
     }
     installLog('...LionixCRM added custom store procedures and views into database successfully.');
     // holiday_table records
-    installLog('LionixCRM starting to add holiday records into database...');
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-01-01', '2016-01-01', DATE_FORMAT('2016-01-01','%W'), 'Año Nuevo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-04-11', '2016-04-11', DATE_FORMAT('2016-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-05-01', '2016-05-01', DATE_FORMAT('2016-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-07-25', '2016-07-25', DATE_FORMAT('2016-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-08-02', '2016-08-02', DATE_FORMAT('2016-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-08-15', '2016-08-15', DATE_FORMAT('2016-08-15','%W'), 'Día de la Madre', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-09-15', '2016-09-15', DATE_FORMAT('2016-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-10-12', '2016-10-12', DATE_FORMAT('2016-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2016-12-25', '2016-12-25', DATE_FORMAT('2016-12-25','%W'), 'Navidad', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-01-01', '2017-01-01', DATE_FORMAT('2017-01-01','%W'), 'Año Nuevo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-04-11', '2017-04-11', DATE_FORMAT('2017-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-05-01', '2017-05-01', DATE_FORMAT('2017-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-07-25', '2017-07-25', DATE_FORMAT('2017-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-08-02', '2017-08-02', DATE_FORMAT('2017-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-08-15', '2017-08-15', DATE_FORMAT('2017-08-15','%W'), 'Día de la Madre', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-09-15', '2017-09-15', DATE_FORMAT('2017-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-10-12', '2017-10-12', DATE_FORMAT('2017-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2017-12-25', '2017-12-25', DATE_FORMAT('2017-12-25','%W'), 'Navidad', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-01-01', '2018-01-01', DATE_FORMAT('2018-01-01','%W'), 'Año Nuevo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-04-11', '2018-04-11', DATE_FORMAT('2018-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-05-01', '2018-05-01', DATE_FORMAT('2018-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-07-25', '2018-07-25', DATE_FORMAT('2018-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-08-02', '2018-08-02', DATE_FORMAT('2018-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-08-15', '2018-08-15', DATE_FORMAT('2018-08-15','%W'), 'Día de la Madre', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-09-15', '2018-09-15', DATE_FORMAT('2018-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-10-12', '2018-10-12', DATE_FORMAT('2018-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2018-12-25', '2018-12-25', DATE_FORMAT('2018-12-25','%W'), 'Navidad', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-01-01', '2019-01-01', DATE_FORMAT('2019-01-01','%W'), 'Año Nuevo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-04-11', '2019-04-11', DATE_FORMAT('2019-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-05-01', '2019-05-01', DATE_FORMAT('2019-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-07-25', '2019-07-25', DATE_FORMAT('2019-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-08-02', '2019-08-02', DATE_FORMAT('2019-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-08-15', '2019-08-15', DATE_FORMAT('2019-08-15','%W'), 'Día de la Madre', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-09-15', '2019-09-15', DATE_FORMAT('2019-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-10-12', '2019-10-12', DATE_FORMAT('2019-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2019-12-25', '2019-12-25', DATE_FORMAT('2019-12-25','%W'), 'Navidad', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-01-01', '2020-01-01', DATE_FORMAT('2020-01-01','%W'), 'Año Nuevo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-04-11', '2020-04-11', DATE_FORMAT('2020-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-05-01', '2020-05-01', DATE_FORMAT('2020-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-07-25', '2020-07-25', DATE_FORMAT('2020-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-08-02', '2020-08-02', DATE_FORMAT('2020-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-08-15', '2020-08-15', DATE_FORMAT('2020-08-15','%W'), 'Día de la Madre', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-09-15', '2020-09-15', DATE_FORMAT('2020-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-10-12', '2020-10-12', DATE_FORMAT('2020-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
-    $db->query($query);
-
-    $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-    VALUES ('2020-12-25', '2020-12-25', DATE_FORMAT('2020-12-25','%W'), 'Navidad', 'CR')";
-    $db->query($query);
-    installLog('...LionixCRM added holiday records into database successfully.');
+    // installLog('LionixCRM starting to add holiday records into database...');
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-01-01', '2016-01-01', DATE_FORMAT('2016-01-01','%W'), 'Año Nuevo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-04-11', '2016-04-11', DATE_FORMAT('2016-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-05-01', '2016-05-01', DATE_FORMAT('2016-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-07-25', '2016-07-25', DATE_FORMAT('2016-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-08-02', '2016-08-02', DATE_FORMAT('2016-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-08-15', '2016-08-15', DATE_FORMAT('2016-08-15','%W'), 'Día de la Madre', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-09-15', '2016-09-15', DATE_FORMAT('2016-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-10-12', '2016-10-12', DATE_FORMAT('2016-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2016-12-25', '2016-12-25', DATE_FORMAT('2016-12-25','%W'), 'Navidad', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-01-01', '2017-01-01', DATE_FORMAT('2017-01-01','%W'), 'Año Nuevo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-04-11', '2017-04-11', DATE_FORMAT('2017-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-05-01', '2017-05-01', DATE_FORMAT('2017-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-07-25', '2017-07-25', DATE_FORMAT('2017-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-08-02', '2017-08-02', DATE_FORMAT('2017-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-08-15', '2017-08-15', DATE_FORMAT('2017-08-15','%W'), 'Día de la Madre', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-09-15', '2017-09-15', DATE_FORMAT('2017-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-10-12', '2017-10-12', DATE_FORMAT('2017-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2017-12-25', '2017-12-25', DATE_FORMAT('2017-12-25','%W'), 'Navidad', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-01-01', '2018-01-01', DATE_FORMAT('2018-01-01','%W'), 'Año Nuevo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-04-11', '2018-04-11', DATE_FORMAT('2018-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-05-01', '2018-05-01', DATE_FORMAT('2018-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-07-25', '2018-07-25', DATE_FORMAT('2018-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-08-02', '2018-08-02', DATE_FORMAT('2018-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-08-15', '2018-08-15', DATE_FORMAT('2018-08-15','%W'), 'Día de la Madre', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-09-15', '2018-09-15', DATE_FORMAT('2018-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-10-12', '2018-10-12', DATE_FORMAT('2018-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2018-12-25', '2018-12-25', DATE_FORMAT('2018-12-25','%W'), 'Navidad', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-01-01', '2019-01-01', DATE_FORMAT('2019-01-01','%W'), 'Año Nuevo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-04-11', '2019-04-11', DATE_FORMAT('2019-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-05-01', '2019-05-01', DATE_FORMAT('2019-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-07-25', '2019-07-25', DATE_FORMAT('2019-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-08-02', '2019-08-02', DATE_FORMAT('2019-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-08-15', '2019-08-15', DATE_FORMAT('2019-08-15','%W'), 'Día de la Madre', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-09-15', '2019-09-15', DATE_FORMAT('2019-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-10-12', '2019-10-12', DATE_FORMAT('2019-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2019-12-25', '2019-12-25', DATE_FORMAT('2019-12-25','%W'), 'Navidad', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-01-01', '2020-01-01', DATE_FORMAT('2020-01-01','%W'), 'Año Nuevo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-04-11', '2020-04-11', DATE_FORMAT('2020-04-11','%W'), 'Día de Juan Santamaría', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-05-01', '2020-05-01', DATE_FORMAT('2020-05-01','%W'), 'Día Internacional del Trabajo', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-07-25', '2020-07-25', DATE_FORMAT('2020-07-25','%W'), 'Anexión del Partido de Nicoya a Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-08-02', '2020-08-02', DATE_FORMAT('2020-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-08-15', '2020-08-15', DATE_FORMAT('2020-08-15','%W'), 'Día de la Madre', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-09-15', '2020-09-15', DATE_FORMAT('2020-09-15','%W'), 'Independencia de Costa Rica', 'CR')";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-10-12', '2020-10-12', DATE_FORMAT('2020-10-12','%W'), 'Día de las Culturas', 'CR') -- Pago no obligatorio";
+    // $db->query($query);
+    //
+    // $query = "INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
+    // VALUES ('2020-12-25', '2020-12-25', DATE_FORMAT('2020-12-25','%W'), 'Navidad', 'CR')";
+    // $db->query($query);
+    // installLog('...LionixCRM added holiday records into database successfully.');
 
     // birthday emails
     installLog('LionixCRM starting to add birthday email campaign (status=inactive)...');
@@ -427,18 +434,18 @@ function post_installModules()
     $query = "INSERT INTO prospect_list_campaigns (id, prospect_list_id, campaign_id, date_modified, deleted) VALUES ('daily-email-bday-congrats-campaign', 'daily-email-bday-congrats-contacts', 'daily-email-bday-congrats-campaign', utc_timestamp(), '0')";
     $db->query($query);
     /*z_daily_email_bday_congrats_template*/
-    $query = "INSERT INTO email_templates (id, date_entered, date_modified, modified_user_id, created_by, published, name, description, subject, body, body_html, deleted, assigned_user_id, text_only, type) VALUES ('bda8bda8-bda8-bda8-bda8-bda8bda8bda8', utc_timestamp(), utc_timestamp(), '1', '1', 'off', 'z_daily_email_birthday_congratulations_template', 'This template is used to send automatically email congratulations to contacts on daily_email_birthday_congratulations_contacts target list.', 'Te deseamos un ¡Feliz cumpleaños!', '¡Muy feliz cumpleaños \$contact_first_name!', '<div class=\"mozaik-inner\" style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px;\"><p style=\"text-align:left;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"><span style=\"font-family:tahoma, arial, helvetica, sans-serif;font-size:24px;line-height:38.4px;color:#444444;padding:0px;margin:0px;\">¡Muy feliz cumpleaños \$contact_first_name!</span></p><p style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"><img style=\"margin:0px;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;\" src=\"custom/lionix/img/happy-birthday-to-you.jpg\" alt=\"happy-birthday-to-you.jpg\" width=\"842\" height=\"500\" /></p><p style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"></p><div class=\"mozaik-clear\" style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;height:0px;\"></div></div>', '0', '1', '0', 'campaign')
-    ";
-    $db->query($query);
+    // $query = "INSERT INTO email_templates (id, date_entered, date_modified, modified_user_id, created_by, published, name, description, subject, body, body_html, deleted, assigned_user_id, text_only, type) VALUES ('bda8bda8-bda8-bda8-bda8-bda8bda8bda8', utc_timestamp(), utc_timestamp(), '1', '1', 'off', 'z_daily_email_birthday_congratulations_template', 'This template is used to send automatically email congratulations to contacts on daily_email_birthday_congratulations_contacts target list.', 'Te deseamos un ¡Feliz cumpleaños!', '¡Muy feliz cumpleaños \$contact_first_name!', '<div class=\"mozaik-inner\" style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px;\"><p style=\"text-align:left;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"><span style=\"font-family:tahoma, arial, helvetica, sans-serif;font-size:24px;line-height:38.4px;color:#444444;padding:0px;margin:0px;\">¡Muy feliz cumpleaños \$contact_first_name!</span></p><p style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"><img style=\"margin:0px;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;\" src=\"custom/lionix/img/happy-birthday-to-you.jpg\" alt=\"happy-birthday-to-you.jpg\" width=\"842\" height=\"500\" /></p><p style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;\"></p><div class=\"mozaik-clear\" style=\"font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;height:0px;\"></div></div>', '0', '1', '0', 'campaign')
+    // ";
+    // $db->query($query);
     installLog('...LionixCRM added birthday email campaign (status=inactive) successfully.');
-    installLog('LionixCRM starting to add email templates only...');
-/*z_NOT_OP_sales_stage_change*/
-$query = "INSERT INTO email_templates
-(id, date_entered, date_modified, modified_user_id, created_by, published, name, description, subject, body, body_html, deleted, assigned_user_id, text_only, `type`)
-VALUES('01abcdef-efef-efef-efef-efefefefefef', utc_timestamp(), utc_timestamp(), '1', '1', 'off', 'z_WF_NOT_OP_SALES_STAGE_CHANGE', NULL, NULL, ' La oportunidad$opportunity_name requiere tu atención Detalle:Nombre: $opportunity_nameHaz click en el nombre de la oportunidad para verla en LionixCRM', '<div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px;"><table class="mce-item-table" style="width:100%;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:3px 3px 3px 0px;margin:0px;"><tbody style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(83,77,100);padding:3px 3px 3px 0px;margin:0px;width:10%;"><img style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" src="custom/themes/default/images/company_logo.png" alt="Alternativa - Furniture - Solutions" width="200" height="40" /></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(83,77,100);padding:3px 3px 3px 0px;margin:0px;width:89%;"><h1 style="font-family:Arial, Helvetica, sans-serif;font-size:24px;line-height:38.4px;color:#444444;padding:0px;margin:0px;">La oportunidad $opportunity_name requiere tu atención</h1></td></tr></tbody></table><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;height:0px;"><br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" /></div></div><div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px;"><table style="width:100%;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:3px 3px 3px 0px;margin:0px;" class="mce-item-table"><tbody style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.0278%;"><h2 style="font-family:Arial, Helvetica, sans-serif;font-size:18px;line-height:28.8px;color:#444444;padding:0px;margin:0px;">Detalle</h2></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.9722%;"><h2 style="font-family:Arial, Helvetica, sans-serif;font-size:18px;line-height:28.8px;color:#444444;padding:0px;margin:0px;">Descripción</h2></td></tr><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.0278%;"><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Nombre: <a style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" href="index.php?module=Opportunities&action=DetailView&record=$opportunity_id">$opportunity_name</a></p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Categoría: $opportunity_lxgoodcategory_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Proveedor: $opportunity_provider_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Cuenta: <a style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" href="index.php?module=Accounts&action=DetailView&record=$opportunity_account_id">$opportunity_account_name</a></p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Pertenece a: $opportunity_pertenece_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Código anual: $opportunity_annualcode_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Código nativo CRM: $opportunity_lxcode_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Tipo: $opportunity_type_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Nro: $opportunity_typeseq_c</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Asignado a: $opportunity_assigned_user_name</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"> </p></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.9722%;">$opportunity_description</td></tr></tbody></table><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;height:0px;"> <br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;" /></div></div><div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px;"><p class="footer" style="font-family:Arial, Helvetica, sans-serif;font-size:10px;line-height:16px;color:#444444;padding:20px;margin:0px;">Haz click en el nombre de la oportunidad o cuenta para verla en LionixCRM<br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" /></p><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;height:0px;"> <br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;" /></div></div>', 0, '1', 0, NULL);
-";
-$db->query($query);
-    installLog('...LionixCRM added birthday email templates only successfully.');
+//     installLog('LionixCRM starting to add email templates only...');
+// /*z_WF_NOT_OP_SALES_STAGE_CHANGE*/
+// $query = "INSERT INTO email_templates
+// (id, date_entered, date_modified, modified_user_id, created_by, published, name, description, subject, body, body_html, deleted, assigned_user_id, text_only, `type`)
+// VALUES('01abcdef-efef-efef-efef-efefefefefef', utc_timestamp(), utc_timestamp(), '1', '1', 'off', 'z_WF_NOT_OP_SALES_STAGE_CHANGE', NULL, NULL, ' La oportunidad$opportunity_name requiere tu atención Detalle:Nombre: $opportunity_nameHaz click en el nombre de la oportunidad para verla en LionixCRM', '<div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px auto;width:1014px;background-color:rgb(250,250,250);"><table class="mce-item-table" style="width:100%;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:3px 3px 3px 0px;margin:0px;"><tbody style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:10%;"><img style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" src="custom/themes/default/images/company_logo.png" alt="Alternativa - Furniture - Solutions" width="200" height="40" /></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:89%;"><h1 style="font-family:Arial, Helvetica, sans-serif;font-size:24px;line-height:38.4px;color:#444444;padding:0px;margin:0px;">La oportunidad $opportunity_name requiere tu atención</h1></td></tr></tbody></table><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;height:0px;"> <br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px auto;" /></div></div><div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px auto;width:1014px;background-color:rgb(250,250,250);"><table style="width:100%;font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:3px 3px 3px 0px;margin:0px;" class="mce-item-table"><tbody style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.0278%;"><h2 style="font-family:Arial, Helvetica, sans-serif;font-size:18px;line-height:28.8px;color:#444444;padding:0px;margin:0px;">Detalle</h2></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.9722%;"><h2 style="font-family:Arial, Helvetica, sans-serif;font-size:18px;line-height:28.8px;color:#444444;padding:0px;margin:0px;">Descripción</h2></td></tr><tr style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:5px 0px;margin:0px;"><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.0278%;"><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Nombre: <a style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" href="index.php?module=Opportunities&action=DetailView&record=$opportunity_id">$opportunity_name</a></p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Cuenta: <a style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" href="index.php?module=Accounts&action=DetailView&record=$opportunity_account_id">$opportunity_account_name</a></p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Etapa de Ventas: $opportunity_sales_stage</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Fecha de Creación: $opportunity_date_entered</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Fecha de Cierre: $opportunity_date_closed</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;">Asignado a: $opportunity_assigned_user_name</p><p style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;"> </p></td><td style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#534d64;padding:3px 3px 3px 0px;margin:0px;width:49.9722%;">$opportunity_description</td></tr></tbody></table><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;height:0px;"> </div></div><div class="mozaik-inner" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px 30px;margin:0px auto;width:1014px;background-color:rgb(250,250,250);"><p class="footer" style="font-family:Arial, Helvetica, sans-serif;font-size:10px;line-height:16px;color:#444444;padding:20px;margin:0px;">Haz click en el nombre de la oportunidad o cuenta para verla en LionixCRM<br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:#444444;padding:0px;margin:0px;" /></p><div class="mozaik-clear" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px;height:0px;"> <br style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22.4px;color:rgb(68,68,68);padding:0px;margin:0px auto;" /></div></div>', 0, '1', 0, NULL);
+// ";
+// $db->query($query);
+//     installLog('...LionixCRM added email templates only successfully.');
     // lxcode_c
     installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
