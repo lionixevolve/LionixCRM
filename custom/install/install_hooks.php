@@ -189,6 +189,7 @@ function post_installModules()
     $sugar_config['default_currency_name'] = 'Colones';
     $sugar_config['default_currency_symbol'] = '₡';
     $sugar_config['disable_persistent_connections'] = false;
+    $sugar_config['aos']['quotes']['initialNumber'] = date("Y").'000';
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
     installLog('...LionixCRM added sugar_config values successfully.');
