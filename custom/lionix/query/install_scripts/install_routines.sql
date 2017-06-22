@@ -249,7 +249,7 @@ VALUES('wf-op-reset-date-closed-action-1', 'Enable future notifications for date
 
 INSERT INTO aow_workflow
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, assigned_user_id, flow_module, flow_run_on, status, run_when, multiple_runs)
-VALUES('wf-op-not-date-closed', 'WF-OP-NOT-DATE_CLOSED: 3 days before', utc_timestamp(), utc_timestamp(), '1', '1', 'Send an email to assigned_user_id and then mark dateclosednotified_c as notified.', 0, '1', 'Opportunities', 'All_Records', 'Inactive', 'In_Scheduler', 1);
+VALUES('wf-op-not-date-closed', 'WF-OP-NOT-DATE_CLOSED: 3 days before', utc_timestamp(), utc_timestamp(), '1', '1', 'Send an email to assigned_user_id and then mark dateclosednotified_c as notified.', 0, '1', 'Opportunities', 'All_Records', 'Active', 'In_Scheduler', 1);
 
 INSERT INTO aow_conditions
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, condition_order, module_path, field, operator, value_type, value)
