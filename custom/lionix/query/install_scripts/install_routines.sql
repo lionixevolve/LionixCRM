@@ -57,6 +57,14 @@ INSERT INTO prospect_lists_cstm (id_c ,autoclean_c ,autofill_c ) VALUES ('daily-
 INSERT INTO prospect_lists (assigned_user_id,id,name,list_type,date_entered,date_modified,modified_user_id,created_by,deleted,description,domain_name)
 VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratulations_contacts','default',utc_timestamp(),utc_timestamp(),'1','1',0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.','');
 
+###### custom fields on opportunities module
+ALTER TABLE opportunities_cstm add COLUMN dateclosednotified_c bool DEFAULT '0' NULL;
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesdateclosednotified_c', 'dateclosednotified_c', 'LBL_DATECLOSEDNOTIFIED', '', '', 'Opportunities', 'bool', 255, 0, '0', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+
 ###### custom fields on contacts module
 ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL;
 ALTER TABLE contacts_cstm add COLUMN cedula_c varchar(255) NULL;
