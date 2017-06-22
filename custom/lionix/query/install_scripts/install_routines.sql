@@ -4,6 +4,11 @@
 CREATE PROCEDURE sp_install_routines
 ()
 BEGIN
+###### outbound_email configuration
+INSERT INTO outbound_email
+(id, name, `type`, user_id, mail_sendtype, mail_smtptype, mail_smtpserver, mail_smtpport, mail_smtpuser, mail_smtppass, mail_smtpauth_req, mail_smtpssl, date_entered, date_modified, modified_user_id, created_by, deleted, assigned_user_id)
+VALUES('test-lionix-org', 'system', 'system', '1', 'SMTP', 'other', 'smtp.gmail.com', 465, 'test@lionix.org', 'kmmxI9mASUU=', 1, '1', NULL, NULL, NULL, NULL, 0, NULL);
+
 ###### default users
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, photo, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, show_on_employees, employee_status, messenger_id, messenger_type, reports_to_id, is_group)
