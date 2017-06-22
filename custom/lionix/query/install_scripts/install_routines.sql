@@ -4,6 +4,12 @@
 CREATE PROCEDURE sp_install_routines
 ()
 BEGIN
+###### dolars when default system currency is colón
+# tipo cambio = 577 | conversion_rate = 1/577
+INSERT INTO currencies
+(id, name, symbol, iso4217, conversion_rate, status, deleted, date_entered, date_modified, created_by)
+VALUES('1', 'Dólar', '$', 'USD', 0.00173310225303292894, 'Active', 0, utc_timestamp(), utc_timestamp(), '1');
+
 ###### outbound_email configuration
 INSERT INTO outbound_email
 (id, name, `type`, user_id, mail_sendtype, mail_smtptype, mail_smtpserver, mail_smtpport, mail_smtpuser, mail_smtppass, mail_smtpauth_req, mail_smtpssl, date_entered, date_modified, modified_user_id, created_by, deleted, assigned_user_id)

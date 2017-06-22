@@ -183,6 +183,11 @@ function post_installModules()
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime'] = '18:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend'] = '09:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend'] = '12:00';
+    $sugar_config['dbconfigoption']['collation'] = 'utf8_general_ci';
+    $sugar_config['default_currency_iso4217'] = 'CRC';
+    $sugar_config['default_currency_name'] = 'Colones';
+    $sugar_config['default_currency_symbol'] = '₡';
+    $sugar_config['disable_persistent_connections'] = false;
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
     installLog('...LionixCRM added sugar_config values successfully.');
