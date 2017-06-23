@@ -7,6 +7,7 @@ $job_strings[] = 'updateProspectListProspects';
 $job_strings[] = 'emailManEr';
 //Jobs for cases module.
 $job_strings[] = 'updateElapsedTimeInMins';
+$job_strings[] = 'updateHolidays';
 //Jobs required for LARGE reports tables.
 //none.
 
@@ -200,3 +201,26 @@ function updateElapsedTimeInMins()
 
     return true;
 }//updateelapsedTimeInMins
+
+function updateHolidays()
+{
+    global $db,$sugar_config;
+
+    $query = "
+    INSERT INTO holiday_table (holiday_table_id, holiday_date, week_day, holiday_name, Country_codes)
+    SELECT replace(holiday_table_id,year(UTC_TIMESTAMP),year(date_add(holiday_date,INTERVAL 1 YEAR))) AS holiday_table_id,
+           date_add(holiday_date,INTERVAL 1 YEAR) AS holiday_date,
+           DATE_FORMAT(date_add(holiday_date,INTERVAL 1 YEAR),'%W') AS week_day,
+           holiday_name,
+           Country_codes
+    FROM holiday_table
+    WHERE YEAR(holiday_date)= YEAR(UTC_TIMESTAMP())
+        AND replace(holiday_table_id,YEAR(UTC_TIMESTAMP),YEAR(date_add(holiday_date,INTERVAL 1 YEAR))) NOT IN
+            (SELECT holiday_table_id
+             FROM holiday_table
+             WHERE YEAR(holiday_date) = YEAR(date_add(UTC_TIMESTAMP(),INTERVAL 1 YEAR)))
+     ";
+    $db->query($query);
+
+    return true;
+}//updateHolidays

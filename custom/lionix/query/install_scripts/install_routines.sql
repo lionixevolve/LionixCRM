@@ -104,6 +104,9 @@ VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- Lioni
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
 VALUES ('updateelapsedtimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateElapsedTimeInMins', 'function::updateElapsedTimeInMins', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0');
 
+INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
+VALUES ('updateholidays', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateHolidays', 'function::updateHolidays', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0');
+
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('updateprospectlistprospects', '0', utc_timestamp(), utc_timestamp(), '1', '1', '01- LionixCRM - Prospect List Prospects Update 2:00am', 'function::updateProspectListProspects', '1980-02-01 06:00:00', '00::02::*::*::*', utc_timestamp(), 'Active', '0');
 
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('campaignlogdeleter', '0', utc_timestamp(), utc_timestamp(), '1', '1', '02- LionixCRM - CampaignLogDeletEr - 8:00am', 'function::campaignLogDeletEr', '1980-02-01 06:00:00', '00::08::*::*::*', utc_timestamp(), 'Active', '0');
@@ -111,140 +114,33 @@ INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, mo
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up) VALUES ('emailmaner', '0', utc_timestamp(), utc_timestamp(), '1', '1', '03- LionixCRM - EmailManEr - 9:00am', 'function::emailManEr', '1980-02-01 06:00:00', '00::09::*::*::*', utc_timestamp(), 'Active', '0');
 
 ###### holiday records
+SET @year = year(UTC_TIMESTAMP);
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-01-01', '2016-01-01', DATE_FORMAT('2016-01-01','%W'), 'Año Nuevo', 'CR');
+VALUES (CONCAT(@year,'-01-01'), CONCAT(@year,'-01-01'), DATE_FORMAT(CONCAT(@year,'-01-01'),'%W'), 'Año Nuevo', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-04-11', '2016-04-11', DATE_FORMAT('2016-04-11','%W'), 'Día de Juan Santamaría', 'CR');
+VALUES (CONCAT(@year,'-04-11'), CONCAT(@year,'-04-11'), DATE_FORMAT(CONCAT(@year,'-04-11'),'%W'), 'Día de Juan Santamaría', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-05-01', '2016-05-01', DATE_FORMAT('2016-05-01','%W'), 'Día Internacional del Trabajo', 'CR');
+VALUES (CONCAT(@year,'-05-01'), CONCAT(@year,'-05-01'), DATE_FORMAT(CONCAT(@year,'-05-01'),'%W'), 'Día Internacional del Trabajo', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-07-25', '2016-07-25', DATE_FORMAT('2016-07-25','%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
+VALUES (CONCAT(@year,'-07-25'), CONCAT(@year,'-07-25'), DATE_FORMAT(CONCAT(@year,'-07-25'),'%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-08-02', '2016-08-02', DATE_FORMAT('2016-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
+VALUES (CONCAT(@year,'-08-02'), CONCAT(@year,'-08-02'), DATE_FORMAT(CONCAT(@year,'-08-02'),'%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-08-15', '2016-08-15', DATE_FORMAT('2016-08-15','%W'), 'Día de la Madre', 'CR');
+VALUES (CONCAT(@year,'-08-15'), CONCAT(@year,'-08-15'), DATE_FORMAT(CONCAT(@year,'-08-15'),'%W'), 'Día de la Madre', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-09-15', '2016-09-15', DATE_FORMAT('2016-09-15','%W'), 'Independencia de Costa Rica', 'CR');
+VALUES (CONCAT(@year,'-09-15'), CONCAT(@year,'-09-15'), DATE_FORMAT(CONCAT(@year,'-09-15'),'%W'), 'Independencia de Costa Rica', 'CR');
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-10-12', '2016-10-12', DATE_FORMAT('2016-10-12','%W'), 'Día de las Culturas', 'CR'); -- Pago no obligatorio;
+VALUES (CONCAT(@year,'-10-12'), CONCAT(@year,'-10-12'), DATE_FORMAT(CONCAT(@year,'-10-12'),'%W'), 'Día de las Culturas', 'CR'); -- Pago no obligatorio;
 
 INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2016-12-25', '2016-12-25', DATE_FORMAT('2016-12-25','%W'), 'Navidad', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-01-01', '2017-01-01', DATE_FORMAT('2017-01-01','%W'), 'Año Nuevo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-04-11', '2017-04-11', DATE_FORMAT('2017-04-11','%W'), 'Día de Juan Santamaría', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-05-01', '2017-05-01', DATE_FORMAT('2017-05-01','%W'), 'Día Internacional del Trabajo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-07-25', '2017-07-25', DATE_FORMAT('2017-07-25','%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-08-02', '2017-08-02', DATE_FORMAT('2017-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-08-15', '2017-08-15', DATE_FORMAT('2017-08-15','%W'), 'Día de la Madre', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-09-15', '2017-09-15', DATE_FORMAT('2017-09-15','%W'), 'Independencia de Costa Rica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-10-12', '2017-10-12', DATE_FORMAT('2017-10-12','%W'), 'Día de las Culturas', 'CR'); -- Pago noobligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2017-12-25', '2017-12-25', DATE_FORMAT('2017-12-25','%W'), 'Navidad', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-01-01', '2018-01-01', DATE_FORMAT('2018-01-01','%W'), 'Año Nuevo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-04-11', '2018-04-11', DATE_FORMAT('2018-04-11','%W'), 'Día de Juan Santamaría', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-05-01', '2018-05-01', DATE_FORMAT('2018-05-01','%W'), 'Día Internacional del Trabajo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-07-25', '2018-07-25', DATE_FORMAT('2018-07-25','%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-08-02', '2018-08-02', DATE_FORMAT('2018-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-08-15', '2018-08-15', DATE_FORMAT('2018-08-15','%W'), 'Día de la Madre', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-09-15', '2018-09-15', DATE_FORMAT('2018-09-15','%W'), 'Independencia de Costa Rica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-10-12', '2018-10-12', DATE_FORMAT('2018-10-12','%W'), 'Día de las Culturas', 'CR'); -- Pago noobligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2018-12-25', '2018-12-25', DATE_FORMAT('2018-12-25','%W'), 'Navidad', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-01-01', '2019-01-01', DATE_FORMAT('2019-01-01','%W'), 'Año Nuevo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-04-11', '2019-04-11', DATE_FORMAT('2019-04-11','%W'), 'Día de Juan Santamaría', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-05-01', '2019-05-01', DATE_FORMAT('2019-05-01','%W'), 'Día Internacional del Trabajo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-07-25', '2019-07-25', DATE_FORMAT('2019-07-25','%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-08-02', '2019-08-02', DATE_FORMAT('2019-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-08-15', '2019-08-15', DATE_FORMAT('2019-08-15','%W'), 'Día de la Madre', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-09-15', '2019-09-15', DATE_FORMAT('2019-09-15','%W'), 'Independencia de Costa Rica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-10-12', '2019-10-12', DATE_FORMAT('2019-10-12','%W'), 'Día de las Culturas', 'CR'); -- Pago noobligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2019-12-25', '2019-12-25', DATE_FORMAT('2019-12-25','%W'), 'Navidad', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-01-01', '2020-01-01', DATE_FORMAT('2020-01-01','%W'), 'Año Nuevo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-04-11', '2020-04-11', DATE_FORMAT('2020-04-11','%W'), 'Día de Juan Santamaría', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-05-01', '2020-05-01', DATE_FORMAT('2020-05-01','%W'), 'Día Internacional del Trabajo', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-07-25', '2020-07-25', DATE_FORMAT('2020-07-25','%W'), 'Anexión del Partido de Nicoya a Costa ica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-08-02', '2020-08-02', DATE_FORMAT('2020-08-02','%W'), 'Día de la Virgen de los Ángeles', 'CR'); -- Pago no obligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-08-15', '2020-08-15', DATE_FORMAT('2020-08-15','%W'), 'Día de la Madre', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-09-15', '2020-09-15', DATE_FORMAT('2020-09-15','%W'), 'Independencia de Costa Rica', 'CR');
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-10-12', '2020-10-12', DATE_FORMAT('2020-10-12','%W'), 'Día de las Culturas', 'CR'); -- Pago noobligatorio;
-
-INSERT INTO `holiday_table` (`holiday_table_id`, `holiday_date`, `week_day`, `holiday_name`, `Country_codes`)
-VALUES ('2020-12-25', '2020-12-25', DATE_FORMAT('2020-12-25','%W'), 'Navidad', 'CR');
+VALUES (CONCAT(@year,'-12-25'), CONCAT(@year,'-12-25'), DATE_FORMAT(CONCAT(@year,'-12-25'),'%W'), 'Navidad', 'CR');
 
 ##### workflows
 INSERT INTO aow_workflow
