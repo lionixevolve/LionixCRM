@@ -51,6 +51,7 @@ function getRelationshipByModules($m1, $m2)
 function lxHumanReadableElapsedTime($minutes, $lang = 'en_us', $levels = 7)
 {
     //Change "$levels = 2;" to whatever you want. A value of 1 will limit to only one number in the result ("3 days ago"). A value of 3 would result in up to three ("3 days 1 hour 2 minutes ago")
+    $lang=strtolower($lang);
     $blocks = array(
         array('en_us' => 'year', 'es_es' => 'año', 'amount' => 60 * 60 * 24 * 365),
         array('en_us' => 'month', 'es_es' => 'mes', 'amount' => 60 * 60 * 24 * 31),
