@@ -74,6 +74,9 @@ SuiteCRM is published under the AGPLv3 license.
 
 ### Descripción Cédulas Personas Costa Rica ###
 RegExp: ^[1-9]{1}\d{8}$
+
+Link hacienda: http://www.hacienda.go.cr/consultapagos/ayuda_cedulas.htm
+
 Persona Física Nacional (Cédula de Identidad)
 Posiciones deben cumplir con la siguiente codificación:
 0P-TTTT-AAAA
@@ -89,10 +92,12 @@ Para los extranjeros que se participaron en el proceso de amnistía, este format
 1OOO-RE-CC...C-NN-AAAA
 Donde OOO es el Código de la oficina regional de la Dirección General de Migración y Extranjería. RE es una constante alfanumérica en mayúsculas, CC...C es un número de consecutivo igual a la posición del solicitante en la lista de cédulas entregadas y cuya longitud depende del número asignado en un momento dado, NN es el núcleo familiar, y AAAA representa el año en que fue vigente la amnistía, actualmente este valor AAAA es constante 1999.
 
+
 ### Descripción Cédulas Jurídicas Costa Rica ###
 RegExp: ^(2[1-4]00\d{6}|3[01]\d{2}\d{6}|4000\d{6})$
 
 Link para búsqueda de cédulas jurídicas: http://196.40.56.20/consultasic/wf_consultajuridicas.aspx
+Link hacienda: http://www.hacienda.go.cr/consultapagos/ayuda_cedulas.htm
 
 Gobierno Central
 Este tipo de persona tendrá 2 como primera posición de la cédula.
