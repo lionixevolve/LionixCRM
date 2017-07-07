@@ -70,3 +70,81 @@ The following links offer various ways to view, contribute and collaborate to th
 SuiteCRM is an open source project. As such please do not contact us directly via email or phone for SuiteCRM support. Instead please use our support forum. By using the forum the knowledge is shared with everyone in the community. Our developers answer questions on the forum daily but it also gives the other members of the community the opportunity to contribute. If you would like customisations to specifically fit your SuiteCRM  needs then please use our contact form.
 
 SuiteCRM is published under the AGPLv3 license.
+
+
+### Descripción Cédulas Personas Costa Rica ###
+RegExp: ^[1-9]{1}\d{8}$
+Persona Física Nacional (Cédula de Identidad)
+Posiciones deben cumplir con la siguiente codificación:
+0P-TTTT-AAAA
+0 En Hacienda las demás posiciones deben cumplir con la siguiente codificación:
+Donde la P representa la provincia, TTTT representa el Tomo justificado con ceros a la izquierda, y AAAA el asiento, que al igual que el tomo, debe estar justificado con ceros a la izquierda.
+
+Persona Física Residente (Cédula de Residencia)
+1 En Hacienda las demás posiciones deben cumplir con la siguiente codificación:
+1NNN-CC...C-EE...E
+Donde NNN representa el código del país, manejado por la Dirección General de Migración y Extranjería, CC...C es el consecutivo de la cantidad total de cédulas de residencia entregas sin importar la nacionalidad y EE...E es un consecutivo de la cantidad de cédulas de residencia entregadas a personas con la misma nacionalidad.
+
+Para los extranjeros que se participaron en el proceso de amnistía, este formato debe cumplir con la siguiente codificación:
+1OOO-RE-CC...C-NN-AAAA
+Donde OOO es el Código de la oficina regional de la Dirección General de Migración y Extranjería. RE es una constante alfanumérica en mayúsculas, CC...C es un número de consecutivo igual a la posición del solicitante en la lista de cédulas entregadas y cuya longitud depende del número asignado en un momento dado, NN es el núcleo familiar, y AAAA representa el año en que fue vigente la amnistía, actualmente este valor AAAA es constante 1999.
+
+### Descripción Cédulas Jurídicas Costa Rica ###
+RegExp: ^(2[1-4]00\d{6}|3[01]\d{2}\d{6}|4000\d{6})$
+
+Link para búsqueda de cédulas jurídicas: http://196.40.56.20/consultasic/wf_consultajuridicas.aspx
+
+Gobierno Central
+Este tipo de persona tendrá 2 como primera posición de la cédula.
+Las restantes nueve posiciones deben cumplir con la siguiente codificación:
+2-PPP-CCCCCC
+PPP identifica el Poder, de la siguiente manera:
+Código Poder
+100    Ejecutivo
+200    Legislativo
+300    Judicial
+400    Tribunal Supremo de Elecciones
+Por ejemplo, el número de cédula para el Ministerio de Hacienda es 2100042005
+
+Persona Jurídica
+Este tipo de persona tendrá 3 como primera posición de la cédula, de acuerdo con la tabla de naturalezas antes descrita.  Las restantes 9 posiciones deben cumplir con la siguiente codificación:
+3-TTT-CCCCCC
+Donde TTT representa el Tipo de Persona Jurídica según la Codificación del Registro Nacional, y CCCCCC corresponde a un consecutivo asignado por el Registro Nacional.
+
+Institución Autónoma
+Este tipo de persona tendrá un 4 como primera posición de la cédula. Las restantes nueve posiciones deben cumplir con la siguiente codificación:
+4-000-CCCCCC
+Donde CCCCCC representa un número de consecutivo asignado por el Registro Nacional. Por ejemplo la cédula del Instituto Costarricense de Turismo (ICT) es 4000042141
+
+TTT representa el Tipo de Persona Jurídica según la Codificación del Registro Nacional:
+TIPO NOMBRE
+000  Instituciones autónomas
+100  Poder Ejecutivo
+200  Poder Legislativo
+300  Poder Judicial
+400  Tribunal Supremo de Elecciones
+002  Asociaciones
+003  Organismos Internacionales
+004  Cooperativas
+005  Embajadas
+006  Fundaciones
+007  Personas Jurídicas creadas por Ley Especial
+008  Juntas Administrativas de Educación
+009  Mutuales de Ahorro y Préstamo
+010  Temporalidades de la Iglesia Católica
+011  Sindicatos - Uniones de Trabajadores
+012  Casas Extranjeras - Poderes
+013  Casas Extranjeras - Sin Fines de lucro
+014  Municipalidades
+101  Sociedades Anónimas
+102  Sociedades de Responsabilidad Limitada
+103  Sociedades en Comandita
+104  Sociedades en Nombre Colectivo
+105  Empresas Individuales de Responsabilidad Limitada
+106  Sociedades Civiles
+107  Sociedades de Usuarios
+108  Sociedades de Actividades Profesionales
+109  Condominios
+110  Otros - Generalmente Fideicomisos
+130  Fideicomisos
+--última línea
