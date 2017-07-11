@@ -21,6 +21,7 @@ $GLOBALS['app_list_strings']['account_tipocedula_list']=array (
     'DIMEX' => 'DIMEX',
     'PASAPORTE' => 'PASAPORTE',
     'JURIDICA' => 'JURIDICA',
+    'NITE' => 'NITE',
 );
 $GLOBALS['app_list_strings']['lx_pais_list']=array (
   '' => '',
