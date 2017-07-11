@@ -92,6 +92,11 @@ Para los extranjeros que se participaron en el proceso de amnistía, este format
 1OOO-RE-CC...C-NN-AAAA
 Donde OOO es el Código de la oficina regional de la Dirección General de Migración y Extranjería. RE es una constante alfanumérica en mayúsculas, CC...C es un número de consecutivo igual a la posición del solicitante en la lista de cédulas entregadas y cuya longitud depende del número asignado en un momento dado, NN es el núcleo familiar, y AAAA representa el año en que fue vigente la amnistía, actualmente este valor AAAA es constante 1999.
 
+### Descripción DIMEX Costa Rica Documento de Identidad Migratoria para Extranjeros ###
+RegExp: ^\d{11,12}$
+
+### Descripción NITE Número Identificación Tributaria Especial ###
+RegExp: ^\d{12}$
 
 ### Descripción Cédulas Jurídicas Costa Rica ###
 RegExp: ^(2[1-4]00\d{6}|3[01]\d{2}\d{6}|4000\d{6})$
