@@ -1,0 +1,28 @@
+.progresslx {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    font-size: 1.2rem;
+    line-height: 0.8rem;
+    text-align: center;
+    background-color: #eceeef;
+    border-radius: .25rem;
+}
+
+.bg-danger {
+    background-color: #d9534f!important;
+}
+
+.bg-warning {
+    background-color: #f0ad4e!important;
+}
+
+.bg-info {
+    background-color: #5bc0de!important;
+}
+
+.bg-success {
+    background-color: #5cb85c!important;
+}
