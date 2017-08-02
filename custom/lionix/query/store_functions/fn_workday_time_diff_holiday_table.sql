@@ -1,6 +1,8 @@
 -- DROP FUNCTION IF EXISTS workday_time_diff_holiday_table;
--- DELIMITER //
--- Delimiter isn't need on php
+-- DELIMITER $$
+-- Delimiter isn't need on php but on dbeaver it is delimiter reserved word changes the semicolon to the custom delimiter, in this case two dollar sings: delimiter $$
+-- At the next line after the end of the procedure you must use the custom delimiter alone: $$
+-- In the following line you must reset the delimiter to the semicolon with: delimiter ;
 -- Slightly changed it version, that includes saturdays, took it from here:
 -- http://mgw.dumatics.com/mysql-function-to-calculate-elapsed-working-time/
 CREATE DEFINER=`root`@`localhost` FUNCTION `workday_time_diff_holiday_table`(
@@ -117,4 +119,5 @@ else
 end if;
 RETURN @timecount*60;
 END
--- // DELIMITER ;
+-- $$
+-- DELIMITER ;
