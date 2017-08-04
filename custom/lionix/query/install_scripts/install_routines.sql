@@ -11,6 +11,7 @@ INSERT INTO currencies
 VALUES('1', 'Dólar', '$', 'USD', 0.00173310225303292894, 'Active', 0, utc_timestamp(), utc_timestamp(), '1');
 
 ###### outbound_email configuration
+UPDATE config SET value = 'LionixCRM' WHERE category = 'notify' AND name = 'fromname';
 INSERT INTO outbound_email
 (id, name, `type`, user_id, mail_sendtype, mail_smtptype, mail_smtpserver, mail_smtpport, mail_smtpuser, mail_smtppass, mail_smtpauth_req, mail_smtpssl, date_entered, date_modified, modified_user_id, created_by, deleted, assigned_user_id)
 VALUES('test-lionix-org', 'system', 'system', '1', 'SMTP', 'other', 'smtp.gmail.com', 465, 'test@lionix.org', 'kmmxI9mASUU=', 1, '1', NULL, NULL, NULL, NULL, 0, NULL);
