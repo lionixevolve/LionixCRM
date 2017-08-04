@@ -5,10 +5,10 @@ CREATE PROCEDURE sp_install_routines
 ()
 BEGIN
 ###### dolars when default system currency is colón
-# tipo cambio = 577 | conversion_rate = 1/577
+# tipo cambio = 580 | conversion_rate = 1/580
 INSERT INTO currencies
 (id, name, symbol, iso4217, conversion_rate, status, deleted, date_entered, date_modified, created_by)
-VALUES('1', 'Dólar', '$', 'USD', 0.00173310225303292894, 'Active', 0, utc_timestamp(), utc_timestamp(), '1');
+VALUES('1', 'Dólar', '$', 'USD', 0.00172413793103448276, 'Active', 0, utc_timestamp(), utc_timestamp(), '1');
 
 ###### outbound_email configuration
 UPDATE config SET value = 'LionixCRM' WHERE category = 'notify' AND name = 'fromname';

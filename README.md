@@ -89,6 +89,20 @@ SuiteCRM is an open source project. As such please do not contact us directly vi
 
 SuiteCRM is published under the AGPLv3 license.
 
+### Moneda por defecto Colones Agosto 2017###
+Tipo cambio = 580 | conversion_rate = 1/580
+
+`INSERT INTO currencies
+(id, name, symbol, iso4217, conversion_rate, status, deleted, date_entered, date_modified, created_by)
+VALUES('1', 'Dólar', '$', 'USD', 0.00172413793103448276, 'Active', 0, utc_timestamp(), utc_timestamp(), '1')
+;`
+
+### Moneda por defecto Dólares Agosto 2017###
+Tipo cambio = 580 | conversion_rate = 1*580
+`INSERT INTO currencies
+(id, name, symbol, iso4217, conversion_rate, status, deleted, date_entered, date_modified, created_by)
+VALUES('2', 'Colones', '₡', 'CRC', 580, 'Active', 0, utc_timestamp, utc_timestamp, '1')
+;`
 
 ### Descripción Cédulas Personas Costa Rica ###
 RegExp: ^[1-9]{1}\d{8}$
