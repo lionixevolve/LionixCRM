@@ -1,20 +1,20 @@
 <?php
-$listViewDefs ['Cases'] =
+$listViewDefs ['Cases'] = 
 array (
-  'CASE_NUMBER' =>
+  'CASE_NUMBER' => 
   array (
     'width' => '5%',
     'label' => 'LBL_LIST_NUMBER',
     'default' => true,
   ),
-  'NAME' =>
+  'NAME' => 
   array (
     'width' => '25%',
     'label' => 'LBL_LIST_SUBJECT',
     'link' => true,
     'default' => true,
   ),
-  'ACCOUNT_NAME' =>
+  'ACCOUNT_NAME' => 
   array (
     'width' => '20%',
     'label' => 'LBL_LIST_ACCOUNT_NAME',
@@ -23,24 +23,31 @@ array (
     'link' => true,
     'default' => true,
     'ACLTag' => 'ACCOUNT',
-    'related_fields' =>
+    'related_fields' => 
     array (
       0 => 'account_id',
     ),
   ),
-  'PRIORITY' =>
+  'STATE' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'label' => 'LBL_STATE',
+    'width' => '10%',
+  ),
+  'PRIORITY' => 
   array (
     'width' => '10%',
     'label' => 'LBL_LIST_PRIORITY',
     'default' => true,
   ),
-  'STATUS' =>
+  'STATUS' => 
   array (
     'width' => '10%',
     'label' => 'LBL_LIST_STATUS',
     'default' => true,
   ),
-  'ELAPSEDTIME' =>
+  'ELAPSEDTIME' => 
   array (
     'type' => 'text',
     'label' => 'elapsedtime',
@@ -48,14 +55,14 @@ array (
     'width' => '10%',
     'default' => true,
   ),
-  'ELAPSEDTIMEINMINS_C' =>
+  'ELAPSEDTIMEINMINS_C' => 
   array (
     'type' => 'int',
     'default' => true,
     'label' => 'LBL_ELAPSEDTIMEINMINS',
     'width' => '10%',
   ),
-  'ASSIGNED_USER_NAME' =>
+  'ASSIGNED_USER_NAME' => 
   array (
     'width' => '10%',
     'label' => 'LBL_ASSIGNED_TO_NAME',
@@ -63,11 +70,12 @@ array (
     'id' => 'ASSIGNED_USER_ID',
     'default' => true,
   ),
-  'DATE_ENTERED' =>
+  'DATE_ENTERED' => 
   array (
     'width' => '10%',
     'label' => 'LBL_DATE_ENTERED',
     'default' => true,
   ),
 );
+;
 ?>
