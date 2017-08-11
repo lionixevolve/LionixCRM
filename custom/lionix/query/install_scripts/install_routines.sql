@@ -40,8 +40,128 @@ VALUES('support', 'support', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 
 
 ###### custom fields on cases module
 ALTER TABLE cases_cstm add COLUMN elapsedtimeinmins_c int(255) DEFAULT '0' NULL;
+ALTER TABLE cases_cstm add COLUMN lxtid_c varchar(36) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtname_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtescalation_c bool NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel2_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel3_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel4_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel5_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel6_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtlevel7_c varchar(255) NULL;
+ALTER TABLE cases_cstm add COLUMN lxtprocedure1_c text NULL;
+ALTER TABLE cases_cstm add COLUMN lxtprocedure2_c text NULL;
+ALTER TABLE cases_cstm add COLUMN lxtprocedure3_c text NULL;
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Caseselapsedtimeinmins_c','elapsedtimeinmins_c','LBL_ELAPSEDTIMEINMINS','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE','Cases','int','255','0','0',utc_timestamp(),'0','0','0','0','1','false','','','1','');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtid_c', 'lxtid_c', 'LBL_LXTID', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 36, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtname_c', 'lxtname_c', 'LBL_LXTNAME', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'fals3', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+VALUES ('Caseslxtescalation_c','lxtescalation_c','LBL_LXTESCALATION','LionixCRM - lx_topics', 'LionixCRM - lx_topics','Cases','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel2_c', 'lxtlevel2_c', 'LBL_LXTLEVEL2', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel3_c', 'lxtlevel3_c', 'LBL_LXTLEVEL3', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel4_c', 'lxtlevel4_c', 'LBL_LXTLEVEL4', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel5_c', 'lxtlevel5_c', 'LBL_LXTLEVEL5', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel6_c', 'lxtlevel6_c', 'LBL_LXTLEVEL6', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtlevel7_c', 'lxtlevel7_c', 'LBL_LXTLEVEL7', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtprocedure1_c', 'lxtprocedure1_c', 'LBL_LXTPROCEDURE1', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtprocedure2_c', 'lxtprocedure2_c', 'LBL_LXTPROCEDURE2', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Caseslxtprocedure3_c', 'lxtprocedure3_c', 'LBL_LXTPROCEDURE3', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+###### custom fields on calls module
+ALTER TABLE calls_cstm add COLUMN lxtid_c varchar(36) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtname_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtescalation_c bool NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel2_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel3_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel4_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel5_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel6_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtlevel7_c varchar(255) NULL;
+ALTER TABLE calls_cstm add COLUMN lxtprocedure1_c text NULL;
+ALTER TABLE calls_cstm add COLUMN lxtprocedure2_c text NULL;
+ALTER TABLE calls_cstm add COLUMN lxtprocedure3_c text NULL;
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtid_c', 'lxtid_c', 'LBL_LXTID', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 36, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtname_c', 'lxtname_c', 'LBL_LXTNAME', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'fals3', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
+VALUES ('Callslxtescalation_c','lxtescalation_c','LBL_LXTESCALATION','LionixCRM - lx_topics', 'LionixCRM - lx_topics','Calls','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel2_c', 'lxtlevel2_c', 'LBL_LXTLEVEL2', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel3_c', 'lxtlevel3_c', 'LBL_LXTLEVEL3', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel4_c', 'lxtlevel4_c', 'LBL_LXTLEVEL4', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel5_c', 'lxtlevel5_c', 'LBL_LXTLEVEL5', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel6_c', 'lxtlevel6_c', 'LBL_LXTLEVEL6', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtlevel7_c', 'lxtlevel7_c', 'LBL_LXTLEVEL7', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtprocedure1_c', 'lxtprocedure1_c', 'LBL_LXTPROCEDURE1', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtprocedure2_c', 'lxtprocedure2_c', 'LBL_LXTPROCEDURE2', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Callslxtprocedure3_c', 'lxtprocedure3_c', 'LBL_LXTPROCEDURE3', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Calls', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
 
 ###### custom fields on campaigns module
 CREATE TABLE campaigns_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -49,10 +169,10 @@ ALTER TABLE campaigns_cstm add COLUMN emailmaner_c bool DEFAULT '0' NULL;
 ALTER TABLE campaigns_cstm add COLUMN clearcamplogdaily_c bool DEFAULT '0' NULL;
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Campaignsemailmaner_c','emailmaner_c','LBL_EMAILMANER','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
+VALUES ('Campaignsemailmaner_c','emailmaner_c','LBL_EMAILMANER','LionixCRM','LionixCRM','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Campaignsclearcamplogdaily_c','clearcamplogdaily_c','LBL_CLEARCAMPLOGDAILY','','','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
+VALUES ('Campaignsclearcamplogdaily_c','clearcamplogdaily_c','LBL_CLEARCAMPLOGDAILY','LionixCRM','LionixCRM','Campaigns','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'false','','','','');
 
 ###### custom fields and records on prospect_lists module
 CREATE TABLE prospect_lists_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -60,10 +180,10 @@ ALTER TABLE prospect_lists_cstm add COLUMN autofill_c bool DEFAULT '0' NULL;
 ALTER TABLE prospect_lists_cstm add COLUMN autoclean_c bool DEFAULT '0' NULL;
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('ProspectListsautofill_c','autofill_c','LBL_AUTOFILL','autofill must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','');
+VALUES ('ProspectListsautofill_c','autofill_c','LBL_AUTOFILL','autofill must be false until there\'s certainty that would be use','LionixCRM','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','');
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','');
+VALUES ('ProspectListsautoclean_c','autoclean_c','LBL_AUTOCLEAN','autoclean must be false until there\'s certainty that would be use','LionixCRM','ProspectLists','bool',255,0,'0',utc_timestamp(),0,0,0,0,1,'true','','','','');
 
 INSERT INTO prospect_lists_cstm (id_c ,autoclean_c ,autofill_c ) VALUES ('daily-email-bday-congrats-contacts' ,'1' ,'1' );
 
@@ -75,7 +195,7 @@ ALTER TABLE opportunities_cstm add COLUMN dateclosednotified_c bool DEFAULT '0' 
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdateclosednotified_c', 'dateclosednotified_c', 'LBL_DATECLOSEDNOTIFIED', '', '', 'Opportunities', 'bool', 255, 0, '0', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdateclosednotified_c', 'dateclosednotified_c', 'LBL_DATECLOSEDNOTIFIED', 'LionixCRM', 'LionixCRM', 'Opportunities', 'bool', 255, 0, '0', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
 
 
 ###### custom fields on contacts module
@@ -83,20 +203,20 @@ ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL;
 ALTER TABLE contacts_cstm add COLUMN cedula_c varchar(255) NULL;
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Contactssoundex_c','soundex_c','LBL_SOUNDEX','Allowed values are AAA,AA,A,B,C,D,NER,MAL,SIN','','Contacts','varchar',3,0,'',utc_timestamp(),0,0,0,0,1,'true','','','','');
+VALUES ('Contactssoundex_c','soundex_c','LBL_SOUNDEX','Allowed values are AAA,AA,A,B,C,D,NER,MAL,SIN','LionixCRM','Contacts','varchar',3,0,'',utc_timestamp(),0,0,0,0,1,'true','','','','');
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','','','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','');
+VALUES ('Contactscedula_c','cedula_c','LBL_CEDULA','LionixCRM','LionixCRM','Contacts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','');
 
 ###### custom fields on accounts module
 ALTER TABLE accounts_cstm add COLUMN tipocedula_c varchar(100) NULL;
 ALTER TABLE accounts_cstm add COLUMN cedula_c varchar(255) NULL;
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Accountstipocedula_c','tipocedula_c','LBL_TIPOCEDULA','','','Accounts','enum',100,0,'',utc_timestamp(),0,0,0,0,1,'true','account_tipocedula_list','','','');
+VALUES ('Accountstipocedula_c','tipocedula_c','LBL_TIPOCEDULA','LionixCRM','LionixCRM','Accounts','enum',100,0,'',utc_timestamp(),0,0,0,0,1,'true','account_tipocedula_list','','','');
 
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
-VALUES ('Accountscedula_c','cedula_c','LBL_CEDULA','','','Accounts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','');
+VALUES ('Accountscedula_c','cedula_c','LBL_CEDULA','LionixCRM','LionixCRM','Accounts','varchar',255,0,'','2016-07-14 20:08:17',0,0,0,0,1,'true','','','','');
 
 ###### custom schedulers
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
