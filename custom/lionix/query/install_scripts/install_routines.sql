@@ -103,6 +103,7 @@ INSERT INTO fields_meta_data
 VALUES('Caseslxtprocedure3_c', 'lxtprocedure3_c', 'LBL_LXTPROCEDURE3', 'LionixCRM - lx_topics', 'LionixCRM - lx_topics', 'Cases', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
 
 ###### custom fields on calls module
+CREATE TABLE calls_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE calls_cstm add COLUMN lxtid_c varchar(36) NULL;
 ALTER TABLE calls_cstm add COLUMN lxtname_c varchar(255) NULL;
 ALTER TABLE calls_cstm add COLUMN lxtescalation_c bool NULL;
