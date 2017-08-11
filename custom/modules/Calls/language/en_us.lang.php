@@ -2,7 +2,7 @@
 // created: 2016-09-21 18:59:34
 $mod_strings = array (
   'LBL_LXTID' => 'Tópico - ID',
-  'LBL_LXTESCALATION' => 'Tópico - Escalar';
+  'LBL_LXTESCALATION' => 'Tópico - Escalar',
   'LBL_LXTNAME' => 'Tópico - Nombre',
   'LBL_LXTLEVEL2' => 'Tópico - Nivel 2',
   'LBL_LXTLEVEL3' => 'Tópico - Nivel 3',
