@@ -144,7 +144,7 @@ function post_installModules()
         if (file_exists($current_file)) {
             $query = file_get_contents($current_file);
             $db->query($query);
-            if($current_file=='custom/lionix/query/install_scripts/install_routines.sql'){
+            if ($current_file=='custom/lionix/query/install_scripts/install_routines.sql') {
                 $db->query("call sp_install_routines");
                 installLog("sp_install_routines executed");
             }
@@ -167,12 +167,38 @@ function post_installModules()
     while (($row = $db->fetchByAssoc($result)) != null) {
         $query = "ALTER TABLE {$row['TABLE_NAME']} ADD lxcode_c int AUTO_INCREMENT NOT NULL UNIQUE";
         $db->query($query);
-        if(!empty($row['MODULE_NAME'])){
+        if (!empty($row['MODULE_NAME'])) {
             $query = "INSERT INTO `fields_meta_data` (`id`, `name`, `vname`, `custom_module`, `type`, `len`, `required`, `date_modified`, `deleted`, `audited`, `massupdate`, `duplicate_merge`, `reportable`, `importable`, `ext3`) VALUES ('{$row['MODULE_NAME']}lxcode_c', 'lxcode_c', 'LBL_LXCODE', '{$row['MODULE_NAME']}', 'int', '255', '0', utc_timestamp(), '0', '0', '0', '0', '1', 'false', '1')";
             $db->query($query);
         }
     }
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
+    installLog('LionixCRM starting to add custom Logic Hooks ...');
+    $hooks= array(
+        // Opportunities
+        array(
+            'module'         => 'Opportunities',
+            'hook'           => 'before_save',
+            'order'          => 101,
+            'description'    => 'saveFetchedRowBS',
+            'file'           => 'custom/modules/Opportunities/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXOpportunitiesBeforeAndAfterSaveMethods',
+            'function'       => 'saveFetchedRowBS',
+        ),
+        array(
+            'module'         => 'Opportunities',
+            'hook'           => 'after_save',
+            'order'          => 101,
+            'description'    => 'setMainContactCAS',
+            'file'           => 'custom/modules/Opportunities/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXOpportunitiesBeforeAndAfterSaveMethods',
+            'function'       => 'setMainContactCAS',
+        ),
+    );
+    foreach ($hooks as $hook) {
+        check_logic_hook_file($hook['module'], $hook['hook'], array($hook['order'], $hook['description'],  $hook['file'], $hook['class'], $hook['function']));
+    }
+    installLog('...LionixCRM added custom Logic Hooks successfully.');
     // LionixCRM configuration values
     // TODO: Ask values on installation
     installLog('LionixCRM starting to add sugar_config values...');

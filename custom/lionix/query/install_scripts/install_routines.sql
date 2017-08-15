@@ -193,11 +193,15 @@ VALUES ('1','daily-email-bday-congrats-contacts','daily_email_birthday_congratul
 
 ###### custom fields on opportunities module
 ALTER TABLE opportunities_cstm add COLUMN dateclosednotified_c bool DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN maincontact_c varchar(100) NULL;
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesdateclosednotified_c', 'dateclosednotified_c', 'LBL_DATECLOSEDNOTIFIED', 'LionixCRM', 'LionixCRM', 'Opportunities', 'bool', 255, 0, '0', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
 
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesmaincontact_c', 'maincontact_c', 'LBL_MAINCONTACT', '', '', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp, 0, 1, 0, 0, 1, 'false', 'lx_empty_list', '', '', '');
 
 ###### custom fields on contacts module
 ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL;
