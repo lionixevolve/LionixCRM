@@ -57,6 +57,11 @@ array (
         array (
           0 => 
           array (
+            'name' => 'amount',
+            'label' => '{$MOD.LBL_AMOUNT} ({$CURRENCY})',
+          ),
+          1 => 
+          array (
             'name' => 'maincontact_c',
             'studio' => 'visible',
             'label' => 'LBL_MAINCONTACT',
@@ -64,29 +69,20 @@ array (
         ),
         2 => 
         array (
-          0 => 
-          array (
-            'name' => 'amount',
-            'label' => '{$MOD.LBL_AMOUNT} ({$CURRENCY})',
-          ),
+          0 => 'sales_stage',
           1 => 'date_closed',
         ),
         3 => 
         array (
-          0 => 'sales_stage',
-          1 => 'opportunity_type',
-        ),
-        4 => 
-        array (
           0 => 'probability',
           1 => 'lead_source',
         ),
-        5 => 
+        4 => 
         array (
           0 => 'next_step',
           1 => 'campaign_name',
         ),
-        6 => 
+        5 => 
         array (
           0 => 
           array (
@@ -94,7 +90,7 @@ array (
             'nl2br' => true,
           ),
         ),
-        7 => 
+        6 => 
         array (
           0 => 
           array (

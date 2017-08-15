@@ -53,6 +53,10 @@ array (
         array (
           0 => 
           array (
+            'name' => 'currency_id',
+          ),
+          1 => 
+          array (
             'name' => 'maincontact_c',
             'studio' => 'visible',
             'label' => 'LBL_MAINCONTACT',
@@ -60,31 +64,20 @@ array (
         ),
         2 => 
         array (
-          0 => 
-          array (
-            'name' => 'currency_id',
-          ),
-          1 => 
-          array (
-            'name' => 'opportunity_type',
-          ),
-        ),
-        3 => 
-        array (
           0 => 'amount',
           1 => 'date_closed',
         ),
-        4 => 
+        3 => 
         array (
           0 => 'next_step',
           1 => 'sales_stage',
         ),
-        5 => 
+        4 => 
         array (
           0 => 'lead_source',
           1 => 'probability',
         ),
-        6 => 
+        5 => 
         array (
           0 => 
           array (
