@@ -4,6 +4,40 @@ $app_list_strings['moduleListSingular']['AOS_Quotes'] = 'Cotización';
 $GLOBALS['app_list_strings']['lx_empty_list'] = array(
   '' => '',
 );
+// keys must be the same as sales_stage_dom
+$GLOBALS['app_list_strings']['sales_probability_dom'] = array(
+    'Prospecting' => '10',
+    'Qualification' => '20',
+    'Needs Analysis' => '25',
+    'Value Proposition' => '30',
+    'Id. Decision Makers' => '40',
+    'Perception Analysis' => '50',
+    'Proposal/Price Quote' => '65',
+    'Negotiation/Review' => '80',
+    'Closed Won' => '100',
+    'Closed Lost' => '0',
+);
+$GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'] = array(
+    'Prospecting' => 'Prospecting',
+    'Qualification' => 'Qualification',
+    'Needs Analysis' => 'Needs Analysis',
+    'Value Proposition' => 'Value Proposition',
+    'Id. Decision Makers' => 'Identifying Decision Makers',
+    'Perception Analysis' => 'Perception Analysis',
+    'Proposal/Price Quote' => 'Proposal/Price Quote',
+    'Negotiation/Review' => 'Negotiation/Review',
+    'Closed Won' => 'Closed Won',
+    'Closed Lost' => 'Closed Lost',
+);
+$GLOBALS['app_list_strings']['sales_stage_dom_goods'] = array(
+);
+$GLOBALS['app_list_strings']['sales_stage_dom_services'] = array(
+);
+$GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
+    $GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'],
+    $GLOBALS['app_list_strings']['sales_stage_dom_goods'],
+    $GLOBALS['app_list_strings']['sales_stage_dom_services']
+);
 $GLOBALS['app_list_strings']['invoice_status_dom']=array (
     'Paid' => 'Pagada',
     'Unpaid' => 'No Pagada',
