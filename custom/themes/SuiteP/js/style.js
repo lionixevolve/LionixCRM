@@ -23,6 +23,7 @@ script.onload = function() {
                     load(++i);
                 });
             } else {
+                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');

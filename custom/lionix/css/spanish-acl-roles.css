@@ -1,0 +1,39 @@
+.aclAll, .aclTodo {
+  font-weight: bold;
+  color: #008000;
+}
+
+.aclOwner, .aclPropietario {
+  font-weight: bold;
+  color: #000000;
+}
+
+.aclNone, .aclNada {
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.aclEnabled, .aclHabilitado {
+  font-weight: bold;
+  color: #008000;
+}
+
+.aclDisabled, .aclDeshabilitado {
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.aclAdmin {
+  font-weight: bold;
+  color: #0000FF;
+}
+
+.aclNormal {
+  font-weight: bold;
+  color: #008000;
+}
+
+.aclGroup, .aclGrupo {
+  font-weight: bold;
+  color: #0000A0;
+}
