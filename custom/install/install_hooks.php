@@ -17,6 +17,49 @@ function post_installModules()
     $database = $sugar_config['dbconfig']['db_name'];
     // acl_roles
     installLog('LionixCRM starting to add roles...');
+    // All posible values for each action
+    // access actions (only 3)
+    // access enable       89
+    // access disabled    -98
+    // access not set       0
+    // delete actions (5)
+    // delete all          90
+    // delete group        80
+    // delete owner        75
+    // delete not set       0
+    // delete none        -99
+    // edit actions (5)
+    // edit all            90
+    // edit group          80
+    // edit owner          75
+    // edit not set         0
+    // edit none          -99
+    // export actions (5)
+    // export all          90
+    // export group        80
+    // export owner        75
+    // export not set       0
+    // export none        -99
+    // import actions (only 3)
+    // import all          90
+    // import not set       0
+    // import none        -99
+    // list actions (5)
+    // list all            90
+    // list group          80
+    // list owner          75
+    // list not set         0
+    // list none          -99
+    // massupdate actions (only 3)
+    // massupdate all      90
+    // massupdate not set   0
+    // massupdate none    -99
+    // list actions (5)
+    // list all            90
+    // list group          80
+    // list owner          75
+    // list not set         0
+    // list none          -99
     $roles = array(
                 array('id' => 'none-role', 'name' => 'None', 'description' => 'Read only access to all data.'),
                 array('id' => 'all-role', 'name' => 'All', 'description' => 'Full access to all data.'),
