@@ -6,37 +6,40 @@ $GLOBALS['app_list_strings']['lx_empty_list'] = array(
 );
 // keys must be the same as sales_stage_dom
 $GLOBALS['app_list_strings']['sales_probability_dom'] = array(
-    'Prospecting' => '10',
-    'Qualification' => '20',
-    'Needs Analysis' => '25',
-    'Value Proposition' => '30',
-    'Id. Decision Makers' => '40',
-    'Perception Analysis' => '50',
-    'Proposal/Price Quote' => '65',
-    'Negotiation/Review' => '80',
-    'Closed Won' => '100',
+    'Future' => '0',
+    'Prospecting' => '5',
+    'Quoting' => '50',
+    'Quoted' => '75',
     'Closed Lost' => '0',
+    'Closed Won' => '90',
+    'Invoiced' => '95',
+    'Paid' => '100',
 );
 $GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'] = array(
-    'Prospecting' => 'Prospecto',
-    'Qualification' => 'Calificación',
-    'Needs Analysis' => 'Necesita Análisis',
-    'Value Proposition' => 'Propuesta de Valor',
-    'Id. Decision Makers' => 'Identificar a los tomadores de decisión',
-    'Perception Analysis' => 'Análisis de Percepción',
-    'Proposal/Price Quote' => 'Propuesta/Presupuesto',
-    'Negotiation/Review' => 'Negociación/Revisión',
-    'Closed Won' => 'Ganado',
-    'Closed Lost' => 'Perdido',
+    // legacy or discontinued values
 );
-$GLOBALS['app_list_strings']['sales_stage_dom_goods'] = array(
+$GLOBALS['app_list_strings']['sales_stage_dom_b2c_goods'] = array(
 );
-$GLOBALS['app_list_strings']['sales_stage_dom_services'] = array(
+$GLOBALS['app_list_strings']['sales_stage_dom_b2c_services'] = array(
+);
+$GLOBALS['app_list_strings']['sales_stage_dom_b2b_goods'] = array(
+);
+$GLOBALS['app_list_strings']['sales_stage_dom_b2b_services'] = array(
+    'Future' => 'Future',
+    'Prospecting' => 'Prospecting',
+    'Quoting' => 'Quoting',
+    'Quoted' => 'Quoted',
+    'Closed Lost' => 'Closed Lost',
+    'Closed Won' => 'Closed Won',
+    'Invoiced' => 'Invoiced',
+    'Paid' => 'Paid',
 );
 $GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
     $GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'],
-    $GLOBALS['app_list_strings']['sales_stage_dom_goods'],
-    $GLOBALS['app_list_strings']['sales_stage_dom_services']
+    $GLOBALS['app_list_strings']['sales_stage_dom_b2b_goods'],
+    $GLOBALS['app_list_strings']['sales_stage_dom_b2b_services']
+    $GLOBALS['app_list_strings']['sales_stage_dom_b2c_goods'],
+    $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services']
 );
 $GLOBALS['app_list_strings']['invoice_status_dom']=array (
     'Paid' => 'Pagada',
