@@ -39,7 +39,7 @@ $GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
     $GLOBALS['app_list_strings']['sales_stage_dom_b2b_goods'],
     $GLOBALS['app_list_strings']['sales_stage_dom_b2b_services'],
     $GLOBALS['app_list_strings']['sales_stage_dom_b2c_goods'],
-    $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services'],
+    $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services']
 );
 $GLOBALS['app_list_strings']['invoice_status_dom']=array (
     'Paid' => 'Pagada',
