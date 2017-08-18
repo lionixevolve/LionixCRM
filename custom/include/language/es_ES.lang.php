@@ -25,14 +25,14 @@ $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services'] = array(
 $GLOBALS['app_list_strings']['sales_stage_dom_b2b_goods'] = array(
 );
 $GLOBALS['app_list_strings']['sales_stage_dom_b2b_services'] = array(
-    'Future' => 'Future',
-    'Prospecting' => 'Prospecting',
-    'Quoting' => 'Quoting',
-    'Quoted' => 'Quoted',
-    'Closed Lost' => 'Closed Lost',
-    'Closed Won' => 'Closed Won',
-    'Invoiced' => 'Invoiced',
-    'Paid' => 'Paid',
+    'Future' => 'A Futuro',
+    'Prospecting' => 'Prospecto',
+    'Quoting' => 'Cotizando',
+    'Quoted' => 'Cotizado',
+    'Closed Lost' => 'Perdido',
+    'Closed Won' => 'Ganado',
+    'Invoiced' => 'Facturado',
+    'Paid' => 'Pagado',
 );
 $GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
     $GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'],
