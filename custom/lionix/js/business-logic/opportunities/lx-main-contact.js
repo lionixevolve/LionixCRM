@@ -104,14 +104,14 @@ function getLxOpportunityMainContactDropdown(opportunityId, currentValue, accoun
 function getnewMainContactCFields() {
     var form_name = 'EditView';
     if ($("#maincontact_c").val() == 'new') {
-        $("#maincontactfirstname_c").parent('div').parent('div').show();
         $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
             switch ($("#maincontactfirstname_c").val().toUpperCase()) {
-                case "new":
+                case "NEW":
                     $("#maincontactfirstname_c").val('');
                     break;
             }
         });
+        $("#maincontactfirstname_c").parent('div').parent('div').show();
         $("#maincontactlastname_c").parent('div').parent('div').show();
         $("#maincontactlastname2_c").parent('div').parent('div').show();
         $("#maincontactphonework_c").parent('div').parent('div').show();
