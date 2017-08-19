@@ -4,4 +4,5 @@ $mod_strings = array(
   'LBL_LXCODE' => 'LxCode',
   'LBL_DATECLOSEDNOTIFIED' => 'dateclosednotified',
   'LBL_MAINCONTACT' => 'Contacto principal',
+  'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contacts',
 );
