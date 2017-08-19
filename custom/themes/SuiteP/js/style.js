@@ -8,6 +8,7 @@ script.onload = function() {
         //SuiteCRM has jQuery preloaded don't include it.
         scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
         scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
+        scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
         scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
         scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");

@@ -111,13 +111,13 @@ function getnewMainContactCFields() {
                     break;
             }
         });
-        $("#maincontactfirstname_c").parent('div').parent('div').show();
-        $("#maincontactlastname_c").parent('div').parent('div').show();
-        $("#maincontactlastname2_c").parent('div').parent('div').show();
-        $("#maincontactphonework_c").parent('div').parent('div').show();
-        $("#maincontactemailaddress_c").parent('div').parent('div').show();
-        $("#maincontacttitle_c").parent('div').parent('div').show();
-        $("#maincontactcedula_c").parent('div').parent('div').show();
+        lxShowCRMfield("maincontactfirstname_c",true);
+        lxShowCRMfield("maincontactlastname_c",true);
+        lxShowCRMfield("maincontactlastname2_c",true);
+        lxShowCRMfield("maincontactphonework_c",true);
+        lxShowCRMfield("maincontactemailaddress_c",true);
+        lxShowCRMfield("maincontacttitle_c",true);
+        lxShowCRMfield("maincontactcedula_c",true);
         lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', true);
@@ -134,13 +134,14 @@ function getnewMainContactCFields() {
         lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
         lxValidateCRMfield(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
         $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
-        $("#maincontactfirstname_c").parent('div').parent('div').hide();
-        $("#maincontactlastname_c").parent('div').parent('div').hide();
-        $("#maincontactlastname2_c").parent('div').parent('div').hide();
-        $("#maincontactphonework_c").parent('div').parent('div').hide();
-        $("#maincontactemailaddress_c").parent('div').parent('div').hide();
-        $("#maincontacttitle_c").parent('div').parent('div').hide();
-        $("#maincontactcedula_c").parent('div').parent('div').hide();
+        lxShowCRMfield("maincontactfirstname_c",false);
+        lxShowCRMfield("maincontactlastname_c",false);
+        lxShowCRMfield("maincontactlastname2_c",false);
+        lxShowCRMfield("maincontactphonework_c",false);
+        lxShowCRMfield("maincontactemailaddress_c",false);
+        lxShowCRMfield("maincontacttitle_c",false);
+        lxShowCRMfield("maincontactcedula_c",false);
+
     }
 }
 
