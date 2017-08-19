@@ -135,6 +135,12 @@ class LxAJAX
         }
     }
 
+    public function getConfigBusinessType()
+    {
+        global $sugar_config;
+        return $sugar_config['lionixcrm']['business_type'];
+    }
+
     public function getOpportunityMainContactList()
     {
         $currentValue = null;
