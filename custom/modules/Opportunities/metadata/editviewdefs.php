@@ -1,19 +1,19 @@
 <?php
-$viewdefs ['Opportunities'] = 
+$viewdefs ['Opportunities'] =
 array (
-  'EditView' => 
+  'EditView' =>
   array (
-    'templateMeta' => 
+    'templateMeta' =>
     array (
       'maxColumns' => '2',
-      'widths' => 
+      'widths' =>
       array (
-        0 => 
+        0 =>
         array (
           'label' => '10',
           'field' => '30',
         ),
-        1 => 
+        1 =>
         array (
           'label' => '10',
           'field' => '30',
@@ -21,126 +21,134 @@ array (
       ),
       'javascript' => '{$PROBABILITY_SCRIPT}',
       'useTabs' => false,
-      'tabDefs' => 
+      'tabDefs' =>
       array (
-        'DEFAULT' => 
+        'DEFAULT' =>
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_PANEL_ASSIGNMENT' => 
+        'LBL_PANEL_ASSIGNMENT' =>
         array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
       ),
     ),
-    'panels' => 
+    'panels' =>
     array (
-      'default' => 
+      'default' =>
       array (
-        0 => 
+        0 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'name',
           ),
           1 => 'account_name',
         ),
-        1 => 
+        1 =>
         array (
           0 => 'sales_stage',
           1 => 'probability',
         ),
-        2 => 
+        2 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'currency_id',
             'label' => 'LBL_CURRENCY',
           ),
-          1 => 
+          1 =>
           array (
             'name' => 'maincontact_c',
             'studio' => 'visible',
             'label' => 'LBL_MAINCONTACT',
           ),
         ),
-        3 => 
+        3 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontactfirstname_c',
             'label' => 'LBL_MAINCONTACTFIRSTNAME',
           ),
         ),
-        4 => 
+        4 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontactlastname_c',
             'label' => 'LBL_MAINCONTACTLASTNAME',
           ),
         ),
-        5 => 
+        5 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontactlastname2_c',
             'label' => 'LBL_MAINCONTACTLASTNAME2',
           ),
         ),
-        6 => 
+        6 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontactphonework_c',
             'label' => 'LBL_MAINCONTACTPHONEWORK',
           ),
         ),
-        7 => 
+        7 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontactemailaddress_c',
             'label' => 'LBL_MAINCONTACTEMAILADDRESS',
           ),
         ),
-        8 => 
+        8 =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'maincontacttitle_c',
             'label' => 'LBL_MAINCONTACTTITLE',
           ),
         ),
-        9 => 
+        9 =>
         array (
-          0 => 
+          0 =>
+          array (
+            'name' => 'maincontactcedula_c',
+            'label' => 'LBL_MAINCONTACTCEDULA',
+          ),
+        ),
+        10 =>
+        array (
+          0 =>
           array (
             'name' => 'amount',
           ),
-          1 => 
+          1 =>
           array (
             'name' => 'date_closed',
           ),
         ),
-        10 => 
+        11 =>
         array (
           0 => 'campaign_name',
         ),
-        11 => 
+        12 =>
         array (
           0 => 'next_step',
         ),
-        12 => 
+        13 =>
         array (
           0 => 'description',
         ),
       ),
-      'LBL_PANEL_ASSIGNMENT' => 
+      'LBL_PANEL_ASSIGNMENT' =>
       array (
-        0 => 
+        0 =>
         array (
           0 => 'assigned_user_name',
         ),
@@ -150,14 +158,14 @@ array (
 );
 $viewdefs['Opportunities']['EditView']['templateMeta'] = array (
   'maxColumns' => '2',
-  'widths' => 
+  'widths' =>
   array (
-    0 => 
+    0 =>
     array (
       'label' => '10',
       'field' => '30',
     ),
-    1 => 
+    1 =>
     array (
       'label' => '10',
       'field' => '30',
