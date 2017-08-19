@@ -3,5 +3,5 @@
 $mod_strings = array (
   'LBL_AUTOFILL' => 'Autofill',
   'LBL_AUTOCLEAN' => 'Autoclean',
-  'LBL_LXCODE' => 'Code',
+  'LBL_LXCODE' => 'LxCode',
 );

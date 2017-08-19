@@ -3,5 +3,5 @@
 $mod_strings = array (
   'LBL_EMAILMANER' => 'EmailManER',
   'LBL_CLEARCAMPLOGDAILY' => 'Clear Campaign Log Daily',
-  'LBL_LXCODE' => 'Code',
+  'LBL_LXCODE' => 'LxCode',
 );
