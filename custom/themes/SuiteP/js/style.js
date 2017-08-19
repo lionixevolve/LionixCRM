@@ -15,6 +15,7 @@ script.onload = function() {
         scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
         scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
         scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
+        scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
         scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
         scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 
