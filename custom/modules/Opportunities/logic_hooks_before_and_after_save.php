@@ -66,6 +66,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
             $newContact->phone_work = $bean->maincontactphonework_c;
             $newContact->email1 = $bean->maincontactemailaddress_c;
             $newContact->title = $bean->maincontacttitle_c;
+            $newContact->cedula_c = $bean->maincontactcedula_c;
             $newContact->assigned_user_id = $bean->created_by;
             $newContact->save();
             $bean->maincontact_c = $newContact->id;
@@ -76,7 +77,9 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                 maincontactlastname_c = null,
                 maincontactlastname2_c = null,
                 maincontactphonework_c = null,
-                maincontactemailaddress_c = null
+                maincontactemailaddress_c = null,
+                maincontacttitle_c = null,
+                maincontactcedula_c = null
                 where id = '{$bean->id}'
             ";
             $bean->db->query($query);

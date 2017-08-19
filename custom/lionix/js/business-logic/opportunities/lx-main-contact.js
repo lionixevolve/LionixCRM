@@ -117,12 +117,14 @@ function getnewMainContactCFields() {
         $("#maincontactphonework_c").parent('div').parent('div').show();
         $("#maincontactemailaddress_c").parent('div').parent('div').show();
         $("#maincontacttitle_c").parent('div').parent('div').show();
+        $("#maincontactcedula_c").parent('div').parent('div').show();
         lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
     } else {
         lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', false);
         lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', false);
@@ -130,6 +132,7 @@ function getnewMainContactCFields() {
         lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', false);
         lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', false);
         lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
         $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
         $("#maincontactfirstname_c").parent('div').parent('div').hide();
         $("#maincontactlastname_c").parent('div').parent('div').hide();
@@ -137,6 +140,7 @@ function getnewMainContactCFields() {
         $("#maincontactphonework_c").parent('div').parent('div').hide();
         $("#maincontactemailaddress_c").parent('div').parent('div').hide();
         $("#maincontacttitle_c").parent('div').parent('div').hide();
+        $("#maincontactcedula_c").parent('div').parent('div').hide();
     }
 }
 
