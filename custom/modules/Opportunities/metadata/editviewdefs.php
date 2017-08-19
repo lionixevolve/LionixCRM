@@ -49,6 +49,11 @@ array (
         ),
         1 => 
         array (
+          0 => 'sales_stage',
+          1 => 'probability',
+        ),
+        2 => 
+        array (
           0 => 
           array (
             'name' => 'currency_id',
@@ -61,7 +66,55 @@ array (
             'label' => 'LBL_MAINCONTACT',
           ),
         ),
-        2 => 
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactfirstname_c',
+            'label' => 'LBL_MAINCONTACTFIRSTNAME',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactlastname_c',
+            'label' => 'LBL_MAINCONTACTLASTNAME',
+          ),
+        ),
+        5 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactlastname2_c',
+            'label' => 'LBL_MAINCONTACTLASTNAME2',
+          ),
+        ),
+        6 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactphonework_c',
+            'label' => 'LBL_MAINCONTACTPHONEWORK',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactemailaddress_c',
+            'label' => 'LBL_MAINCONTACTEMAILADDRESS',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontacttitle_c',
+            'label' => 'LBL_MAINCONTACTTITLE',
+          ),
+        ),
+        9 => 
         array (
           0 => 
           array (
@@ -72,21 +125,15 @@ array (
             'name' => 'date_closed',
           ),
         ),
-        3 => 
+        10 => 
         array (
-          0 => 'sales_stage',
-          1 => 'lead_source',
+          0 => 'campaign_name',
         ),
-        4 => 
-        array (
-          0 => 'probability',
-          1 => 'campaign_name',
-        ),
-        5 => 
+        11 => 
         array (
           0 => 'next_step',
         ),
-        6 => 
+        12 => 
         array (
           0 => 'description',
         ),

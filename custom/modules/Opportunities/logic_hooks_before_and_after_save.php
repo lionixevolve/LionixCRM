@@ -49,6 +49,39 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setMainContactCAS(&$bean, $event, $arguments)
     {
         $bean->custom_fields->retrieve();
+
+        if ($bean->maincontact_c=='new') {
+            if (($sugar_config['lionixcrm']['bussines_type']=='b2c') && empty($bean->account_id)) {
+                $newAccount = BeanFactory::newBean('Accounts');
+                $newAccount->name = "{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}";
+                $newAccount->save();
+                $bean->account_id = $newAccount->id;
+            }
+
+            $newContact = BeanFactory::newBean('Contacts');
+            $newContact->account_id = $bean->account_id;
+            $newContact->first_name = $bean->maincontactfirstname_c;
+            $newContact->last_name = $bean->maincontactlastname_c;
+            $newContact->lastname2_c = $bean->maincontactlastname2_c;
+            $newContact->phone_work = $bean->maincontactphonework_c;
+            $newContact->email1 = $bean->maincontactemailaddress_c;
+            $newContact->title = $bean->maincontacttitle_c;
+            $newContact->assigned_user_id = $bean->created_by;
+            $newContact->save();
+            $bean->maincontact_c = $newContact->id;
+            $query = "
+                update opportunities_cstm
+                set maincontact_c = '{$newContact->id}',
+                maincontactfirstname_c = null,
+                maincontactlastname_c = null,
+                maincontactlastname2_c = null,
+                maincontactphonework_c = null,
+                maincontactemailaddress_c = null
+                where id = '{$bean->id}'
+            ";
+            $bean->db->query($query);
+        }
+
         $query = "
             select count(1)
             from opportunities_contacts oc
@@ -59,8 +92,8 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         $qty = $bean->db->getOne($query);
         if (empty($qty)) {
             $query = "
-                insert into opportunities_contacts (id,contact_id,opportunity_id,date_modified,deleted)
-                values (uuid(),'{$bean->maincontact_c}','{$bean->id}',utc_timestamp(),0)
+                insert into opportunities_contacts (id,contact_id,opportunity_id,contact_role,date_modified,deleted)
+                values (uuid(),'{$bean->maincontact_c}','{$bean->id}','Primary Decision Maker',utc_timestamp(),0)
             ";
             $bean->db->query($query);
         }

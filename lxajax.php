@@ -188,6 +188,8 @@ class LxAJAX
             //$list[] = array('value' => $value, 'name' => $name, 'default' => $default, 'selected' => $selected); //this is the below format example
             $list[] = $row;
         }
+        $newSelected = ($this->data['currentValue'] == 'new') ? true : false;
+        $list[] = array('value' => 'new', 'name' => 'Nuevo Contacto', 'selected' => $newSelected);
 
         return json_encode($list);
     }

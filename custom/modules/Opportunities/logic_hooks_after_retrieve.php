@@ -7,8 +7,9 @@ class LXOpportunitiesAfterRetrieveMethods
         $bean->custom_fields->retrieve();
         if ($_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
             $query = "
-                select trim(concat(ifnull(first_name,''), ' ',ifnull(last_name,''))) AS 'maincontact_c'
+                select trim(concat(ifnull(first_name,''), ' ',ifnull(last_name,''), ' ',ifnull(lastname2_c,''))) AS 'maincontact_c'
                 from contacts
+                LEFT JOIN contacts_cstm ON id = id_c
                 where id = '{$bean->maincontact_c}'
             ";
             $results = $bean->db->query($query);
