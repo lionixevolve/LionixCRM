@@ -16,12 +16,14 @@
                         console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', '!function()', 'initial');
                         console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
                         console.groupEnd();
-                        var form_name = 'EditView';
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                         getLxOpportunityMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
-                        $('#account_name').on("focusout.lx-main-contact-c", function() {
+                        $('#account_name').on("focusout.account-name", function() {
                             getLxOpportunityMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
+                        });
+                        $('#maincontact_c').on("change.lx-main-contact-c", function() {
+                            getnewMainContactCFields();
                         });
                     }
                 }
@@ -96,5 +98,46 @@ function getLxOpportunityMainContactDropdown(opportunityId, currentValue, accoun
         // }, // end complete
         datatype: "text"
     }); // end ajax
+    getnewMainContactCFields();
 } // end function
+
+function getnewMainContactCFields() {
+    var form_name = 'EditView';
+    if ($("#maincontact_c").val() == 'new') {
+        $("#maincontactfirstname_c").parent('div').parent('div').show();
+        $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
+            switch ($("#maincontactfirstname_c").val().toUpperCase()) {
+                case "new":
+                    $("#maincontactfirstname_c").val('');
+                    break;
+            }
+        });
+        $("#maincontactlastname_c").parent('div').parent('div').show();
+        $("#maincontactlastname2_c").parent('div').parent('div').show();
+        $("#maincontactphonework_c").parent('div').parent('div').show();
+        $("#maincontactemailaddress_c").parent('div').parent('div').show();
+        $("#maincontacttitle_c").parent('div').parent('div').show();
+        lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
+    } else {
+        lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', false);
+        lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
+        $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
+        $("#maincontactfirstname_c").parent('div').parent('div').hide();
+        $("#maincontactlastname_c").parent('div').parent('div').hide();
+        $("#maincontactlastname2_c").parent('div').parent('div').hide();
+        $("#maincontactphonework_c").parent('div').parent('div').hide();
+        $("#maincontactemailaddress_c").parent('div').parent('div').hide();
+        $("#maincontacttitle_c").parent('div').parent('div').hide();
+    }
+}
+
 //eof
