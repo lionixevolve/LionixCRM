@@ -286,12 +286,12 @@ function post_installModules()
         ),
         array(
             'module'         => 'Opportunities',
-            'hook'           => 'before_save',
+            'hook'           => 'after_save',
             'order'          => 101,
-            'description'    => 'setMainContactCBS',
+            'description'    => 'setMainContactCAS',
             'file'           => 'custom/modules/Opportunities/logic_hooks_before_and_after_save.php',
             'class'          => 'LXOpportunitiesBeforeAndAfterSaveMethods',
-            'function'       => 'setMainContactCBS',
+            'function'       => 'setMainContactCAS',
         ),
         array(
             'module'         => 'Opportunities',

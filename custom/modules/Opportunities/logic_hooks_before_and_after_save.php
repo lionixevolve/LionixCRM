@@ -46,7 +46,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         }
     }
 
-    public function setMainContactCBS(&$bean, $event, $arguments)
+    public function setMainContactCAS(&$bean, $event, $arguments)
     {
         global $sugar_config;
         $bean->custom_fields->retrieve();
