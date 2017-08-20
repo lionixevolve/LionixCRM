@@ -83,7 +83,7 @@ function getLxOpportunityAccountNameByBusinessType(opportunityId, currentValue, 
                     lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', false);
                     $('#maincontact_c').on("change.lx-hide-account-name", function() {
                         if ($("#maincontact_c").val() == 'new') {
-                            $('#account_name').val('');
+                            $('#account_id').val('');
                             lxShowCRMfield("account_name", false);
                         } else {
                             lxShowCRMfield("account_name", true);
