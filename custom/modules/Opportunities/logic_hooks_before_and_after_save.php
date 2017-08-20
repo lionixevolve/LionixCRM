@@ -83,7 +83,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                 maincontactemailaddress_c = null,
                 maincontacttitle_c = null,
                 maincontactcedula_c = null
-                where id = '{$bean->id}'
+                where id_c = '{$bean->id}'
             ";
             $bean->db->query($query);
         }
