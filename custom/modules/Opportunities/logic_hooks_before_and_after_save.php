@@ -46,17 +46,17 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         }
     }
 
-    public function setMainContactCAS(&$bean, $event, $arguments)
+    public function setMainContactCBS(&$bean, $event, $arguments)
     {
         global $sugar_config;
         $bean->custom_fields->retrieve();
 
         if ($bean->maincontact_c=='new') {
-            if (($sugar_config['lionixcrm']['business_type']=='b2c') && empty($bean->account_id)) {
+            if (($sugar_config['lionixcrm']['business_type']=='b2c')) {
                 $newAccount = BeanFactory::newBean('Accounts');
                 $newAccount->name = "{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}";
                 $newAccount->tipocedula_c = 'NACIONAL';
-                $newContact->cedula_c = $bean->maincontactcedula_c;
+                $newAccount->cedula_c = $bean->maincontactcedula_c;
                 $newAccount->save();
                 $bean->account_id = $newAccount->id;
             }

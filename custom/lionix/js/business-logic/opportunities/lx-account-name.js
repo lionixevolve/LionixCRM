@@ -77,9 +77,25 @@ function getLxOpportunityAccountNameByBusinessType(opportunityId, currentValue, 
             console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'getLxOpportunityAccountNameByBusinessType()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
-            if (data == 'b2c') {
-                lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', false);
+
+            switch (data) {
+                case 'b2c':
+                    lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', false);
+                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
+                        if ($("#maincontact_c").val() == 'new') {
+                            $('#account_name').val('');
+                            lxShowCRMfield("account_name", false);
+                        } else {
+                            lxShowCRMfield("account_name", true);
+                        }
+                    });
+                    break;
+                case 'b2b':
+                    lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', true);
+                    $('#maincontact_c').off("change.lx-hide-account-name");
+                    break;
             }
+
             console.groupEnd();
         }, // end success
         // error is a function to be called if the request fails.
