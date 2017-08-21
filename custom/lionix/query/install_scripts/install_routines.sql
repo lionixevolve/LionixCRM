@@ -201,6 +201,11 @@ ALTER TABLE opportunities_cstm add COLUMN maincontactphonework_c varchar(100) NU
 ALTER TABLE opportunities_cstm add COLUMN maincontactemailaddress_c varchar(255) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontacttitle_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactcedula_c varchar(255) NULL;
+ALTER TABLE opportunities_cstm add COLUMN dateinvoiced_c date  NULL ;
+ALTER TABLE opportunities_cstm add COLUMN datepaid_c date  NULL ;
+ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100)  NULL ;
+ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100)  NULL ;
+ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100)  NULL ;
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
@@ -237,6 +242,26 @@ VALUES('Opportunitiesmaincontacttitle_c', 'maincontacttitle_c', 'LBL_MAINCONTACT
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesmaincontactcedula_c', 'maincontactcedula_c', 'LBL_MAINCONTACTCEDULA', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 255, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesdateinvoiced_c', 'dateinvoiced_c', 'LBL_DATEINVOICED', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesdatepaid_c', 'datepaid_c', 'LBL_DATEPAID', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesprevioussalesstage_c', 'previoussalesstage_c', 'LBL_PREVIOUSSALESSTAGE', '', '', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_dom', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiespreviousstatus_c', 'previousstatus_c', 'LBL_PREVIOUSSTATUS', '', '', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesstatus_c', 'status_c', 'LBL_STATUS', NULL, NULL, 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', NULL, NULL, NULL);
 
 ###### custom fields on contacts module
 ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL;

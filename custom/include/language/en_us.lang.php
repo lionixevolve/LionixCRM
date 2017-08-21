@@ -41,6 +41,24 @@ $GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
     $GLOBALS['app_list_strings']['sales_stage_dom_b2c_goods'],
     $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services']
 );
+$GLOBALS['app_list_strings']['sales_stage_status_list'] = array(
+    'Future_new' => 'Future New',
+    'Future_old' => 'Future Old',
+    'Prospecting_new' => 'Prospecting New',
+    'Prospecting_old' => 'Prospecting Old',
+    'Quoting_new' => 'Quoting New',
+    'Quoting_old' => 'Quoting Old',
+    'Quoted_new' => 'Quoted New',
+    'Quoted_old' => 'Quoted Old',
+    'Closed Lost_new' => 'Closed Lost New',
+    'Closed Lost_old' => 'Closed Lost Old',
+    'Closed Won_new' => 'Closed Won New',
+    'Closed Won_old' => 'Closed Won Old',
+    'Invoiced_new' => 'Invoiced New',
+    'Invoiced_old' => 'Invoiced Old',
+    'Paid_new' => 'Paid New',
+    'Paid_old' => 'Paid Old',
+);
 $GLOBALS['app_list_strings']['invoice_status_dom']=array (
     'Paid' => 'Pagada',
     'Unpaid' => 'No Pagada',
