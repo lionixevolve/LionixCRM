@@ -302,6 +302,25 @@ function post_installModules()
             'class'          => 'LXOpportunitiesAfterRetrieveMethods',
             'function'       => 'setMainContactC',
         ),
+        // AOS_Quotes
+        array(
+            'module'         => 'AOS_Quotes',
+            'hook'           => 'before_save',
+            'order'          => 101,
+            'description'    => 'saveFetchedRowBS',
+            'file'           => 'custom/modules/AOS_Quotes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXAOSQuotesBeforeAndAfterSaveMethods',
+            'function'       => 'saveFetchedRowBS',
+        ),
+        array(
+            'module'         => 'AOS_Quotes',
+            'hook'           => 'before_save',
+            'order'          => 102,
+            'description'    => 'setNumberBS',
+            'file'           => 'custom/modules/AOS_Quotes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXAOSQuotesBeforeAndAfterSaveMethods',
+            'function'       => 'setNumberBS',
+        ),
     );
     foreach ($hooks as $hook) {
         check_logic_hook_file($hook['module'], $hook['hook'], array($hook['order'], $hook['description'],  $hook['file'], $hook['class'], $hook['function']));
