@@ -256,7 +256,7 @@ function post_installModules()
     installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
         SELECT TABLE_NAME,
-               IF(TABLE_NAME LIKE '%_cstm',REPLACE(CONCAT(UPPER(MID(TABLE_NAME, 1, 1)),MID(REPLACE(TABLE_NAME, '_cstm', ''), 2)),'_lists','Lists'),'') AS 'MODULE_NAME'
+               IF(TABLE_NAME LIKE '%_cstm',REPLACE(REPLACE(REPLACE(CONCAT(UPPER(MID(TABLE_NAME, 1, 1)),MID(REPLACE(TABLE_NAME, '_cstm', ''), 2)),'_lists','Lists'),'Aos_i','AOS_I'),'Aos_q','AOS_Q'),'') AS 'MODULE_NAME'
         FROM information_schema.tables
         WHERE table_schema = '{$database}'
             AND (TABLE_NAME LIKE '%cstm'
