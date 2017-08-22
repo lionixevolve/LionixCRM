@@ -288,6 +288,26 @@ VALUES ('Accountstipocedula_c', 'tipocedula_c', 'LBL_TIPOCEDULA', 'LionixCRM', '
 INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4)
 VALUES ('Accountscedula_c', 'cedula_c', 'LBL_CEDULA', 'LionixCRM', 'LionixCRM', 'Accounts', 'varchar', 255, 0, '', utc_timestamp(), 0, 0, 0, 0,1,'true', '', '', '', '');
 
+###### custom fields on AOS modules
+CREATE TABLE aos_quotes_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE aos_quotes_cstm add COLUMN quotenumber_c varchar(50) NULL;
+
+CREATE TABLE aos_invoices_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE aos_invoices_cstm add COLUMN invoicenumber_c_c varchar(50) NULL;
+ALTER TABLE aos_invoices_cstm add COLUMN quotenumber_c varchar(50) NULL;
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('AOS_Quotesquotenumber_c', 'quotenumber_c', 'LBL_QUOTENUMBER', 'LionixCRM', 'LionixCRM', 'AOS_Quotes', 'varchar', 50, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('AOS_Invoicesinvoicenumber_c', 'invoicenumber_c', 'LBL_INVOICENUMBER', 'LionixCRM', 'LionixCRM', 'AOS_Invoices', 'varchar', 50, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('AOS_Invoicesquotenumber_c', 'quotenumber_c', 'LBL_QUOTENUMBER', 'LionixCRM', 'LionixCRM', 'AOS_Invoices', 'varchar', 50, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
+
 ###### custom schedulers
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
 VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '1980-02-01 06:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0');
