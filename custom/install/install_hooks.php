@@ -256,7 +256,7 @@ function post_installModules()
     installLog('LionixCRM starting to add lxcode_c to all custom and audit tables...');
     $query = "
         SELECT TABLE_NAME,
-               IF(TABLE_NAME LIKE '%_cstm',REPLACE(CONCAT(UPPER(MID(TABLE_NAME, 1, 1)),MID(REPLACE(TABLE_NAME, '_cstm', ''), 2)),'_lists','Lists'),'') AS 'MODULE_NAME'
+               IF(TABLE_NAME LIKE '%_cstm',REPLACE(REPLACE(REPLACE(CONCAT(UPPER(MID(TABLE_NAME, 1, 1)),MID(REPLACE(TABLE_NAME, '_cstm', ''), 2)),'_lists','Lists'),'Aos_i','AOS_I'),'Aos_q','AOS_Q'),'') AS 'MODULE_NAME'
         FROM information_schema.tables
         WHERE table_schema = '{$database}'
             AND (TABLE_NAME LIKE '%cstm'
@@ -302,6 +302,25 @@ function post_installModules()
             'class'          => 'LXOpportunitiesAfterRetrieveMethods',
             'function'       => 'setMainContactC',
         ),
+        // AOS_Quotes
+        array(
+            'module'         => 'AOS_Quotes',
+            'hook'           => 'before_save',
+            'order'          => 101,
+            'description'    => 'saveFetchedRowBS',
+            'file'           => 'custom/modules/AOS_Quotes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXAOSQuotesBeforeAndAfterSaveMethods',
+            'function'       => 'saveFetchedRowBS',
+        ),
+        array(
+            'module'         => 'AOS_Quotes',
+            'hook'           => 'before_save',
+            'order'          => 102,
+            'description'    => 'setNumberBS',
+            'file'           => 'custom/modules/AOS_Quotes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXAOSQuotesBeforeAndAfterSaveMethods',
+            'function'       => 'setNumberBS',
+        ),
     );
     foreach ($hooks as $hook) {
         check_logic_hook_file($hook['module'], $hook['hook'], array($hook['order'], $hook['description'],  $hook['file'], $hook['class'], $hook['function']));
@@ -325,6 +344,7 @@ function post_installModules()
     $sugar_config['default_currency_symbol'] = '₡';
     $sugar_config['disable_persistent_connections'] = false;
     $sugar_config['aos']['quotes']['initialNumber'] = date("Y").'000';
+    $sugar_config['aos']['invoices']['initialNumber'] = date("Y").'000';
     $sugar_config['cron']['allowed_cron_users'] = array(0 => 'qma',1 => 'www-data',2 => 'apache');
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
