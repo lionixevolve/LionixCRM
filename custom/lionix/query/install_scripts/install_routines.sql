@@ -201,11 +201,11 @@ ALTER TABLE opportunities_cstm add COLUMN maincontactphonework_c varchar(100) NU
 ALTER TABLE opportunities_cstm add COLUMN maincontactemailaddress_c varchar(255) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontacttitle_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactcedula_c varchar(255) NULL;
-ALTER TABLE opportunities_cstm add COLUMN dateinvoiced_c date  NULL ;
-ALTER TABLE opportunities_cstm add COLUMN datepaid_c date  NULL ;
-ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100)  NULL ;
-ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100)  NULL ;
-ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100)  NULL ;
+ALTER TABLE opportunities_cstm add COLUMN dateinvoiced_c date NULL ;
+ALTER TABLE opportunities_cstm add COLUMN datepaid_c date NULL ;
+ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100) NULL ;
+ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100) NULL ;
+ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100) NULL ;
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
@@ -293,7 +293,7 @@ CREATE TABLE aos_quotes_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARAC
 ALTER TABLE aos_quotes_cstm add COLUMN quotenumber_c varchar(50) NULL;
 
 CREATE TABLE aos_invoices_cstm (id_c char(36) NOT NULL, PRIMARY KEY (id_c)) CHARACTER SET utf8 COLLATE utf8_general_ci;
-ALTER TABLE aos_invoices_cstm add COLUMN invoicenumber_c_c varchar(50) NULL;
+ALTER TABLE aos_invoices_cstm add COLUMN invoicenumber_c varchar(50) NULL;
 ALTER TABLE aos_invoices_cstm add COLUMN quotenumber_c varchar(50) NULL;
 
 INSERT INTO fields_meta_data
