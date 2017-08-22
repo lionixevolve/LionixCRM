@@ -120,7 +120,7 @@ function getnewMainContactCFields() {
         lxShowCRMfield("maincontactcedula_c",true);
         lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', true);
+        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
         lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
         lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
