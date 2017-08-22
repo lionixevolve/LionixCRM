@@ -263,6 +263,32 @@ INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesstatus_c', 'status_c', 'LBL_STATUS', NULL, NULL, 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', NULL, NULL, NULL);
 
+###### custom fields on Opportunities module (elapsed time in mins)
+ALTER TABLE opportunities_cstm add COLUMN ssfutureinmins_c      int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssprospectinginmins_c int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssquotinginmins_c     int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssquotedinmins_c      int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssclosedlostinmins_c  int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssclosedwoninmins_c   int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN ssinvoicedinmins_c    int(255) DEFAULT '0' NULL;
+ALTER TABLE opportunities_cstm add COLUMN sspaidinmins_c        int(255) DEFAULT '0' NULL;
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssfutureinmins_c', 'ssfutureinmins_c', 'LBL_SSFUTUREINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssprospectinginmins_c', 'ssprospectinginmins_c', 'LBL_SSPROSPECTINGINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssquotinginmins_c', 'ssqussquotinginmins_c', 'LBL_SSQUOTINGINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssquotedinmins_c', 'ssquotedinmins_c', 'LBL_SSQUOTEDINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssclosedlostinmins_c', 'ssclosedlostinmins_c', 'LBL_SSCLOSEDLOSTINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssclosedwoninmins_c', 'ssclosedwoninmins_c', 'LBL_SSCLOSEDWONINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiesssinvoicedinmins_c', 'ssinvoicedinmins_c', 'LBL_SSINVOICEDINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
+INSERT INTO fields_meta_data (id,name,vname,comments,help,custom_module,type,len,required,default_value,date_modified,deleted,audited,massupdate,duplicate_merge,reportable,importable,ext1,ext2,ext3,ext4) VALUES ('Opportunitiessspaidinmins_c', 'sspaidinmins_c', 'LBL_SSPAIDINMINS', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'This time is calculated on schedulers with function WORKDAY_TIME_DIFF_HOLIDAY_TABLE', 'Opportunities', 'int', '255', '0', '0',utc_timestamp(),'0', '0', '0', '0', '1', 'false', '', '', '1', '');
+
 ###### custom fields on contacts module
 ALTER TABLE contacts_cstm add COLUMN soundex_c varchar(3) NULL;
 ALTER TABLE contacts_cstm add COLUMN cedula_c varchar(255) NULL;
