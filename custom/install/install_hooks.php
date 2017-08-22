@@ -343,8 +343,8 @@ function post_installModules()
     $sugar_config['default_currency_name'] = 'Colones';
     $sugar_config['default_currency_symbol'] = '₡';
     $sugar_config['disable_persistent_connections'] = false;
-    $sugar_config['aos']['quotes']['initialNumber'] = date("Y").'000';
-    $sugar_config['aos']['invoices']['initialNumber'] = date("Y").'000';
+    $sugar_config['aos']['quotes']['initialNumber'] = '1';
+    $sugar_config['aos']['invoices']['initialNumber'] = '1';
     $sugar_config['cron']['allowed_cron_users'] = array(0 => 'qma',1 => 'www-data',2 => 'apache');
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
