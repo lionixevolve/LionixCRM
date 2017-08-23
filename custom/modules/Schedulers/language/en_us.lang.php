@@ -5,4 +5,5 @@ $mod_strings ['LBL_UPDATEPROSPECTLISTPROSPECTS']='LionixCRM - Prospect List Pros
 $mod_strings ['LBL_EMAILMANER']='LionixCRM - EmailManEr';
 $mod_strings ['LBL_UPDATEELAPSEDTIMEINMINS']='LionixCRM - UpdateElapsedTimeInMins';
 $mod_strings ['LBL_UPDATEHOLIDAYS']='LionixCRM - updateHolidays';
+$mod_strings ['LBL_UPDATESALESSTAGESTIMEINMINS']='LionixCRM - updateSalesStagesTimeInMins';
 ?>
