@@ -192,7 +192,6 @@ function updateElapsedTimeInMins()
         ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime']}'
         ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend']}'
         ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend']}'
-
     )
     WHERE ca.deleted = 0
     AND state = 'open'
@@ -224,3 +223,50 @@ function updateHolidays()
 
     return true;
 }//updateHolidays
+
+function updateSalesStagesTimeInMins()
+{
+    global $db,$sugar_config;
+
+    $query = '
+    INSERT INTO opportunities_cstm (id_c)
+    SELECT id
+    FROM opportunities
+    WHERE deleted = 0
+        AND id NOT IN
+            (SELECT id_c
+             FROM opportunities_cstm)
+     ';
+    $db->query($query);
+
+    $exclude_fields = implode("','",$sugar_config['lionixcrm']['exclude_fields_for_update_sales_stages_time_in_mins']);
+    $query = "
+        SELECT REPLACE(REPLACE(REPLACE(name,'ss',''),'inmins_c',''),'closed','closed ') AS 'sales_stage', name AS 'field_name'
+        FROM fields_meta_data
+        WHERE custom_module = 'Opportunities'
+        AND name LIKE 'ss%inmins_c'
+        AND name NOT in ('{$exclude_fields}')
+    ";
+    $rs = $db->query($query);
+
+    while (($row = $db->fetchByAssoc($rs)) != null) {
+        $query = "
+            UPDATE opportunities o
+            LEFT JOIN opportunities_cstm oc ON o.id = oc.id_c
+            SET oc.{$row['field_name']} = `WORKDAY_TIME_DIFF_HOLIDAY_TABLE`(
+               '{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['country']}'
+               ,date_add(o.date_entered, interval {$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['utchourstimediff']} hour)
+               ,date_add(utc_timestamp(),interval {$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['utchourstimediff']} hour)
+               ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttime']}'
+               ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime']}'
+               ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend']}'
+               ,'{$sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend']}'
+            )
+            WHERE o.deleted = 0
+            AND sales_stage = '{$row['sales_stage']}'
+       ";
+        $db->query($query);
+    }
+
+    return true;
+}//updateelapsedTimeInMins
