@@ -8,6 +8,8 @@ $job_strings[] = 'emailManEr';
 //Jobs for cases module.
 $job_strings[] = 'updateElapsedTimeInMins';
 $job_strings[] = 'updateHolidays';
+//Jobs for opportunities module.
+$job_strings[] = 'updateSalesStagesTimeInMins';
 //Jobs required for LARGE reports tables.
 //none.
 
