@@ -55,6 +55,11 @@ array (
         ),
         1 => 
         array (
+          0 => 'sales_stage',
+          1 => 'probability',
+        ),
+        2 => 
+        array (
           0 => 
           array (
             'name' => 'amount',
@@ -68,21 +73,29 @@ array (
             'customCode' => '{$fields.maincontact_c.value}',
           ),
         ),
-        2 => 
-        array (
-          0 => 'sales_stage',
-          1 => 'probability',
-        ),
         3 => 
         array (
-          0 => 'campaign_name',
+          0 => 
+          array (
+            'name' => 'lxcode_c',
+            'label' => 'LBL_LXCODE',
+          ),
           1 => 'date_closed',
         ),
         4 => 
         array (
-          0 => 'next_step',
+          0 => 
+          array (
+            'name' => 'dnc_c',
+            'label' => 'LBL_DNC',
+          ),
+          1 => 'campaign_name',
         ),
         5 => 
+        array (
+          0 => 'next_step',
+        ),
+        6 => 
         array (
           0 => 
           array (
@@ -90,7 +103,7 @@ array (
             'nl2br' => true,
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
