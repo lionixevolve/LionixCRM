@@ -137,13 +137,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'dnc_c',
-            'label' => 'LBL_DNC',
+            'name' => 'campaign_name',
+            'label' => 'LBL_CAMPAIGN',
           ),
           1 => 
           array (
-            'name' => 'campaign_name',
-            'label' => 'LBL_CAMPAIGN',
+            'name' => 'dnc_c',
+            'label' => 'LBL_DNC',
           ),
         ),
         12 => 

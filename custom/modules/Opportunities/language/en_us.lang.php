@@ -7,6 +7,7 @@ $mod_strings = array (
   'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contacts',
   'LBL_DATEINVOICED' => 'Fecha Facturación',
   'LBL_DATEPAID' => 'Fecha Pagada',
+  'LBL_DNC' => 'Fecha Próximo contacto',
   'LBL_PREVIOUSSALESSTAGE' => 'Etapa de Ventas Previa',
   'LBL_STATUS' => 'Estado',
   'LBL_PREVIOUSSTATUS' => 'Estado Anterior',
