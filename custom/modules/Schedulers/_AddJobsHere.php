@@ -10,6 +10,7 @@ $job_strings[] = 'updateElapsedTimeInMins';
 $job_strings[] = 'updateHolidays';
 //Jobs for opportunities module.
 $job_strings[] = 'updateSalesStagesTimeInMins';
+$job_strings[] = 'updateDateClosedLostC';
 //Jobs required for LARGE reports tables.
 //none.
 
@@ -272,3 +273,17 @@ function updateSalesStagesTimeInMins()
 
     return true;
 }//updateelapsedTimeInMins
+
+function updateDateClosedLostC()
+{
+    $query = "
+        UPDATE opportunities o
+        LEFT JOIN opportunities_cstm oc ON o.id = oc.id_c
+        SET oc.previoussalesstage_c = o.sales_stage, oc.dateclosedlost_c = UTC_TIMESTAMP(), o.sales_stage = 'Closed Lost', oc.previousstatus_c = oc.status_c, oc.status_c = 'Closed Lost_new'
+        WHERE deleted = 0
+        AND date_closed < UTC_TIMESTAMP()
+        AND sales_stage NOT IN ('Closed Won','Closed Lost','Paid')
+    ";
+    $db->query($query);
+    return true;
+}
