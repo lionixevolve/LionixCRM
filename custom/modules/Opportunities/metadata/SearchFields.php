@@ -1,5 +1,5 @@
 <?php
-// created: 2017-08-21 15:09:41
+// created: 2017-08-24 13:26:53
 $searchFields['Opportunities'] = array (
   'name' => 
   array (
@@ -191,6 +191,24 @@ $searchFields['Opportunities'] = array (
     'is_date_field' => true,
   ),
   'end_range_datepaid' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'range_dnc' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'start_range_dnc' => 
+  array (
+    'query_type' => 'default',
+    'enable_range_search' => true,
+    'is_date_field' => true,
+  ),
+  'end_range_dnc' => 
   array (
     'query_type' => 'default',
     'enable_range_search' => true,
