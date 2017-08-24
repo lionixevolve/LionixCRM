@@ -1,8 +1,8 @@
 <?php
- // created: 2017-08-18 19:29:59
-$dictionary['Opportunity']['fields']['dnc_c']['display_default']='+1 week';
-$dictionary['Opportunity']['fields']['dnc_c']['inline_edit']=true;
-$dictionary['Opportunity']['fields']['dnc_c']['comments']='Expected date next call or contact';
-$dictionary['Opportunity']['fields']['dnc_c']['merge_filter']='disabled';
+ // created: 2017-08-24 13:26:54
+$dictionary['Opportunity']['fields']['dnc_c']['inline_edit']='1';
+$dictionary['Opportunity']['fields']['dnc_c']['options']='date_range_search_dom';
+$dictionary['Opportunity']['fields']['dnc_c']['labelValue']='Fecha Próximo Contacto';
+$dictionary['Opportunity']['fields']['dnc_c']['enable_range_search']='1';
 
  ?>
