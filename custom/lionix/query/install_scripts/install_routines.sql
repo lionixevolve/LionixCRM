@@ -248,35 +248,35 @@ VALUES('Opportunitiesmaincontactcedula_c', 'maincontactcedula_c', 'LBL_MAINCONTA
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdnc_c', 'dnc_c', 'LBL_DNC', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdnc_c', 'dnc_c', 'LBL_DNC', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '+1 week', '2017-08-24 19:26:53.000', 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdateclosedlost_c', 'dateclosedlost_c', 'LBL_DATECLOSEDLOST', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdateclosedlost_c', 'dateclosedlost_c', 'LBL_DATECLOSEDLOST', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdateclosedwon_c', 'dateclosedwon_c', 'LBL_DATECLOSEDWON', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdateclosedwon_c', 'dateclosedwon_c', 'LBL_DATECLOSEDWON', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdateinvoiced_c', 'dateinvoiced_c', 'LBL_DATEINVOICED', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdateinvoiced_c', 'dateinvoiced_c', 'LBL_DATEINVOICED', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdatepaid_c', 'datepaid_c', 'LBL_DATEPAID', '', '', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdatepaid_c', 'datepaid_c', 'LBL_DATEPAID', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesprevioussalesstage_c', 'previoussalesstage_c', 'LBL_PREVIOUSSALESSTAGE', '', '', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_dom', '', '', '');
+VALUES('Opportunitiesprevioussalesstage_c', 'previoussalesstage_c', 'LBL_PREVIOUSSALESSTAGE', 'LionixCRM', 'LionixCRM', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_dom', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiespreviousstatus_c', 'previousstatus_c', 'LBL_PREVIOUSSTATUS', '', '', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', '', '', '');
+VALUES('Opportunitiespreviousstatus_c', 'previousstatus_c', 'LBL_PREVIOUSSTATUS', 'LionixCRM', 'LionixCRM', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesstatus_c', 'status_c', 'LBL_STATUS', NULL, NULL, 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', NULL, NULL, NULL);
+VALUES('Opportunitiesstatus_c', 'status_c', 'LBL_STATUS', 'LionixCRM', 'LionixCRM', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'sales_stage_status_list', NULL, NULL, NULL);
 
 ###### custom fields on Opportunities module (elapsed time in mins)
 ALTER TABLE opportunities_cstm add COLUMN ssfutureinmins_c      int(255) DEFAULT '0' NULL;

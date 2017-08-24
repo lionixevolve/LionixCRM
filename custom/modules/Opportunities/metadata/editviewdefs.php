@@ -135,12 +135,12 @@ array (
         ),
         11 => 
         array (
-          0 => 
+          0 => 'campaign_name',
+          1 => 
           array (
             'name' => 'dnc_c',
             'label' => 'LBL_DNC',
           ),
-          1 => 'campaign_name',
         ),
         12 => 
         array (
