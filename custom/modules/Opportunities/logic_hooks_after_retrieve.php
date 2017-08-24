@@ -4,8 +4,8 @@ class LXOpportunitiesAfterRetrieveMethods
 {
     public function setMainContactC(&$bean, $event, $arguments)
     {
-        $bean->custom_fields->retrieve();
         if ($_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
+            // $bean->custom_fields->retrieve(); // it seems that this method is no longer requiered.
             $query = "
                 select trim(concat(ifnull(first_name,''), ' ',ifnull(last_name,''), ' ',ifnull(lastname2_c,''))) AS 'maincontact_c'
                 from contacts
