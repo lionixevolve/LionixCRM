@@ -13,6 +13,13 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         }
     }
 
+    public function setStatusCBS(&$bean, $event, $arguments)
+    {
+        if (empty($bean->status_c)) {
+            $bean->status_c = $bean->sales_stage.'_new';
+        }
+    }
+
     //after_save methods
     public function setExampleWithPreviousDataValidationAS(&$bean, $event, $arguments)
     {
@@ -40,6 +47,28 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                     # set some_custom_date_field_c = utc_timestamp()
                     # where sales_stage = '{$bean->sales_stage}'
                     # and id = '{$bean->id}'
+                ";
+                $bean->db->query($query);
+            }
+        }
+    }
+
+    public function setPreviousSalesStageCAS(&$bean, $event, $arguments)
+    {
+        // call on changed records only
+        if (isset(self::$fetchedRow[$bean->id])) {
+            // execute changed record business process
+            if ($bean->sales_stage != self::$fetchedRow[$bean->id]['sales_stage']) {
+                $previoussalesstage = self::$fetchedRow[$bean->id]['sales_stage'];
+                $query = "
+                    update opportunities o
+                    left join opportunities_cstm oc on o.id = oc.id_c
+                    set
+                    oc.previoussalesstage_c = '{$previoussalesstage}',
+                    oc.previousstatus_c = oc.status_c,
+                    oc.status_c = '{$bean->sales_stage}_new'
+                    where o.deleted = 0
+                    and o.id = '{$bean->id}'
                 ";
                 $bean->db->query($query);
             }
