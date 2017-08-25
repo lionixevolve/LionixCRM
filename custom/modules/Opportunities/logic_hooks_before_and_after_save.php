@@ -102,6 +102,22 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                 values (uuid(),'{$bean->maincontact_c}','{$bean->id}','Primary Decision Maker',utc_timestamp(),0)
             ";
             $bean->db->query($query);
+        } else {
+            $query = "
+                update opportunities_contacts
+                set contact_role = ''
+                where deleted = 0
+                and opportunity_id = '{$bean->id}'
+            ";
+            $bean->db->query($query);
+            $query = "
+                update opportunities_contacts
+                set contact_role = 'Primary Decision Maker'
+                where deleted = 0
+                and opportunity_id = '{$bean->id}'
+                and contact_id = '{$bean->maincontact_c}'
+            ";
+            $bean->db->query($query);
         }
     }
 }
