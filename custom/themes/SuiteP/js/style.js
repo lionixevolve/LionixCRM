@@ -8,6 +8,7 @@ script.onload = function() {
         //SuiteCRM has jQuery preloaded don't include it.
         scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
         scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
+        scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
@@ -31,6 +32,7 @@ script.onload = function() {
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
                 $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
                 $('head').append('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
+                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
                 $(document).ready(function() { //Primer document ready
                     console.log("You are running jQuery version:", $.fn.jquery);
                     // Add "Metas" option on main nav menu
