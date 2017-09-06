@@ -135,10 +135,12 @@ class LxAJAX
         }
     }
 
-    public function getConfigBusinessType()
+    public function getLionixCRMConfigOption()
     {
         global $sugar_config;
-        return $sugar_config['lionixcrm']['business_type'];
+        return $sugar_config['lionixcrm'][$this->data['option']];
+        //eg given: $this->data['option'] = business_type;
+        //eg given: $this->data['option'] = environment;
     }
 
     public function getOpportunityMainContactList()

@@ -55,8 +55,9 @@
 
 // function definitions section
 function getLxOpportunityAccountNameByBusinessType(opportunityId, currentValue, accountId) {
-    var method = "getConfigBusinessType";
+    var method = "getLionixCRMConfigOption";
     var data = "method=" + method;
+    data += "&option=" + "business_type";
     // data += "&opportunityId=" + opportunityId;
     // data += "&currentValue=" + currentValue;
     // data += "&accountId=" + accountId;
