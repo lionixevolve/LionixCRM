@@ -263,8 +263,4 @@ if (isset($_SESSION['authenticated_user_id'])) {
 } else {
     $problem = 'Problem creating an LxAJAX instance.';
     error_log($problem);
-    if ($this->debug) {
-        //lxlog
-        file_put_contents($_SERVER["DOCUMENT_ROOT"]."/lx.log", PHP_EOL. date_format(date_create(), "Y-m-d H:i:s ")  .__FILE__ .":". __LINE__." -- ".print_r($problem, 1).PHP_EOL, FILE_APPEND);
-    }
 }
