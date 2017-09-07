@@ -39,7 +39,7 @@
                 applySelect2 = false;
             }
             if (applySelect2) {
-                $('select:not([class^="select2"])').each(function(index) {
+                $('select:not([class^="select2"],[class^="datetimecombo_time"])').each(function(index) {
                     if (!$(this).hasClass("select2-hidden-accessible")) {
                         $(this).select2({
                             closeOnSelect: false,
