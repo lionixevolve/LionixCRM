@@ -95,6 +95,14 @@ function insertLineItems(product,group){
  */
 
 function insertProductLine(tableid, groupid) {
+    // LionixCRM
+    $('#total_amt').attr("readonly","readonly");
+    $('#discount_amount').attr("readonly","readonly");
+    $('#subtotal_amount').attr("readonly","readonly");
+    $('#shipping_tax_amt').attr("readonly","readonly");
+    $('#tax_amount').attr("readonly","readonly");
+    $('#total_amount').attr("readonly","readonly");
+    // LionixCRM
 
   if(!enable_groups){
     tableid = "product_group0";
@@ -316,6 +324,15 @@ function formatListPrice(ln){
  */
 
 function insertServiceLine(tableid, groupid) {
+
+    // LionixCRM
+    $('#total_amt').attr("readonly","readonly");
+    $('#discount_amount').attr("readonly","readonly");
+    $('#subtotal_amount').attr("readonly","readonly");
+    $('#shipping_tax_amt').attr("readonly","readonly");
+    $('#tax_amount').attr("readonly","readonly");
+    $('#total_amount').attr("readonly","readonly");
+    // LionixCRM
 
   if(!enable_groups){
     tableid = "service_group0";
