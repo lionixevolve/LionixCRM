@@ -6,14 +6,9 @@
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 
 // function definitions section
-
-    var currentForm = document.forms['DetailView'];
-    if (!currentForm) {
-        currentForm = document.forms['EditView'];
-    }
-    var record_id = currentForm.record.value;
-    var module_name = currentForm.module.value;
 window.lxchatSetData = function(userMessage) {
+    // Save button temporary disabled
+    $("#lxchatSave").attr("disabled", true);
         // currentUser Name
         var currentUser = $(".user_label:eq(0)").text().trim();
         /*Today's date splitted*/
@@ -28,6 +23,12 @@ window.lxchatSetData = function(userMessage) {
         di = (di < 10) ? "0" + di : di;
         var newMessage = currentUser + ":\n" + userMessage + "\n" + dd + "/" + dm + "/" + dy + " " + dh + ":" + di + " " + ampm + "\n\n";
 
+        var currentForm = document.forms['DetailView'];
+        if (!currentForm) {
+            currentForm = document.forms['EditView'];
+        }
+        var record_id = currentForm.record.value;
+        var module_name = currentForm.module.value;
 
         var data = "method=" + "lxChat" + "&chat_c=" + newMessage + "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
         $.ajax({
@@ -67,6 +68,7 @@ window.lxchatSetData = function(userMessage) {
             datatype: "text"
         });
     }
+    $("#lxchatSave").removeAttr("disabled");
 }
 
 window.lxchatRender = function(lxchatfield) {
@@ -87,7 +89,6 @@ window.lxchatRender = function(lxchatfield) {
         //Save new messages button added
         $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
         $(document).on("click", "#lxchatSave", function(event) {
-            $("#lxchatSave").attr("disabled", true);
             lxchatSetData($("#lxchatnewmsg").val());
         });
     }
@@ -100,8 +101,7 @@ window.lxchatFindFieldToRender = function() {
     }
     var record_id = currentForm.record.value;
     var module_name = currentForm.module.value;
-    var lxajaxdata = "method=" +
-    "lxChatConfigOverrideField";
+    var lxajaxdata = "method=" + "lxChatConfigOverrideField";
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
