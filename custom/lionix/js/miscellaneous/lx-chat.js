@@ -6,18 +6,6 @@
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 
 // function definitions section
-window.lxchatSetData = function(newMessage) {
-    var currentUser = $(".user_label:eq(0)").text().trim();
-
-    /*Today's date splitted*/
-    var d = new Date();
-    var curr_date = d.getDate();
-    var curr_month = d.getMonth() + 1;
-    var curr_year = d.getFullYear();
-
-    if (newMessage != '') {
-        var newMessage = "[" + "%2B" + "] " + " [" + curr_date + " - " + curr_month + " - " + curr_year + "]  " + currentUser + " : " + newMessage + " [" + "%2B" + "]\n\n";
-    }
 
     var currentForm = document.forms['DetailView'];
     if (!currentForm) {
@@ -25,6 +13,20 @@ window.lxchatSetData = function(newMessage) {
     }
     var record_id = currentForm.record.value;
     var module_name = currentForm.module.value;
+window.lxchatSetData = function(userMessage) {
+        // currentUser Name
+        var currentUser = $(".user_label:eq(0)").text().trim();
+        /*Today's date splitted*/
+        var d = new Date();
+        var dd = d.getDate();
+        var dm = d.getMonth() + 1;
+        var dy = d.getFullYear();
+        var dh = d.getHours();
+        var di = d.getMinutes();
+        var ampm = (dh > 12) ? "pm" : "am";
+        dh = (dh > 12) ? "0" + (dh - 12) : dh;
+        di = (di < 10) ? "0" + di : di;
+        var newMessage = currentUser + ":\n" + userMessage + "\n" + dd + "/" + dm + "/" + dy + " " + dh + ":" + di + " " + ampm + "\n\n";
 
     var data = "method=" + "lxChat" + "&chat_c=" + newMessage + "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
     $.ajax({
