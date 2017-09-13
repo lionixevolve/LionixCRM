@@ -118,12 +118,7 @@ window.lxchatRender = function(lxchatfield) {
         $('#lxchat').attr('style', 'position:relative'); //aca no estaba esta línea
         $('#lxchat').attr('style', 'width: 400px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
         $('#lxchat').append('<textarea id="lxchatcontent" cols="80" rows="6" readonly="readonly" style="width: 100%; overflow: scroll; background-color: #F6FAFD;">' + lxchatfieldtext + '</textarea>');
-        if (lxchatfieldtext.length === 1) {
-            $('#lxchat').attr('style', 'width: 400px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
-            $('#lxchatcontent').attr('style', 'width: 100%; height: 27px;background-color: #F6FAFD;');
-        } else {
-            $('#lxchatcontent').attr('style', 'width: 100%; height: 200px;background-color: #F6FAFD;');
-        }
+        $('#lxchatcontent').attr('style', 'width: 100%; height: 200px;background-color: #F6FAFD;');
         //Textarea for new messages added
         $('<br><textarea id="lxchatnewmsg" tabindex="0" title="" cols="80" rows="6" style="width: 400px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
         //Save new messages button added
