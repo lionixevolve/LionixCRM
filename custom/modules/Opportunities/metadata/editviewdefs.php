@@ -150,6 +150,15 @@ array (
         array (
           0 => 'description',
         ),
+        14 => 
+        array (
+          0 => 
+          array (
+            'name' => 'chat_c',
+            'studio' => 'visible',
+            'label' => 'LBL_CHAT',
+          ),
+        ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 
       array (
