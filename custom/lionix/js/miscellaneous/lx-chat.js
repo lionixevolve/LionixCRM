@@ -9,6 +9,11 @@
 window.lxchatSetData = function(userMessage) {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
+    if (userMessage === '') {
+        toastr["warning"]("¿Quieres compartir alguna novedad? Escribe un mensaje", "Chat - Mensaje vacío", {
+            "positionClass": "toast-bottom-center"
+        });
+    } else {
         // currentUser Name
         var currentUser = $(".user_label:eq(0)").text().trim();
         /*Today's date splitted*/
