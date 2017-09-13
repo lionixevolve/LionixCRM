@@ -28,41 +28,44 @@ window.lxchatSetData = function(userMessage) {
         di = (di < 10) ? "0" + di : di;
         var newMessage = currentUser + ":\n" + userMessage + "\n" + dd + "/" + dm + "/" + dy + " " + dh + ":" + di + " " + ampm + "\n\n";
 
-    var data = "method=" + "lxChat" + "&chat_c=" + newMessage + "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax beforeSend');
-            console.log("*** start ***");
-            console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
-        },
-        url: 'lxajax.php',
-        type: 'POST',
-        data: data,
-        // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
-            $("#lxchatnewmsg").val('');
-            lxchatGetData();
-            console.groupEnd();
-        },
-        // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function lxchatSetData error:", error);
-            console.groupEnd();
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        // },
-        datatype: "text"
-    })
-}
 
+        var data = "method=" + "lxChat" + "&chat_c=" + newMessage + "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
+        $.ajax({
+            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+            beforeSend: function(jqXHR, settings) {
+                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax beforeSend');
+                console.log("*** start ***");
+                console.log("beforeSend callback:", settings.url);
+                console.groupEnd();
+            },
+            url: 'lxajax.php',
+            type: 'POST',
+            data: data,
+            // success is a function to be called if the request succeeds.
+            success: function(data, status, jqXHR) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax success');
+                console.log("success callback:", status);
+                console.log("data:", data);
+                $("#lxchatnewmsg").val('');
+                $("textarea#" + lxchatfield).val(data);
+                $('#lxchatcontent').val(data).trigger('autosize');
+                var h1 = $('#lxchatcontent')[0].scrollHeight,
+                    h2 = $('#lxchatcontent').height();
+                $('#lxchatcontent').scrollTop(h1 - h2);
+                console.groupEnd();
+            },
+            // error is a function to be called if the request fails.
+            error: function(jqXHR, status, error) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSetData()', 'ajax error');
+                console.log("error callback:", status);
+                console.log("Function lxchatSetData error:", error);
+                console.groupEnd();
+            }, // end error
+            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+            // complete: function(jqXHR, status) {
+            // },
+            datatype: "text"
+        });
     }
 }
 
