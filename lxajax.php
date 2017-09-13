@@ -269,9 +269,9 @@ class LxAJAX
                     $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']] = $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']].$this->data['chat_c'];
                     $module_object->save();
                 }
-            } else {
-                return $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']];
             }
+
+            return $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']];
         }
     }
 }//end class LxAJAX
