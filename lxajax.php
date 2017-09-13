@@ -250,6 +250,30 @@ class LxAJAX
         usort($list, array($this, "callbackOrderArrayByName")); //this orders $list array alphabetically by name
         return json_encode($list);
     }
+
+    public function lxChatConfigOverrideField()
+    {
+        return json_encode($GLOBALS['sugar_config']['lionixcrm']['jschat']);
+    }
+
+    public function lxChat()
+    {
+        global $moduleList,$beanList,$beanFiles,$app_list_strings;
+        if ($this->data['module']) {
+            $class_name = $beanList[$this->data['module']];
+            $module_object = new $class_name();
+            $module_object->retrieve($this->data['record_id']);
+
+            if ($this->data['save']) {
+                if (!empty($module_object->id)) {
+                    $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']] = $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']].$this->data['chat_c'];
+                    $module_object->save();
+                }
+            } else {
+                return $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']];
+            }
+        }
+    }
 }//end class LxAJAX
 
 // Session variables passed to this page

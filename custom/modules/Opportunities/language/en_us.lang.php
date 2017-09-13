@@ -20,4 +20,5 @@ $mod_strings = array (
   'LBL_SSINVOICEDINMINS' => 'Invoiced (Minutes)',
   'LBL_SSPAIDINMINS' => 'Paid (Minutes)',
   'AOS_Quotes' => 'Cotizaciones',
+  'LBL_CHAT' => 'Chat',
 );

@@ -192,6 +192,7 @@ INSERT INTO prospect_lists (assigned_user_id,id,name,list_type,date_entered,date
 VALUES ('1', 'daily-email-bday-congrats-contacts', 'daily_email_birthday_congratulations_contacts', 'default',utc_timestamp(),utc_timestamp(),'1', '1', 0,'Autoclean and autofill must be set to true always, this list is used by emailManEr function on schedulers.', '');
 
 ###### custom fields on opportunities module
+ALTER TABLE opportunities_cstm add COLUMN chat_c text NULL;
 ALTER TABLE opportunities_cstm add COLUMN dateclosednotified_c bool DEFAULT '0' NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontact_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactfirstname_c varchar(100) NULL;
@@ -209,6 +210,10 @@ ALTER TABLE opportunities_cstm add COLUMN datepaid_c date NULL ;
 ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100) NULL ;
 ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100) NULL ;
 ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100) NULL ;
+
+INSERT INTO lionixcrm.fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitieschat_c', 'chat_c', 'LBL_CHAT', 'LionixCRM', 'LionixCRM', 'Opportunities', 'text', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '6', '80', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
