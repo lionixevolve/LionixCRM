@@ -90,7 +90,7 @@ window.lxchatRender = function(lxchatfield) {
         $('#lxchat').append('<textarea id="lxchatcontent" cols="80" rows="6" readonly="readonly" style="width: 100%; overflow: scroll; background-color: #F6FAFD;">' + lxchatfieldtext + '</textarea>');
         $('#lxchatcontent').attr('style', 'width: 100%; height: 200px;background-color: #F6FAFD;');
         //Textarea for new messages added
-        $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, '+currentUser+'?" tabindex="0" title="" cols="80" rows="6" style="width: 400px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
+        $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, '+currentUser.split(" ")[0]+'?" tabindex="0" title="" cols="80" rows="6" style="width: 400px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
         //Save new messages button added
         $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
         $(document).on("click", "#lxchatSave", function(event) {
