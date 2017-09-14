@@ -86,11 +86,11 @@ window.lxchatRender = function(lxchatfield) {
         //lxchat div added
         $('<div id="lxchat"><center>CHAT</center></div>').insertAfter('#' + lxchatfield);
         $('#lxchat').attr('style', 'position:relative'); //aca no estaba esta línea
-        $('#lxchat').attr('style', 'width: 400px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
+        $('#lxchat').attr('style', 'width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
         $('#lxchat').append('<textarea id="lxchatcontent" cols="80" rows="6" readonly="readonly" style="width: 100%; overflow: scroll; background-color: #F6FAFD;">' + lxchatfieldtext + '</textarea>');
         $('#lxchatcontent').attr('style', 'width: 100%; height: 200px;background-color: #F6FAFD;');
         //Textarea for new messages added
-        $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, '+currentUser.split(" ")[0]+'?" tabindex="0" title="" cols="80" rows="6" style="width: 400px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
+        $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, '+currentUser.split(" ")[0]+'?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
         //Save new messages button added
         $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
         $(document).on("click", "#lxchatSave", function(event) {
