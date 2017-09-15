@@ -207,7 +207,7 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
     html = "";
     if (Array.isArray(msgArray)) {
         html = "";
-        msgArray.forEach(function(msg) {
+        msgArray.forEach(function(msg, i) {
             var d = new Date(msg.date);
             var dd = d.getDate();
             var dm = d.getMonth() + 1;
@@ -226,7 +226,7 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
             pStyle = (msg.currentUser)
                 ? 'align="right" style="white-space: normal; background-color: #DCF8C6";'
                 : 'style="white-space: normal; background-color: #FFF";';
-            html += '<p ' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + dd + '/' + dm + '/' + dy + ' ' + dh + ':' + di + ' ' + ampm + '</i>' + '</p>';
+            html += '<p id="lxchatmsg'+i+'"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + dd + '/' + dm + '/' + dy + ' ' + dh + ':' + di + ' ' + ampm + '</i>' + '</p>';
         });
     }
     return html;
