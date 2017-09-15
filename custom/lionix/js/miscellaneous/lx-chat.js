@@ -12,19 +12,15 @@ window.lxchatSaveNewMessage = function(userMessage) {
     if (userMessage === '') {
         toastr["warning"]("¿Quieres compartir alguna novedad? Escribe un mensaje", "Chat - Mensaje vacío", {"positionClass": "toast-bottom-center"});
     } else {
-        // currentUser Name
-        var currentUser = $(".user_label:eq(0)").text().trim();
-
         var d = new Date();
         if (!Array.isArray(window.lxchatMessagesArray)) {
             window.lxchatMessagesArray = [];
         }
         window.lxchatMessagesArray.push({
-            "id": "1", // falta el ajax para saber el id del usuario actual
+            "id": window.current_user_id,
             "msg": userMessage,
             "date": d.toISOString()
         });
-
         newMessage = JSON.stringify(window.lxchatMessagesArray);
 
         var currentForm = document.forms['DetailView'];
@@ -196,10 +192,10 @@ window.lxchatFindFieldToRender = function() {
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         complete: function(jqXHR, status) {
-            var textarea = document.getElementById('lxchatcontent');
-            if (textarea) {
-                textarea.scrollTop = textarea.scrollHeight;
-            }
+            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax complete');
+            console.log("complete status:", status);
+            lxchatGetCurrentUserId();
+            console.groupEnd();
         },
         datatype: "text"
     })
@@ -235,6 +231,47 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
     return html;
 }
 
+window.lxchatGetCurrentUserId = function() {
+    var currentForm = document.forms['DetailView'];
+    if (!currentForm) {
+        currentForm = document.forms['EditView'];
+    }
+    var record_id = currentForm.record.value;
+    var module_name = currentForm.module.value;
+    var lxajaxdata = "method=" +
+    "getCurrentUserId";
+    $.ajax({
+        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+        beforeSend: function(jqXHR, settings) {
+            console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax beforeSend');
+            console.log("*** start ***");
+            console.log("beforeSend callback:", settings.url);
+            console.groupEnd();
+        },
+        url: 'lxajax.php',
+        type: 'GET',
+        data: lxajaxdata,
+        // success is a function to be called if the request succeeds.
+        success: function(data, status, jqXHR) {
+            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax success');
+            console.log("success callback:", status);
+            console.log("data:", data);
+            window.current_user_id = data;
+        },
+        // error is a function to be called if the request fails.
+        error: function(jqXHR, status, error) {
+            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax error');
+            console.log("error callback:", status);
+            console.log("Function lxchatGetCurrentUserId error:", error);
+            console.groupEnd();
+        }, // end error
+        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+        // complete: function(jqXHR, status) {
+        // },
+        datatype: "text"
+    })
+    // }
+}
 
 window.lxchatScrollToBottom = function() {
     var h1 = $('#lxchatcontent')[0].scrollHeight,
