@@ -76,26 +76,70 @@ window.lxchatSetData = function(userMessage) {
     $("#lxchatSave").removeAttr("disabled");
 }
 
-window.lxchatRender = function(lxchatfield) {
+window.lxchatRender = function(lxchatfield, lxchat_array_position) {
     if (!$("#lxchat").length) {
-        var currentUser = $(".user_label:eq(0)").text().trim();
-        //Current lxchatfield text
-        lxchatfieldtext = $('#' + lxchatfield).text();
-        //Current crm field must be hide
-        $('#' + lxchatfield).hide();
-        //lxchat div added
-        $('<div id="lxchat"><center>CHAT</center></div>').insertAfter('#' + lxchatfield);
-        $('#lxchat').attr('style', 'position:relative'); //aca no estaba esta línea
-        $('#lxchat').attr('style', 'width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
-        $('#lxchat').append('<textarea id="lxchatcontent" cols="80" rows="6" readonly="readonly" style="width: 100%; overflow: scroll; background-color: #F6FAFD;">' + lxchatfieldtext + '</textarea>');
-        $('#lxchatcontent').attr('style', 'width: 100%; height: 200px;background-color: #F6FAFD;');
-        //Textarea for new messages added
-        $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, '+currentUser.split(" ")[0]+'?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
-        //Save new messages button added
-        $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
-        $(document).on("click", "#lxchatSave", function(event) {
-            lxchatSetData($("#lxchatnewmsg").val());
+        var currentForm = document.forms['DetailView'];
+        if (!currentForm) {
+            currentForm = document.forms['EditView'];
+        }
+        var record_id = currentForm.record.value;
+        var module_name = currentForm.module.value;
+
+        var data = "method=" +
+        "lxChat" +
+        "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
+        $.ajax({
+            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+            beforeSend: function(jqXHR, settings) {
+                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax beforeSend');
+                console.log("*** start ***");
+                console.log("beforeSend url:", settings.url);
+                console.log("beforeSend data:", settings.data);
+                console.groupEnd();
+            },
+            url: 'lxajax.php',
+            type: 'POST',
+            data: data,
+            // success is a function to be called if the request succeeds.
+            success: function(data, status, jqXHR) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax success');
+                console.log("success callback:", status);
+                console.log("data:", data);
+                var currentUser = $(".user_label:eq(0)").text().trim();
+                //Current lxchatfield text
+                window.lxchatMessagesArray = JSON.parse(data);
+                lxchatfieldtext = window.lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
+                //Current crm field must be hide
+                $('#' + lxchatfield).hide();
+                //lxchat div added
+                $('<div id="lxchat"><center>LionixCRM Smart CHAT</center></div>').insertAfter('#' + lxchatfield);
+                $('#lxchat').attr('style', 'position:relative; width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
+                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 200px; background-color: #F5F5F5; overflow-y: auto;">' + lxchatfieldtext + '</div>');
+                var h1 = $('#lxchatcontent')[0].scrollHeight,
+                    h2 = $('#lxchatcontent').height();
+                $('#lxchatcontent').scrollTop(h1 - h2);
+                //Textarea for new messages added
+                $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
+                //Save new messages button added
+                $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
+                $(document).on("click", "#lxchatSave", function(event) {
+                    lxchatSaveNewMessage($("#lxchatnewmsg").val());
+                });
+                console.groupEnd();
+            },
+            // error is a function to be called if the request fails.
+            error: function(jqXHR, status, error) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax error');
+                console.log("error callback:", status);
+                console.log("Function lxchatRender error:", error);
+                console.groupEnd();
+            }, // end error
+            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+            // complete: function(jqXHR, status) {
+            // },
+            datatype: "text"
         });
+
     }
 }
 
@@ -106,7 +150,8 @@ window.lxchatFindFieldToRender = function() {
     }
     var record_id = currentForm.record.value;
     var module_name = currentForm.module.value;
-    var lxajaxdata = "method=" + "lxChatConfigOverrideField";
+    var lxajaxdata = "method=" +
+    "lxChatGetSmartChatField";
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
@@ -131,9 +176,9 @@ window.lxchatFindFieldToRender = function() {
                         lxShowCRMfield(fieldsArray[i]);
                         $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + fieldsArray[i]);
                     } else {
-                        lxchatRender(fieldsArray[i]);
                         lxchatfield = fieldsArray[i];
                         lxchat_array_position = i;
+                        lxchatRender(lxchatfield, lxchat_array_position);
                     }
                 }
             }
