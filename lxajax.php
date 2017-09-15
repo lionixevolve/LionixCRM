@@ -295,6 +295,10 @@ class LxAJAX
         }
         return json_encode($messagesArray);
     }
+
+    public function getCurrentUserId()
+    {
+        return $GLOBALS['current_user']->id;
     }
 }//end class LxAJAX
 
