@@ -58,10 +58,6 @@ window.lxchatSaveNewMessage = function(userMessage) {
                 $("textarea#" + lxchatfield).val(data);
                 console.log(data);
                 window.lxchatMessagesArray = JSON.parse(data);
-                document.getElementById("lxchatcontent").innerHTML = window.lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
-                var h1 = $('#lxchatcontent')[0].scrollHeight,
-                    h2 = $('#lxchatcontent').height();
-                $('#lxchatcontent').scrollTop(h1 - h2);
                 console.groupEnd();
             },
             // error is a function to be called if the request fails.
@@ -72,8 +68,12 @@ window.lxchatSaveNewMessage = function(userMessage) {
                 console.groupEnd();
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            // complete: function(jqXHR, status) {
-            // },
+            complete: function(jqXHR, status) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSaveNewMessage()', 'ajax complete');
+                console.log("complete status:", status);
+                lxchatScrollToBottom();
+                console.groupEnd();
+            },
             datatype: "text"
         });
     }
@@ -119,9 +119,6 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 $('<div id="lxchat"><center>LionixCRM Smart CHAT</center></div>').insertAfter('#' + lxchatfield);
                 $('#lxchat').attr('style', 'position:relative; width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
                 $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 200px; background-color: #F5F5F5; overflow-y: auto;">' + lxchatfieldtext + '</div>');
-                var h1 = $('#lxchatcontent')[0].scrollHeight,
-                    h2 = $('#lxchatcontent').height();
-                $('#lxchatcontent').scrollTop(h1 - h2);
                 //Textarea for new messages added
                 $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
                 //Save new messages button added
@@ -139,11 +136,14 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 console.groupEnd();
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            // complete: function(jqXHR, status) {
-            // },
+            complete: function(jqXHR, status) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSaveNewMessage()', 'ajax complete');
+                console.log("complete status:", status);
+                lxchatScrollToBottom();
+                console.groupEnd();
+            },
             datatype: "text"
         });
-
     }
 }
 
@@ -233,6 +233,13 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
         });
     }
     return html;
+}
+
+
+window.lxchatScrollToBottom = function() {
+    var h1 = $('#lxchatcontent')[0].scrollHeight,
+        h2 = $('#lxchatcontent').height();
+    $('#lxchatcontent').scrollTop(h1 - h2);
 }
 
 // Observers definitions
