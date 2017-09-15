@@ -280,7 +280,7 @@ class LxAJAX
                            ifnull(first_name,'') AS 'first_name',
                            ifnull(last_name,'') AS 'last_name',
                            concat(ifnull(first_name,''),' ',ifnull(last_name,'')) AS 'full_name',
-                           if({$GLOBALS['current_user']->id}=u.id,1,0) as 'current_user'
+                           if('{$GLOBALS['current_user']->id}'=u.id,1,0) as 'current_user'
                     FROM users u
                     WHERE u.id = '{$msg->id}'
                 ";
