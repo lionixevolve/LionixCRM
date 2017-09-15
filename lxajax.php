@@ -258,8 +258,9 @@ class LxAJAX
 
     public function lxChat()
     {
-        global $moduleList,$beanList,$beanFiles,$app_list_strings;
+        $messagesArray = Array();
         if ($this->data['module']) {
+            global $moduleList,$beanList,$beanFiles,$app_list_strings;
             $class_name = $beanList[$this->data['module']];
             $module_object = new $class_name();
             $module_object->retrieve($this->data['record_id']);
@@ -272,8 +273,28 @@ class LxAJAX
                 }
             }
 
-            return $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']];
+            $messagesArray = json_decode(html_entity_decode($module_object->$smart_chat_field, ENT_QUOTES));
+            foreach ($messagesArray as &$msg) {
+                $query = "
+                    SELECT u.id,
+                           ifnull(first_name,'') AS 'first_name',
+                           ifnull(last_name,'') AS 'last_name',
+                           concat(ifnull(first_name,''),' ',ifnull(last_name,'')) AS 'full_name',
+                           if({$GLOBALS['current_user']->id}=u.id,1,0) as 'current_user'
+                    FROM users u
+                    WHERE u.id = '{$msg->id}'
+                ";
+                $rs = $GLOBALS['db']->query($query, false);
+                if (($row = $GLOBALS['db']->fetchByAssoc($rs)) != null) {
+                    $msg->firstName = $row['first_name'];
+                    $msg->lastName = $row['last_name'];
+                    $msg->fullName = $row['full_name'];
+                    $msg->currentUser = ($row['current_user']) ? true : false;
+                }
+            }
         }
+        return json_encode($messagesArray);
+    }
     }
 }//end class LxAJAX
 
