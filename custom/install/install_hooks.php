@@ -360,7 +360,7 @@ function post_installModules()
         'ssclosedwoninmins_c',
         //'anyOtherField'
     );
-    $sugar_config['lionixcrm']['jschat'] = array(
+    $sugar_config['lionixcrm']['smartchat'] = array(
         0 => 'chat_c',
         //1 => 'anyOtherField',
     );

@@ -251,9 +251,9 @@ class LxAJAX
         return json_encode($list);
     }
 
-    public function lxChatConfigOverrideField()
+    public function lxChatGetSmartChatField()
     {
-        return json_encode($GLOBALS['sugar_config']['lionixcrm']['jschat']);
+        return json_encode($GLOBALS['sugar_config']['lionixcrm']['smartchat']);
     }
 
     public function lxChat()
@@ -263,10 +263,11 @@ class LxAJAX
             $class_name = $beanList[$this->data['module']];
             $module_object = new $class_name();
             $module_object->retrieve($this->data['record_id']);
+            $smart_chat_field = $GLOBALS['sugar_config']['lionixcrm']['smartchat'][$this->data['array_position']];
 
             if ($this->data['save']) {
                 if (!empty($module_object->id)) {
-                    $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']] = $module_object->$GLOBALS['sugar_config']['lionixcrm']['jschat'][$this->data['array_position']].$this->data['chat_c'];
+                    $module_object->$smart_chat_field = $this->data['chat_c'];
                     $module_object->save();
                 }
             }
