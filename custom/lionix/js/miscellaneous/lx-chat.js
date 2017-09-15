@@ -193,12 +193,11 @@ window.lxchatFindFieldToRender = function() {
             console.groupEnd();
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        complete: function(jqXHR, status) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax complete');
-            console.log("complete status:", status);
-            lxchatGetCurrentUserId();
-            console.groupEnd();
-        },
+        // complete: function(jqXHR, status) {
+        //     console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax complete');
+        //     console.log("complete status:", status);
+        //     console.groupEnd();
+        // },
         datatype: "text"
     })
     // }
@@ -233,7 +232,7 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
     return html;
 }
 
-window.lxchatGetCurrentUserId = function() {
+window.lxchatStart = function() {
     var currentForm = document.forms['DetailView'];
     if (!currentForm) {
         currentForm = document.forms['EditView'];
@@ -245,7 +244,7 @@ window.lxchatGetCurrentUserId = function() {
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax beforeSend');
+            console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatStart()', 'ajax beforeSend');
             console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
             console.groupEnd();
@@ -255,16 +254,17 @@ window.lxchatGetCurrentUserId = function() {
         data: lxajaxdata,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax success');
+            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatStart()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
             window.current_user_id = data;
+            lxchatFindFieldToRender();
         },
         // error is a function to be called if the request fails.
         error: function(jqXHR, status, error) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatGetCurrentUserId()', 'ajax error');
+            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatStart()', 'ajax error');
             console.log("error callback:", status);
-            console.log("Function lxchatGetCurrentUserId error:", error);
+            console.log("Function lxchatStart error:", error);
             console.groupEnd();
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
@@ -286,7 +286,7 @@ window.lxchatScrollToBottom = function() {
     if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
         // now it ensures that lxchat isn't already present
         if (!$("#lxchat").length) {
-            lxchatFindFieldToRender();
+            lxchatStart();
         }
     }
     // On other modules
@@ -315,7 +315,7 @@ window.lxchatScrollToBottom = function() {
                 if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
                     // now it ensures that lxchat isn't already present
                     if (!$("#lxchat").length) {
-                        lxchatFindFieldToRender();
+                        lxchatStart();
                     }
                 }
             });
