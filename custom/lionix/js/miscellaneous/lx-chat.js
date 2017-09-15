@@ -157,6 +157,35 @@ window.lxchatFindFieldToRender = function() {
     // }
 }
 
+window.lxchatMessagesArrayToHTML = function(msgArray) {
+    html = "";
+    if (Array.isArray(msgArray)) {
+        html = "";
+        msgArray.forEach(function(msg) {
+            var d = new Date(msg.date);
+            var dd = d.getDate();
+            var dm = d.getMonth() + 1;
+            var dy = d.getFullYear();
+            var dh = d.getHours();
+            var di = d.getMinutes();
+            var ampm = (dh > 12)
+                ? "pm"
+                : "am";
+            dh = (dh > 12)
+                ? "0" + (dh - 12)
+                : dh;
+            di = (di < 10)
+                ? "0" + di
+                : di;
+            pStyle = (msg.currentUser)
+                ? 'align="right" style="white-space: normal; background-color: #DCF8C6";'
+                : 'style="white-space: normal; background-color: #FFF";';
+            html += '<p ' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br></br>' + msg.msg + '</br></br>' + '<i>' + dd + '/' + dm + '/' + dy + ' ' + dh + ':' + di + ' ' + ampm + '</i>' + '</p></br>';
+        });
+    }
+    return html;
+}
+
 // Observers definitions
 !function() {
     if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
