@@ -7,6 +7,13 @@ script.onload = function() {
         var scripts = new Array();
         //SuiteCRM has jQuery preloaded don't include it.
         scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"); //momentjs x-pseudo usefult for testing
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-do.js"); //momentjs Spanish for Dominican Republic
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"); //momentjs Portuguese for Brazil
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
+        scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
         scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
         scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
