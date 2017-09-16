@@ -12,7 +12,7 @@ moment.defineLocale('es-cr', {
 moment.updateLocale('es-cr', {
     calendar: {
         sameDay: function() {
-            return '['+this.fromNow()+']'+', '+'[hoy a la' + ((this.hours() !== 1) ? 's' : '') + '] LT';
+            return '['+this.fromNow()+']';
         },
         sameElse: 'LLLL'
     }
