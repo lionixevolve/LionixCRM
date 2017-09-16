@@ -13,15 +13,11 @@ window.lxchatSaveNewMessage = function(userMessage) {
         toastr["warning"]("¿Quieres compartir alguna novedad? Escribe un mensaje", "Chat - Mensaje vacío", {"positionClass": "toast-bottom-center"});
     } else {
         // message creation
-        var d = new Date();
+        var m = moment();
         if (!Array.isArray(window.lxchatMessagesArray)) {
             window.lxchatMessagesArray = [];
         }
-        window.lxchatMessagesArray.push({
-            "id": window.current_user_id,
-            "msg": userMessage,
-            "date": d.toISOString()
-        });
+        window.lxchatMessagesArray.push({"id": window.current_user_id, "msg": userMessage, "date": m.toISOString()});
         newMessage = JSON.stringify(window.lxchatMessagesArray);
 
         var currentForm = document.forms['DetailView'];
@@ -53,7 +49,6 @@ window.lxchatSaveNewMessage = function(userMessage) {
                 console.log("data:", data);
                 $("#lxchatnewmsg").val('');
                 $("textarea#" + lxchatfield).val(data);
-                console.log(data);
                 window.lxchatMessagesArray = JSON.parse(data);
                 document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 console.groupEnd();
@@ -116,7 +111,8 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 //lxchat div added
                 $('<div id="lxchat"><center>LionixCRM Smart CHAT</center></div>').insertAfter('#' + lxchatfield);
                 $('#lxchat').attr('style', 'position:relative; width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
-                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 420px; background-color: #F5F5F5; overflow-y: auto;">' + lxchatfieldtext + '</div>');
+                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 420px; background-color: #F5F5F5; overflow-y: auto;"></div>');
+                document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 //Textarea for new messages added
                 $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
                 //Save new messages button added
@@ -135,9 +131,13 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
             complete: function(jqXHR, status) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatSaveNewMessage()', 'ajax complete');
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax complete');
                 console.log("complete status:", status);
                 lxchatScrollToBottom();
+                window.lxchatcontent_interval_id = window.setInterval(function() {
+                    document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
+                    console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, see you in 15 secs...');
+                }, 15000);
                 console.groupEnd();
             },
             datatype: "text"
@@ -208,25 +208,11 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
     if (Array.isArray(msgArray)) {
         html = "";
         msgArray.forEach(function(msg, i) {
-            var d = new Date(msg.date);
-            var dd = d.getDate();
-            var dm = d.getMonth() + 1;
-            var dy = d.getFullYear();
-            var dh = d.getHours();
-            var di = d.getMinutes();
-            var ampm = (dh > 12)
-                ? "pm"
-                : "am";
-            dh = (dh > 12)
-                ? "0" + (dh - 12)
-                : dh;
-            di = (di < 10)
-                ? "0" + di
-                : di;
+            var m = moment(msg.date);
             pStyle = (msg.currentUser)
                 ? 'align="right" style="white-space: normal; background-color: #DCF8C6";'
                 : 'style="white-space: normal; background-color: #FFF";';
-            html += '<p id="lxchatmsg'+i+'"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + dd + '/' + dm + '/' + dy + ' ' + dh + ':' + di + ' ' + ampm + '</i>' + '</p>';
+            html += '<p id="lxchatmsg' + i + '"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + m.calendar() + '</i>' + '</p>';
         });
     }
     return html;
