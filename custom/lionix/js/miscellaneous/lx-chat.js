@@ -27,9 +27,14 @@ window.lxchatSaveNewMessage = function(userMessage) {
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
 
-        var data = "method=" +
-        "lxChat" +
-        "&chat_c=" + newMessage + "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
+        var data = {
+            "method": "lxchat",
+            "module": module_name,
+            "record_id": record_id,
+            "array_position": lxchat_array_position,
+            "save": 1,
+            "chat_c": newMessage
+        };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
@@ -82,9 +87,12 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
 
-        var data = "method=" +
-        "lxChat" +
-        "&record_id=" + record_id + "&module=" + module_name + "&array_position=" + lxchat_array_position + "&save=" + 1;
+        var data = {
+            "method": "lxchat",
+            "module": module_name,
+            "record_id": record_id,
+            "array_position": lxchat_array_position
+        };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
@@ -257,8 +265,7 @@ window.lxchatStart = function() {
         // complete: function(jqXHR, status) {
         // },
         datatype: "text"
-    })
-    // }
+    });
 }
 
 window.lxchatScrollToBottom = function() {
