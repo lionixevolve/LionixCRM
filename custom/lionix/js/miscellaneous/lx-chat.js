@@ -142,10 +142,7 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax complete');
                 console.log("complete status:", status);
                 lxchatScrollToBottom();
-                window.lxchatcontent_interval_id = window.setInterval(function() {
-                    document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
-                    console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, see you in 15 secs...');
-                }, 15000);
+                lxchatRefreshMessagesInterval(true);
                 console.groupEnd();
             },
             datatype: "text"
@@ -272,6 +269,19 @@ window.lxchatScrollToBottom = function() {
     var h1 = $('#lxchatcontent')[0].scrollHeight,
         h2 = $('#lxchatcontent').height();
     $('#lxchatcontent').scrollTop(h1 - h2);
+}
+
+window.lxchatRefreshMessagesInterval = function(refresh) {
+    if (refresh) {
+        console.log('Starting LionixCRM Smart CHAT refresh messages interval...')
+        window.lxchatcontent_interval_id = window.setInterval(function() {
+            document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
+            console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, see you in 15 secs...');
+        }, 15000);
+    } else {
+        console.log('Stoping LionixCRM Smart CHAT refresh messages interval...')
+        window.clearInterval(window.lxchatcontent_interval_id);
+    }
 }
 
 // Observers definitions
