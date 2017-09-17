@@ -181,13 +181,13 @@ window.lxchatFindFieldToRender = function() {
             fieldsArray = JSON.parse(data);
             for (var i = 0; i < fieldsArray.length; i++) {
                 if ($(document).find("#" + fieldsArray[i]).length) {
+                    lxchatfield = fieldsArray[i];
+                    lxchat_array_position = i;
                     if (!record_id) {
                         console.log("lxchat doesn't render when record_id isn't present");
-                        lxShowCRMfield(fieldsArray[i]);
-                        $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + fieldsArray[i]);
+                        lxShowCRMfield(lxchatfield, false);
+                        $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
                     } else {
-                        lxchatfield = fieldsArray[i];
-                        lxchat_array_position = i;
                         lxchatRender(lxchatfield, lxchat_array_position);
                     }
                 }
