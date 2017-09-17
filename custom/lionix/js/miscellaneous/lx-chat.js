@@ -117,9 +117,9 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 //Current crm field must be hide
                 $('#' + lxchatfield).hide();
                 //lxchat div added
-                $('<div id="lxchat"><center>LionixCRM Smart CHAT</center></div>').insertAfter('#' + lxchatfield);
-                $('#lxchat').attr('style', 'position:relative; width: 550px; border: 3px solid #6495ED;border-radius:5px;text-align:left;background-color: #BCD2EE;');
-                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 420px; background-color: #F5F5F5; overflow-y: auto;"></div>');
+                $('<div id="lxchat"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + lxchatfield);
+                $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
+                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
                 document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 //Textarea for new messages added
                 $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
@@ -218,8 +218,8 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
         msgArray.forEach(function(msg, i) {
             var m = moment(msg.date);
             pStyle = (msg.currentUser)
-                ? 'align="right" style="white-space: normal; background-color: #DCF8C6";'
-                : 'style="white-space: normal; background-color: #FFF";';
+                ? 'style="white-space: normal; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
+                : 'style="white-space: normal; border: 1px solid #829EB5; background-color: #F6FAFD;"' // their msgs
             html += '<p id="lxchatmsg' + i + '"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + m.calendar() + '</i>' + '</p>';
         });
     }
