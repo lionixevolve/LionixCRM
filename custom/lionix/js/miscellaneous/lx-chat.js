@@ -123,32 +123,15 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 //Textarea for new messages added
                 $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
+                $(document).on("keypress", "#lxchatnewmsg", function(event) {
+                    if (event.which == 13) {
+                        lxchatValidateNewMessage();
+                    }
+                });
                 //Save new messages button added
                 $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
                 $(document).on("click", "#lxchatSave", function(event) {
-                    if ($("#lxchatnewmsg").val() === '') {
-                        toastr["warning"]("Mensaje vacío no permitido", "Smart Chat", {
-                            "positionClass": "toast-bottom-center",
-                            "showDuration": "0",
-                            "hideDuration": "0",
-                            "timeOut": "1000",
-                            "extendedTimeOut": "0",
-                            "progressBar": true
-                        });
-                        $('#lxchatnewmsg').focus();
-                    } else {
-                        toastr["success"]("Guardando mensaje...", "Smart Chat", {
-                            "positionClass": "toast-bottom-center",
-                            "showDuration": "1",
-                            "hideDuration": "1",
-                            "timeOut": "1",
-                            "extendedTimeOut": "1",
-                            "onShown": function() {
-                                lxchatSaveNewMessage($("#lxchatnewmsg").val());
-                            }
-                        });
-
-                    }
+                    lxchatValidateNewMessage();
                 });
                 console.groupEnd();
             },
@@ -304,6 +287,35 @@ window.lxchatRefreshMessagesInterval = function(refresh) {
     } else {
         console.log('Stoping LionixCRM Smart CHAT refresh messages interval...')
         window.clearInterval(window.lxchatcontent_interval_id);
+    }
+}
+
+window.lxchatValidateNewMessage = function() {
+    var userMessage = $("#lxchatnewmsg").val().trim();
+    if (userMessage === '') {
+        toastr["warning"]("Mensaje vacío no permitido", "Smart Chat", {
+            "positionClass": "toast-bottom-center",
+            "showDuration": "0",
+            "hideDuration": "0",
+            "timeOut": "1000",
+            "extendedTimeOut": "0",
+            "progressBar": true,
+            "onShown": function() {
+                $('#lxchatnewmsg').val('');
+                $('#lxchatnewmsg').focus();
+            }
+        });
+    } else {
+        toastr["success"]("Guardando mensaje...", "Smart Chat", {
+            "positionClass": "toast-bottom-center",
+            "showDuration": "1",
+            "hideDuration": "1",
+            "timeOut": "1",
+            "extendedTimeOut": "1",
+            "onShown": function() {
+                lxchatSaveNewMessage(userMessage);
+            }
+        });
     }
 }
 
