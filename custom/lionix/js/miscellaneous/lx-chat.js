@@ -274,7 +274,6 @@ window.lxchatScrollToBottom = function() {
     var h1 = $('#lxchatcontent')[0].scrollHeight,
         h2 = $('#lxchatcontent').height();
     $('#lxchatcontent').scrollTop(h1 - h2);
-    $('#lxchatnewmsg').focus();
 }
 
 window.lxchatRefreshMessagesInterval = function(refresh) {
@@ -314,6 +313,7 @@ window.lxchatValidateNewMessage = function() {
             "extendedTimeOut": "1",
             "onShown": function() {
                 lxchatSaveNewMessage(userMessage);
+                $('#lxchatnewmsg').focus();
             }
         });
     }
