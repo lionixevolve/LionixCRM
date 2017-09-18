@@ -124,7 +124,7 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 //Textarea for new messages added
                 $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
                 $(document).on("keypress", "#lxchatnewmsg", function(event) {
-                    if (event.which == 13) {
+                    if (event.which == 13 && !event.shiftKey) {
                         lxchatValidateNewMessage();
                     }
                 });
