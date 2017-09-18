@@ -220,8 +220,8 @@ window.lxchatMessagesArrayToHTML = function(msgArray) {
         msgArray.forEach(function(msg, i) {
             var m = moment(msg.date);
             pStyle = (msg.currentUser)
-                ? 'style="white-space: normal; word-wrap: break-word; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
-                : 'style="white-space: normal; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"' // their msgs
+                ? 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
+                : 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"' // their msgs
             html += '<p id="lxchatmsg' + i + '"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + m.calendar() + '</i>' + '</p>';
         });
     }
