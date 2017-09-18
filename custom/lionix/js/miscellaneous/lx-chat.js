@@ -10,7 +10,7 @@ window.lxchatSaveNewMessage = function(userMessage) {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
     if (userMessage === '') {
-        toastr["warning"]("¿Quieres compartir alguna novedad? Escribe un mensaje", "Chat - Mensaje vacío", {"positionClass": "toast-bottom-center"});
+        console.log('lxchatSaveNewMessage do not stores empty messages');
     } else {
         // message creation
         var m = moment();
@@ -126,7 +126,28 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 //Save new messages button added
                 $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
                 $(document).on("click", "#lxchatSave", function(event) {
-                    lxchatSaveNewMessage($("#lxchatnewmsg").val());
+                    if ($("#lxchatnewmsg").val() === '') {
+                        toastr["warning"]("Mensaje vacío no permitido", "Smart Chat", {
+                            "positionClass": "toast-bottom-center",
+                            "showDuration": "0",
+                            "hideDuration": "0",
+                            "timeOut": "1000",
+                            "extendedTimeOut": "0",
+                            "progressBar": true
+                        });
+                    } else {
+                        toastr["success"]("Guardando mensaje...", "Smart Chat", {
+                            "positionClass": "toast-bottom-center",
+                            "showDuration": "1",
+                            "hideDuration": "1",
+                            "timeOut": "1",
+                            "extendedTimeOut": "1",
+                            "onShown": function() {
+                                lxchatSaveNewMessage($("#lxchatnewmsg").val());
+                            }
+                        });
+
+                    }
                 });
                 console.groupEnd();
             },
