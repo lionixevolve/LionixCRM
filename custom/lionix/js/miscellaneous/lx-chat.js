@@ -54,6 +54,9 @@ window.lxchatSaveNewMessage = function(userMessage) {
                 console.log("data:", data);
                 $("#lxchatnewmsg").val('');
                 $("textarea#" + lxchatfield).val(data);
+                data = (data == '')
+                    ? "[]"
+                    : data;
                 window.lxchatMessagesArray = JSON.parse(data);
                 document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 console.groupEnd();
@@ -112,6 +115,9 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 console.log("data:", data);
                 var currentUser = $(".user_label:eq(0)").text().trim();
                 //Current lxchatfield text
+                data = (data == '')
+                    ? "[]"
+                    : data;
                 window.lxchatMessagesArray = JSON.parse(data);
                 lxchatfieldtext = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
                 //Current crm field must be hide
