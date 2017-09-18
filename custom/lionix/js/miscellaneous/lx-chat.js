@@ -28,7 +28,7 @@ window.lxchatSaveNewMessage = function(userMessage) {
         var module_name = currentForm.module.value;
 
         var data = {
-            "method": "lxchat",
+            "method": "lxChat",
             "module": module_name,
             "record_id": record_id,
             "array_position": lxchat_array_position,
@@ -88,7 +88,7 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
         var module_name = currentForm.module.value;
 
         var data = {
-            "method": "lxchat",
+            "method": "lxChat",
             "module": module_name,
             "record_id": record_id,
             "array_position": lxchat_array_position
