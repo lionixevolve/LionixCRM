@@ -135,6 +135,7 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                             "extendedTimeOut": "0",
                             "progressBar": true
                         });
+                        $('#lxchatnewmsg').focus();
                     } else {
                         toastr["success"]("Guardando mensaje...", "Smart Chat", {
                             "positionClass": "toast-bottom-center",
@@ -290,6 +291,7 @@ window.lxchatScrollToBottom = function() {
     var h1 = $('#lxchatcontent')[0].scrollHeight,
         h2 = $('#lxchatcontent').height();
     $('#lxchatcontent').scrollTop(h1 - h2);
+    $('#lxchatnewmsg').focus();
 }
 
 window.lxchatRefreshMessagesInterval = function(refresh) {
