@@ -186,17 +186,21 @@ window.lxchatFindFieldToRender = function() {
             console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
-            fieldsArray = JSON.parse(data);
-            for (var i = 0; i < fieldsArray.length; i++) {
-                if ($(document).find("#" + fieldsArray[i]).length) {
-                    lxchatfield = fieldsArray[i];
-                    lxchat_array_position = i;
-                    if (!record_id) {
-                        console.log("lxchat doesn't render when record_id isn't present");
-                        lxShowCRMfield(lxchatfield, false);
-                        $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
-                    } else {
-                        lxchatRender(lxchatfield, lxchat_array_position);
+            if (data == '') {
+                console.log("lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file");
+            } else {
+                fieldsArray = JSON.parse(data);
+                for (var i = 0; i < fieldsArray.length; i++) {
+                    if ($(document).find("#" + fieldsArray[i]).length) {
+                        lxchatfield = fieldsArray[i];
+                        lxchat_array_position = i;
+                        if (!record_id) {
+                            console.log("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
+                            lxShowCRMfield(lxchatfield, false);
+                            $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
+                        } else {
+                            lxchatRender(lxchatfield, lxchat_array_position);
+                        }
                     }
                 }
             }
