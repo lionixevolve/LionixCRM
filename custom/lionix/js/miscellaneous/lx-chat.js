@@ -113,32 +113,34 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
                 console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatRender()', 'ajax success');
                 console.log("success callback:", status);
                 console.log("data:", data);
-                var currentUser = $(".user_label:eq(0)").text().trim();
-                //Current lxchatfield text
-                data = (data == '')
-                    ? "[]"
-                    : data;
-                window.lxchatMessagesArray = JSON.parse(data);
-                lxchatfieldtext = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
-                //Current crm field must be hide
-                $('#' + lxchatfield).hide();
-                //lxchat div added
-                $('<div id="lxchat"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + lxchatfield);
-                $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
-                $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
-                document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
-                //Textarea for new messages added
-                $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
-                $(document).on("keypress", "#lxchatnewmsg", function(event) {
-                    if (event.which == 13 && !event.shiftKey) {
+                if (!$("#lxchat").length) {
+                    var currentUser = $(".user_label:eq(0)").text().trim();
+                    //Current lxchatfield text
+                    data = (data == '')
+                        ? "[]"
+                        : data;
+                    window.lxchatMessagesArray = JSON.parse(data);
+                    lxchatfieldtext = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
+                    //Current crm field must be hide
+                    $('#' + lxchatfield).hide();
+                    //lxchat div added
+                    $('<div id="lxchat"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + lxchatfield);
+                    $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
+                    $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
+                    document.getElementById("lxchatcontent").innerHTML = lxchatMessagesArrayToHTML(window.lxchatMessagesArray);
+                    //Textarea for new messages added
+                    $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
+                    $(document).on("keypress", "#lxchatnewmsg", function(event) {
+                        if (event.which == 13 && !event.shiftKey) {
+                            lxchatValidateNewMessage();
+                        }
+                    });
+                    //Save new messages button added
+                    $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
+                    $(document).on("click", "#lxchatSave", function(event) {
                         lxchatValidateNewMessage();
-                    }
-                });
-                //Save new messages button added
-                $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
-                $(document).on("click", "#lxchatSave", function(event) {
-                    lxchatValidateNewMessage();
-                });
+                    });
+                }
                 console.groupEnd();
             },
             // error is a function to be called if the request fails.
