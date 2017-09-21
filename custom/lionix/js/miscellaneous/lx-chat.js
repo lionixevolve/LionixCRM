@@ -164,65 +164,69 @@ window.lxchatRender = function(lxchatfield, lxchat_array_position) {
 }
 
 window.lxchatFindFieldToRender = function() {
-    var currentForm = document.forms['DetailView'];
-    if (!currentForm) {
-        currentForm = document.forms['EditView'];
-    }
-    var record_id = currentForm.record.value;
-    var module_name = currentForm.module.value;
-    var lxajaxdata = "method=" +
-    "lxChatGetSmartChatField";
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax beforeSend');
-            console.log("*** start ***");
-            console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
-        },
-        url: 'lxajax.php',
-        type: 'GET',
-        data: lxajaxdata,
-        // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
-            if (data == '') {
-                console.log("lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file");
-            } else {
-                fieldsArray = JSON.parse(data);
-                for (var i = 0; i < fieldsArray.length; i++) {
-                    if ($(document).find("#" + fieldsArray[i]).length) {
-                        lxchatfield = fieldsArray[i];
-                        lxchat_array_position = i;
-                        if (!record_id) {
-                            console.log("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
-                            lxShowCRMfield(lxchatfield, false);
-                            $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
-                        } else {
-                            lxchatRender(lxchatfield, lxchat_array_position);
+    if (!$("#lxchat").length) {
+        var currentForm = document.forms['DetailView'];
+        if (!currentForm) {
+            currentForm = document.forms['EditView'];
+        }
+        var record_id = currentForm.record.value;
+        var module_name = currentForm.module.value;
+        var lxajaxdata = "method=" +
+        "lxChatGetSmartChatField";
+        $.ajax({
+            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+            beforeSend: function(jqXHR, settings) {
+                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax beforeSend');
+                console.log("*** start ***");
+                console.log("beforeSend callback:", settings.url);
+                console.groupEnd();
+            },
+            url: 'lxajax.php',
+            type: 'GET',
+            data: lxajaxdata,
+            // success is a function to be called if the request succeeds.
+            success: function(data, status, jqXHR) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax success');
+                console.log("success callback:", status);
+                console.log("data:", data);
+                if (!$("#lxchat").length) {
+                    if (data == '') {
+                        console.log("lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file");
+                    } else {
+                        fieldsArray = JSON.parse(data);
+                        for (var i = 0; i < fieldsArray.length; i++) {
+                            if ($(document).find("#" + fieldsArray[i]).length) {
+                                lxchatfield = fieldsArray[i];
+                                lxchat_array_position = i;
+                                if (!record_id) {
+                                    console.log("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
+                                    lxShowCRMfield(lxchatfield, false);
+                                    $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
+                                } else {
+                                    lxchatRender(lxchatfield, lxchat_array_position);
+                                }
+                            }
                         }
                     }
                 }
-            }
-        },
-        // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function lxchatFindFieldToRender error:", error);
-            console.groupEnd();
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        //     console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax complete');
-        //     console.log("complete status:", status);
-        //     console.groupEnd();
-        // },
-        datatype: "text"
-    })
-    // }
+            },
+            // error is a function to be called if the request fails.
+            error: function(jqXHR, status, error) {
+                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax error');
+                console.log("error callback:", status);
+                console.log("Function lxchatFindFieldToRender error:", error);
+                console.groupEnd();
+            }, // end error
+            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+            // complete: function(jqXHR, status) {
+            //     console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lxchatFindFieldToRender()', 'ajax complete');
+            //     console.log("complete status:", status);
+            //     console.groupEnd();
+            // },
+            datatype: "text"
+        })
+        // }
+    }
 }
 
 window.lxchatMessagesArrayToHTML = function(msgArray) {
@@ -333,6 +337,8 @@ window.lxchatValidateNewMessage = function() {
 
 // Observers definitions
 !function() {
+    var lxchatfield = '';
+    var lxchat_array_position = '';
     if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
         // now it ensures that lxchat isn't already present
         if (!$("#lxchat").length) {
@@ -359,8 +365,6 @@ window.lxchatValidateNewMessage = function() {
         // if (mutations) { /*your code*/ }
         if (mutations) {
             $(document).ready(function() {
-                var lxchatfield = '';
-                var lxchat_array_position = '';
                 // if #edit_button exists is a detailview, if not, then if a #SAVE or #SAVE_HEADER button exists is a editview
                 if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
                     // now it ensures that lxchat isn't already present
