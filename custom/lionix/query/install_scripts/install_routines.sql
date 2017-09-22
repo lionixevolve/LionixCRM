@@ -253,7 +253,7 @@ VALUES('Opportunitiesmaincontactcedula_c', 'maincontactcedula_c', 'LBL_MAINCONTA
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
-VALUES('Opportunitiesdnc_c', 'dnc_c', 'LBL_DNC', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '+1 week', '2017-08-24 19:26:53.000', 0, 0, 0, 0, 1, 'false', '', '', '', '');
+VALUES('Opportunitiesdnc_c', 'dnc_c', 'LBL_DNC', 'LionixCRM', 'LionixCRM', 'Opportunities', 'date', NULL, 0, '+1 week', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
