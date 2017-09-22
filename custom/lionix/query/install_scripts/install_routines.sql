@@ -211,7 +211,7 @@ ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100) NULL
 ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100) NULL ;
 ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100) NULL ;
 
-INSERT INTO lionixcrm.fields_meta_data
+INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitieschat_c', 'chat_c', 'LBL_CHAT', 'LionixCRM', 'LionixCRM', 'Opportunities', 'text', NULL, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '6', '80', '');
 
@@ -418,13 +418,17 @@ VALUES('wf-op-not-date-closed', 'WF-OP-NOT-DATE_CLOSED: Notify 3 days before', u
 
 INSERT INTO aow_conditions
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, condition_order, module_path, field, operator, value_type, value)
-VALUES('wf-op-not-date-closed-cond-1', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 1, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'sales_stage', 'Not_Equal_To', 'Multi', '^Closed Won^,^Closed Lost^');
+VALUES('wf-op-not-date-closed-cond-1', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 1, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'sales_stage', 'Not_Equal_To', 'Multi', '^Closed Lost^,^Closed Won^');
 INSERT INTO aow_conditions
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, condition_order, module_path, field, operator, value_type, value)
-VALUES('wf-op-not-date-closed-cond-2', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 2, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'date_closed', 'Greater_Than', 'Date', 'YTo0OntpOjA7czo1OiJ0b2RheSI7aToxO3M6NToibWludXMiO2k6MjtzOjE6IjMiO2k6MztzOjM6ImRheSI7fQ==');
+VALUES('wf-op-not-date-closed-cond-2', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 2, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'dateclosednotified_c', 'Equal_To', 'Value', NULL);
 INSERT INTO aow_conditions
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, condition_order, module_path, field, operator, value_type, value)
-VALUES('wf-op-not-date-closed-cond-3', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 3, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'dateclosednotified_c', 'Equal_To', 'Value', '0');
+VALUES('wf-op-not-date-closed-cond-3', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 3, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'date_closed', 'Greater_Than', 'Date', 'YTo0OntpOjA7czo1OiJ0b2RheSI7aToxO3M6NDoicGx1cyI7aToyO3M6MToiMyI7aTozO3M6MzoiZGF5Ijt9');
+INSERT INTO aow_conditions
+(id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, condition_order, module_path, field, operator, value_type, value)
+VALUES('wf-op-not-date-closed-cond-4', '', utc_timestamp(), utc_timestamp(), '1', '1', NULL, 0, 'wf-op-not-date-closed', 4, 'YToxOntpOjA7czoxMzoiT3Bwb3J0dW5pdGllcyI7fQ==', 'date_closed', 'Less_Than', 'Date', 'YTo0OntpOjA7czo1OiJ0b2RheSI7aToxO3M6NDoicGx1cyI7aToyO3M6MToiNSI7aTozO3M6MzoiZGF5Ijt9');
+
 
 INSERT INTO aow_actions
 (id, name, date_entered, date_modified, modified_user_id, created_by, description, deleted, aow_workflow_id, action_order, `action`, parameters)
