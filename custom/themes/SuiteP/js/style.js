@@ -23,6 +23,23 @@ lxscripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js
 lxscripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
 lxscripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lxscripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
+// when developing use the "activate" cache mode, like this:
+// lxscripts.push(["custom/lionix/js/{your-developing-script}",true]);
+// preload al LionixCRM required javascript files array list for blazing speed
+lxscripts.forEach(function(element) {
+    if (Array.isArray(element)) {
+        current_script = element[0];
+        cache = element[1];
+    } else {
+        current_script = element;
+        cache = false;
+    }
+    var preloadLink = document.createElement("link");
+    preloadLink.href = current_script //"custom/lionix/js/miscellaneous/loadScript.js";
+    preloadLink.rel = "preload";
+    preloadLink.as = "script";
+    document.head.appendChild(preloadLink);
+});
 //load js on cascade
 var script = document.createElement("script");
 script.type = "text/javascript";
