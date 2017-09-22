@@ -46,25 +46,32 @@ script.type = "text/javascript";
 script.src = "custom/lionix/js/miscellaneous/loadScript.js"; //+ "?t=" + new Date().getTime(); //prevent caching;;
 document.head.appendChild(script);
 script.onload = function() {
-        function load(i) {
-            if (i < scripts.length) {
-                loadScript(scripts[i], function() {
-                    load(++i);
-                });
     scripts = lxscripts;
+    function load(i) {
+        if (i < scripts.length) {
+            if (Array.isArray(scripts[i])) {
+                current_script = scripts[i][0];
+                cache = scripts[i][1];
             } else {
-                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
-                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
-                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
-                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
-                $('head').append('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
-                $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
-                $(document).ready(function() { //Primer document ready
-                    console.log("You are running jQuery version:", $.fn.jquery);
-                    // Add "Metas" option on main nav menu
-                    //Any code you may need please added on another scripts.push(file) on the beginning
-                }); //final primer document ready
-            } //fin else *all your scripts have loaded, so go ahead and do what you need to do*
-        } //fin load(i)
-        load(0);
-    } //fin custom/lionix/js/loadScript.js
+                current_script = scripts[i];
+                cache = false;
+            }
+            loadScript(current_script, cache, function() {
+                load(++i);
+            });
+        } else {
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
+            $('head').append('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
+            $(document).ready(function() { //Primer document ready
+                console.log("You are running jQuery version:", $.fn.jquery);
+                // Add "Metas" option on main nav menu
+                //Any code you may need please added on another scripts.push(file) on the beginning
+            }); //final primer document ready
+        } //fin else *all your scripts have loaded, so go ahead and do what you need to do*
+    } //fin load(i)
+    load(0);
+} //fin custom/lionix/js/loadScript.js
