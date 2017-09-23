@@ -63,8 +63,8 @@ function post_installModules()
     $roles = array(
                 array('id' => 'all-role',           'name' => 'All',            'description' => 'Full access to all data.'),
                 array('id' => 'read-only-role',     'name' => 'Read Only',      'description' => 'Read only access to all data.'),
-                array('id' => 'owner-edit-role',    'name' => 'Owner',          'description' => 'Edit only my records.'),
-                array('id' => 'owner-delete-role',  'name' => 'Owner',          'description' => 'Delete only my records.'),
+                array('id' => 'owner-edit-role',    'name' => 'Owner Edit',          'description' => 'Edit only my records.'),
+                array('id' => 'owner-delete-role',  'name' => 'Owner Delete',          'description' => 'Delete only my records.'),
                 array('id' => 'no-export-role',     'name' => 'No Export',      'description' => 'Cannot export any data.'),
                 array('id' => 'no-massupdate-role', 'name' => 'No Mass Update', 'description' => 'Cannot mass update any data.'),
                 array('id' => 'no-delete-role',     'name' => 'No Delete',      'description' => 'Cannot deleted any data.'),
@@ -147,7 +147,7 @@ function post_installModules()
                         AND action_id IN
                             (SELECT id
                              FROM acl_actions
-                             WHERE name IN ('access'
+                             WHERE name IN ('access',
                                             'delete',
                                             'export',
                                             'import',
@@ -175,7 +175,7 @@ function post_installModules()
                         AND action_id IN
                             (SELECT id
                              FROM acl_actions
-                             WHERE name IN ('access'
+                             WHERE name IN ('access',
                                             'edit',
                                             'export',
                                             'import',
