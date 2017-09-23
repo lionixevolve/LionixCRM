@@ -61,13 +61,29 @@ function post_installModules()
     // view not set         0
     // view none          -99
     $roles = array(
-                array('id' => 'all-role',           'name' => 'All',            'description' => 'Full access to all data.'),
-                array('id' => 'read-only-role',     'name' => 'Read Only',      'description' => 'Read only access to all data.'),
-                array('id' => 'owner-edit-role',    'name' => 'Owner Edit',          'description' => 'Edit only my records.'),
-                array('id' => 'owner-delete-role',  'name' => 'Owner Delete',          'description' => 'Delete only my records.'),
-                array('id' => 'no-export-role',     'name' => 'No Export',      'description' => 'Cannot export any data.'),
-                array('id' => 'no-massupdate-role', 'name' => 'No Mass Update', 'description' => 'Cannot mass update any data.'),
-                array('id' => 'no-delete-role',     'name' => 'No Delete',      'description' => 'Cannot deleted any data.'),
+                array('id' => 'all-role',              'name' => 'All',               'description' => 'Full access to all data.'),
+                array('id' => 'read-only-role',        'name' => 'Read Only',         'description' => 'Read only access to all data.'),
+                array('id' => 'delete-no-role',        'name' => 'No Delete',         'description' => 'Cannot deleted any data.'),
+                array('id' => 'delete-owner-role',     'name' => 'Owner Delete',      'description' => 'Delete only my records.'),
+                array('id' => 'delete-group-role',     'name' => 'Group Delete',      'description' => 'Delete only group records.'),
+                array('id' => 'edit-no-role',          'name' => 'No Edit',           'description' => 'Cannot edit any data.'),
+                array('id' => 'edit-owner-role',       'name' => 'Owner Edit',        'description' => 'Edit only my records.'),
+                array('id' => 'edit-group-role',       'name' => 'Group Edit',        'description' => 'Edit only group records.'),
+                array('id' => 'export-no-role',        'name' => 'No Export',         'description' => 'Cannot export any data.'),
+                array('id' => 'export-owner-role',     'name' => 'Owner Export',      'description' => 'Export only my records.'),
+                array('id' => 'export-group-role',     'name' => 'Group Export',      'description' => 'Export only group records.'),
+                array('id' => 'import-no-role',        'name' => 'No Import',         'description' => 'Cannot import any data.'),
+                array('id' => 'import-owner-role',     'name' => 'Owner Import',      'description' => 'Import only my records.'),
+                array('id' => 'import-group-role',     'name' => 'Group Import',      'description' => 'Import only group records.'),
+                array('id' => 'list-no-role',          'name' => 'No List',           'description' => 'Cannot list any data.'),
+                array('id' => 'list-owner-role',       'name' => 'Owner List',        'description' => 'List only my records.'),
+                array('id' => 'list-group-role',       'name' => 'Group List',        'description' => 'List only group records.'),
+                array('id' => 'massupdate-no-role',    'name' => 'No Mass Update',    'description' => 'Cannot mass update any data.'),
+                array('id' => 'massupdate-owner-role', 'name' => 'Owner Mass Update', 'description' => 'Mass update only my records.'),
+                array('id' => 'massupdate-group-role', 'name' => 'Group Mass Update', 'description' => 'Mass update only group records.'),
+                array('id' => 'view-no-role',          'name' => 'No View',           'description' => 'Cannot view any data.'),
+                array('id' => 'view-owner-role',       'name' => 'Owner View',        'description' => 'View only my records.'),
+                array('id' => 'view-group-role',       'name' => 'Group View',        'description' => 'View only group records.'),
             );
     foreach ($roles as $role) {
         $query = "
@@ -129,15 +145,15 @@ function post_installModules()
                 ";
                 $db->query($query);
             break;
-            case 'owner-edit-role':
+            case 'delete-no-role':
                 $query = "
                     UPDATE acl_roles_actions
-                    SET access_override = '75' -- 75 is owner
+                    SET access_override = '-99' -- -99 is none
                     WHERE role_id = '{$role['id']}'
                         AND action_id IN
                             (SELECT id
                              FROM acl_actions
-                             WHERE name IN ('edit'))
+                             WHERE name IN ('delete'))
                 ";
                 $db->query($query);
                 $query = "
@@ -147,17 +163,17 @@ function post_installModules()
                         AND action_id IN
                             (SELECT id
                              FROM acl_actions
-                             WHERE name IN ('access',
-                                            'delete',
-                                            'export',
-                                            'import',
-                                            'list',
-                                            'massupdate',
-                                            'view'))
+                             WHERE name IN ( 'access',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
                 ";
                 $db->query($query);
             break;
-            case 'owner-delete-role':
+            case 'delete-owner-role':
                 $query = "
                     UPDATE acl_roles_actions
                     SET access_override = '75' -- 75 is owner
@@ -185,7 +201,119 @@ function post_installModules()
                 ";
                 $db->query($query);
             break;
-            case 'no-export-role':
+            case 'delete-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('delete'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('access',
+                                            'edit',
+                                            'export',
+                                            'import',
+                                            'list',
+                                            'massupdate',
+                                            'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'edit-no-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '-99' -- -99 is none
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('edit'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('access',
+                                            'delete',
+                                            'export',
+                                            'import',
+                                            'list',
+                                            'massupdate',
+                                            'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'edit-owner-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '75' -- 75 is owner
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('edit'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('access',
+                                            'delete',
+                                            'export',
+                                            'import',
+                                            'list',
+                                            'massupdate',
+                                            'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'edit-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('edit'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('access',
+                                            'delete',
+                                            'export',
+                                            'import',
+                                            'list',
+                                            'massupdate',
+                                            'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'export-no-role':
                 $query = "
                     UPDATE acl_roles_actions
                     SET access_override = '-99' -- -99 is none
@@ -206,14 +334,238 @@ function post_installModules()
                              WHERE name IN ( 'access',
                                              'delete',
                                              'edit',
-                                             'massupdate',
                                              'import',
                                              'list',
+                                             'massupdate',
                                              'view'))
                 ";
                 $db->query($query);
             break;
-            case 'no-massupdate-role':
+            case 'export-owner-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '75' -- 75 is owner
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('export'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'import',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'export-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('export'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'import',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'import-no-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '-99' -- -99 is none
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('import'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'import-owner-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '75' -- 75 is owner
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('import'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'import-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('import'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'list',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'list-no-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '-99' -- -99 is none
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('list'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'list-owner-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '75' -- 75 is owner
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('list'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'list-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('list'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'massupdate',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'massupdate-no-role':
                 $query = "
                     UPDATE acl_roles_actions
                     SET access_override = '-99' -- -99 is none
@@ -241,15 +593,15 @@ function post_installModules()
                 ";
                 $db->query($query);
             break;
-            case 'no-delete-role':
+            case 'massupdate-owner-role':
                 $query = "
                     UPDATE acl_roles_actions
-                    SET access_override = '-99' -- -99 is none
+                    SET access_override = '75' -- 75 is owner
                     WHERE role_id = '{$role['id']}'
                         AND action_id IN
                             (SELECT id
                              FROM acl_actions
-                             WHERE name IN ('delete'))
+                             WHERE name IN ('massupdate'))
                 ";
                 $db->query($query);
                 $query = "
@@ -260,12 +612,124 @@ function post_installModules()
                             (SELECT id
                              FROM acl_actions
                              WHERE name IN ( 'access',
+                                             'delete',
                                              'edit',
                                              'export',
                                              'import',
                                              'list',
-                                             'massupdate',
                                              'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'massupdate-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('massupdate'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'list',
+                                             'view'))
+                ";
+                $db->query($query);
+            break;
+            case 'view-no-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '-99' -- -99 is none
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('view'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'list',
+                                             'massupdate'))
+                ";
+                $db->query($query);
+            break;
+            case 'view-owner-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '75' -- 75 is owner
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('view'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'list',
+                                             'massupdate'))
+                ";
+                $db->query($query);
+            break;
+            case 'view-group-role':
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '80' -- 80 is group
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ('view'))
+                ";
+                $db->query($query);
+                $query = "
+                    UPDATE acl_roles_actions
+                    SET access_override = '0' -- 0 is not set
+                    WHERE role_id = '{$role['id']}'
+                        AND action_id IN
+                            (SELECT id
+                             FROM acl_actions
+                             WHERE name IN ( 'access',
+                                             'delete',
+                                             'edit',
+                                             'export',
+                                             'import',
+                                             'list',
+                                             'massupdate'))
                 ";
                 $db->query($query);
             break;
