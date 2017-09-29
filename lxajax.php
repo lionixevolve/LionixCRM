@@ -251,6 +251,12 @@ class LxAJAX
         return json_encode($list);
     }
 
+    // functions working together getCurrentUserId, lxChatGetSmartChatField and lxChat.
+    public function getCurrentUserId()
+    {
+        return $GLOBALS['current_user']->id;
+    }
+
     public function lxChatGetSmartChatField()
     {
         return json_encode($GLOBALS['sugar_config']['lionixcrm']['smartchat']);
@@ -258,7 +264,7 @@ class LxAJAX
 
     public function lxChat()
     {
-        $messagesArray = Array();
+        $messagesArray = array();
         if ($this->data['module']) {
             global $moduleList,$beanList,$beanFiles,$app_list_strings;
             $class_name = $beanList[$this->data['module']];
@@ -296,9 +302,7 @@ class LxAJAX
         return json_encode($messagesArray);
     }
 
-    public function getCurrentUserId()
     {
-        return $GLOBALS['current_user']->id;
     }
 }//end class LxAJAX
 
