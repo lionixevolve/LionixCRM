@@ -1,4 +1,64 @@
 // This file containts opportunities bussines logic
+// function definitions section
+lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentValue, accountId) {
+    var method = "getLionixCRMConfigOption";
+    var data = "method=" + method;
+    data += "&option=" + "business_type";
+    // data += "&opportunityId=" + opportunityId;
+    // data += "&currentValue=" + currentValue;
+    // data += "&accountId=" + accountId;
+    //data += "&use_adodb5="+"1";
+    $.ajax({
+        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+        beforeSend: function(jqXHR, settings) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax beforeSend');
+            console.log("*** start ***");
+            console.log("beforeSend callback:", settings.url);
+            console.groupEnd();
+        }, //end beforeSend
+        url: 'lxajax.php',
+        type: 'GET',
+        data: data,
+        // success is a function to be called if the request succeeds.
+        success: function(data, status, jqXHR) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax success');
+            console.log("success callback:", status);
+            console.log("data:", data);
+
+            switch (data) {
+                case 'b2c':
+                    lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
+                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
+                        if ($("#maincontact_c").val() == 'new') {
+                            $('#account_id').val('');
+                            lx.field.show("account_name", false);
+                        } else {
+                            lx.field.show("account_name", true);
+                        }
+                    });
+                    break;
+                case 'b2b':
+                    lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', true);
+                    $('#maincontact_c').off("change.lx-hide-account-name");
+                    break;
+            }
+
+            console.groupEnd();
+        }, // end success
+        // error is a function to be called if the request fails.
+        error: function(jqXHR, status, error) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax error');
+            console.log("error callback:", status);
+            console.log("Function lx.opportunity.getAccountNameByBusinessType error:", error);
+            console.groupEnd();
+        }, // end error
+        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+        // complete: function(jqXHR, status) {
+        // }, // end complete
+        datatype: "text"
+    }); // end ajax
+} // end function
+
 //Self-Invoking Anonymous Function Notation
 // !function(){}(); // easy to read, the result is unimportant.
 // (function(){})(); // like above but more parens.
@@ -18,7 +78,7 @@
                         console.groupEnd();
                         opid = document.forms['EditView'].record.value;
                         $("#account_name").append('<div id="account_name_lxajaxed"/>');
-                        getLxOpportunityAccountNameByBusinessType(); //popoulate dropdown once when editview loads.
+                        lx.opportunity.getAccountNameByBusinessType(); //popoulate dropdown once when editview loads.
                     }
                 }
             }
@@ -52,64 +112,4 @@
     observer.observe(target, config);
     // end observer
 }();
-
-// function definitions section
-function getLxOpportunityAccountNameByBusinessType(opportunityId, currentValue, accountId) {
-    var method = "getLionixCRMConfigOption";
-    var data = "method=" + method;
-    data += "&option=" + "business_type";
-    // data += "&opportunityId=" + opportunityId;
-    // data += "&currentValue=" + currentValue;
-    // data += "&accountId=" + accountId;
-    //data += "&use_adodb5="+"1";
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'getLxOpportunityAccountNameByBusinessType()', 'ajax beforeSend');
-            console.log("*** start ***");
-            console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
-        }, //end beforeSend
-        url: 'lxajax.php',
-        type: 'GET',
-        data: data,
-        // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'getLxOpportunityAccountNameByBusinessType()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
-
-            switch (data) {
-                case 'b2c':
-                    lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', false);
-                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
-                        if ($("#maincontact_c").val() == 'new') {
-                            $('#account_id').val('');
-                            lxShowCRMfield("account_name", false);
-                        } else {
-                            lxShowCRMfield("account_name", true);
-                        }
-                    });
-                    break;
-                case 'b2b':
-                    lxValidateCRMfield('EditView', 'account_name', 'Nombre de Cuenta', true);
-                    $('#maincontact_c').off("change.lx-hide-account-name");
-                    break;
-            }
-
-            console.groupEnd();
-        }, // end success
-        // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'getLxOpportunityAccountNameByBusinessType()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function getLxOpportunityAccountNameByBusinessType error:", error);
-            console.groupEnd();
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        // }, // end complete
-        datatype: "text"
-    }); // end ajax
-} // end function
 //eof
