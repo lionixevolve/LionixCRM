@@ -1,32 +1,38 @@
+// LionixCRM lx javascript object definition
+var lx = {
+    "field": {},
+    "lionixCRM": {},
+    "opportunity": {}
+};
 // LionixCRM required javascript files array list
-var lxscripts = new Array();
+lx.lionixCRM.scripts = new Array();
 //SuiteCRM has jQuery preloaded don't include it.
-lxscripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"); //momentjs x-pseudo usefult for testing
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-do.js"); //momentjs Spanish for Dominican Republic
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"); //momentjs Portuguese for Brazil
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
-lxscripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
-lxscripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
-lxscripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
-lxscripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
-lxscripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
-lxscripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
-lxscripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/toastr.js");
-lxscripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
-lxscripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
-lxscripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"); //momentjs x-pseudo usefult for testing
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-do.js"); //momentjs Spanish for Dominican Republic
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"); //momentjs Portuguese for Brazil
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 // when developing use the "activate" cache mode, like this:
-// lxscripts.push(["custom/lionix/js/{your-developing-script}",true]);
+// lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // preload al LionixCRM required javascript files array list for blazing speed
-lxscripts.forEach(function(element) {
+lx.lionixCRM.scripts.forEach(function(element) {
     if (Array.isArray(element)) {
         current_script = element[0];
         cache = element[1];
@@ -46,7 +52,7 @@ script.type = "text/javascript";
 script.src = "custom/lionix/js/miscellaneous/loadScript.js"; //+ "?t=" + new Date().getTime(); //prevent caching;;
 document.head.appendChild(script);
 script.onload = function() {
-    scripts = lxscripts;
+    scripts = lx.lionixCRM.scripts;
     function load(i) {
         if (i < scripts.length) {
             if (Array.isArray(scripts[i])) {
@@ -56,7 +62,7 @@ script.onload = function() {
                 current_script = scripts[i];
                 cache = false;
             }
-            loadScript(current_script, cache, function() {
+            lx.lionixCRM.loadScript(current_script, cache, function() {
                 load(++i);
             });
         } else {
