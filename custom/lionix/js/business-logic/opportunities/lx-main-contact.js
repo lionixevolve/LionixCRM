@@ -1,4 +1,100 @@
 // This file containts opportunities bussines logic
+
+// function definitions section
+lx.opportunity.getnewMainContactCFields = function() {
+    var form_name = 'EditView';
+    if ($("#lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
+        $("#maincontact_c").append('<div id="lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time"/>');
+        $("#maincontactfirstname_c").val('');
+        $("#maincontactlastname_c").val('');
+        $("#maincontactlastname2_c").val('');
+        $("#maincontactphonework_c").val('');
+        $("#maincontactemailaddress_c").val('');
+        $("#maincontacttitle_c").val('');
+        $("#maincontactcedula_c").val('');
+    }
+    if ($("#maincontact_c").val() == 'new') {
+        $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
+            switch ($("#maincontactfirstname_c").val().toUpperCase()) {
+                case "NEW":
+                    $("#maincontactfirstname_c").val('');
+                    break;
+            }
+        });
+        lx.field.show("maincontactfirstname_c", true);
+        lx.field.show("maincontactlastname_c", true);
+        lx.field.show("maincontactlastname2_c", true);
+        lx.field.show("maincontactphonework_c", true);
+        lx.field.show("maincontactemailaddress_c", true);
+        lx.field.show("maincontacttitle_c", true);
+        lx.field.show("maincontactcedula_c", true);
+        lx.field.validate(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
+        lx.field.validate(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
+        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
+        lx.field.validate(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
+        lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
+        lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
+    } else {
+        lx.field.validate(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
+        $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
+        lx.field.show("maincontactfirstname_c", false);
+        lx.field.show("maincontactlastname_c", false);
+        lx.field.show("maincontactlastname2_c", false);
+        lx.field.show("maincontactphonework_c", false);
+        lx.field.show("maincontactemailaddress_c", false);
+        lx.field.show("maincontacttitle_c", false);
+        lx.field.show("maincontactcedula_c", false);
+    }
+}
+
+lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, accountId) {
+    var method = "getOpportunityMainContactList";
+    var data = "method=" + method;
+    data += "&opportunityId=" + opportunityId;
+    data += "&currentValue=" + currentValue;
+    data += "&accountId=" + accountId;
+    //data += "&use_adodb5="+"1";
+    $.ajax({
+        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+        beforeSend: function(jqXHR, settings) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
+            console.log("*** start ***");
+            console.log("beforeSend callback:", settings.url);
+            console.groupEnd();
+        }, //end beforeSend
+        url: 'lxajax.php',
+        type: 'GET',
+        data: data,
+        // success is a function to be called if the request succeeds.
+        success: function(data, status, jqXHR) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax success');
+            console.log("success callback:", status);
+            console.log("data:", data);
+            $('#maincontact_c').fillSelect($.parseJSON(data));
+            console.groupEnd();
+        }, // end success
+        // error is a function to be called if the request fails.
+        error: function(jqXHR, status, error) {
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax error');
+            console.log("error callback:", status);
+            console.log("Function lx.opportunity.getMainContactDropdown error:", error);
+            console.groupEnd();
+        }, // end error
+        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+        // complete: function(jqXHR, status) {
+        // }, // end complete
+        datatype: "text"
+    }); // end ajax
+    lx.opportunity.getnewMainContactCFields();
+} // end function
+
 //Self-Invoking Anonymous Function Notation
 // !function(){}(); // easy to read, the result is unimportant.
 // (function(){})(); // like above but more parens.
@@ -18,12 +114,12 @@
                         console.groupEnd();
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
-                        getLxOpportunityMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
+                        lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
                         $('#account_name').on("focusout.account-name", function() {
-                            getLxOpportunityMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
+                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
                         });
                         $('#maincontact_c').on("change.lx-main-contact-c", function() {
-                            getnewMainContactCFields();
+                            lx.opportunity.getnewMainContactCFields();
                         });
                     }
                 }
@@ -58,100 +154,5 @@
     observer.observe(target, config);
     // end observer
 }();
-
-// function definitions section
-function getLxOpportunityMainContactDropdown(opportunityId, currentValue, accountId) {
-    var method = "getOpportunityMainContactList";
-    var data = "method=" + method;
-    data += "&opportunityId=" + opportunityId;
-    data += "&currentValue=" + currentValue;
-    data += "&accountId=" + accountId;
-    //data += "&use_adodb5="+"1";
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'getLxOpportunityMainContactDropdown()', 'ajax beforeSend');
-            console.log("*** start ***");
-            console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
-        }, //end beforeSend
-        url: 'lxajax.php',
-        type: 'GET',
-        data: data,
-        // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'getLxOpportunityMainContactDropdown()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
-            $('#maincontact_c').fillSelect($.parseJSON(data));
-            console.groupEnd();
-        }, // end success
-        // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'getLxOpportunityMainContactDropdown()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function getLxOpportunityMainContactDropdown error:", error);
-            console.groupEnd();
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        // }, // end complete
-        datatype: "text"
-    }); // end ajax
-    getnewMainContactCFields();
-} // end function
-
-function getnewMainContactCFields() {
-    var form_name = 'EditView';
-    if ($("#maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
-        $("#maincontact_c").append('<div id="maincontact_c_lxajaxed_getnewMainContactCFields_first_time"/>');
-        $("#maincontactfirstname_c").val('');
-        $("#maincontactlastname_c").val('');
-        $("#maincontactlastname2_c").val('');
-        $("#maincontactphonework_c").val('');
-        $("#maincontactemailaddress_c").val('');
-        $("#maincontacttitle_c").val('');
-        $("#maincontactcedula_c").val('');
-    }
-    if ($("#maincontact_c").val() == 'new') {
-        $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
-            switch ($("#maincontactfirstname_c").val().toUpperCase()) {
-                case "NEW":
-                    $("#maincontactfirstname_c").val('');
-                    break;
-            }
-        });
-        lxShowCRMfield("maincontactfirstname_c", true);
-        lxShowCRMfield("maincontactlastname_c", true);
-        lxShowCRMfield("maincontactlastname2_c", true);
-        lxShowCRMfield("maincontactphonework_c", true);
-        lxShowCRMfield("maincontactemailaddress_c", true);
-        lxShowCRMfield("maincontacttitle_c", true);
-        lxShowCRMfield("maincontactcedula_c", true);
-        lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
-        lxValidateCRMfield(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
-    } else {
-        lxValidateCRMfield(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
-        lxValidateCRMfield(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
-        $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
-        lxShowCRMfield("maincontactfirstname_c", false);
-        lxShowCRMfield("maincontactlastname_c", false);
-        lxShowCRMfield("maincontactlastname2_c", false);
-        lxShowCRMfield("maincontactphonework_c", false);
-        lxShowCRMfield("maincontactemailaddress_c", false);
-        lxShowCRMfield("maincontacttitle_c", false);
-        lxShowCRMfield("maincontactcedula_c", false);
-    }
-}
 
 //eof
