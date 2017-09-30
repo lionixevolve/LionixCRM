@@ -201,7 +201,7 @@ lx.chat.findFieldToRender = function() {
                                 lxchat_array_position = i;
                                 if (!record_id) {
                                     console.log("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
-                                    lxShowCRMfield(lxchatfield, false);
+                                    lx.field.show(lxchatfield, false);
                                     $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
                                 } else {
                                     lx.chat.render(lxchatfield, lxchat_array_position);
