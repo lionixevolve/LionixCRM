@@ -20,7 +20,6 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environme
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
@@ -31,6 +30,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-acco
 lx.lionixCRM.scripts.push(["custom/lionix/js/business-logic/opportunities/lx-upload-files-in-editview.js",true]);
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
 // when developing use the "activate" cache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // preload al LionixCRM required javascript files array list for blazing speed
