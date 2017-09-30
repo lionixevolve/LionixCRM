@@ -24,6 +24,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
