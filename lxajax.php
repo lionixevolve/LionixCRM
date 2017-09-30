@@ -302,7 +302,147 @@ class LxAJAX
         return json_encode($messagesArray);
     }
 
+    // functions working together uploadFileTemplate, lxUploadAnyDocumentFormat, uploadExcelFileOrGivenFormat and createSuiteCRMNote.
+    public function uploadFileTemplate()
     {
+        $url = 'lxajax.php?method=lxUploadAnyDocumentFormat&ok_message='.urlencode($this->data['ok_message']);
+        return '
+            <!-- bof -->
+            <div id="'.$this->data['field_name'].'_loader" style="position: absolute; margin: 5px">
+                <span id="'.$this->data['field_name'].'-title"><center style="color: black; font-size: 20px;">Seleccione "'.$this->data['label'].'" a subir</center></span><br/>
+                <form id="'.$this->data['field_name'].'-form" method="post" enctype="multipart/form-data" action="'.$url.'">
+                    <span id="span-'.$this->data['field_name'].'-file">
+                        <input type="file" id="excel-file" name="excel-file" />
+                    </span>
+                </form>
+                <br/>
+                <!-- div preview is handled afterwards by jQuery -->
+                <div id="preview_'.$this->data['field_name'].'" align="center" style="color: navy; font-size: 17px;" />
+                <br/>
+                <center>
+                    <button type="button" class="btn btn-primary btn-sm" id="upload-'.$this->data['field_name'].'-btn">Subir</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="exit-'.$this->data['field_name'].'-btn">Salir</button>
+                </center>
+            </div>
+            <!-- eof -->
+        ';
+    }
+
+    public function lxUploadAnyDocumentFormat()
+    {
+        $data = array();
+        $ok = false;
+        $this->data['regular_expression'] = '/.+/si'; //anything regexp
+        $this->data['valid_formats'] = array('xls', 'XLS', 'xlsx', 'XLSX', 'doc', 'docx', 'pdf', 'jpg', 'jpeg', 'png', 'cmg', 'svg', 'dwg'); //add the formats you want to upload - cmg is for images
+        $uploaded = $this->uploadExcelFileOrGivenFormat();
+        $message = $uploaded['message'];
+        if ($uploaded['ok']) {
+            if ($this->createSuiteCRMNote($this->data, "Opportunities", $this->data['opportunity_id'])) {
+                $ok = true;
+                if (empty($this->data['ok_message'])) {
+                    $message = "Archivo agregado correctamente.";
+                } else {
+                    $message = $this->data['ok_message'];
+                }
+            }
+        }
+        $data['message'] = $message;
+        $data['ok'] = $ok;
+        $data['document_name'] = $this->data['document_name'];
+        $data['document_id'] = $this->data['note_id'];
+        $data['document_file'] = $this->data['note_file'];
+
+        return json_encode($data);
+    }
+
+    public function uploadExcelFileOrGivenFormat()
+    {
+        $data = array();
+        $ok = false;
+        $message = '404: GET not allowed to upload files';
+        if (isset($_POST) and $_SERVER['REQUEST_METHOD'] == 'POST') {
+            $path = 'upload/'; //set your folder path
+            $filename = $_FILES['excel-file']['tmp_name']; //get the temporary uploaded file name
+            $valid_formats = empty($this->data['valid_formats']) ? array('xls', 'XLS', 'xlsx', 'XLSX', 'xlt', 'XLT', 'xltx', 'XLTX') : $this->data['valid_formats'];
+            $name = $_FILES['excel-file']['name']; //get the name of the file
+            $type = $_FILES['excel-file']['type']; //get the mime_type of the file
+            $size = $_FILES['excel-file']['size']; //get the size of the file
+            $tmp = $_FILES['excel-file']['tmp_name']; //get the temporal name of the file
+
+            $this->data['original_filename'] = $name;
+            $this->data['original_file_mime_type'] = $type;
+
+            //check if the file is selected or cancelled after pressing the browse button.
+            if (strlen($name)) {
+                //extract the name and extension of the file
+                list($txt, $ext) = explode('.', $name);
+                $this->data['original_file_ext'] = $ext;
+                //if the file is valid go on.
+                if (in_array($ext, $valid_formats)) {
+                    // check if the file size is more than 2 Gb
+                    if ($size < 2000000000) {
+                        // This regular expression is assign the final name on the file system
+                        $re = $this->data['regular_expression'];
+                        preg_match($re, $name, $matches);
+                        if (!empty($matches)) {
+                            $this->data['document_name'] = $matches[0];
+                            //SUBSTR to 36 chars -  We need to use the filename as the NOTE id
+                            $actual_file_name = uniqid();
+                            //check if it the file move successfully.
+                            if (move_uploaded_file($tmp, $path.$actual_file_name)) {
+                                $this->data['current_filename'] = $actual_file_name;
+                                $ok = true;
+                                $message = 'Archivo subido correctamente.';
+                            } else {
+                                $message = 'Hubo un error al cargar el archivo por favor intente de nuevo.';
+                            }
+                        } else {
+                            $message = 'El archivo no contiene un nombre válido.';
+                        }
+                    } else {
+                        $size_on_gigabytes = $size / pow(1024, 3);
+                        $message = "El tamaño máximo para el archivo es 2 GB, este archivo mide {$size_on_gigabytes} GB.";
+                    }
+                } else {
+                    $message = 'Formato de archivo incorrecto.';
+                }
+            } else {
+                $message = 'Por favor seleccione el archivo a cargar.';
+            }
+        }
+        $data['message'] = $message;
+        $data['ok'] = $ok;
+
+        return $data;
+    }
+
+    public function createSuiteCRMNote($data, $parentType, $parentId)
+    {
+        // Try to upload file
+        try {
+            // Success!
+            $note = new Note();
+            $note->id = $data['current_filename'];
+            $note->new_with_id = true;
+            $note->name = $data['document_name'];
+            $note->filename = $data['document_name'];
+            $note->file_mime_type = $data['mime'];
+            $note->assigned_user_id = $user_id;
+            $note->parent_type = $parentType;
+            $note->parent_id = $parentId;
+            if (strtolower($parentType) == 'contacts') {
+                $note->contact_id = $parentId;
+            }
+            $note->save();
+            // $contents = file_get_contents("upload://{$data['name']}");
+            $this->data['note_id'] = $note->id;
+            $this->data['note_file'] = "index.php?entryPoint=download&type=Notes&id={$note->id}";
+            return true;
+        } catch (\Exception $e) {
+            // Fail!
+            $errors = "Cannot create Document";
+            return $errors;
+        }
     }
 }//end class LxAJAX
 

@@ -148,9 +148,17 @@ array (
         ),
         13 => 
         array (
-          0 => 'description',
+          0 => 
+          array (
+            'name' => 'fpurchaseorder_c',
+            'label' => 'LBL_FPURCHASEORDER',
+          ),
         ),
         14 => 
+        array (
+          0 => 'description',
+        ),
+        15 => 
         array (
           0 => 
           array (

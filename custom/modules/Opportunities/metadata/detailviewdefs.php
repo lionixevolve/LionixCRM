@@ -99,11 +99,19 @@ array (
         array (
           0 => 
           array (
+            'name' => 'fpurchaseorder_c',
+            'label' => 'LBL_FPURCHASEORDER',
+          ),
+        ),
+        7 => 
+        array (
+          0 => 
+          array (
             'name' => 'description',
             'nl2br' => true,
           ),
         ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -112,7 +120,7 @@ array (
             'label' => 'LBL_CHAT',
           ),
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (

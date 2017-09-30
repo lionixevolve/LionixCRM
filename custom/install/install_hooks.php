@@ -818,12 +818,30 @@ function post_installModules()
         ),
         array(
             'module'         => 'Opportunities',
+            'hook'           => 'after_save',
+            'order'          => 103,
+            'description'    => 'setMissingNotesLinksAS',
+            'file'           => 'custom/modules/Opportunities/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXOpportunitiesBeforeAndAfterSaveMethods',
+            'function'       => 'setMissingNotesLinksAS',
+        ),
+        array(
+            'module'         => 'Opportunities',
             'hook'           => 'after_retrieve',
             'order'          => 101,
             'description'    => 'setMainContactC',
             'file'           => 'custom/modules/Opportunities/logic_hooks_after_retrieve.php',
             'class'          => 'LXOpportunitiesAfterRetrieveMethods',
             'function'       => 'setMainContactC',
+        ),
+        array(
+            'module'         => 'Opportunities',
+            'hook'           => 'after_retrieve',
+            'order'          => 102,
+            'description'    => 'setLinksToUploadedFiles',
+            'file'           => 'custom/modules/Opportunities/logic_hooks_after_retrieve.php',
+            'class'          => 'LXOpportunitiesAfterRetrieveMethods',
+            'function'       => 'setLinksToUploadedFiles',
         ),
         // AOS_Quotes
         array(
@@ -863,6 +881,10 @@ function post_installModules()
     $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c'
     $sugar_config['lionixcrm']['exclude_fields_for_update_sales_stages_time_in_mins'] = array(
         'ssclosedwoninmins_c',
+        //'anyOtherField'
+    );
+    $sugar_config['lionixcrm']['opportunities']['upload_files_fields'] = array(
+        'fpurchaseorder_c',
         //'anyOtherField'
     );
     $sugar_config['lionixcrm']['smartchat'] = array(

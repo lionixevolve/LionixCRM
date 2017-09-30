@@ -28,6 +28,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
+lx.lionixCRM.scripts.push(["custom/lionix/js/business-logic/opportunities/lx-upload-files-in-editview.js",true]);
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 // when developing use the "activate" cache mode, like this:
@@ -72,6 +73,7 @@ script.onload = function() {
             $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
             $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
             $('head').append('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
+            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />');
             $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
             $(document).ready(function() { //Primer document ready
                 console.log("You are running jQuery version:", $.fn.jquery);

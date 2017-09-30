@@ -1,5 +1,5 @@
 <?php
-// created: 2017-08-22 17:22:56
+// created: 2017-09-30 00:26:22
 $mod_strings = array (
   'LBL_LXCODE' => 'LxCode',
   'LBL_DATECLOSEDNOTIFIED' => 'dateclosednotified',
@@ -21,4 +21,5 @@ $mod_strings = array (
   'LBL_SSPAIDINMINS' => 'Paid (Minutes)',
   'AOS_Quotes' => 'Cotizaciones',
   'LBL_CHAT' => 'Chat',
+  'LBL_FPURCHASEORDER' => 'Orden de Compra',
 );
