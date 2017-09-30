@@ -242,7 +242,7 @@ function updateSalesStagesTimeInMins()
      ';
     $db->query($query);
 
-    $exclude_fields = implode("','", $sugar_config['lionixcrm']['exclude_fields_for_update_sales_stages_time_in_mins']);
+    $exclude_fields = implode("','", $sugar_config['lionixcrm']['opportunities']['exclude_fields_for_update_sales_stages_time_in_mins']);
     $query = "
         SELECT REPLACE(REPLACE(REPLACE(name,'ss',''),'inmins_c',''),'closed','closed ') AS 'sales_stage', name AS 'field_name'
         FROM fields_meta_data
