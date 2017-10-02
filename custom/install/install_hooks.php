@@ -779,6 +779,25 @@ function post_installModules()
     installLog('...LionixCRM added lxcode_c to all custom and audit tables successfully.');
     installLog('LionixCRM starting to add custom Logic Hooks ...');
     $hooks= array(
+        // Notes
+        array(
+            'module'         => 'Notes',
+            'hook'           => 'before_save',
+            'order'          => 101,
+            'description'    => 'saveFetchedRowBS',
+            'file'           => 'custom/modules/Notes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXNotesBeforeAndAfterSaveMethods',
+            'function'       => 'saveFetchedRowBS',
+        ),
+        array(
+            'module'         => 'Notes',
+            'hook'           => 'before_save',
+            'order'          => 102,
+            'description'    => 'setContactIdWhenRelatedToIsContactsBS',
+            'file'           => 'custom/modules/Notes/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXNotesBeforeAndAfterSaveMethods',
+            'function'       => 'setContactIdWhenRelatedToIsContactsBS',
+        ),
         // Opportunities
         array(
             'module'         => 'Opportunities',
