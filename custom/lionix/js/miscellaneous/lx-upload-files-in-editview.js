@@ -1,6 +1,6 @@
 // This file containts opportunities bussines logic
 // function definitions section
-function getUploadFileButton(element) {
+lx.upload.getFileButton = function(element) {
     data = $('#' + element.field_name).val();
     if (data == '') {
         data = {
@@ -16,14 +16,14 @@ function getUploadFileButton(element) {
     $('#' + element.field_name).prop('readonly', 'readonly');
     $('#' + element.field_name).hide();
     $('#show_' + element.field_name + '_loader').click(function() {
-        getUploadFileTemplate(element);
+        lx.upload.getFileTemplate(element);
         $('#show_' + element.field_name + '_loader').prop('disabled', true);
         $('#' + element.field_name).prop('disabled', true);
         // $('#' + element.field_name).toggle(); // to view field
     });
 }
 
-function getUploadFileTemplate(element) {
+lx.upload.getFileTemplate = function(element) {
     var method = "uploadFileTemplate";
     data = {
         "method": method,
@@ -34,7 +34,7 @@ function getUploadFileTemplate(element) {
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajax beforeSend');
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax beforeSend');
             console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
             console.log("beforeSend callback:", settings.data);
@@ -45,7 +45,7 @@ function getUploadFileTemplate(element) {
         data: data,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajax success');
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
             $('#floating-div-for-upload-' + element.field_name + '-file').remove();
@@ -77,7 +77,7 @@ function getUploadFileTemplate(element) {
                 $('<div class="lx-progress"><div class="lx-bar"></div ><div class="lx-percent">0%</div ></div>').prependTo('#preview_' + element.field_name);
                 $('#' + element.field_name + '-form').ajaxForm({
                     beforeSend: function(jqXHR, settings) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajaxForm beforeSend');
+                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm beforeSend');
                         console.log("*** start ***");
                         console.log("beforeSend callback:", settings.url);
                         // file to be modified
@@ -95,7 +95,7 @@ function getUploadFileTemplate(element) {
                     },
                     // success is a function to be called if the request succeeds.
                     success: function(data, status, jqXHR) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajaxForm success');
+                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm success');
                         console.log("success callback:", status);
                         console.log("data:", data);
                         data = JSON.parse(data);
@@ -126,14 +126,14 @@ function getUploadFileTemplate(element) {
                     }, // success
                     // error is a function to be called if the request fails.
                     error: function(jqXHR, status, error) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajaxForm error');
+                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm error');
                         console.log("error callback:", status);
-                        console.log("Function getUploadFileTemplate error:", error);
+                        console.log("Function lx.upload.getFileTemplate error:", error);
                         console.groupEnd();
                     }, // end error
                     // complete is a function to be called when the request finishes (after success and error callbacks are executed).
                     complete: function(jqXHR, status) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajaxForm complete');
+                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm complete');
                         console.log("complete callback:", status);
                         console.log("*** finish ***");
                         console.groupEnd();
@@ -145,21 +145,52 @@ function getUploadFileTemplate(element) {
         }, // end success
         // error is a function to be called if the request fails.
         error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajax error');
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax error');
             console.log("error callback:", status);
-            console.log("Function getUploadFileTemplate error:", error);
+            console.log("Function lx.upload.getFileTemplate error:", error);
             console.groupEnd();
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         complete: function(jqXHR, status) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'getUploadFileTemplate()', 'ajax complete');
+            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax complete');
             console.log("complete callback:", status);
             console.log("*** finish ***");
             console.groupEnd();
         }, // end complete
         datatype: "text"
     })/*Fin del Ajax*/
-} //getUploadFileTemplate()
+} //lx.upload.getFileTemplate()
+
+lx.upload.getFileFields = function() {
+    var execute = false;
+    var crmEditView = document.forms['EditView'];
+    if (crmEditView) {
+        switch (crmEditView.module.value) {
+            case 'Opportunities':
+                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.opportunities.upload_files_fields;
+                execute = true;
+                break;
+            case 'Accounts':
+                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.accounts.upload_files_fields;
+                execute = true;
+                break;
+            case 'Contacts':
+                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.contacts.upload_files_fields;
+                execute = true;
+                break;
+        }
+        if (execute) {
+            console.log('Rendering upload files fields for ' + crmEditView.module.value + ' module...')
+            text_fields_to_upload_fields_list.forEach(function(element) {
+                console.log('Field ' + element.field_name + ' rendered.')
+                if ($('#show_' + element.field_name + '_loader').length == 0) {
+                    lx.upload.getFileButton(element);
+                }
+            });
+            console.log('All upload file fields rendered.')
+        }
+    }
+} // end function
 
 //Self-Invoking Anonymous Function Notation
 // !function(){}(); // easy to read, the result is unimportant.
@@ -167,59 +198,36 @@ function getUploadFileTemplate(element) {
 // (function(){}()); // Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
-    // On opportunities module
-    var crmEditView = document.forms['EditView'];
-    var opportunity_id = 'opportunity_id_not_defined';
-    if (crmEditView) {
-        opportunity_id = crmEditView.record.value;
-    }
-    // var text_fields_to_upload_file_list = [
-    //     // {
-    //     //     "field_name": "text_field_name_255_chars_long",  // 'text_field_name_255_chars_long', //meter en un arreglo los campos para que los leas el javascript y el logic en el php
-    //     //     "button_label": "Generalmente es una *Orden de compra*?",
-    //     //     "ok_message": "*Orden de compra* agregada correctamente."
-    //     // }
-    // ];
-    var text_fields_to_upload_file_list = [
-        {
-            "field_name": "fpurchaseorder_c",  // 'text_field_name_255_chars_long', //meter en un arreglo los campos para que los leas el javascript y el logic en el php
-            "button_label": "Orden de compra",
-            "ok_message": "Orden de compra agregada correctamente."
-        }
-    ];
-    // this appends opportunity_id to each element
-    text_fields_to_upload_file_list.forEach(function(element) {
-        element.opportunity_id = opportunity_id;
-    });
-    if (crmEditView) {
-        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', '!function()', 'initial');
-        console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-        console.groupEnd();
-        if (crmEditView.module.value == 'Opportunities') {
-            text_fields_to_upload_file_list.forEach(function(element) {
-                getUploadFileButton(element);
-            });
-        }
-    }
-
     // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.type == "attributes") {
-                if (mutation.target.nodeName == "FORM") {
-                    //when found do your code
-                    text_fields_to_upload_file_list.forEach(function(element) {
-                        if ($('#show_' + element.field_name + '_loader').length == 0) {
-                            getUploadFileButton(element);
-                        }
-                    });
-                    // if needed only once, you can stop observing with observer.disconnect();
-                    // observer.disconnect();
-                }
+        if (mutations) {
+            console.groupCollapsed("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
+            console.log('Running lx.upload.getFileFields() function');
+            console.groupEnd();
+            if (lx.lionixCRM.config.modules == undefined) {
+                lx.lionixCRM.getConfigOption('modules').then(function() {
+                    lx.upload.getFileFields();
+                });
+            } else {
+                lx.upload.getFileFields();
             }
-        });
+            // if needed only once, you can stop observing with observer.disconnect();
+            observer.disconnect();
+        }
+        // When need to find something special
+        // mutations.forEach(function(mutation) {
+        //     console.log('select2-lionixcrm mutation:', mutation);
+        //     //     if (mutation.type == "attributes") {
+        //     //         if (mutation.target.nodeName == "FORM" && mutation.target.id == "some-form-id") {
+        //     //             //when found do your code
+        //     //             //your code
+        //     //             // if needed only once, you can stop observing with observer.disconnect();
+        //     //             //observer.disconnect();
+        //     //         }
+        //     //     }
+        // });
     });
     // Observer target
     var target = document.querySelector('#content');
