@@ -135,6 +135,14 @@ class LxAJAX
         }
     }
 
+    public function getSuiteCRMConfigOption()
+    {
+        global $sugar_config;
+        return json_encode($sugar_config[$this->data['option']]);
+        //eg given: $this->data['option'] = 'default_currency_symbol';
+        //eg given: $this->data['option'] = 'lionixcrm';
+    }
+
     public function getLionixCRMConfigOption()
     {
         global $sugar_config;
