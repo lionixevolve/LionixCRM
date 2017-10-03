@@ -1,57 +1,28 @@
 // function definitions section
-lx.lionixCRM.getConfigOptionEnvironment = function(opportunityId, currentValue, accountId) {
+lx.lionixCRM.getEnvironment = function() {
     if ($("#LionixCRM-environment").length == 0) {
-        var method = "getLionixCRMConfigOption";
-        var data = "method=" + method;
-        data += "&option=" + "environment";
-        // data += "&opportunityId=" + opportunityId;
-        // data += "&currentValue=" + currentValue;
-        // data += "&accountId=" + accountId;
-        //data += "&use_adodb5="+"1";
-        $.ajax({
-            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function(jqXHR, settings) {
-                console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', 'lx.lionixCRM.getConfigOptionEnvironment()', 'ajax beforeSend');
-                console.log("*** start ***");
-                console.log("beforeSend callback:", settings.url);
-                console.groupEnd();
-            }, //end beforeSend
-            url: 'lxajax.php',
-            type: 'GET',
-            data: data,
-            // success is a function to be called if the request succeeds.
-            success: function(data, status, jqXHR) {
-                console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', 'lx.lionixCRM.getConfigOptionEnvironment()', 'ajax success');
-                console.log("success callback:", status);
-                console.log("data:", data);
-                if ($("#LionixCRM-environment").length == 0) {
-                    if (data.toLowerCase() === 'testing') {
-                        let pbclass = "progress-bar bg-info";
-                        let probability = 100;
-                        let text_bar = "Testing Environment"
-                        $('#content').before('<div id="LionixCRM-environment" data-enviroment="Testing Environment" class="progresslx"> <div class="' + pbclass + '" role="progressbar" aria-valuenow="' + probability + '" aria-valuemin="0" aria-valuemax="100" style="min-width: 10%; width: ' + probability + '%; height: 30px; font-size:1.9em; line-height: 2.8rem;">' + text_bar + '</div></div>');
-                    } else {
-                        $('#content').before('<div id="LionixCRM-environment" data-enviroment="Production Environment" />');
-                    }
-                    console.log("LionixCRM-environment added.");
-                } else {
-                    console.log("LionixCRM-environment exists.");
-                }
-                console.groupEnd();
-            }, // end success
-            // error is a function to be called if the request fails.
-            error: function(jqXHR, status, error) {
-                console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', 'lx.lionixCRM.getConfigOptionEnvironment()', 'ajax error');
-                console.log("error callback:", status);
-                console.log("Function lx.lionixCRM.getConfigOptionEnvironment error:", error);
-                console.groupEnd();
-            }, // end error
-            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            // complete: function(jqXHR, status) {
-            // }, // end complete
-            datatype: "text"
-        }); // end ajax
-    } // end first if
+        if (lx.lionixCRM.config.environment.toLowerCase() === 'testing') {
+            let pbclass = "progress-bar bg-info";
+            let probability = 100;
+            let text_bar = "Testing Environment"
+            $('#content').before('<div id="LionixCRM-environment" data-enviroment="Testing Environment" class="progresslx"> <div class="' + pbclass + '" role="progressbar" aria-valuenow="' + probability + '" aria-valuemin="0" aria-valuemax="100" style="min-width: 10%; width: ' + probability + '%; height: 30px; font-size:1.9em; line-height: 2.8rem;">' + text_bar + '</div></div>');
+        } else {
+            $('#content').before('<div id="LionixCRM-environment" data-enviroment="Production Environment" />');
+        }
+        console.log("LionixCRM-environment added.");
+    } else {
+        console.log("LionixCRM-environment exists.");
+    }
+} // end function
+
+lx.lionixCRM.checkEnvironment = function() {
+    if (lx.lionixCRM.config.environment == undefined) {
+        lx.lionixCRM.getConfigOption('environment').then(function() {
+            lx.lionixCRM.getEnvironment()
+        });
+    } else {
+        lx.lionixCRM.getEnvironment();
+    }
 } // end function
 //eof
 
@@ -64,19 +35,13 @@ lx.lionixCRM.getConfigOptionEnvironment = function(opportunityId, currentValue, 
 !function() {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    if ($("#LionixCRM-environment").length == 0) {
-        console.groupCollapsed("Check environment '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()', 'initial');
-        console.log('Running lx.lionixCRM.getConfigOptionEnvironment() function');
-        console.groupEnd();
-        lx.lionixCRM.getConfigOptionEnvironment();
-    }
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             if ($("#LionixCRM-environment").length == 0) {
                 console.groupCollapsed("Check environment '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()', 'observer');
-                console.log('Running lx.lionixCRM.getConfigOptionEnvironment() function');
+                console.log('Running lx.lionixCRM.checkEnvironment() function');
                 console.groupEnd();
-                lx.lionixCRM.getConfigOptionEnvironment();
+                lx.lionixCRM.checkEnvironment();
             }
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
