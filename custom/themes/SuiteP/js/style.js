@@ -1,6 +1,7 @@
 // LionixCRM lx javascript object definition
 var lx = {
     "field": {},
+    "upload": {},
     "lionixCRM": {
         "config": {}
     },
@@ -19,10 +20,9 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-do
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"); //momentjs Portuguese for Brazil
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-get-config-option.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-load-config-options.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
@@ -31,10 +31,11 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/notes/lx-remove-contacts-from-related-to.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
-lx.lionixCRM.scripts.push(["custom/lionix/js/business-logic/opportunities/lx-upload-files-in-editview.js",true]);
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
