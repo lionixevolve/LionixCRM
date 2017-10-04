@@ -922,15 +922,20 @@ function post_installModules()
         'ssclosedwoninmins_c',
         //'anyOtherField'
     );
-    $sugar_config['lionixcrm']['modules']['opportunities']['upload_files_fields'] = array(
-        'fpurchaseorder_c',
-        //'anyOtherField'
+    $sugar_config['lionixcrm']['modules']['opportunities']['upload_files_fields'] =array(
+        'field_name' => 'fpurchaseorder_c',
+        'button_label'=> 'Orden de compra',
+        'ok_message'=> 'Orden de compra agregada correctamente.',
     );
     $sugar_config['lionixcrm']['modules']['accounts']['upload_files_fields'] = array(
-        //'anyOtherField'
+        // 'field_name' => 'f{name}_c',
+        // 'button_label'=> '{label}',
+        // 'ok_message'=> '{any success message}',
     );
     $sugar_config['lionixcrm']['modules']['contacts']['upload_files_fields'] = array(
-        //'anyOtherField'
+        // 'field_name' => 'f{name}_c',
+        // 'button_label'=> '{label}',
+        // 'ok_message'=> '{any success message}',
     );
     $sugar_config['lionixcrm']['smartchat'] = array(
         'chat_c',
