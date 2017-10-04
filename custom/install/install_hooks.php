@@ -898,12 +898,18 @@ function post_installModules()
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend'] = '12:00';
     $sugar_config['lionixcrm']['environment'] = 'production'; //The options for environment are 'testing' or 'production'
     $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c'
-    $sugar_config['lionixcrm']['opportunities']['exclude_fields_for_update_sales_stages_time_in_mins'] = array(
+    $sugar_config['lionixcrm']['modules']['opportunities']['exclude_fields_for_update_sales_stages_time_in_mins'] = array(
         'ssclosedwoninmins_c',
         //'anyOtherField'
     );
-    $sugar_config['lionixcrm']['opportunities']['upload_files_fields'] = array(
+    $sugar_config['lionixcrm']['modules']['opportunities']['upload_files_fields'] = array(
         'fpurchaseorder_c',
+        //'anyOtherField'
+    );
+    $sugar_config['lionixcrm']['modules']['accounts']['upload_files_fields'] = array(
+        //'anyOtherField'
+    );
+    $sugar_config['lionixcrm']['modules']['contacts']['upload_files_fields'] = array(
         //'anyOtherField'
     );
     $sugar_config['lionixcrm']['smartchat'] = array(
