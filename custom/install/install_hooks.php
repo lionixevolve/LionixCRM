@@ -798,6 +798,26 @@ function post_installModules()
             'class'          => 'LXNotesBeforeAndAfterSaveMethods',
             'function'       => 'setContactIdWhenRelatedToIsContactsBS',
         ),
+        // Accounts
+        array(
+            'module'         => 'Accounts',
+            'hook'           => 'after_retrieve',
+            'order'          => 102,
+            'description'    => 'setLinksToUploadedFiles',
+            'file'           => 'custom/modules/Accounts/logic_hooks_after_retrieve.php',
+            'class'          => 'LXOpportunitiesAfterRetrieveMethods',
+            'function'       => 'setLinksToUploadedFiles',
+        ),
+        // Contacts
+        array(
+            'module'         => 'Contacts',
+            'hook'           => 'after_retrieve',
+            'order'          => 102,
+            'description'    => 'setLinksToUploadedFiles',
+            'file'           => 'custom/modules/Contacts/logic_hooks_after_retrieve.php',
+            'class'          => 'LXOpportunitiesAfterRetrieveMethods',
+            'function'       => 'setLinksToUploadedFiles',
+        ),
         // Opportunities
         array(
             'module'         => 'Opportunities',
