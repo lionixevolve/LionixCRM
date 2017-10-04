@@ -165,18 +165,15 @@ lx.upload.getFileFields = function() {
     var execute = false;
     var crmEditView = document.forms['EditView'];
     if (crmEditView) {
-        switch (crmEditView.module.value) {
-            case 'Opportunities':
-                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.opportunities.upload_files_fields;
-                execute = true;
-                break;
-            case 'Accounts':
-                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.accounts.upload_files_fields;
-                execute = true;
-                break;
-            case 'Contacts':
-                text_fields_to_upload_fields_list = lx.lionixCRM.config.modules.contacts.upload_files_fields;
-                execute = true;
+        module_name = crmEditView.module.value.toLowerCase();
+        switch (module_name) {
+            case 'accounts':
+            case 'contacts':
+            case 'opportunities':
+                if (lx.lionixCRM.config.modules[module_name].upload_files_fields != undefined) {
+                    text_fields_to_upload_fields_list = lx.lionixCRM.config.modules[module_name].upload_files_fields;
+                    execute = true;
+                }
                 break;
         }
         if (execute) {
