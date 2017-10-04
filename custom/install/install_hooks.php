@@ -917,7 +917,7 @@ function post_installModules()
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend'] = '09:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend'] = '12:00';
     $sugar_config['lionixcrm']['environment'] = 'production'; //The options for environment are 'testing' or 'production'
-    $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c'
+    $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c', if null or '' it uses default CRM validation rules
     $sugar_config['lionixcrm']['modules']['opportunities']['exclude_fields_for_update_sales_stages_time_in_mins'] = array(
         'ssclosedwoninmins_c',
         //'anyOtherField'

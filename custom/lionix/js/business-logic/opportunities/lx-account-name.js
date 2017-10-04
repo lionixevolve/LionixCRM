@@ -2,12 +2,10 @@
 // function definitions section
 lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentValue, accountId) {
     var method = "getLionixCRMConfigOption";
-    var data = "method=" + method;
-    data += "&option=" + "business_type";
-    // data += "&opportunityId=" + opportunityId;
-    // data += "&currentValue=" + currentValue;
-    // data += "&accountId=" + accountId;
-    //data += "&use_adodb5="+"1";
+    var data = {
+        "method": method,
+        "option": "business_type"
+    };
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
@@ -17,14 +15,14 @@ lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentVal
             console.groupEnd();
         }, //end beforeSend
         url: 'lxajax.php',
-        type: 'GET',
+        type: 'POST',
         data: data,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
             console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
-
+            data = JSON.parse(data);
             switch (data) {
                 case 'b2c':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
