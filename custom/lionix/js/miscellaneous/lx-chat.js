@@ -164,8 +164,9 @@ lx.chat.findFieldToRender = function() {
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
-        var lxajaxdata = "method=" +
-        "lxChatGetSmartChatField";
+        var lxajaxdata = {
+            "method": "lxChatGetSmartChatField"
+        }
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
@@ -174,7 +175,7 @@ lx.chat.findFieldToRender = function() {
                 console.log("beforeSend callback:", settings.url);
             },
             url: 'lxajax.php',
-            type: 'GET',
+            type: 'POST',
             data: lxajaxdata,
             // success is a function to be called if the request succeeds.
             success: function(data, status, jqXHR) {
@@ -244,8 +245,9 @@ lx.chat.start = function() {
             }
             var record_id = currentForm.record.value;
             var module_name = currentForm.module.value;
-            var lxajaxdata = "method=" +
-            "getCurrentUserId";
+            var lxajaxdata = {
+                "method": "getCurrentUserId"
+            }
             $.ajax({
                 // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
                 beforeSend: function(jqXHR, settings) {
@@ -254,7 +256,7 @@ lx.chat.start = function() {
                     console.log("beforeSend callback:", settings.url);
                 },
                 url: 'lxajax.php',
-                type: 'GET',
+                type: 'POST',
                 data: lxajaxdata,
                 // success is a function to be called if the request succeeds.
                 success: function(data, status, jqXHR) {
@@ -293,7 +295,7 @@ lx.chat.refreshMessagesInterval = function(refresh) {
     }
     if (refresh) {
         console.log('Starting new LionixCRM Smart CHAT refresh messages interval...');
-        lx.chat.interval_ids_list.forEach(function(element){
+        lx.chat.interval_ids_list.forEach(function(element) {
             window.clearInterval(element);
         });
         new_id = window.setInterval(function() {
@@ -303,7 +305,7 @@ lx.chat.refreshMessagesInterval = function(refresh) {
         lx.chat.interval_ids_list.unshift(new_id);
         console.log('New LionixCRM messages interval id set: %s', new_id);
     } else {
-        lx.chat.interval_ids_list.forEach(function(element){
+        lx.chat.interval_ids_list.forEach(function(element) {
             window.clearInterval(element);
         });
         lx.chat.interval_ids_list = undefined;
