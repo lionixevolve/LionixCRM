@@ -288,15 +288,26 @@ lx.chat.scrollToBottom = function() {
 }
 
 lx.chat.refreshMessagesInterval = function(refresh) {
+    if (lx.chat.interval_ids_list == undefined) {
+        lx.chat.interval_ids_list = [];
+    }
     if (refresh) {
-        console.log('Starting LionixCRM Smart CHAT refresh messages interval...')
-        lx.chat.content_interval_id = window.setInterval(function() {
+        console.log('Starting new LionixCRM Smart CHAT refresh messages interval...');
+        lx.chat.interval_ids_list.forEach(function(element){
+            window.clearInterval(element);
+        });
+        new_id = window.setInterval(function() {
             document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
-            console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, see you in 15 secs...');
-        }, 15000);
+            console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_ids_list[0]);
+        }, 15000)
+        lx.chat.interval_ids_list.unshift(new_id);
+        console.log('New LionixCRM messages interval id set: %s', new_id);
     } else {
-        console.log('Stoping LionixCRM Smart CHAT refresh messages interval...')
-        window.clearInterval(lx.chat.content_interval_id);
+        lx.chat.interval_ids_list.forEach(function(element){
+            window.clearInterval(element);
+        });
+        lx.chat.interval_ids_list = undefined;
+        console.log('LionixCRM messages interval stopped');
     }
 }
 
@@ -344,20 +355,6 @@ lx.chat.validateNewMessage = function() {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
-
-        // If a specific mutation is need iterate over the array
-        // mutations.forEach(function(mutation) {
-        // There are 3 types attributes, childList and characterData
-        // if (mutation.type == "attributes") {
-        // if (mutation.target.nodeName == "DIV" && mutation.target.id == 'tabcontent0') {
-        /*when found do your code*/
-        // console.log(mutation);
-        //}
-        //}
-        // });
-
-        // If any change will trigger the effect check only if the array exists
-        // if (mutations) { /*your code*/ }
         if (mutations) {
             $(document).ready(function() {
                 // if #edit_button exists is a detailview, if not, then if a #SAVE or #SAVE_HEADER button exists is a editview
@@ -369,7 +366,7 @@ lx.chat.validateNewMessage = function() {
                 }
             });
             // if needed only once, you can stop observing with observer.disconnect();
-            // observer.disconnect();
+            observer.disconnect();
         }
     });
     // Observer target
