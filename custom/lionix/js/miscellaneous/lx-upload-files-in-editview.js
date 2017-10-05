@@ -196,28 +196,12 @@ lx.upload.getFileFields = function() {
         if (mutations) {
             console.log("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
             console.log('Running lx.upload.getFileFields() function');
-            if (lx.lionixCRM.config.modules == undefined) {
-                lx.lionixCRM.getConfigOption('modules').then(function() {
-                    lx.upload.getFileFields();
-                });
-            } else {
+            lx.lionixCRM.getConfigOption('modules').then(function() {
                 lx.upload.getFileFields();
-            }
+            });
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
         }
-        // When need to find something special
-        // mutations.forEach(function(mutation) {
-        //     console.log('select2-lionixcrm mutation:', mutation);
-        //     //     if (mutation.type == "attributes") {
-        //     //         if (mutation.target.nodeName == "FORM" && mutation.target.id == "some-form-id") {
-        //     //             //when found do your code
-        //     //             //your code
-        //     //             // if needed only once, you can stop observing with observer.disconnect();
-        //     //             //observer.disconnect();
-        //     //         }
-        //     //     }
-        // });
     });
     // Observer target
     var target = document.querySelector('#content');
