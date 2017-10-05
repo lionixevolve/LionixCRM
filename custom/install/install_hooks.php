@@ -805,7 +805,7 @@ function post_installModules()
             'order'          => 102,
             'description'    => 'setLinksToUploadedFiles',
             'file'           => 'custom/modules/Accounts/logic_hooks_after_retrieve.php',
-            'class'          => 'LXOpportunitiesAfterRetrieveMethods',
+            'class'          => 'LXAccountsAfterRetrieveMethods',
             'function'       => 'setLinksToUploadedFiles',
         ),
         // Contacts
@@ -815,7 +815,7 @@ function post_installModules()
             'order'          => 102,
             'description'    => 'setLinksToUploadedFiles',
             'file'           => 'custom/modules/Contacts/logic_hooks_after_retrieve.php',
-            'class'          => 'LXOpportunitiesAfterRetrieveMethods',
+            'class'          => 'LXContactsAfterRetrieveMethods',
             'function'       => 'setLinksToUploadedFiles',
         ),
         // Opportunities
