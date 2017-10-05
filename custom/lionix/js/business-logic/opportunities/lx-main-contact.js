@@ -108,7 +108,6 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
                     if ($("#maincontact_c_lxajaxed").length == 0) {
                         console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', '!function()', 'initial');
                         console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                         lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
