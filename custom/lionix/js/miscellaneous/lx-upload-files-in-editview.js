@@ -1,26 +1,32 @@
 // This file containts opportunities bussines logic
 // function definitions section
 lx.upload.getFileButton = function(element) {
-    data = $('#' + element.field_name).val();
-    if (data == '') {
-        data = {
-            "note_link": '',
-            "note_name": ''
-        };
+    console.log('Rendering button from %s', element.field_name);
+    if ($('#' + element.field_name).length == 0) {
+        console.log('Field %s not present in EditView', element.field_name);
     } else {
-        data = JSON.parse(data);
+        data = $('#' + element.field_name).val();
+        if (data == '') {
+            data = {
+                "note_link": '',
+                "note_name": ''
+            };
+        } else {
+            data = JSON.parse(data);
+        }
+        $('#' + element.field_name).parent().append('<div id="' + element.field_name + '-file-name"><a href="' + data.note_link.replace('index.php', location.origin + location.pathname) + '">' + data.note_name + '</a></div></br>');
+        $('#' + element.field_name).parent().append('<button id="show_' + element.field_name + '_loader" type="button" class="btn btn-primary btn-sm">+ ' + element.button_label + '</button>');
+        $('#' + element.field_name).parent().append('<div id="' + element.field_name + '_loader_hook" style="position: relative;"/>');
+        $('#' + element.field_name).prop('readonly', 'readonly');
+        $('#' + element.field_name).hide();
+        $('#show_' + element.field_name + '_loader').click(function() {
+            lx.upload.getFileTemplate(element);
+            $('#show_' + element.field_name + '_loader').prop('disabled', true);
+            $('#' + element.field_name).prop('disabled', true);
+            // $('#' + element.field_name).toggle(); // to view field
+        });
+        console.log('Field ' + element.field_name + ' rendered.')
     }
-    $('#' + element.field_name).parent().append('<div id="' + element.field_name + '-file-name"><a href="' + data.note_link.replace('index.php', location.origin + location.pathname) + '">' + data.note_name + '</a></div></br>');
-    $('#' + element.field_name).parent().append('<button id="show_' + element.field_name + '_loader" type="button" class="btn btn-primary btn-sm">+ ' + element.button_label + '</button>');
-    $('#' + element.field_name).parent().append('<div id="' + element.field_name + '_loader_hook" style="position: relative;"/>');
-    $('#' + element.field_name).prop('readonly', 'readonly');
-    $('#' + element.field_name).hide();
-    $('#show_' + element.field_name + '_loader').click(function() {
-        lx.upload.getFileTemplate(element);
-        $('#show_' + element.field_name + '_loader').prop('disabled', true);
-        $('#' + element.field_name).prop('disabled', true);
-        // $('#' + element.field_name).toggle(); // to view field
-    });
 }
 
 lx.upload.getFileTemplate = function(element) {
@@ -173,12 +179,10 @@ lx.upload.getFileFields = function() {
         if (execute) {
             console.log('Rendering upload files fields for ' + crmEditView.module.value + ' module...')
             text_fields_to_upload_fields_list.forEach(function(element) {
-                console.log('Field ' + element.field_name + ' rendered.')
                 if ($('#show_' + element.field_name + '_loader').length == 0) {
                     lx.upload.getFileButton(element);
                 }
             });
-            console.log('All upload file fields rendered.')
         }
     }
 } // end function
