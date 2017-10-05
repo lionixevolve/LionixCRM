@@ -48,5 +48,4 @@ lx.lionixCRM.getConfigOption = function(option) {
             datatype: "text"
         }); // end ajax
     });
-
 } // end function
