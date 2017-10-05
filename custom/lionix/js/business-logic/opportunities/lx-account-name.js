@@ -1,29 +1,11 @@
-// This file containts opportunities bussines logic
-// function definitions section
-lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentValue, accountId) {
-    var method = "getLionixCRMConfigOption";
-    var data = {
-        "method": method,
-        "option": "business_type"
-    };
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax beforeSend');
-            console.log("*** start ***");
-            console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
-        }, //end beforeSend
-        url: 'lxajax.php',
-        type: 'POST',
-        data: data,
-        // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
-            data = JSON.parse(data);
-            switch (data) {
+// // This file containts opportunities bussines logic
+// // function definitions section
+lx.opportunity.getAccountNameByBusinessType = function() {
+    lx.lionixCRM.getConfigOption('business_type').then(function(data) {
+        console.log("business_type:", data);
+        if ($("#account_name_lxajaxed").length == 0) {
+            $("#account_name").append('<div id="account_name_lxajaxed"/>');
+            switch (lx.lionixCRM.config.business_type.toLowerCase()) {
                 case 'b2c':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
                     $('#maincontact_c').on("change.lx-hide-account-name", function() {
@@ -40,21 +22,8 @@ lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentVal
                     $('#maincontact_c').off("change.lx-hide-account-name");
                     break;
             }
-
-            console.groupEnd();
-        }, // end success
-        // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', 'lx.opportunity.getAccountNameByBusinessType()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function lx.opportunity.getAccountNameByBusinessType error:", error);
-            console.groupEnd();
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        // }, // end complete
-        datatype: "text"
-    }); // end ajax
+        }
+    });
 } // end function
 
 //Self-Invoking Anonymous Function Notation
@@ -70,18 +39,13 @@ lx.opportunity.getAccountNameByBusinessType = function(opportunityId, currentVal
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
                 if (crmEditView.module.value == 'Opportunities') {
-                    if ($("#account_name_lxajaxed").length == 0) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', '!function()', 'initial');
-                        console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-                        console.groupEnd();
-                        opid = document.forms['EditView'].record.value;
-                        $("#account_name").append('<div id="account_name_lxajaxed"/>');
-                        lx.opportunity.getAccountNameByBusinessType(); //popoulate dropdown once when editview loads.
-                    }
+                    console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', '!function()', 'initial');
+                    console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
+                    lx.opportunity.getAccountNameByBusinessType();
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();
-            // observer.disconnect();
+            observer.disconnect();
         }
         // When need to find something special
         // mutations.forEach(function(mutation) {
