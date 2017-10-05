@@ -35,7 +35,9 @@ lx.upload.getFileTemplate = function(element) {
         "method": method,
         "field_name": element.field_name,
         "label": element.button_label,
-        "ok_message": element.ok_message
+        "ok_message": element.ok_message,
+        "module_name": element.module_name,
+        "record_id": element.record_id
     }
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
@@ -178,6 +180,10 @@ lx.upload.getFileFields = function() {
         }
         if (execute) {
             console.log('Rendering upload files fields for ' + crmEditView.module.value + ' module...')
+            text_fields_to_upload_fields_list.forEach(function(element) {
+                element.module_name = crmEditView.module.value;
+                element.record_id = crmEditView.record.value;
+            });
             text_fields_to_upload_fields_list.forEach(function(element) {
                 if ($('#show_' + element.field_name + '_loader').length == 0) {
                     lx.upload.getFileButton(element);

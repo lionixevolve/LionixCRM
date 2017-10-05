@@ -317,7 +317,11 @@ class LxAJAX
     // functions working together uploadFileTemplate, lxUploadAnyDocumentFormat, uploadExcelFileOrGivenFormat and createSuiteCRMNote.
     public function uploadFileTemplate()
     {
-        $url = 'lxajax.php?method=lxUploadAnyDocumentFormat&ok_message='.urlencode($this->data['ok_message']);
+        $url = 'lxajax.php?method=lxUploadAnyDocumentFormat';
+        $url .='&module_name='.urlencode($this->data['module_name']);
+        $url .='&record_id='.urlencode($this->data['record_id']);
+        $url .='&ok_message='.urlencode($this->data['ok_message']);
+
         return '
             <!-- bof -->
             <div id="'.$this->data['field_name'].'_loader" style="position: absolute; margin: 5px">
@@ -349,7 +353,7 @@ class LxAJAX
         $uploaded = $this->uploadExcelFileOrGivenFormat();
         $message = $uploaded['message'];
         if ($uploaded['ok']) {
-            if ($this->createSuiteCRMNote($this->data, "Opportunities", $this->data['opportunity_id'])) {
+            if ($this->createSuiteCRMNote($this->data, $this->data['module_name'], $this->data['record_id'])) {
                 $ok = true;
                 if (empty($this->data['ok_message'])) {
                     $message = "Archivo agregado correctamente.";
@@ -443,7 +447,14 @@ class LxAJAX
             $note->parent_type = $parentType;
             $note->parent_id = $parentId;
             if (strtolower($parentType) == 'contacts') {
-                $note->contact_id = $parentId;
+                // The following lines are to avoid incorrect "related to" links to contacts since Notes has a one-to-many relationship
+                // This if is to avoid overwrite an existing linked contact
+                if (empty($note->contact_id)) {
+                    $note->contact_id = $parentId;
+                }
+                // This is the default behaviour when linking a contact
+                $note->parent_type = 'Accounts';
+                $note->parent_id = '';
             }
             $note->save();
             // $contents = file_get_contents("upload://{$data['name']}");
