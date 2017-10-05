@@ -34,18 +34,17 @@ lx.upload.getFileTemplate = function(element) {
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax beforeSend');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax beforeSend');
             console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
             console.log("beforeSend callback:", settings.data);
-            console.groupEnd();
         }, //end beforeSend
         url: "lxajax.php",
         type: 'POST',
         data: data,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax success');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
             $('#floating-div-for-upload-' + element.field_name + '-file').remove();
@@ -77,13 +76,12 @@ lx.upload.getFileTemplate = function(element) {
                 $('<div class="lx-progress"><div class="lx-bar"></div ><div class="lx-percent">0%</div ></div>').prependTo('#preview_' + element.field_name);
                 $('#' + element.field_name + '-form').ajaxForm({
                     beforeSend: function(jqXHR, settings) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm beforeSend');
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm beforeSend');
                         console.log("*** start ***");
                         console.log("beforeSend callback:", settings.url);
                         // file to be modified
                         settings.url += "&opportunity_id=" + element.opportunity_id;
                         console.log("url modified:", settings.url);
-                        console.groupEnd();
                     }, //end beforeSend
                     // target: '#preview_fieldname', //It's not required 'cause #preview_fieldname is been handled on success
                     // Progress bar while uploading file...
@@ -95,7 +93,7 @@ lx.upload.getFileTemplate = function(element) {
                     },
                     // success is a function to be called if the request succeeds.
                     success: function(data, status, jqXHR) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm success');
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm success');
                         console.log("success callback:", status);
                         console.log("data:", data);
                         data = JSON.parse(data);
@@ -122,40 +120,36 @@ lx.upload.getFileTemplate = function(element) {
                             $('#upload-' + element.field_name + '-btn').show();
                             $('#exit-' + element.field_name + '-btn').show();
                         }
-                        console.groupEnd();
+
                     }, // success
                     // error is a function to be called if the request fails.
                     error: function(jqXHR, status, error) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm error');
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm error');
                         console.log("error callback:", status);
                         console.log("Function lx.upload.getFileTemplate error:", error);
-                        console.groupEnd();
                     }, // end error
                     // complete is a function to be called when the request finishes (after success and error callbacks are executed).
                     complete: function(jqXHR, status) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm complete');
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm complete');
                         console.log("complete callback:", status);
                         console.log("*** finish ***");
-                        console.groupEnd();
                     }, // end complete
                     datatype: "text"
                 }).submit();
             });
-            console.groupEnd();
+
         }, // end success
         // error is a function to be called if the request fails.
         error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax error');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax error');
             console.log("error callback:", status);
             console.log("Function lx.upload.getFileTemplate error:", error);
-            console.groupEnd();
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         complete: function(jqXHR, status) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax complete');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax complete');
             console.log("complete callback:", status);
             console.log("*** finish ***");
-            console.groupEnd();
         }, // end complete
         datatype: "text"
     })/*Fin del Ajax*/
@@ -200,9 +194,8 @@ lx.upload.getFileFields = function() {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            console.groupCollapsed("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
+            console.log("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
             console.log('Running lx.upload.getFileFields() function');
-            console.groupEnd();
             if (lx.lionixCRM.config.modules == undefined) {
                 lx.lionixCRM.getConfigOption('modules').then(function() {
                     lx.upload.getFileFields();

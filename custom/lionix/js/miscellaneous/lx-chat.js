@@ -39,18 +39,17 @@ lx.chat.saveNewMessage = function(userMessage) {
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
-                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax beforeSend');
+                console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax beforeSend');
                 console.log("*** start ***");
                 console.log("beforeSend url:", settings.url);
                 console.log("beforeSend data:", settings.data);
-                console.groupEnd();
             },
             url: 'lxajax.php',
             type: 'POST',
             data: data,
             // success is a function to be called if the request succeeds.
             success: function(data, status, jqXHR) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax success');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax success');
                 console.log("success callback:", status);
                 console.log("data:", data);
                 $("#lxchatnewmsg").val('');
@@ -60,21 +59,18 @@ lx.chat.saveNewMessage = function(userMessage) {
                     : data;
                 lx.chat.messagesArray = JSON.parse(data);
                 document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
-                console.groupEnd();
             },
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax error');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax error');
                 console.log("error callback:", status);
                 console.log("Function lx.chat.saveNewMessage error:", error);
-                console.groupEnd();
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
             complete: function(jqXHR, status) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax complete');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax complete');
                 console.log("complete status:", status);
                 lx.chat.scrollToBottom();
-                console.groupEnd();
             },
             datatype: "text"
         });
@@ -100,18 +96,17 @@ lx.chat.render = function(lxchatfield, lxchat_array_position) {
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
-                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax beforeSend');
+                console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax beforeSend');
                 console.log("*** start ***");
                 console.log("beforeSend url:", settings.url);
                 console.log("beforeSend data:", settings.data);
-                console.groupEnd();
             },
             url: 'lxajax.php',
             type: 'POST',
             data: data,
             // success is a function to be called if the request succeeds.
             success: function(data, status, jqXHR) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax success');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax success');
                 console.log("success callback:", status);
                 console.log("data:", data);
                 if (!$("#lxchat").length) {
@@ -142,22 +137,19 @@ lx.chat.render = function(lxchatfield, lxchat_array_position) {
                         lx.chat.validateNewMessage();
                     });
                 }
-                console.groupEnd();
             },
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax error');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax error');
                 console.log("error callback:", status);
                 console.log("Function lx.chat.render error:", error);
-                console.groupEnd();
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
             complete: function(jqXHR, status) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax complete');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax complete');
                 console.log("complete status:", status);
                 lx.chat.scrollToBottom();
                 lx.chat.refreshMessagesInterval(true);
-                console.groupEnd();
             },
             datatype: "text"
         });
@@ -177,17 +169,16 @@ lx.chat.findFieldToRender = function() {
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
-                console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax beforeSend');
+                console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax beforeSend');
                 console.log("*** start ***");
                 console.log("beforeSend callback:", settings.url);
-                console.groupEnd();
             },
             url: 'lxajax.php',
             type: 'GET',
             data: lxajaxdata,
             // success is a function to be called if the request succeeds.
             success: function(data, status, jqXHR) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax success');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax success');
                 console.log("success callback:", status);
                 console.log("data:", data);
                 if (!$("#lxchat").length) {
@@ -213,16 +204,15 @@ lx.chat.findFieldToRender = function() {
             },
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
-                console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax error');
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax error');
                 console.log("error callback:", status);
                 console.log("Function lx.chat.findFieldToRender error:", error);
-                console.groupEnd();
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
             // complete: function(jqXHR, status) {
-            //     console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax complete');
+            //     console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax complete');
             //     console.log("complete status:", status);
-            //     console.groupEnd();
+            //
             // },
             datatype: "text"
         })
@@ -259,17 +249,16 @@ lx.chat.start = function() {
             $.ajax({
                 // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
                 beforeSend: function(jqXHR, settings) {
-                    console.groupCollapsed("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax beforeSend');
+                    console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax beforeSend');
                     console.log("*** start ***");
                     console.log("beforeSend callback:", settings.url);
-                    console.groupEnd();
                 },
                 url: 'lxajax.php',
                 type: 'GET',
                 data: lxajaxdata,
                 // success is a function to be called if the request succeeds.
                 success: function(data, status, jqXHR) {
-                    console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax success');
+                    console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax success');
                     console.log("success callback:", status);
                     console.log("data:", data);
                     window.current_user_id = data;
@@ -279,10 +268,9 @@ lx.chat.start = function() {
                 },
                 // error is a function to be called if the request fails.
                 error: function(jqXHR, status, error) {
-                    console.groupCollapsed("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax error');
+                    console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax error');
                     console.log("error callback:", status);
                     console.log("Function lx.chat.start error:", error);
-                    console.groupEnd();
                 }, // end error
                 // complete is a function to be called when the request finishes (after success and error callbacks are executed).
                 // complete: function(jqXHR, status) {

@@ -64,28 +64,25 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
             console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
-            console.groupEnd();
         }, //end beforeSend
         url: 'lxajax.php',
         type: 'GET',
         data: data,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax success');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax success');
             console.log("success callback:", status);
             console.log("data:", data);
             $('#maincontact_c').fillSelect($.parseJSON(data));
-            console.groupEnd();
         }, // end success
         // error is a function to be called if the request fails.
         error: function(jqXHR, status, error) {
-            console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax error');
+            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax error');
             console.log("error callback:", status);
             console.log("Function lx.opportunity.getMainContactDropdown error:", error);
-            console.groupEnd();
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         // complete: function(jqXHR, status) {
@@ -109,9 +106,9 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
             if (crmEditView) {
                 if (crmEditView.module.value == 'Opportunities') {
                     if ($("#maincontact_c_lxajaxed").length == 0) {
-                        console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', '!function()', 'initial');
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', '!function()', 'initial');
                         console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-                        console.groupEnd();
+
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                         lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.

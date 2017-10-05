@@ -12,11 +12,10 @@
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
                 if (crmEditView.module.value == 'Notes') {
-                    console.groupCollapsed("Bussines logic '%s' '%s' '%s' '%s'", 'notes', 'lx-remove-contacts-from-related-to.js', '!function()', 'initial');
+                    console.log("Bussines logic '%s' '%s' '%s' '%s'", 'notes', 'lx-remove-contacts-from-related-to.js', '!function()', 'initial');
                     console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
                     // Notes has already the contact_id field to link Contacts, and the related to field fails when Contact is selected, so is better it not appear at all
                     $("#parent_type option[value='Contacts']").remove();
-                    console.groupEnd();
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();

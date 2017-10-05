@@ -11,8 +11,7 @@
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             if ($('.desktop-bar > ul > li > form[name=UnifiedSearch]').is(':visible')) {
-                console.groupCollapsed("Hidding UnifiedSearch '%s' '%s' '%s' '%s'", 'all modules', 'lx-hide-global-search-while-not-working.js', '!function()', 'observer');
-                console.groupEnd();
+                console.log("Hidding UnifiedSearch '%s' '%s' '%s' '%s'", 'all modules', 'lx-hide-global-search-while-not-working.js', '!function()', 'observer');
                 $('.desktop-bar > ul > li > form[name=UnifiedSearch]').hide();
             }
             // if needed only once, you can stop observing with observer.disconnect();
