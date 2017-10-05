@@ -124,18 +124,6 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
         }
-        // When need to find something special
-        // mutations.forEach(function(mutation) {
-        //     console.log('select2-lionixcrm mutation:', mutation);
-        //     //     if (mutation.type == "attributes") {
-        //     //         if (mutation.target.nodeName == "FORM" && mutation.target.id == "some-form-id") {
-        //     //             //when found do your code
-        //     //             //your code
-        //     //             // if needed only once, you can stop observing with observer.disconnect();
-        //     //             //observer.disconnect();
-        //     //         }
-        //     //     }
-        // });
     });
     // Observer target
     var target = document.querySelector('#content');
@@ -151,5 +139,4 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
     observer.observe(target, config);
     // end observer
 }();
-
 //eof

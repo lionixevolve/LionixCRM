@@ -1,4 +1,5 @@
 // This file containts all modules bussines logic
+// function definitions section
 //Self-Invoking Anonymous Function Notation
 // !function(){}(); // easy to read, the result is unimportant.
 // (function(){})(); // like above but more parens.
@@ -36,5 +37,3 @@
     observer.observe(target, config);
     // end observer
 }();
-
-// function definitions section
