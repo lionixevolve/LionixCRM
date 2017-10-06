@@ -3,17 +3,48 @@
 // function definitions section
 lx.opportunity.getnewMainContactCFields = function() {
     var form_name = 'EditView';
+    var maincontact_fields = [
+        {
+            "field": 'maincontactfirstname_c',
+            "label": 'Nombre nuevo contacto'
+        }, {
+            "field": 'maincontactlastname_c',
+            "label": '1er apellido nuevo contacto'
+        }, {
+            "field": 'maincontactlastname2_c',
+            "label": '2do apellido nuevo contacto'
+        }, {
+            "field": 'maincontactphonework_c',
+            "label": 'Teléfono nuevo contacto'
+        }, {
+            "field": 'maincontactemailaddress_c',
+            "label": 'Correo electrónico nuevo contacto'
+        }, {
+            "field": 'maincontacttitle_c',
+            "label": 'Cargo nuevo contacto'
+        }, {
+            "field": 'maincontactcedula_c',
+            "label": 'Cédula nuevo contacto'
+        }
+    ];
     if ($("#lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
         $("#maincontact_c").append('<div id="lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time"/>');
-        $("#maincontactfirstname_c").val('');
-        $("#maincontactlastname_c").val('');
-        $("#maincontactlastname2_c").val('');
-        $("#maincontactphonework_c").val('');
-        $("#maincontactemailaddress_c").val('');
-        $("#maincontacttitle_c").val('');
-        $("#maincontactcedula_c").val('');
+        maincontact_fields.forEach(function(element) {
+            $('#' + element.field).val('');
+        });
     }
     if ($("#maincontact_c").val() == 'new') {
+        if (validate[form_name] != undefined) {
+            maincontact_fields.forEach(function(element) {
+                lx.field.validate(form_name, element.field, element.label, true);
+            });
+            //Exceptions
+            lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
+            lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
+        }
+        maincontact_fields.forEach(function(element) {
+            lx.field.show(element.field, true);
+        });
         $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
             switch ($("#maincontactfirstname_c").val().toUpperCase()) {
                 case "NEW":
@@ -21,36 +52,16 @@ lx.opportunity.getnewMainContactCFields = function() {
                     break;
             }
         });
-        lx.field.show("maincontactfirstname_c", true);
-        lx.field.show("maincontactlastname_c", true);
-        lx.field.show("maincontactlastname2_c", true);
-        lx.field.show("maincontactphonework_c", true);
-        lx.field.show("maincontactemailaddress_c", true);
-        lx.field.show("maincontacttitle_c", true);
-        lx.field.show("maincontactcedula_c", true);
-        lx.field.validate(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', true);
-        lx.field.validate(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', true);
-        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', true);
-        lx.field.validate(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', true);
-        lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', true);
-        lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
     } else {
-        lx.field.validate(form_name, 'maincontactfirstname_c', 'Nombre nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactlastname_c', '1er apellido nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactphonework_c', 'Teléfono nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactemailaddress_c', 'Correo electrónico nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
-        lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
+        if (validate[form_name] != undefined) {
+            maincontact_fields.forEach(function(element) {
+                lx.field.validate(form_name, element.field, element.label, false);
+            });
+        }
+        maincontact_fields.forEach(function(element) {
+            lx.field.show(element.field, false);
+        });
         $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
-        lx.field.show("maincontactfirstname_c", false);
-        lx.field.show("maincontactlastname_c", false);
-        lx.field.show("maincontactlastname2_c", false);
-        lx.field.show("maincontactphonework_c", false);
-        lx.field.show("maincontactemailaddress_c", false);
-        lx.field.show("maincontacttitle_c", false);
-        lx.field.show("maincontactcedula_c", false);
     }
 }
 
