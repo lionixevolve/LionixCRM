@@ -20,7 +20,7 @@
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();
-            observer.disconnect();
+            // observer.disconnect();
         }
     });
     // Observer target
