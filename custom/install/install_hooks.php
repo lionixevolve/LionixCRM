@@ -823,7 +823,7 @@ function post_installModules()
             'hook'           => 'after_save',
             'order'          => 102,
             'description'    => 'setMissingNotesLinksAS',
-            'file'           => 'custom/modules/Accounts/logic_hooks_before_and_after_save.php',
+            'file'           => 'custom/modules/Contacts/logic_hooks_before_and_after_save.php',
             'class'          => 'LXContactsBeforeAndAfterSaveMethods',
             'function'       => 'setMissingNotesLinksAS',
         ),
