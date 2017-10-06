@@ -23,9 +23,9 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-get-config-option.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-load-config-options.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-validate-crm-field.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-show-crm-field.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-change-visibility-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-show-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-change-visibility-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
