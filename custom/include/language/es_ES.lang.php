@@ -2209,3 +2209,10 @@ $GLOBALS['app_list_strings']['lx_distrito_list']=array (
     'CR0706016' => 'ARGENTINA',
     'CR0706017' => 'LAS COLINAS',
 );
+$GLOBALS['app_list_strings']['opportunity_lostdetail_list'] = array(
+    'Competition' => 'Competencia',
+    'Price' => 'Precio',
+    'DeliveryTime' => 'Tiempo de Entrega',
+    'Inventory' => 'Inventario',
+    'CancelledByClient' => 'Cancelada',
+);
