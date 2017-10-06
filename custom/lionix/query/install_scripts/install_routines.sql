@@ -358,6 +358,23 @@ INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('AOS_Invoicesquotenumber_c', 'quotenumber_c', 'LBL_QUOTENUMBER', 'LionixCRM', 'LionixCRM', 'AOS_Invoices', 'varchar', 50, 0, NULL, utc_timestamp(), 0, 1, 0, 0, 1, 'false', NULL, NULL, NULL, NULL);
 
+###### Migration related fields
+ALTER TABLE accounts_cstm add COLUMN migratedfrom_c varchar(255) NULL;
+ALTER TABLE contacts_cstm add COLUMN migratedfrom_c varchar(255) NULL;
+ALTER TABLE opportunities_cstm add COLUMN migratedfrom_c varchar(255) NULL;
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Accountsmigratedfrom_c', 'migratedfrom_c', 'LBL_MIGRATEDFROM', 'LionixCRM', 'LionixCRM', 'Accounts', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Contactsmigratedfrom_c', 'migratedfrom_c', 'LBL_MIGRATEDFROM', 'LionixCRM', 'LionixCRM', 'Contacts', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesmigratedfrom_c', 'migratedfrom_c', 'LBL_MIGRATEDFROM', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
 ###### custom schedulers
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
 VALUES ('infoticos', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - INFOTICOS - Check against TSE CR', 'function::infoticos', '1980-02-01 06:00:00', '*/2::*::*::*::*', utc_timestamp(), 'Active', '0');

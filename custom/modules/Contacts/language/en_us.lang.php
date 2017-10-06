@@ -7,4 +7,5 @@ $mod_strings = array (
   'LBL_LASTNAME' => '1er Apellido',
   'LBL_LASTNAME2' => '2do Apellido',
   'AOS_Quotes' => 'Cotizaciones',
+  'LBL_MIGRATEDFROM' => 'Migrado desde',
 );

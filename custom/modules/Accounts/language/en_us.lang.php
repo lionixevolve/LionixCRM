@@ -5,4 +5,5 @@ $mod_strings = array (
   'LBL_CEDULA' => 'Cédula',
   'LBL_TIPOCEDULA' => 'Tipo cédula',
   'AOS_Quotes' => 'Cotizaciones',
+  'LBL_MIGRATEDFROM' => 'Migrado desde',
 );

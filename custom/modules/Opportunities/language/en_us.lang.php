@@ -22,5 +22,6 @@ $mod_strings = array (
   'AOS_Quotes' => 'Cotizaciones',
   'LBL_CHAT' => 'Chat',
   'LBL_FPURCHASEORDER' => 'Orden de Compra',
+  'LBL_MIGRATEDFROM' => 'Migrado desde',
   'LBL_LOSTDETAIL' => 'Detalle Perdida',
 );
