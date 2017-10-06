@@ -211,6 +211,7 @@ ALTER TABLE opportunities_cstm add COLUMN previoussalesstage_c varchar(100) NULL
 ALTER TABLE opportunities_cstm add COLUMN status_c varchar(100) NULL ;
 ALTER TABLE opportunities_cstm add COLUMN previousstatus_c varchar(100) NULL ;
 ALTER TABLE opportunities_cstm add COLUMN fpurchaseorder_c varchar(255) NULL;
+ALTER TABLE opportunities_cstm add COLUMN lostdetail_c varchar(100) NULL ;
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
@@ -287,6 +288,10 @@ VALUES('Opportunitiesstatus_c', 'status_c', 'LBL_STATUS', 'LionixCRM', 'LionixCR
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesfpurchaseorder_c', 'fpurchaseorder_c', 'LBL_FPURCHASEORDER', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 255, 0, '', utc_timestamp(), 0, 1, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitieslostdetail_c', 'lostdetail_c', 'LBL_LOSTDETAIL', 'LionixCRM', 'LionixCRM', 'Opportunities', 'enum', 100, 0, NULL, utc_timestamp(), 0, 0, 0, 0, 1, 'false', 'opportunity_lostdetail_list', '', '', '');
 
 ###### custom fields on Opportunities module (elapsed time in mins)
 ALTER TABLE opportunities_cstm add COLUMN ssfutureinmins_c      int(255) DEFAULT '0' NULL;
