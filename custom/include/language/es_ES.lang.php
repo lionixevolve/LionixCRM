@@ -11,8 +11,8 @@ $GLOBALS['app_list_strings']['sales_probability_dom'] = array(
     'Quoting' => '50',
     'Quoted' => '75',
     'Closed Lost' => '0',
-    'Closed Won' => '90',
-    'Invoiced' => '95',
+    'Closed Won' => '100',
+    'Invoiced' => '100',
     'Paid' => '100',
 );
 $GLOBALS['app_list_strings']['sales_stage_dom_oldvalues'] = array(
