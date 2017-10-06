@@ -41,7 +41,7 @@ $GLOBALS['app_list_strings']['sales_stage_dom'] = array_merge(
     $GLOBALS['app_list_strings']['sales_stage_dom_b2c_goods'],
     $GLOBALS['app_list_strings']['sales_stage_dom_b2c_services']
 );
-$GLOBALS['app_list_strings']['sales_stage_status_list'] = arroy(
+$GLOBALS['app_list_strings']['sales_stage_status_list'] = array(
     'Future_new' => 'A Futuro Nuevo',
     'Future_old' => 'A Futuro Viejo',
     'Prospecting_new' => 'Prospecto Nuevo',
@@ -59,18 +59,18 @@ $GLOBALS['app_list_strings']['sales_stage_status_list'] = arroy(
     'Paid_new' => 'Pagado Nuevo',
     'Paid_old' => 'Pagado Viejo',
 );
-$GLOBALS['app_list_strings']['invoice_status_dom']=array (
+$GLOBALS['app_list_strings']['invoice_status_dom']=array(
     'Paid' => 'Pagada',
     'Unpaid' => 'No Pagada',
     'Cancelled' => 'Anulada',
     '' => '',
 );
-$GLOBALS['app_list_strings']['call_status_dom']=array (
+$GLOBALS['app_list_strings']['call_status_dom']=array(
     'Planned' => 'Planificada',
     'Held' => 'Realizada',
     'Not Held' => 'No Realizada',
 );
-$GLOBALS['app_list_strings']['account_tipocedula_list']=array (
+$GLOBALS['app_list_strings']['account_tipocedula_list']=array(
     'JURIDICA' => 'JURIDICA',
     'NITE' => 'NITE',
     'NACIONAL' => 'NACIONAL',
@@ -78,11 +78,11 @@ $GLOBALS['app_list_strings']['account_tipocedula_list']=array (
     'DIMEX' => 'DIMEX',
     'PASAPORTE' => 'PASAPORTE',
 );
-$GLOBALS['app_list_strings']['lx_pais_list']=array (
+$GLOBALS['app_list_strings']['lx_pais_list']=array(
   '' => '',
   'CR' => 'COSTA RICA',
 );
-$GLOBALS['app_list_strings']['lx_provincia_list']=array (
+$GLOBALS['app_list_strings']['lx_provincia_list']=array(
   '' => '',
   'CR01' => 'SAN JOSE',
   'CR02' => 'ALAJUELA',
@@ -92,7 +92,7 @@ $GLOBALS['app_list_strings']['lx_provincia_list']=array (
   'CR06' => 'PUNTARENAS',
   'CR07' => 'LIMON',
 );
-$GLOBALS['app_list_strings']['lx_canton_list']=array (
+$GLOBALS['app_list_strings']['lx_canton_list']=array(
     '' => '',
     'CR0101' => 'CENTRAL',
     'CR0102' => 'ESCAZU',
@@ -176,7 +176,7 @@ $GLOBALS['app_list_strings']['lx_canton_list']=array (
     'CR0705' => 'MATINA',
     'CR0706' => 'GUACIMO',
 );
-$GLOBALS['app_list_strings']['lx_distrito_list']=array (
+$GLOBALS['app_list_strings']['lx_distrito_list']=array(
     '' => '',
     'CR0101001' => 'HOSPITAL',
     'CR0101002' => 'ZAPOTE',
