@@ -153,12 +153,12 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setMissingNotesLinksAS(&$bean, $event, $arguments)
     {
         global $sugar_config;
-        $files_fields = $sugar_config['lionixcrm']['opportunities']['upload_files_fields'];
-        foreach ($files_fields as $field_name) {
+        $files_fields = $sugar_config['lionixcrm']['modules']['opportunities']['upload_files_fields'];
+        foreach ($files_fields as $ff) {
             $sql = "
                 UPDATE opportunities o
                 LEFT JOIN opportunities_cstm oc ON o.id = oc.id_c
-                LEFT JOIN notes n ON oc.{$field_name} LIKE CONCAT('%',n.id,'%')
+                LEFT JOIN notes n ON oc.{$ff['field_name']} LIKE CONCAT('%',n.id,'%')
                 SET n.parent_id = o.id
                 WHERE o.deleted = 0
                 AND n.deleted = 0

@@ -801,6 +801,15 @@ function post_installModules()
         // Accounts
         array(
             'module'         => 'Accounts',
+            'hook'           => 'after_save',
+            'order'          => 102,
+            'description'    => 'setMissingNotesLinksAS',
+            'file'           => 'custom/modules/Accounts/logic_hooks_after_retrieve.php',
+            'class'          => 'LXAccountsBeforeAndAfterSaveMethods',
+            'function'       => 'setMissingNotesLinksAS',
+        ),
+        array(
+            'module'         => 'Accounts',
             'hook'           => 'after_retrieve',
             'order'          => 102,
             'description'    => 'setLinksToUploadedFiles',
@@ -809,6 +818,15 @@ function post_installModules()
             'function'       => 'setLinksToUploadedFiles',
         ),
         // Contacts
+        array(
+            'module'         => 'Contacts',
+            'hook'           => 'after_save',
+            'order'          => 102,
+            'description'    => 'setMissingNotesLinksAS',
+            'file'           => 'custom/modules/Contacts/logic_hooks_after_retrieve.php',
+            'class'          => 'LXContactsBeforeAndAfterSaveMethods',
+            'function'       => 'setMissingNotesLinksAS',
+        ),
         array(
             'module'         => 'Contacts',
             'hook'           => 'after_retrieve',
