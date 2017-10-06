@@ -21,8 +21,8 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-get-config-option.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-lionixcrm-load-config-options.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-config-option.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-show-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-change-visibility-crm-field.js");
@@ -31,7 +31,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-check-crm-environment.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/upload/lx-upload-files-in-editview.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/notes/lx-remove-contacts-from-related-to.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
@@ -51,7 +51,7 @@ lx.lionixCRM.scripts.forEach(function(element) {
         cache = false;
     }
     var preloadLink = document.createElement("link");
-    preloadLink.href = current_script //"custom/lionix/js/miscellaneous/loadScript.js";
+    preloadLink.href = current_script //"custom/lionix/js/miscellaneous/lionixcrm/loadScript.js";
     preloadLink.rel = "preload";
     preloadLink.as = "script";
     document.head.appendChild(preloadLink);
@@ -59,7 +59,7 @@ lx.lionixCRM.scripts.forEach(function(element) {
 //load js on cascade
 var script = document.createElement("script");
 script.type = "text/javascript";
-script.src = "custom/lionix/js/miscellaneous/loadScript.js"; //+ "?t=" + new Date().getTime(); //prevent caching;;
+script.src = "custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"; //+ "?t=" + new Date().getTime(); //prevent caching;;
 document.head.appendChild(script);
 script.onload = function() {
     scripts = lx.lionixCRM.scripts;
