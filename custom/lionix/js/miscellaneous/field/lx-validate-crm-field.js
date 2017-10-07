@@ -1,4 +1,5 @@
-lx.field.validate = function(form_name, field_name, label, validate, fnCallerName = "") {
+lx.field.validate = function(form_name, field_name, label, lxvalidate, fnCallerName = "") {
+    //validate is defined somewhere on SuiteCRM by default, we only use it here
     if (typeof validate[form_name] == 'undefined') {
         //addForm is defined somewhere on SuiteCRM by default, we only use it here
         addForm(form_name);
@@ -7,7 +8,7 @@ lx.field.validate = function(form_name, field_name, label, validate, fnCallerNam
         ? "(Function " + fnCallerName + ")"
         : "";
     label_field_name_without_c = field_name.replace(/_c$/, '');
-    if (validate) {
+    if (lxvalidate) {
         console.log("lx.field.validate adding validation on form " + form_name + " to field " + field_name, fnCallerName);
         //addToValidate is defined somewhere on SuiteCRM by default, we only use it here
         addToValidate(form_name, field_name, 'varchar', true, "Falta campo requerido: " + label);
