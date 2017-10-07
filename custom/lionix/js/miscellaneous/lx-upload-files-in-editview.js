@@ -187,6 +187,8 @@ lx.upload.getFileFields = function() {
             text_fields_to_upload_fields_list.forEach(function(element) {
                 if ($('#show_' + element.field_name + '_loader').length == 0) {
                     lx.upload.getFileButton(element);
+                } else {
+                    console.log('Field ' + element.field_name + ' was already rendered.')
                 }
             });
         }
