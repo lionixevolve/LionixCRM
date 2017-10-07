@@ -12,6 +12,7 @@ var lx = {
 // LionixCRM required javascript files array list
 lx.lionixCRM.scripts = new Array();
 //SuiteCRM has jQuery preloaded don't include it.
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"); //Must always be first
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
@@ -51,7 +52,7 @@ lx.lionixCRM.scripts.forEach(function(element) {
         cache = false;
     }
     var preloadLink = document.createElement("link");
-    preloadLink.href = current_script //"custom/lionix/js/miscellaneous/lionixcrm/loadScript.js";
+    preloadLink.href = current_script
     preloadLink.rel = "preload";
     preloadLink.as = "script";
     document.head.appendChild(preloadLink);
@@ -59,7 +60,7 @@ lx.lionixCRM.scripts.forEach(function(element) {
 //load js on cascade
 var script = document.createElement("script");
 script.type = "text/javascript";
-script.src = "custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"; //+ "?t=" + new Date().getTime(); //prevent caching;;
+script.src = lx.lionixCRM.scripts.shift(); //loadScript.js must always be the first in the array
 document.head.appendChild(script);
 script.onload = function() {
     scripts = lx.lionixCRM.scripts;
