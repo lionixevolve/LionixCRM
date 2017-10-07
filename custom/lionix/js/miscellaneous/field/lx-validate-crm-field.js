@@ -1,4 +1,8 @@
 lx.field.validate = function(form_name, field_name, label, validate, fnCallerName = "") {
+    if (typeof validate[form_name] == 'undefined') {
+        //addForm is defined somewhere on SuiteCRM by default, we only use it here
+        addForm(form_name);
+    }
     fnCallerName = (fnCallerName != "")
         ? "(Function " + fnCallerName + ")"
         : "";
