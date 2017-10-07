@@ -50,16 +50,18 @@ lx.opportunity.getAccountNameByBusinessType = function() {
     });
     // Observer target
     var target = document.querySelector('#content');
-    // configuration of the observer:
-    // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-    var config = {
-        attributes: true,
-        childList: true,
-        // characterData: true,
-        subtree: true
-    };
-    // pass in the target node, as well as the observer options
-    observer.observe(target, config);
+    if (target) {
+        // configuration of the observer:
+        // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
+        var config = {
+            attributes: true,
+            childList: true,
+            // characterData: true,
+            subtree: true
+        };
+        // pass in the target node, as well as the observer options
+        observer.observe(target, config);
+    }
     // end observer
 }();
 //eof

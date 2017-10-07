@@ -54,34 +54,21 @@
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
         }
-        // When need to find something special
-        // mutations.forEach(function(mutation) {
-        //     console.log('select2-lionixcrm mutation:', mutation);
-        //     //     if (mutation.type == "attributes") {
-        //     //         if (mutation.target.nodeName == "FORM" && mutation.target.id == "some-form-id") {
-        //     //             //when found do your code
-        //     //             //your code
-        //     //             // if needed only once, you can stop observing with observer.disconnect();
-        //     //             //observer.disconnect();
-        //     //         }
-        //     //     }
-        // });
     });
     // Observer target
     var target = document.querySelector("body");
-
-    // configuration of the observer:
-    // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-    var config = {
-        attributes: true,
-        childList: true,
-        // characterData: true,
-        subtree: true
-    };
-    // pass in the target node, as well as the observer options
-    observer.observe(target, config); // uncomment to run
+    if (target) {
+        // configuration of the observer:
+        // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
+        var config = {
+            attributes: true,
+            childList: true,
+            // characterData: true,
+            subtree: true
+        };
+        // pass in the target node, as well as the observer options
+        observer.observe(target, config); // uncomment to run
+    }
     // end observer
 })();
-
-// function definitions section
 //eof
