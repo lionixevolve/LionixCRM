@@ -42,6 +42,15 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js"
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
 // when developing use the "activate" cache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
+// LionixCRM required css files array list
+lx.lionixCRM.css = new Array();
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
+lx.lionixCRM.css.push('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
 // preload al LionixCRM required javascript files array list for blazing speed
 lx.lionixCRM.scripts.forEach(function(element) {
     if (Array.isArray(element)) {
@@ -77,13 +86,9 @@ script.onload = function() {
                 load(++i);
             });
         } else {
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
-            $('head').append('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />');
-            $('head').append('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
+            lx.lionixCRM.css.forEach(function(element) {
+                $('head').append(element);
+            });
             $(document).ready(function() { //Primer document ready
                 console.log("You are running jQuery version:", $.fn.jquery);
                 // Add "Metas" option on main nav menu
