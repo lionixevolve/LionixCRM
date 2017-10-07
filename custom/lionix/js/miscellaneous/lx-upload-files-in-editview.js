@@ -189,10 +189,7 @@ lx.upload.getFileFields = function() {
                     lx.upload.getFileButton(element);
                 }
             });
-            lx.upload.processed = true;
         }
-    } else {
-        lx.upload.processed = true;
     }
 } // end function
 
@@ -207,17 +204,16 @@ lx.upload.getFileFields = function() {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            // if needed only once, you can stop observing with observer.disconnect();
-            if (lx.upload.processed) {
-                observer.disconnect();
-                console.log('Upload file fields already processed, observer stopped');
-            } else {
+            var crmEditView = document.forms['EditView'];
+            if (crmEditView) {
                 console.log("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
                 console.log('Running lx.upload.getFileFields() function');
                 lx.lionixCRM.getConfigOption('modules').then(function() {
                     lx.upload.getFileFields();
                 });
             }
+            // if needed only once, you can stop observing with observer.disconnect();
+            // observer.disconnect();
         }
     });
     // Observer target
@@ -227,7 +223,7 @@ lx.upload.getFileFields = function() {
     var config = {
         attributes: true,
         childList: true,
-        characterData: true,
+        // characterData: true,
         subtree: true
     };
     // pass in the target node, as well as the observer options
