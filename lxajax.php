@@ -48,6 +48,9 @@ class LxAJAX
         $this->user_id = $_SESSION['authenticated_user_id'];
         $this->debug = $this->data['debug'];
         $this->data = (empty($_GET)) ? $_POST : $_GET;
+        if (!isset($this->data['use_adodb5'])) {
+            $this->data['use_adodb5'] = false;
+        }
         $this->db = ($this->data['use_adodb5']) ?  new LxDBConnections() : DBManagerFactory::getInstance();
         $method = $this->data['method'];
         if (method_exists($this, $method)) {
@@ -472,9 +475,11 @@ class LxAJAX
 // Session variables passed to this page
 session_start();
 if (isset($_SESSION['authenticated_user_id'])) {
-    if ($_SESSION['authenticated_user_id']=="1" && !empty($_GET['sudo']) || $_SESSION['sudo']=="1" && !empty($_GET['sudo'])) {
-        $_SESSION['authenticated_user_id']=$_GET['sudo'];
-        $_SESSION['sudo']="1";
+    if (isset($_GET['sudo'])) {
+        if (($_SESSION['authenticated_user_id'] == "1" || $_SESSION['sudo'] == "1") && !empty($_GET['sudo'])) {
+            $_SESSION['authenticated_user_id'] = $_GET['sudo'];
+            $_SESSION['sudo'] = "1";
+        }
     }
     $lxajax = new LxAJAX();
 } else {
