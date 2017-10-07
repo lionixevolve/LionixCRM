@@ -466,7 +466,7 @@ class LxAJAX
             return true;
         } catch (\Exception $e) {
             // Fail!
-            $errors = "Cannot create Document";
+            $errors = "Cannot create Note";
             return $errors;
         }
     }
