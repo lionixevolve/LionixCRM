@@ -38,7 +38,7 @@ class LxAJAX
     public $data;  //Local copy of $_GET and $_POST global variables.
     public $user_id;
 
-    public function LxAJAX()
+    public function __construct()
     {
         // session_start(); // unneeded, session starts when instanced
         global $sugar_config, $current_user;
