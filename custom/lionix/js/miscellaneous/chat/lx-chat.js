@@ -299,7 +299,7 @@ lx.chat.refreshMessagesInterval = function(refresh) {
         new_id = window.setInterval(function() {
             if (!$("#lxchatcontent").length) {
                 lx.chat.refreshMessagesInterval(false);
-            }else{
+            } else {
                 document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
                 console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_ids_list[0]);
             }
@@ -381,16 +381,18 @@ lx.chat.validateNewMessage = function() {
     });
     // Observer target
     var target = document.querySelector('#content');
-    // configuration of the observer:
-    // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-    var config = {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true
-    };
-    // pass in the target node, as well as the observer options
-    observer.observe(target, config);
+    if (target) {
+        // configuration of the observer:
+        // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
+        var config = {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true
+        };
+        // pass in the target node, as well as the observer options
+        observer.observe(target, config);
+    }
     // end observer
 }();
 
