@@ -39,7 +39,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-chat.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
 // when developing use the "activate" cache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // LionixCRM required css files array list

@@ -237,49 +237,47 @@ lx.chat.messagesArrayToHTML = function(msgArray) {
 }
 
 lx.chat.start = function() {
-    if (window.current_user_id == undefined) {
-        if (!$("#lxchat").length) {
-            var currentForm = document.forms['DetailView'];
-            if (!currentForm) {
-                currentForm = document.forms['EditView'];
-            }
-            var record_id = currentForm.record.value;
-            var module_name = currentForm.module.value;
-            var lxajaxdata = {
-                "method": "getCurrentUserId"
-            }
-            $.ajax({
-                // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-                beforeSend: function(jqXHR, settings) {
-                    console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax beforeSend');
-                    console.log("*** start ***");
-                    console.log("beforeSend callback:", settings.url);
-                },
-                url: 'lxajax.php',
-                type: 'POST',
-                data: lxajaxdata,
-                // success is a function to be called if the request succeeds.
-                success: function(data, status, jqXHR) {
-                    console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax success');
-                    console.log("success callback:", status);
-                    console.log("data:", data);
-                    window.current_user_id = data;
-                    if (!$("#lxchat").length) {
-                        lx.chat.findFieldToRender();
-                    }
-                },
-                // error is a function to be called if the request fails.
-                error: function(jqXHR, status, error) {
-                    console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax error');
-                    console.log("error callback:", status);
-                    console.log("Function lx.chat.start error:", error);
-                }, // end error
-                // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-                // complete: function(jqXHR, status) {
-                // },
-                datatype: "text"
-            });
+    if (!$("#lxchat").length) {
+        var currentForm = document.forms['DetailView'];
+        if (!currentForm) {
+            currentForm = document.forms['EditView'];
         }
+        var record_id = currentForm.record.value;
+        var module_name = currentForm.module.value;
+        var lxajaxdata = {
+            "method": "getCurrentUserId"
+        }
+        $.ajax({
+            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+            beforeSend: function(jqXHR, settings) {
+                console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax beforeSend');
+                console.log("*** start ***");
+                console.log("beforeSend callback:", settings.url);
+            },
+            url: 'lxajax.php',
+            type: 'POST',
+            data: lxajaxdata,
+            // success is a function to be called if the request succeeds.
+            success: function(data, status, jqXHR) {
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax success');
+                console.log("success callback:", status);
+                console.log("data:", data);
+                window.current_user_id = data;
+                if (!$("#lxchat").length) {
+                    lx.chat.findFieldToRender();
+                }
+            },
+            // error is a function to be called if the request fails.
+            error: function(jqXHR, status, error) {
+                console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax error');
+                console.log("error callback:", status);
+                console.log("Function lx.chat.start error:", error);
+            }, // end error
+            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+            // complete: function(jqXHR, status) {
+            // },
+            datatype: "text"
+        });
     }
 }
 
@@ -299,8 +297,12 @@ lx.chat.refreshMessagesInterval = function(refresh) {
             window.clearInterval(element);
         });
         new_id = window.setInterval(function() {
-            document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
-            console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_ids_list[0]);
+            if (!$("#lxchatcontent").length) {
+                lx.chat.refreshMessagesInterval(false);
+            }else{
+                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
+                console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_ids_list[0]);
+            }
         }, 15000)
         lx.chat.interval_ids_list.unshift(new_id);
         console.log('New LionixCRM messages interval id set: %s', new_id);
@@ -358,17 +360,23 @@ lx.chat.validateNewMessage = function() {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            $(document).ready(function() {
-                // if #edit_button exists is a detailview, if not, then if a #SAVE or #SAVE_HEADER button exists is a editview
-                if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
-                    // now it ensures that lxchat isn't already present
-                    if (!$("#lxchat").length) {
-                        lx.chat.start();
+            var currentForm = document.forms['DetailView'];
+            if (!currentForm) {
+                currentForm = document.forms['EditView'];
+            }
+            if (currentForm) {
+                $(document).ready(function() {
+                    // if #edit_button exists is a detailview, if not, then if a #SAVE or #SAVE_HEADER button exists is a editview
+                    if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
+                        // now it ensures that lxchat isn't already present
+                        if (!$("#lxchat").length) {
+                            lx.chat.start();
+                        }
                     }
-                }
-            });
+                });
+            }
             // if needed only once, you can stop observing with observer.disconnect();
-            observer.disconnect();
+            // observer.disconnect();
         }
     });
     // Observer target
