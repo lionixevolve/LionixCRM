@@ -70,11 +70,19 @@ array (
         array (
           0 => 
           array (
+            'name' => 'maincontactcedula_c',
+            'label' => 'LBL_MAINCONTACTCEDULA',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'maincontactfirstname_c',
             'label' => 'LBL_MAINCONTACTFIRSTNAME',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -82,7 +90,7 @@ array (
             'label' => 'LBL_MAINCONTACTLASTNAME',
           ),
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -90,7 +98,7 @@ array (
             'label' => 'LBL_MAINCONTACTLASTNAME2',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -98,7 +106,7 @@ array (
             'label' => 'LBL_MAINCONTACTPHONEWORK',
           ),
         ),
-        7 => 
+        8 => 
         array (
           0 => 
           array (
@@ -106,20 +114,12 @@ array (
             'label' => 'LBL_MAINCONTACTEMAILADDRESS',
           ),
         ),
-        8 => 
+        9 => 
         array (
           0 => 
           array (
             'name' => 'maincontacttitle_c',
             'label' => 'LBL_MAINCONTACTTITLE',
-          ),
-        ),
-        9 => 
-        array (
-          0 => 
-          array (
-            'name' => 'maincontactcedula_c',
-            'label' => 'LBL_MAINCONTACTCEDULA',
           ),
         ),
         10 => 

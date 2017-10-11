@@ -5,6 +5,9 @@ lx.opportunity.getnewMainContactCFields = function() {
     var form_name = 'EditView';
     var maincontact_fields = [
         {
+            "field": 'maincontactcedula_c',
+            "label": 'Cédula nuevo contacto'
+        }, {
             "field": 'maincontactfirstname_c',
             "label": 'Nombre nuevo contacto'
         }, {
@@ -22,9 +25,6 @@ lx.opportunity.getnewMainContactCFields = function() {
         }, {
             "field": 'maincontacttitle_c',
             "label": 'Cargo nuevo contacto'
-        }, {
-            "field": 'maincontactcedula_c',
-            "label": 'Cédula nuevo contacto'
         }
     ];
     if ($("#lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
