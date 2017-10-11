@@ -62,9 +62,12 @@ lx.opportunity.getnewMainContactCFields = function() {
     }
 }
 
-lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, accountId) {
+lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, accountId, accountName) {
     var method = "getOpportunityMainContactList";
     var data = "method=" + method;
+    if (accountName == '') {
+        accountId = '';
+    }
     data += "&opportunityId=" + opportunityId;
     data += "&currentValue=" + currentValue;
     data += "&accountId=" + accountId;
@@ -120,7 +123,7 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                         lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
                         $('#account_name').on("focusout.account-name", function() {
-                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
+                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val(), $("#account_name").val()); //popoulate dropdown once when editview loads.
                         });
                         $('#maincontact_c').on("change.lx-main-contact-c", function() {
                             lx.opportunity.getnewMainContactCFields();
