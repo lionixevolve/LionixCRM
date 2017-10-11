@@ -38,8 +38,9 @@ lx.opportunity.getnewMainContactCFields = function() {
             lx.field.validate(form_name, element.field, element.label, true);
         });
         //Exceptions
-        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
         lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
+        lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
 
         maincontact_fields.forEach(function(element) {
             lx.field.show(element.field, true);
