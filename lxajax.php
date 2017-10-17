@@ -470,6 +470,61 @@ class LxAJAX
             return $errors;
         }
     }
+
+    public function getContactDuplicates()
+    {
+        $list = array();
+        if (!empty($this->data['first_name']) || !empty($this->data['last_name']) || !empty($this->data['lastname2_c']) || !empty($this->data['cedula_c']) || !empty($this->data['email_address'])) {
+            $query = "
+                SELECT distinct c.id, cc.cedula_c, c.first_name, c.last_name, cc.lastname2_c, c.phone_work, c.phone_mobile, c.title
+                FROM contacts c
+                LEFT JOIN contacts_cstm cc ON c.id = cc.id_c
+                LEFT JOIN email_addr_bean_rel er ON er.bean_module = 'Contacts' AND er.bean_id = c.id
+                LEFT JOIN email_addresses e ON er.email_address_id = e.id
+                WHERE c.deleted = 0
+                AND er.deleted = 0
+                AND e.deleted = 0
+            ";
+            if (!empty($this->data['cedula_c'])) {
+                $query .= " AND cc.cedula_c LIKE '%{$this->data['cedula_c']}%' ";
+            }
+            if (!empty($this->data['first_name'])) {
+                $query .= " AND c.first_name LIKE '%{$this->data['first_name']}%' ";
+            }
+            if (!empty($this->data['last_name'])) {
+                $query .= " AND c.last_name LIKE '%{$this->data['last_name']}%' ";
+            }
+            if (!empty($this->data['lastname2_c'])) {
+                $query .= " AND cc.lastname2_c LIKE '%{$this->data['lastname2_c']}%' ";
+            }
+            if (!empty($this->data['email_address'])) {
+                $query .= " AND e.email_address LIKE '%{$this->data['email_address']}%' ";
+            }
+            $query .= " ORDER BY c.first_name ,c.last_name, cc.lastname2_c";
+            $rs = $GLOBALS['db']->query($query, false);
+            while (($row = $GLOBALS['db']->fetchByAssoc($rs)) != null) {
+                $row['emails'] = array();
+                $query = "
+                    SELECT e.id, e.email_address, er.primary_address
+                    FROM contacts c
+                    LEFT JOIN email_addr_bean_rel er ON er.bean_module = 'Contacts' AND er.bean_id = c.id
+                    LEFT JOIN email_addresses e ON er.email_address_id = e.id
+                    WHERE c.deleted = 0
+                    AND er.deleted = 0
+                    AND e.deleted = 0
+                    AND c.id = '{$row['id']}'
+                    ORDER BY er.primary_address desc, e.date_created desc
+                ";
+                $rse = $GLOBALS['db']->query($query, false);
+                while (($rowe = $GLOBALS['db']->fetchByAssoc($rse)) != null) {
+                    $row['emails'][] = $rowe;
+                }
+                //$list[] = array('value' => $value, 'name' => $name, 'default' => $default, 'selected' => $selected); //this is the below format example
+                $list[] = $row;
+            }
+        }
+        return json_encode($list);
+    }
 }//end class LxAJAX
 
 // Session variables passed to this page
