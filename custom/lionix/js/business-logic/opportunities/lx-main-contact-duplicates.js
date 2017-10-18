@@ -14,7 +14,7 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
             $.ajax({
                 // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
                 beforeSend: function(jqXHR, settings) {
-                    console.log("Bussines logic '%s' '%s' '%s' option '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', option, 'ajax beforeSend');
+                    console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax beforeSend');
                     console.log("*** start ***");
                     console.log("beforeSend callback:", settings.url);
                 }, //end beforeSend
@@ -23,7 +23,7 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                 data: data,
                 // success is a function to be called if the request succeeds.
                 success: function(data, status, jqXHR) {
-                    console.log("Bussines logic '%s' '%s' '%s' option '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', option, 'ajax success');
+                    console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax success');
                     console.log("success callback:", status);
                     console.log("data:", data);
                     if (data == '') {
@@ -33,14 +33,13 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                         console.log("LionixCRM option (" + option + ") updated.")
                     }
                     resolve({
-                        "id": so.fieldname,
-                        // "data": ['Sakura', 'Naruto', 'Sasuke', 'Kakashi','Jiraiya']
+                        "fieldname": so.fieldname,
                         "data": data
                     });
                 }, // end success
                 // error is a function to be called if the request fails.
                 error: function(jqXHR, status, error) {
-                    console.log("Bussines logic '%s' '%s' '%s' option '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', option, 'ajax error');
+                    console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax error');
                     console.log("error callback:", status);
                     console.log("Function lx.lionixCRM.getConfigOption error:", error);
                     reject(error);
@@ -63,7 +62,7 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
             fced = $('#maincontactcedula_c');
             if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
                 if ($('#main_contact_duplicates_' + this.id).length == 0) {
-                    $(this).after('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 0px; top: 52px;">    <div class="yui-ac-content" style="width: 458px; height: 60px; display: none; ">        <div class="yui-ac-bd">            <ul id="#ul_' + this.id + '">                <li style="">Sakura</li>                <li style="">Naruto</li>                <li style="">Sasuke</li>            </ul>        </div>    </div></div>');
+                    $(this).after('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 0px; top: 52px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd"><ul id="#ul_' + this.id + '"></ul></div></div></div>');
                 }
                 lx.opportunity.getMainContactDuplicates({
                     "fieldname": this.id,
@@ -72,11 +71,11 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                     "lastname2_c": $(fln2).val()
                     // "cedula_c": $(fced).val(),
                     // "email_address": $(femail).val()
-                }).then(function(data) {
-                    console.log("array devulto:", data);
+                }).then(function(duplicates) {
+                    console.log("duplicados devueltos:", duplicates);
                     $('.main_contact_duplicates ul li').remove();
-                    if (data.data.length) {
-                        data.data.forEach(function(element) {
+                    if (duplicates.data.length) {
+                        duplicates.data.forEach(function(element) {
                             primary_address = {};
                             element.emails.forEach(function(element) {
                                 if (element.primary_address === '1') {
@@ -99,13 +98,14 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                             element.emails.forEach(function(element) {
                                 duplicate_detail += element.email_address + ' ';
                             });
-                            duplicate_detail += element.phone;
+                            duplicate_detail += element.phone_mobile + ' ';
+                            duplicate_detail += element.phone_work;
                             duplicate_detail += '</li>';
                             $('.main_contact_duplicates ul').append(duplicate_detail);
                         });
-                        newh = data.data.length * 20;
-                        $('#main_contact_duplicates_' + data.id + ' .yui-ac-content').css("height", newh + "px");
-                        $('#main_contact_duplicates_' + data.id + ' .yui-ac-content').show(500);
+                        newh = duplicates.data.length * 20;
+                        $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').css("height", newh + "px");
+                        $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').show(500);
                         $('.main_contact_duplicates li').off("mouseover.main_contact_duplicates_list");
                         $('.main_contact_duplicates li').on("mouseover.main_contact_duplicates_list", function() {
                             $(this).toggleClass('yui-ac-highlight');
@@ -113,8 +113,11 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                         });
                         $('.main_contact_duplicates li').off("click.main_contact_duplicates_list");
                         $('.main_contact_duplicates li').on("click.main_contact_duplicates_list", function() {
+                            $('.main_contact_duplicates .yui-ac-content').hide(500);
+
                             console.log('contact_id', $(this).prop('id'));
                             console.log('email_id', $(this).data('primary_email_address_id'));
+                            $('#maincontactduplicateid_c').val($(this).prop('id'));
                             $('#maincontactcedula_c').val($(this).data('cedula_c'));
                             $('#maincontactfirstname_c').val($(this).data('first_name'));
                             $('#maincontactlastname_c').val($(this).data('last_name'));
@@ -123,12 +126,30 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                             $('#maincontactphonework_c').val($(this).data('phone_work'));
                             $('#maincontactemailaddress_c').val($(this).data('primary_email_address'));
                             $('#maincontacttitle_c').val($(this).data('title'));
-                            $('.main_contact_duplicates .yui-ac-content').hide(500);
+
+                            $('#maincontactcedula_c').css('border', '1px solid #0045ff')
+                            $('#maincontactfirstname_c').css('border', '1px solid #0045ff')
+                            $('#maincontactlastname_c').css('border', '1px solid #0045ff')
+                            $('#maincontactlastname2_c').css('border', '1px solid #0045ff')
+                            $('#maincontactphonemobile_c').css('border', '1px solid #0045ff')
+                            $('#maincontactphonework_c').css('border', '1px solid #0045ff')
+                            $('#maincontactemailaddress_c').css('border', '1px solid #0045ff')
+                            $('#maincontacttitle_c').css('border', '1px solid #0045ff')
+
+                            main_contact_clear_button = '<span class="id-ff multiple"> <button type="button" style="margin: 8px" class="button lastChild lx-clear-duplicate" value="Limpiar nuevo contacto" onclick="lx.opportunity.clearMainContactCFields(true)"><img src="themes/SuiteP/images/id-ff-clear.png"></button></span>';
+
+                            $('#maincontactcedula_c').after(main_contact_clear_button);
+                            $('#maincontactfirstname_c').after(main_contact_clear_button);
+                            $('#maincontactlastname_c').after(main_contact_clear_button);
+                            $('#maincontactlastname2_c').after(main_contact_clear_button);
+                            $('#maincontactphonemobile_c').after(main_contact_clear_button);
+                            $('#maincontactphonework_c').after(main_contact_clear_button);
+                            $('#maincontactemailaddress_c').after(main_contact_clear_button);
+                            $('#maincontacttitle_c').after(main_contact_clear_button);
                         });
                     }
                 });
             }
-            // lo comentado abajo funciona, solo lo comento para que no desaparezca mientras hago mas pruebas
             $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.duplicate_results_list");
             $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.duplicate_results_list", function() {
                 $('.main_contact_duplicates .yui-ac-content').hide(500);
