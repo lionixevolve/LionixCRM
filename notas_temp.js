@@ -89,7 +89,8 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                             duplicate_detail += '" data-first_name="' + element.first_name;
                             duplicate_detail += '" data-last_name="' + element.last_name;
                             duplicate_detail += '" data-lastname2_c="' + element.lastname2_c;
-                            duplicate_detail += '" data-phone="' + element.phone;
+                            duplicate_detail += '" data-phone_mobile="' + element.phone_mobile;
+                            duplicate_detail += '" data-phone_work="' + element.phone_work;
                             duplicate_detail += '" data-title="' + element.title;
                             duplicate_detail += '" data-primary_email_address_id="' + primary_address.id;
                             duplicate_detail += '" data-primary_email_address="' + primary_address.email_address;
@@ -118,7 +119,8 @@ lx.opportunity.getMainContactDuplicates = function(searchObject) {
                             $('#maincontactfirstname_c').val($(this).data('first_name'));
                             $('#maincontactlastname_c').val($(this).data('last_name'));
                             $('#maincontactlastname2_c').val($(this).data('lastname2_c'));
-                            $('#maincontactphonework_c').val($(this).data('phone'));
+                            $('#maincontactphonemobile_c').val($(this).data('phone_mobile'));
+                            $('#maincontactphonework_c').val($(this).data('phone_work'));
                             $('#maincontactemailaddress_c').val($(this).data('primary_email_address'));
                             $('#maincontacttitle_c').val($(this).data('title'));
                             $('.main_contact_duplicates .yui-ac-content').hide(500);
