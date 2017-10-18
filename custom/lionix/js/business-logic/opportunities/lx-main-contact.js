@@ -3,6 +3,11 @@
 // function definitions section
 lx.opportunity.maincontact_fields = [
     {
+        "field": 'maincontactduplicateid_c',
+        "label": 'Id contacto dulicado',
+        "hidden": true,
+        "notes": "This field must be always hide"
+    }, {
         "field": 'maincontactcedula_c',
         "label": 'Cédula nuevo contacto'
     }, {
@@ -67,13 +72,18 @@ lx.opportunity.getnewMainContactCFields = function() {
             }
         });
         //Exceptions
+        lx.field.validate(form_name, 'maincontactduplicateid_c', 'Id contacto dulicado', false);
         lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
         lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
         lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
         lx.field.validate(form_name, 'maincontactphonework_c', 'Télefono trabajo nuevo contacto', false);
 
         lx.opportunity.maincontact_fields.forEach(function(element) {
-            lx.field.show(element.field, true);
+            if (element.hidden) {
+                lx.field.show(element.field, false);
+            } else {
+                lx.field.show(element.field, true);
+            }
         });
         $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
             switch ($("#maincontactfirstname_c").val().toUpperCase()) {
