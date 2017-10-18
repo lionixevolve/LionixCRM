@@ -476,7 +476,7 @@ class LxAJAX
         $list = array();
         if (!empty($this->data['first_name']) || !empty($this->data['last_name']) || !empty($this->data['lastname2_c']) || !empty($this->data['cedula_c']) || !empty($this->data['email_address'])) {
             $query = "
-                SELECT distinct c.id, cc.cedula_c, c.first_name, c.last_name, cc.lastname2_c, c.phone_work, c.phone_mobile, c.title
+                SELECT distinct c.id, ifnull(cc.cedula_c,'') as 'cedula_c', ifnull(c.first_name,'') as 'first_name', ifnull(c.last_name,'') as 'last_name', ifnull(cc.lastname2_c,'') as 'lastname2_c', ifnull(c.phone_work,ifnull(c.phone_mobile,'')) as 'phone', ifnull(c.title,'') as 'title'
                 FROM contacts c
                 LEFT JOIN contacts_cstm cc ON c.id = cc.id_c
                 LEFT JOIN email_addr_bean_rel er ON er.bean_module = 'Contacts' AND er.bean_id = c.id
