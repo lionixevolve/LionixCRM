@@ -29,13 +29,28 @@ lx.opportunity.maincontact_fields = [
     }
 ];
 
+lx.opportunity.clearMainContactCFields = function(duplicate) {
+    lx.opportunity.maincontact_fields.forEach(function(element) {
+        $('#' + element.field).val('');
+    });
+    if (duplicate) {
+        $('#maincontactcedula_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactfirstname_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactlastname_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactlastname2_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactphonemobile_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactphonework_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactemailaddress_c').css('border', '1px solid #a5e8d6')
+        $('#maincontacttitle_c').css('border', '1px solid #a5e8d6')
+        $('.lx-clear-duplicate').remove();
+    }
+}
+
 lx.opportunity.getnewMainContactCFields = function() {
     var form_name = 'EditView';
     if ($("#lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
         $("#maincontact_c").append('<div id="lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time"/>');
-        maincontact_fields.forEach(function(element) {
-            $('#' + element.field).val('');
-        });
+        lx.opportunity.clearMainContactCFields();
     }
     if ($("#maincontact_c").val() == 'new') {
         lx.opportunity.maincontact_fields.forEach(function(element) {
