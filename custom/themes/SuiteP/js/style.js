@@ -25,6 +25,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-config-option.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field-callback.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-show-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-change-visibility-crm-field.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
