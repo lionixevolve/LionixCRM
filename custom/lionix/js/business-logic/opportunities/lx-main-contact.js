@@ -40,14 +40,14 @@ lx.opportunity.clearMainContactCFields = function(duplicate) {
         $('#' + element.field).val('');
     });
     if (duplicate) {
-        $('#maincontactcedula_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactfirstname_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactlastname_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactlastname2_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactphonemobile_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactphonework_c').css('border', '1px solid #a5e8d6')
-        $('#maincontactemailaddress_c').css('border', '1px solid #a5e8d6')
-        $('#maincontacttitle_c').css('border', '1px solid #a5e8d6')
+        $('#maincontactcedula_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactfirstname_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactlastname_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactlastname2_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactphonemobile_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactphonework_c').css('border', '1px solid #a5e8d6');
+        $('#maincontactemailaddress_c').css('border', '1px solid #a5e8d6');
+        $('#maincontacttitle_c').css('border', '1px solid #a5e8d6');
         $('.lx-clear-duplicate').remove();
     }
 }
