@@ -1,32 +1,36 @@
 // This file containts opportunities bussines logic
 
 // function definitions section
+lx.opportunity.maincontact_fields = [
+    {
+        "field": 'maincontactcedula_c',
+        "label": 'Cédula nuevo contacto'
+    }, {
+        "field": 'maincontactfirstname_c',
+        "label": 'Nombre nuevo contacto'
+    }, {
+        "field": 'maincontactlastname_c',
+        "label": '1er apellido nuevo contacto'
+    }, {
+        "field": 'maincontactlastname2_c',
+        "label": '2do apellido nuevo contacto'
+    }, {
+        "field": 'maincontactemailaddress_c',
+        "label": 'Correo electrónico nuevo contacto'
+    }, {
+        "field": 'maincontactphonemobile_c',
+        "label": 'Télefono celular nuevo contacto'
+    }, {
+        "field": 'maincontactphonework_c',
+        "label": 'Télefono trabajo nuevo contacto'
+    }, {
+        "field": 'maincontacttitle_c',
+        "label": 'Cargo nuevo contacto'
+    }
+];
+
 lx.opportunity.getnewMainContactCFields = function() {
     var form_name = 'EditView';
-    var maincontact_fields = [
-        {
-            "field": 'maincontactcedula_c',
-            "label": 'Cédula nuevo contacto'
-        }, {
-            "field": 'maincontactfirstname_c',
-            "label": 'Nombre nuevo contacto'
-        }, {
-            "field": 'maincontactlastname_c',
-            "label": '1er apellido nuevo contacto'
-        }, {
-            "field": 'maincontactlastname2_c',
-            "label": '2do apellido nuevo contacto'
-        }, {
-            "field": 'maincontactphonework_c',
-            "label": 'Teléfono nuevo contacto'
-        }, {
-            "field": 'maincontactemailaddress_c',
-            "label": 'Correo electrónico nuevo contacto'
-        }, {
-            "field": 'maincontacttitle_c',
-            "label": 'Cargo nuevo contacto'
-        }
-    ];
     if ($("#lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time").length == 0) {
         $("#maincontact_c").append('<div id="lx_opportunity_maincontact_c_lxajaxed_getnewMainContactCFields_first_time"/>');
         maincontact_fields.forEach(function(element) {
@@ -34,7 +38,7 @@ lx.opportunity.getnewMainContactCFields = function() {
         });
     }
     if ($("#maincontact_c").val() == 'new') {
-        maincontact_fields.forEach(function(element) {
+        lx.opportunity.maincontact_fields.forEach(function(element) {
             lx.field.validate(form_name, element.field, element.label, true);
         });
         //Exceptions
@@ -42,7 +46,7 @@ lx.opportunity.getnewMainContactCFields = function() {
         lx.field.validate(form_name, 'maincontactlastname2_c', '2do apellido nuevo contacto', false);
         lx.field.validate(form_name, 'maincontacttitle_c', 'Cargo nuevo contacto', false);
 
-        maincontact_fields.forEach(function(element) {
+        lx.opportunity.maincontact_fields.forEach(function(element) {
             lx.field.show(element.field, true);
         });
         $('#maincontactfirstname_c').on("focusout.maincontactfirstname_c", function() {
@@ -53,10 +57,10 @@ lx.opportunity.getnewMainContactCFields = function() {
             }
         });
     } else {
-        maincontact_fields.forEach(function(element) {
+        lx.opportunity.maincontact_fields.forEach(function(element) {
             lx.field.validate(form_name, element.field, element.label, false);
         });
-        maincontact_fields.forEach(function(element) {
+        lx.opportunity.maincontact_fields.forEach(function(element) {
             lx.field.show(element.field, false);
         });
         $('#maincontactfirstname_c').off("focusout.maincontactfirstname_c");
