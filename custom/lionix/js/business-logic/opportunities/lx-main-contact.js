@@ -16,7 +16,13 @@ lx.opportunity.maincontact_fields = [
         "label": '2do apellido nuevo contacto'
     }, {
         "field": 'maincontactemailaddress_c',
-        "label": 'Correo electrónico nuevo contacto'
+        "label": 'Correo electrónico nuevo contacto',
+        "required": true,
+        "customValidate": true,
+        "customValidateCallback": function() {
+            emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return emailRegExp.test($('#maincontactemailaddress_c').val());
+        }
     }, {
         "field": 'maincontactphonemobile_c',
         "label": 'Télefono celular nuevo contacto'
@@ -54,7 +60,11 @@ lx.opportunity.getnewMainContactCFields = function() {
     }
     if ($("#maincontact_c").val() == 'new') {
         lx.opportunity.maincontact_fields.forEach(function(element) {
-            lx.field.validate(form_name, element.field, element.label, true);
+            if (element.customValidate) {
+                lx.field.validateCallback(form_name, element.field, element.label, element.customValidateCallback, element.required);
+            } else {
+                lx.field.validate(form_name, element.field, element.label, true);
+            }
         });
         //Exceptions
         lx.field.validate(form_name, 'maincontactcedula_c', 'Cédula nuevo contacto', false);
