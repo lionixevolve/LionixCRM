@@ -479,11 +479,13 @@ class LxAJAX
                 SELECT distinct c.id, ifnull(cc.cedula_c,'') as 'cedula_c', ifnull(c.first_name,'') as 'first_name', ifnull(c.last_name,'') as 'last_name', ifnull(cc.lastname2_c,'') as 'lastname2_c', ifnull(c.phone_work,'') as 'phone_work', ifnull(c.phone_mobile,'') AS 'phone_mobile', ifnull(c.title,'') as 'title'
                 FROM contacts c
                 LEFT JOIN contacts_cstm cc ON c.id = cc.id_c
-                LEFT JOIN email_addr_bean_rel er ON er.bean_module = 'Contacts' AND er.bean_id = c.id
-                LEFT JOIN email_addresses e ON er.email_address_id = e.id
+                LEFT JOIN email_addr_bean_rel er ON er.bean_id = c.id AND er.bean_module = 'Contacts' AND er.deleted = 0
+                LEFT JOIN email_addresses e ON er.email_address_id = e.id AND e.deleted = 0
+                LEFT JOIN accounts_contacts acco ON c.id = acco.contact_id
+                LEFT JOIN accounts a ON acco.account_id = a.id
                 WHERE c.deleted = 0
-                AND er.deleted = 0
-                AND e.deleted = 0
+                AND acco.deleted = 0
+                AND a.deleted = 0
             ";
             if (!empty($this->data['cedula_c'])) {
                 $query .= " AND cc.cedula_c LIKE '%{$this->data['cedula_c']}%' ";
@@ -518,6 +520,23 @@ class LxAJAX
                 $rse = $GLOBALS['db']->query($query, false);
                 while (($rowe = $GLOBALS['db']->fetchByAssoc($rse)) != null) {
                     $row['emails'][] = $rowe;
+                }
+                $row['accounts'] = array();
+                $query = "
+                    SELECT a.id, a.name, ifnull(ac.tipocedula_c,'') AS 'tipocedula_c'
+                    FROM contacts c
+                    LEFT JOIN accounts_contacts acco ON c.id = acco.contact_id
+                    LEFT JOIN accounts a ON acco.account_id = a.id
+                    LEFT JOIN accounts_cstm ac ON a.id = ac.id_c
+                    WHERE c.deleted = 0
+                    AND acco.deleted = 0
+                    AND a.deleted = 0
+                    AND c.id = '{$row['id']}'
+                    ORDER BY ac.tipocedula_c
+                ";
+                $rsa = $GLOBALS['db']->query($query, false);
+                while (($rowa = $GLOBALS['db']->fetchByAssoc($rsa)) != null) {
+                    $row['accounts'][] = $rowa;
                 }
                 //$list[] = array('value' => $value, 'name' => $name, 'default' => $default, 'selected' => $selected); //this is the below format example
                 $list[] = $row;
