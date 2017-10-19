@@ -95,6 +95,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
             $newContact->first_name = $bean->maincontactfirstname_c;
             $newContact->last_name = $bean->maincontactlastname_c;
             $newContact->lastname2_c = $bean->maincontactlastname2_c;
+            $newContact->phone_mobile = $bean->maincontactphonemobile_c;
             $newContact->phone_work = $bean->maincontactphonework_c;
             $newContact->email1 = $bean->maincontactemailaddress_c;
             $newContact->title = $bean->maincontacttitle_c;
