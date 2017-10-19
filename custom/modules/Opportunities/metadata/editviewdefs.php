@@ -70,11 +70,19 @@ array (
         array (
           0 => 
           array (
+            'name' => 'maincontactduplicateid_c',
+            'label' => 'LBL_MAINCONTACTDUPLICATEID',
+          ),
+        ),
+        4 => 
+        array (
+          0 => 
+          array (
             'name' => 'maincontactcedula_c',
             'label' => 'LBL_MAINCONTACTCEDULA',
           ),
         ),
-        4 => 
+        5 => 
         array (
           0 => 
           array (
@@ -82,7 +90,7 @@ array (
             'label' => 'LBL_MAINCONTACTFIRSTNAME',
           ),
         ),
-        5 => 
+        6 => 
         array (
           0 => 
           array (
@@ -90,7 +98,7 @@ array (
             'label' => 'LBL_MAINCONTACTLASTNAME',
           ),
         ),
-        6 => 
+        7 => 
         array (
           0 => 
           array (
@@ -98,7 +106,15 @@ array (
             'label' => 'LBL_MAINCONTACTLASTNAME2',
           ),
         ),
-        7 => 
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'maincontactphonemobile_c',
+            'label' => 'LBL_MAINCONTACTPHONEMOBILE',
+          ),
+        ),
+        9 => 
         array (
           0 => 
           array (
@@ -106,7 +122,7 @@ array (
             'label' => 'LBL_MAINCONTACTPHONEWORK',
           ),
         ),
-        8 => 
+        10 => 
         array (
           0 => 
           array (
@@ -114,7 +130,7 @@ array (
             'label' => 'LBL_MAINCONTACTEMAILADDRESS',
           ),
         ),
-        9 => 
+        11 => 
         array (
           0 => 
           array (
@@ -122,7 +138,7 @@ array (
             'label' => 'LBL_MAINCONTACTTITLE',
           ),
         ),
-        10 => 
+        12 => 
         array (
           0 => 
           array (
@@ -133,7 +149,7 @@ array (
             'name' => 'date_closed',
           ),
         ),
-        11 => 
+        13 => 
         array (
           0 => 'campaign_name',
           1 => 
@@ -142,11 +158,11 @@ array (
             'label' => 'LBL_DNC',
           ),
         ),
-        12 => 
+        14 => 
         array (
           0 => 'next_step',
         ),
-        13 => 
+        15 => 
         array (
           0 => 
           array (
@@ -154,11 +170,11 @@ array (
             'label' => 'LBL_FPURCHASEORDER',
           ),
         ),
-        14 => 
+        16 => 
         array (
           0 => 'description',
         ),
-        15 => 
+        17 => 
         array (
           0 => 
           array (
