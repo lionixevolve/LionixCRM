@@ -226,7 +226,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
             duplicate_detail += '</li>';
             $('.main_contact_duplicates ul').append(duplicate_detail);
         });
-        newh = duplicates.data.length * 20;
+        newh = duplicates.data.length * 20 + 18; // last 18px bit is for duplicates title
         $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').css("height", newh + "px");
         $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').show(500);
         $('.main_contact_duplicates li').off("mouseover.main_contact_duplicates_list");
@@ -307,7 +307,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                             fced = $('#maincontactcedula_c');
                             if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
                                 if ($('#main_contact_duplicates_' + this.id).length == 0) {
-                                    $(this).after('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 0px; top: 52px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd"><ul id="#ul_' + this.id + '"></ul></div></div></div>');
+                                    $(this).after('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
                                 }
                                 $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.duplicate_results_list");
                                 $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.duplicate_results_list", function() {
