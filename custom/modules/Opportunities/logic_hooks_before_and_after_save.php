@@ -81,7 +81,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         $bean->custom_fields->retrieve();
 
         if ($bean->maincontact_c=='new') {
-            if (($sugar_config['lionixcrm']['business_type']=='b2c')) {
+            if (($sugar_config['lionixcrm']['business_type']=='b2c') && empty($bean->account_id)) {
                 $newAccount = BeanFactory::newBean('Accounts');
                 $newAccount->name = "{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}";
                 $newAccount->tipocedula_c = 'NACIONAL';
@@ -89,8 +89,10 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                 $newAccount->save();
                 $bean->account_id = $newAccount->id;
             }
-
             $newContact = BeanFactory::newBean('Contacts');
+            if (!empty($bean->maincontactduplicateid_c)) {
+                $newContact->retrieve($bean->maincontactduplicateid_c);
+            }
             $newContact->account_id = $bean->account_id;
             $newContact->first_name = $bean->maincontactfirstname_c;
             $newContact->last_name = $bean->maincontactlastname_c;
