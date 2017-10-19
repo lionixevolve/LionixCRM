@@ -14,7 +14,10 @@ class LXOpportunitiesAfterRetrieveMethods
             ";
             $results = $bean->db->query($query);
             if ($row = $bean->db->fetchByAssoc($results)) {
-                $bean->maincontact_c = mb_convert_encoding($row['maincontact_c'], 'UTF-8');
+                global $sugar_config;
+                $url = $sugar_config['site_url'];
+                $contact_full_name = mb_convert_encoding($row['maincontact_c'], 'UTF-8');
+                $bean->maincontact_c = "<a href=\"{$url}/index.php?module=Contacts&action=DetailView&record={$bean->maincontact_c}\">{$contact_full_name}</a>";
             }
         }
     }
