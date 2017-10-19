@@ -1,6 +1,6 @@
 // // This file containts opportunities bussines logic
 // // function definitions section
-lx.opportunity.getAccountNameByBusinessType = function() {
+lx.opportunity.getAccountNameByBusinessType = function(observer) {
     lx.lionixCRM.getConfigOption('business_type').then(function(data) {
         console.log("business_type:", data);
         if ($("#account_name_lxajaxed").length == 0) {
@@ -22,6 +22,8 @@ lx.opportunity.getAccountNameByBusinessType = function() {
                     $('#maincontact_c').off("change.lx-hide-account-name");
                     break;
             }
+            // only comment out during testing please
+            // observer.disconnect();
         }
     });
 } // end function
@@ -41,7 +43,7 @@ lx.opportunity.getAccountNameByBusinessType = function() {
                 if (crmEditView.module.value == 'Opportunities') {
                     console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-account-name.js', '!function()', 'initial');
                     console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-                    lx.opportunity.getAccountNameByBusinessType();
+                    lx.opportunity.getAccountNameByBusinessType(observer);
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();

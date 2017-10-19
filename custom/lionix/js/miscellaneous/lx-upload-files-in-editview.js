@@ -163,7 +163,7 @@ lx.upload.getFileTemplate = function(element) {
     })/*Fin del Ajax*/
 } //lx.upload.getFileTemplate()
 
-lx.upload.getFileFields = function() {
+lx.upload.getFileFields = function(observer) {
     var execute = false;
     var crmEditView = document.forms['EditView'];
     if (crmEditView) {
@@ -191,7 +191,13 @@ lx.upload.getFileFields = function() {
                     console.log('Field ' + element.field_name + ' was already rendered.')
                 }
             });
+            // only comment out during testing please
+            // observer.disconnect();
         }
+    } else {
+        // only comment out during testing please
+        // observer.disconnect();
+        console.log('lx.upload.getFileFields not in EditView');
     }
 } // end function
 
@@ -211,7 +217,7 @@ lx.upload.getFileFields = function() {
                 console.log("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
                 console.log('Running lx.upload.getFileFields() function');
                 lx.lionixCRM.getConfigOption('modules').then(function() {
-                    lx.upload.getFileFields();
+                    lx.upload.getFileFields(observer);
                 });
             }
             // if needed only once, you can stop observing with observer.disconnect();
