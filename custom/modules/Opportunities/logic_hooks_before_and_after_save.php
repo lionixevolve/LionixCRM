@@ -111,10 +111,12 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
                 maincontactfirstname_c = null,
                 maincontactlastname_c = null,
                 maincontactlastname2_c = null,
+                maincontactphonemobile_c = null,
                 maincontactphonework_c = null,
                 maincontactemailaddress_c = null,
                 maincontacttitle_c = null,
-                maincontactcedula_c = null
+                maincontactcedula_c = null,
+                maincontactduplicateid_c = null
                 where id_c = '{$bean->id}'
             ";
             $bean->db->query($query);
