@@ -198,10 +198,12 @@ ALTER TABLE opportunities_cstm add COLUMN maincontact_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactfirstname_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactlastname_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactlastname2_c varchar(100) NULL;
+ALTER TABLE opportunities_cstm add COLUMN maincontactphonemobile_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactphonework_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactemailaddress_c varchar(255) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontacttitle_c varchar(100) NULL;
 ALTER TABLE opportunities_cstm add COLUMN maincontactcedula_c varchar(255) NULL;
+ALTER TABLE opportunities_cstm add COLUMN maincontactduplicateid_c varchar(36) NULL;
 ALTER TABLE opportunities_cstm add COLUMN dnc_c date NULL ;
 ALTER TABLE opportunities_cstm add COLUMN dateclosedlost_c date NULL ;
 ALTER TABLE opportunities_cstm add COLUMN dateclosedwon_c date NULL ;
@@ -239,6 +241,10 @@ VALUES('Opportunitiesmaincontactlastname2_c', 'maincontactlastname2_c', 'LBL_MAI
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesmaincontactphonemobile_c', 'maincontactphonemobile_c', 'LBL_MAINCONTACTPHONEMOBILE', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 100, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesmaincontactphonework_c', 'maincontactphonework_c', 'LBL_MAINCONTACTPHONEWORK', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 100, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
@@ -252,6 +258,10 @@ VALUES('Opportunitiesmaincontacttitle_c', 'maincontacttitle_c', 'LBL_MAINCONTACT
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
 VALUES('Opportunitiesmaincontactcedula_c', 'maincontactcedula_c', 'LBL_MAINCONTACTCEDULA', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 255, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
+
+INSERT INTO fields_meta_data
+(id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
+VALUES('Opportunitiesmaincontactduplicateid_c', 'maincontactduplicateid_c', 'LBL_MAINCONTACTDUPLICATEID', 'LionixCRM', 'LionixCRM', 'Opportunities', 'varchar', 36, 0, '', utc_timestamp(), 0, 0, 0, 0, 1, 'false', '', '', '', '');
 
 INSERT INTO fields_meta_data
 (id, name, vname, comments, help, custom_module, `type`, len, required, default_value, date_modified, deleted, audited, massupdate, duplicate_merge, reportable, importable, ext1, ext2, ext3, ext4)
