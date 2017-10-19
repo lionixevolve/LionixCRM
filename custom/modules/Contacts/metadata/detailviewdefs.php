@@ -174,13 +174,13 @@ array (
         array (
           0 => 
           array (
-            'name' => 'phone_work',
-            'label' => 'LBL_OFFICE_PHONE',
+            'name' => 'phone_mobile',
+            'label' => 'LBL_MOBILE_PHONE',
           ),
           1 => 
           array (
-            'name' => 'phone_mobile',
-            'label' => 'LBL_MOBILE_PHONE',
+            'name' => 'phone_work',
+            'label' => 'LBL_OFFICE_PHONE',
           ),
         ),
         5 => 
