@@ -992,6 +992,7 @@ function post_installModules()
     $sugar_config['aos']['quotes']['initialNumber'] = '1';
     $sugar_config['aos']['invoices']['initialNumber'] = '1';
     $sugar_config['cron']['allowed_cron_users'] = array(0 => 'qma',1 => 'www-data',2 => 'apache');
+    $sugar_config['export_delimiter'] = ';';
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
     installLog('...LionixCRM added sugar_config values successfully.');
