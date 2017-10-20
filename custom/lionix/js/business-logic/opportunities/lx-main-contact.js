@@ -307,7 +307,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                             fced = $('#maincontactcedula_c');
                             if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
                                 if ($('#main_contact_duplicates_' + this.id).length == 0) {
-                                    $(this).after('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
+                                    $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
                                 }
                                 $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.duplicate_results_list");
                                 $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.duplicate_results_list", function() {
