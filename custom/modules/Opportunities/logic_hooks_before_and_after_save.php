@@ -83,7 +83,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         if ($bean->maincontact_c=='new') {
             if (($sugar_config['lionixcrm']['business_type']=='b2c') && empty($bean->account_id)) {
                 $newAccount = BeanFactory::newBean('Accounts');
-                $newAccount->name = "{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}";
+                $newAccount->name = trim("{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}");
                 $newAccount->tipocedula_c = 'NACIONAL';
                 $newAccount->cedula_c = $bean->maincontactcedula_c;
                 $newAccount->save();

@@ -36,6 +36,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/notes/lx-remove-contacts-from-related-to.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-account-name.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");

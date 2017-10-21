@@ -63,4 +63,33 @@ class LXContactsBeforeAndAfterSaveMethods
             $bean->db->query($sql);
         }
     }
+
+    public function setAccountAS(&$bean, $event, $arguments)
+    {
+        global $sugar_config;
+        if ($sugar_config['lionixcrm']['business_type']=='b2c') {
+            $newAccount = BeanFactory::newBean('Accounts');
+            if (!empty($bean->account_id)) {
+                $query = "
+                    SELECT a.id
+                    FROM accounts_contacts acco
+                    LEFT JOIN accounts a ON acco.account_id = a.id
+                    LEFT JOIN accounts_cstm ac ON a.id = ac.id_c
+                    WHERE acco.deleted = 0
+                    AND a.deleted = 0
+                    AND ac.tipocedula_c = 'NACIONAL'
+                    AND contact_id = '{$bean->id}'
+                    ORDER BY acco.date_modified desc
+                    LIMIT 1
+                ";
+                $nacional_account_id = $bean->db->getOne($query);
+                $newAccount->retrieve($nacional_account_id);
+            }
+            $newAccount->name = trim("{$bean->first_name} {$bean->last_name} {$bean->lastname2_c}");
+            $newAccount->tipocedula_c = 'NACIONAL';
+            $newAccount->cedula_c = $bean->cedula_c;
+            $newAccount->contact_id = $bean->id;
+            $newAccount->save();
+        }
+    }
 }

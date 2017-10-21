@@ -847,6 +847,15 @@ function post_installModules()
         ),
         array(
             'module'         => 'Contacts',
+            'hook'           => 'after_save',
+            'order'          => 102,
+            'description'    => 'setAccountAS',
+            'file'           => 'custom/modules/Contacts/logic_hooks_before_and_after_save.php',
+            'class'          => 'LXContactsBeforeAndAfterSaveMethods',
+            'function'       => 'setAccountAS',
+        ),
+        array(
+            'module'         => 'Contacts',
             'hook'           => 'after_retrieve',
             'order'          => 101,
             'description'    => 'setLinksToUploadedFiles',
