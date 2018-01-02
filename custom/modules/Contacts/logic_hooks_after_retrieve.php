@@ -4,7 +4,7 @@ class LXContactsAfterRetrieveMethods
 {
     public function setLinksToUploadedFiles($bean, $event, $arguments)
     {
-        if ($_REQUEST['module'] == 'Contacts' && $_REQUEST['action'] == 'DetailView') {
+        if (isset($_REQUEST['module'],$_REQUEST['action']) && $_REQUEST['module'] == 'Contacts' && $_REQUEST['action'] == 'DetailView') {
             global $sugar_config;
             $url = $sugar_config['site_url'];
             $files_fields = $sugar_config['lionixcrm']['modules']['contacts']['upload_files_fields'];

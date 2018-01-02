@@ -4,7 +4,7 @@ class LXOpportunitiesAfterRetrieveMethods
 {
     public function setMainContactC(&$bean, $event, $arguments)
     {
-        if ($_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
+        if (isset($_REQUEST['module'],$_REQUEST['action']) && $_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
             // $bean->custom_fields->retrieve(); // it seems that this method is no longer requiered.
             $query = "
                 select trim(concat(ifnull(first_name,''), ' ',ifnull(last_name,''), ' ',ifnull(lastname2_c,''))) AS 'maincontact_c'
@@ -24,7 +24,7 @@ class LXOpportunitiesAfterRetrieveMethods
 
     public function setLinksToUploadedFiles($bean, $event, $arguments)
     {
-        if ($_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
+        if (isset($_REQUEST['module'],$_REQUEST['action']) && $_REQUEST['module'] == 'Opportunities' && $_REQUEST['action'] == 'DetailView') {
             global $sugar_config;
             $url = $sugar_config['site_url'];
             $files_fields = $sugar_config['lionixcrm']['modules']['opportunities']['upload_files_fields'];
