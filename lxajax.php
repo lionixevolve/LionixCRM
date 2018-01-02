@@ -544,6 +544,12 @@ class LxAJAX
         }
         return json_encode($list);
     }
+
+    public function setSuiteCRMList()
+    {
+        lxSetSuiteCRMList($this->data['suitecrm_list'], $this->data['list_value'], $this->data['list_lang']);
+        return $this->getSuiteCRMList();
+    }
 }//end class LxAJAX
 
 // Session variables passed to this page
