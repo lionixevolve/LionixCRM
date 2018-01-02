@@ -4,9 +4,10 @@ class LXUsersAfterLogInMethods
 {
     public function setNewTrackerRecord(&$bean, $event, $arguments)
     {
-        $user_id = '8673ab83-3bc1-795e-0a23-592f32003f67';
-        $user_name = 'cumana';
-        $session_id = 'xxx';
+        global $current_user;
+        $user_id = $_SESSION['authenticated_user_id'];
+        $user_name = $current_user->user_name;
+        $session_id = session_id();
         $query = "
         INSERT INTO tracker
         (monitor_id, user_id, module_name, item_id, item_summary, date_modified, `action`, session_id, visible, deleted)
