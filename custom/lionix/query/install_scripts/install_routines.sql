@@ -20,7 +20,7 @@ delete from outbound_email where id != 'test-lionix-org';
 ###### default users
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, photo, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, show_on_employees, employee_status, messenger_id, messenger_type, reports_to_id, is_group)
-VALUES('2', 'sync', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Sync Bot', 'Lionix evolve', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', 'Costa Rica', '', 0, 0, 1, 'Active', '', '', '', 0);
+VALUES('2', 'sync', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Sync Bot', 'LionixCRM', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', 'Costa Rica', '', 0, 0, 1, 'Active', '', '', '', 0);
 
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, photo, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, show_on_employees, employee_status, messenger_id, messenger_type, reports_to_id, is_group)
@@ -28,15 +28,15 @@ VALUES('reasignar', 'reasignar', md5(utc_timestamp()), 1, utc_timestamp(), NULL,
 
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, photo, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, show_on_employees, employee_status, messenger_id, messenger_type, reports_to_id, is_group)
-VALUES('bot', 'bot', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Multi Purpose Bot', 'Lionix evolve', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', '', '', 0, 0, 0, 'Active', '', '', '', 0);
+VALUES('bot', 'bot', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Multi Purpose Bot', 'LionixCRM', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', '', '', 0, 0, 0, 'Active', '', '', '', 0);
 
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, reports_to_id, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, employee_status, messenger_id, messenger_type, is_group, show_on_employees)
-VALUES('test', 'test', 'md5(utc_timestamp())', 0, NULL, NULL, 1, 'Usuario Pruebas', 'Lionix evolve', NULL, 0, 0, 1, NULL, utc_timestamp(), utc_timestamp(), '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Active', NULL, NULL, NULL, NULL, NULL, 0, 0, 'Active', NULL, NULL, 0, 1);
+VALUES('test', 'test', md5(utc_timestamp()), 0, NULL, NULL, 1, 'Usuario Pruebas', 'LionixCRM', NULL, 0, 0, 1, NULL, utc_timestamp(), utc_timestamp(), '1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Active', NULL, NULL, NULL, NULL, NULL, 0, 0, 'Active', NULL, NULL, 0, 1);
 
 INSERT INTO users
 (id, user_name, user_hash, system_generated_password, pwd_last_changed, authenticate_id, sugar_login, first_name, last_name, is_admin, external_auth_only, receive_notifications, description, date_entered, date_modified, modified_user_id, created_by, title, photo, department, phone_home, phone_mobile, phone_work, phone_other, phone_fax, status, address_street, address_city, address_state, address_country, address_postalcode, deleted, portal_only, show_on_employees, employee_status, messenger_id, messenger_type, reports_to_id, is_group)
-VALUES('support', 'support', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Soporte', 'Lionix evolve', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', '', '', 0, 0, 0, 'Active', '', '', '', 0);
+VALUES('support', 'support', md5(utc_timestamp()), 1, utc_timestamp(), NULL, 1, 'Soporte', 'LionixCRM', 0, 0, 1, '', utc_timestamp(), utc_timestamp(), '1', '1', '', NULL, '', '', '', '', '', '', 'Active', '', '', '', '', '', 0, 0, 0, 'Active', '', '', '', 0);
 
 ###### custom fields on cases module
 ALTER TABLE cases_cstm add COLUMN elapsedtimeinmins_c int(255) DEFAULT '0' NULL;
