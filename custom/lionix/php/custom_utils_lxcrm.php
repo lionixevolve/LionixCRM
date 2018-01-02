@@ -307,3 +307,53 @@ function createEmailsBeans($mail, $dataMail)
     // All done, emails sended are recorded correctly
     return 1;
 }
+
+function lxSetSuiteCRMList($suitecrm_list, $list_value_string_or_mysqli_result, $list_lang = null)
+{
+    global $db;
+    if ($list_value_string_or_mysqli_result instanceof MYSQLI_RESULT) {
+        $rs = $list_value_string_or_mysqli_result;
+        $list_value = '[';
+        while (($row = $db->fetchByAssoc($rs)) != null) {
+            $list_value .= '["'.implode('","', $row).'"],';
+        }
+        $list_value = rtrim($list_value, ',').']';
+    } else {
+        $list_value = $list_value_string_or_mysqli_result;
+    }
+    if (!empty($list_value)) {
+        require_once 'modules/ModuleBuilder/parsers/parser.dropdown.php';
+        $parser = new ParserDropDown();
+        $lang = !empty($list_lang) ? $list_lang : $_SESSION['authenticated_user_language'];
+        $_REQUEST['to_pdf'] = true;
+        $_REQUEST['sugar_body_only'] = 1;
+        $_REQUEST['module'] = 'ModuleBuilder';
+        $_REQUEST['action'] = 'savedropdown';
+        $_REQUEST['view_module'] = '';
+        $_REQUEST['view_package'] = 'studio';
+        $_REQUEST['dropdown_name'] = $suitecrm_list;
+        $_REQUEST['list_value'] = $list_value; //$lv correct format is a string like this => '[["1","one"],["2","two"]]'
+        $_REQUEST['dropdown_lang'] = $lang; //$lang is not super important with any language al dropdowns are changed
+        $_REQUEST['drop_name'] = '';
+        $_REQUEST['drop_value'] = '';
+        $parser->saveDropDown($_REQUEST);
+    }
+}
+
+function callbackOrderArrayByNameAsc($a, $b)
+{
+    //dai - ordenar lista alfabetica por el campo nombre, se llama en la funcion getSuiteCRMList para ordenar alreves cambiar el  orden entre $a $b
+    if ($b['name'] == $a['name']) {
+        return 0;
+    }
+    return ($b['name'] > $a['name']) ? -1 : 1;
+}
+
+function callbackOrderArrayByNameDesc($a, $b)
+{
+    //dai - ordenar lista alfabetica por el campo nombre, se llama en la funcion getSuiteCRMList para ordenar alreves cambiar el  orden entre $a $b
+    if ($b['name'] == $a['name']) {
+        return 0;
+    }
+    return ($a['name'] > $b['name']) ? -1 : 1;
+}
