@@ -4,6 +4,12 @@ $app_list_strings['moduleListSingular']['AOS_Quotes'] = 'Cotización';
 $GLOBALS['app_list_strings']['lx_empty_list'] = array(
   '' => '',
 );
+$GLOBALS['app_list_strings']['lx_function_list'] = array(
+  '' => '',
+);
+$GLOBALS['app_list_strings']['lx_ajax_list'] = array(
+  '' => '',
+);
 // keys must be the same as sales_stage_dom
 $GLOBALS['app_list_strings']['sales_probability_dom'] = array(
     'Future' => '0',
