@@ -1,4 +1,6 @@
 <?php
+include_once 'custom/lionix/php/fields_functions_lionixcrm.php';
+include_once 'custom/lionix/php/fields_functions_custom.php';
 
 function lxlog($obj, $file = __FILE__, $line = __LINE__, $func = __FUNCTION__, $append = 1)
 {
