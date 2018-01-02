@@ -116,6 +116,7 @@ function lxSendEmail2($dataMail)
 
         if ($dataMail['replaceSubject']) {
             $emailtemplate->subject = from_html($dataMail['subject']);
+            $emailtemplate->body_html = str_replace('{{subject}}', $dataMail['subject'], $emailtemplate->body_html);
         }
     }
 
