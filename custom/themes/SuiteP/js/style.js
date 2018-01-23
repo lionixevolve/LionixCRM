@@ -53,6 +53,7 @@ lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lioni
 lx.lionixCRM.css.push('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />');
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
+lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/font-awesome-4.7.0/css/font-awesome.min.css" />');
 // preload al LionixCRM required javascript files array list for blazing speed
 lx.lionixCRM.scripts.forEach(function(element) {
     if (Array.isArray(element)) {
