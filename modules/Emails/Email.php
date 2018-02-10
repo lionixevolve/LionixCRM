@@ -1,10 +1,11 @@
 <?php
 /**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2016 SalesAgility Ltd.
+ * Copyright (C) 2011 - 2017 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -15,7 +16,7 @@
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
  * details.
  *
  * You should have received a copy of the GNU Affero General Public License along with
@@ -33,8 +34,8 @@
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the "Powered by
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ * reasonably feasible for technical reasons, the Appropriate Legal Notices must
+ * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
 if (!defined('sugarEntry') || !sugarEntry) {
@@ -863,7 +864,38 @@ class Email extends Basic
                 $this->type = 'out';
                 $this->status = 'sent';
             }
-        }
+
+        // This code is 7.8.x LTS specific, from 7.9 onwards it is found in EmailsController and can be deleted here
+        if (!empty($_REQUEST['parent_type']) && !empty($_REQUEST['parent_id'])) {
+            $macro_nv = array();
+            $focusName = $request['parent_type'];
+            $focus = BeanFactory::getBean($focusName, $request['parent_id']);
+            if ($this->module_dir == 'Accounts') {
+                $focusName = 'Accounts';
+            }
+
+            $emailTemplate = BeanFactory::getBean(
+                'EmailTemplates',
+                isset($request['emails_email_templates_idb']) ?
+                    $request['emails_email_templates_idb'] :
+                    null
+            );
+            $templateData = $emailTemplate->parse_email_template(
+                array(
+                    'subject' => $this->name,
+                    'body_html' => $this->description_html,
+                    'body' => $this->description,
+                ),
+                $focusName,
+                $focus,
+                $macro_nv
+            );
+
+            $this->description_html = $templateData['body_html'];
+            $this->description = $templateData['body'];
+
+        } // End of 7.8.x code
+    }
 
         if (isset($_REQUEST['parent_type']) && empty($_REQUEST['parent_type']) &&
             isset($_REQUEST['parent_id']) && empty($_REQUEST['parent_id'])
@@ -1637,16 +1669,16 @@ class Email extends Basic
 
         if (count($return) > 0) {
             if (isset($return['from'])) {
-                $this->from_addr = implode(", ", $return['from']);
+                $this->from_addr_name = implode(", ", $return['from']);
             }
             if (isset($return['to'])) {
-                $this->to_addrs = implode(", ", $return['to']);
+                $this->to_addrs_names = implode(", ", $return['to']);
             }
             if (isset($return['cc'])) {
-                $this->cc_addrs = implode(", ", $return['cc']);
+                $this->cc_addrs_names = implode(", ", $return['cc']);
             }
             if (isset($return['bcc'])) {
-                $this->bcc_addrs = implode(", ", $return['bcc']);
+                $this->bcc_addrs_names = implode(", ", $return['bcc']);
             }
         }
     }
@@ -1730,7 +1762,7 @@ class Email extends Basic
         }
 
         $noteArray = array();
-        $q = "SELECT id FROM notes WHERE parent_id = '" . $id . "'";
+        $q = "SELECT id FROM notes WHERE deleted = 0 AND parent_id = '" . $id . "'";
         $r = $this->db->query($q);
 
         while ($a = $this->db->fetchByAssoc($r)) {
@@ -2288,7 +2320,10 @@ class Email extends Basic
 
         ///////////////////////////////////////////////////////////////////////////
         ////    ATTACHMENTS FROM DRAFTS
-        if (($this->type == 'out' || $this->type == 'draft') && $this->status == 'draft' && isset($_REQUEST['record'])) {
+        if (($this->type == 'out' || $this->type == 'draft')
+            && $this->status == 'draft'
+            && isset($_REQUEST['record'])
+            && empty($_REQUEST['ignoreParentAttachments'])) {
             $this->getNotes($_REQUEST['record']); // cn: get notes from OLD email for use in new email
         }
         ////    END ATTACHMENTS FROM DRAFTS
@@ -2703,6 +2738,8 @@ class Email extends Basic
         // FROM NAME
         if (!empty($this->from_name)) {
             $mail->FromName = $this->from_name;
+        } elseif (!empty($this->from_addr_name)) {
+            $mail->FromName = $this->from_addr_name;
         } else {
             $mail->FromName = $current_user->getPreference('mail_fromname');
             $this->from_name = $mail->FromName;
@@ -3078,7 +3115,7 @@ class Email extends Basic
             $this->status_name = $app_list_strings['dom_email_status'][$this->status];
         }
 
-        if (empty($this->name) && empty($_REQUEST['record'])) {
+        if (empty($this->name) && empty($_REQUEST['record']) && !empty($mod_strings['LBL_NO_SUBJECT'])) {
             $this->name = $mod_strings['LBL_NO_SUBJECT'];
         }
 
@@ -3147,7 +3184,8 @@ class Email extends Basic
             'Emails'); // hard-coding for Home screen ListView
 
         if ($this->status != 'replied') {
-            $email_fields['QUICK_REPLY'] = '<a  href="index.php?module=Emails&action=Compose&replyForward=true&reply=reply&record=' . $this->id . '&inbound_email_id=' . $this->id . '">' . $mod_strings['LNK_QUICK_REPLY'] . '</a>';
+            $email_fields['QUICK_REPLY'] = '<a href="index.php?module=Emails&action=ReplyTo&record='. $this->id .'">'
+                . $mod_strings['LNK_QUICK_REPLY'] . '</a>';
             $email_fields['STATUS'] = ($email_fields['REPLY_TO_STATUS'] == 1 ? $mod_strings['LBL_REPLIED'] : $email_fields['STATUS']);
         } else {
             $email_fields['QUICK_REPLY'] = $mod_strings['LBL_REPLIED'];
