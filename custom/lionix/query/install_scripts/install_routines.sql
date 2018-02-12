@@ -393,7 +393,7 @@ INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, mo
 VALUES ('updateelapsedtimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateElapsedTimeInMins', 'function::updateElapsedTimeInMins', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0');
 
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
-VALUES ('updatesalesstagestimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateSalesStagesTimeInMins', 'function::updateSalesStagesTimeInMins', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0');
+VALUES ('updatesalesstagestimeinmins', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateSalesStagesTimeInMins', 'function::updateSalesStagesTimeInMins', '1980-02-01 06:00:00', '0::2::*::*::*', utc_timestamp(), 'Active', '0');
 
 INSERT INTO schedulers (id, deleted, date_entered, date_modified, created_by, modified_user_id, name, job, date_time_start, job_interval, last_run, status, catch_up)
 VALUES ('updatedateclosedlostc', '0', utc_timestamp(), utc_timestamp(), '1', '1', '99- LionixCRM - updateDateClosedLostC', 'function::updateDateClosedLostC', '1980-02-01 06:00:00', '*::*::*::*::*', utc_timestamp(), 'Active', '0');
