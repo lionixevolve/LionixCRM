@@ -121,7 +121,14 @@ class MyPipelineBySalesStageDashlet extends DashletGenericChart
         $subtitle = translate('LBL_OPP_SIZE', 'Charts') . " " . $currency_symbol . "1" . translate('LBL_OPP_THOUSANDS', 'Charts');
 
         $query = $this->constructQuery();
-        $data = $this->getChartData($query);
+        //LXCRM / LIONIX FIX
+        $chartRawData=$this->getChartData($query);
+        $data = $this->constructCEChartData($chartRawData);
+        foreach ($chartRawData as $key => $value) {
+            $data['key'][]=$value['key'];
+            # code...
+        }
+        //LXCRM / LIONIX FIX
 
         $chartReadyData = $this->prepareChartData($data, $currency_symbol, $thousands_symbol);
 
@@ -138,8 +145,9 @@ class MyPipelineBySalesStageDashlet extends DashletGenericChart
 
         $total = $chartReadyData['total'];
 
-
-        $jsonKey = json_encode($chartReadyData['key']);
+        //LXCRM / LIONIX FIX
+        $jsonKey = json_encode($data['key']);
+        //LXCRM / LIONIX FIX
         $jsonTooltips = json_encode($chartReadyData['tooltips']);
 
         $colours = "['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c','#fdbf6f','#ff7f00','#cab2d6','#6a3d9a','#ffff99','#b15928']";
