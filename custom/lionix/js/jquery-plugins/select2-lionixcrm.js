@@ -38,6 +38,11 @@
             ) {
                 applySelect2 = false;
             }
+            // select2 disabled for importation forms
+            if ($('#importstep3').length) {
+                applySelect2 = false;
+            }
+            // select2 applied
             if (applySelect2) {
                 $('select:not([class^="select2"],[class^="datetimecombo_time"])').each(function(index) {
                     if (!$(this).hasClass("select2-hidden-accessible")) {
