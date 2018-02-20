@@ -420,13 +420,14 @@ class Contact extends Person {
 		   $this->portal_active = true;
 		}
         // Set campaign name if there is a campaign id
-		if( !empty($this->campaign_id)){
-
-			$camp = new Campaign();
-		    $where = "campaigns.id='{$this->campaign_id}'";
-		    $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
-		    $this->campaign_name = $campaign_list[0]->name;
-		}
+        if( !empty($this->campaign_id)){
+            $camp = new Campaign();
+            $where = "campaigns.id='{$this->campaign_id}'";
+            $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
+            if (!empty($campaign_list) && !empty($campaign_list[0]->name)) {
+                $this->campaign_name = $campaign_list[0]->name;
+            }
+        }
 	}
 
 		/**
