@@ -1,14 +1,15 @@
-// // This file containts opportunities bussines logic
-// // function definitions section
+//  This file containts opportunities bussines logic
+//  function definitions section
 lx.opportunity.getAccountNameByBusinessType = function(observer) {
     lx.lionixCRM.getConfigOption('business_type').then(function(data) {
         console.log("business_type:", data);
-        if ($("#account_name_lxajaxed").length == 0) {
-            $("#account_name").append('<div id="account_name_lxajaxed"/>');
+        if ($("#account_name_lxajaxed").length == 0 || $('#account_name_lxajaxed').data('business_type') != data) {
+            $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
             switch (lx.lionixCRM.config.business_type.toLowerCase()) {
                 case 'b2c':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
                     $('#maincontact_c').on("change.lx-hide-account-name", function() {
+                        lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
                         if ($("#maincontact_c").val() == 'new') {
                             $('#account_id').val('');
                             lx.field.show("account_name", false);
@@ -19,7 +20,9 @@ lx.opportunity.getAccountNameByBusinessType = function(observer) {
                     break;
                 case 'b2b':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', true);
-                    $('#maincontact_c').off("change.lx-hide-account-name");
+                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
+                        lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', true);
+                    });
                     break;
             }
             // only comment out during testing please

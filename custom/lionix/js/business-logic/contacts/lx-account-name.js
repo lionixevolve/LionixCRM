@@ -3,8 +3,8 @@
 lx.contact.getAccountNameByBusinessType = function(observer) {
     lx.lionixCRM.getConfigOption('business_type').then(function(data) {
         console.log("business_type:", data);
-        if ($("#account_name_lxajaxed").length == 0) {
-            $("#account_name").append('<div id="account_name_lxajaxed"/>');
+        if ($("#account_name_lxajaxed").length == 0 || $('#account_name_lxajaxed').data('business_type') != data) {
+            $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
             switch (lx.lionixCRM.config.business_type.toLowerCase()) {
                 case 'b2c':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
