@@ -550,6 +550,26 @@ class LxAJAX
         lxSetSuiteCRMList($this->data['suitecrm_list'], $this->data['list_value'], $this->data['list_lang']);
         return $this->getSuiteCRMList();
     }
+
+    public function getTSEData()
+    {
+        // IMPORTANT NOTE: if this function isn't returning data is because you haven't granted select permission for the crm user on config.php to infoticos database
+        // grant select on infoticos.* to {user}@{server} identified by '{password}';
+        $list = array();
+        if (!empty($this->data['cedula_c'])) {
+            $query = "
+                SELECT cedula as cedula_c, nombre as first_name, `1.apellido` as last_name, `2.apellido` as lastname2_c, true as found
+                FROM infoticos.padron
+                WHERE cedula = '{$this->data['cedula_c']}'
+            ";
+            $rs = $GLOBALS['db']->query($query, false);
+            while (($row = $GLOBALS['db']->fetchByAssoc($rs)) != null) {
+                //$list[] = array('value' => $value, 'name' => $name, 'default' => $default, 'selected' => $selected); //this is the below format example
+                $list[] = $row;
+            }
+        }
+        return json_encode($list);
+    }
 }//end class LxAJAX
 
 // Session variables passed to this page

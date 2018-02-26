@@ -322,6 +322,29 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                                 });
                             }
                         });
+                        $('#maincontactcedula_c').on("keyup.tsecr_search_results", function() {
+                            console.log('key up ->', String.fromCharCode(event.which));
+                            if ($(this).val().length != 9) {
+                                $('#maincontactfirstname_c').val('');
+                                $('#maincontactlastname_c').val('');
+                                $('#maincontactlastname2_c').val('');
+                            } else {
+                                typed_cedula = $(this).val();
+                                lx.lionixCRM.getTSECRData({
+                                    // Infoticos must be on same database server this SuiteCRM instance.
+                                    "focusfieldname": this.id,
+                                    "cedula_c": typed_cedula
+                                }).then(function(tsecrlist) {
+                                    console.log('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
+                                    $('#maincontactcedula_c').val(tsecrlist.data[0].cedula_c);
+                                    $('#maincontactfirstname_c').val(tsecrlist.data[0].first_name);
+                                    $('#maincontactlastname_c').val(tsecrlist.data[0].last_name);
+                                    $('#maincontactlastname2_c').val(tsecrlist.data[0].lastname2_c);
+                                    $('#maincontactfirstname_c').focus();
+                                    $('#maincontactfirstname_c').trigger('keypress');
+                                });
+                            }
+                        });
                     }
                     // only comment out during testing please
                     // observer.disconnect();
