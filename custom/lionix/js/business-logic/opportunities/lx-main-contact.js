@@ -143,56 +143,6 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
     lx.opportunity.getnewMainContactCFields();
 }
 
-lx.opportunity.getMainContactDuplicates = function(searchObject) {
-    so = searchObject;
-    return new Promise(function(resolve, reject) {
-        var method = "getContactDuplicates";
-        var data = {
-            "method": method,
-            "first_name": so.first_name,
-            "last_name": so.last_name,
-            "lastname2_c": so.lastname2_c,
-            "email_address": so.email_address,
-            "cedula_c": so.cedula_c
-        };
-        $.ajax({
-            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function(jqXHR, settings) {
-                console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax beforeSend');
-                console.log("*** start ***");
-                console.log("beforeSend callback:", settings.url);
-            }, //end beforeSend
-            url: 'lxajax.php',
-            type: 'POST',
-            data: data,
-            // success is a function to be called if the request succeeds.
-            success: function(data, status, jqXHR) {
-                console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax success');
-                console.log("success callback:", status);
-                console.log("data:", data);
-                if (data == '') {
-                    console.log("Not duplicates found.")
-                } else {
-                    data = JSON.parse(data);
-                    console.log("Contact duplicates found.")
-                }
-                resolve({"fieldname": so.fieldname, "data": data});
-            }, // end success
-            // error is a function to be called if the request fails.
-            error: function(jqXHR, status, error) {
-                console.log("Bussines logic '%s' '%s' '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-get-contact-duplicates.js', 'lx.opportunity.getMainContactDuplicates', 'ajax error');
-                console.log("error callback:", status);
-                console.log("Function lx.lionixCRM.getConfigOption error:", error);
-                reject(error);
-            }, // end error
-            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            // complete: function(jqXHR, status) {
-            // }, // end complete
-            datatype: "text"
-        }); // end ajax
-    });
-}
-
 lx.opportunity.renderMainContactDuplicates = function(duplicates) {
     console.log("duplicados devueltos:", duplicates);
     $('.main_contact_duplicates ul li').remove();
@@ -313,7 +263,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                                 $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.duplicate_results_list", function() {
                                     $('.main_contact_duplicates .yui-ac-content').hide(500);
                                 });
-                                lx.opportunity.getMainContactDuplicates({
+                                lx.lionixCRM.getContactDuplicates({
                                     "fieldname": this.id, "first_name": $(ffn).val(), "last_name": $(fln).val(), "lastname2_c": $(fln2).val()
                                     // "cedula_c": $(fced).val(),
                                     // "email_address": $(femail).val()
