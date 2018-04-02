@@ -6,3 +6,4 @@
 - Change business_type to b2c and check that account name is no longer required
 - Change environment to testing and check blue Testing notice appears on top
 - Add a new panel on detailview on any module (opportunities is a good choice) and check it can be viewed as tab
+- Optional: Make a call to testQuery method on lxajax with postman
