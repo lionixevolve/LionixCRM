@@ -51,7 +51,7 @@ class LxAJAX
         if (!isset($this->data['use_adodb5'])) {
             $this->data['use_adodb5'] = false;
         }
-        $this->db = ($this->data['use_adodb5']) ?  new LxDBConnections() : DBManagerFactory::getInstance();
+        $this->db = ($this->data['use_adodb5']) ? new LxDBConnections() : DBManagerFactory::getInstance();
         $method = $this->data['method'];
         if (method_exists($this, $method)) {
             echo $this->$method();
@@ -86,17 +86,32 @@ class LxAJAX
 
     public function testQuery()
     {
-        $query = 'SELECT @@VERSION;';
-        $result = $this->db->query($query, true, 'FAILD');
-        $r = null;
-        while (($row = $this->db->fetchByAssoc($result))) {
-            $r = $row;
+        $query = "SELECT @@VERSION as mysql_version";
+        $tests = array();
+
+        if ($this->data['use_adodb5']) {
+            $result = $this->db->execute($query, 'crm');
+            if (!$result->EOF) {
+                $tests['using_adodb5'] = $result->fields;
+            }
+            if ($this->data['use_pdo']) {
+                $result = $this->db->execute($query, 'crm'.'pdo', 'pdo');
+                 while ($row = $result->fetch()) {
+                    $tests['using_pdo'] = $row;
+                }
+            }
+        } else {
+            $result = $this->db->query($query, true, 'FAILD');
+            while (($row = $this->db->fetchByAssoc($result))) {
+                $tests['using_native_crm_connection'] = $row;
+            }
         }
+
         if ($this->debug) {
             //lxlog
             file_put_contents($_SERVER["DOCUMENT_ROOT"]."/lx.log", PHP_EOL. date_format(date_create(), "Y-m-d H:i:s ")  .__FILE__ .":". __LINE__." -- ".print_r('testQuery called', 1).PHP_EOL, FILE_APPEND);
         }
-        return json_encode($r);
+        return json_encode($tests);
     }
 
     public function sendQuoteEmail()
