@@ -30,8 +30,9 @@ require_once 'include/formbase.php';
 require_once 'custom/lionix/adodb5/adodb.inc.php';
 //Connection to CRM database using ADODB5 Object
 require_once 'custom/lionix/lxdb/dbconn.php';
-
-class LxAJAX
+//Custom specific functions for each client
+require_once 'lxajax_custom.php';
+class LxAJAX extends LxAJAXCustom
 {
     public $debug; //Local instance of Debug LioniX CLASS.
     public $db;   //Local instance of database manager.
