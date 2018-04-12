@@ -1,5 +1,13 @@
 // function definitions section
 lx.lionixCRM.getTSECRData = function(searchObject) {
+    /*
+    // searchObject example
+    searchObject = {
+        // Infoticos must be on same database server this SuiteCRM instance.
+        "focusfieldname": "replace with input textfield id",
+        "cedula_c": "replace with cédula to looking for"
+    }
+    */
     so = searchObject;
     return new Promise(function(resolve, reject) {
         // var method = "getContactDuplicates";
