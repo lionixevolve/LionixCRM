@@ -7,3 +7,4 @@
 - Change environment to testing and check blue Testing notice appears on top
 - Add a new panel on detailview on any module (opportunities is a good choice) and check it can be viewed as tab
 - Optional: Make a call to testQuery method on lxajax with postman
+- Optional: Export on any module (opportunities is a good choice) and check it out on excel
