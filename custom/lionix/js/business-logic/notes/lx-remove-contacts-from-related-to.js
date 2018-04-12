@@ -1,9 +1,9 @@
 // This file containts all modules bussines logic
 // function definitions section
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
     // create an observer instance
@@ -13,10 +13,12 @@
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
                 if (crmEditView.module.value == 'Notes') {
-                    console.log("Bussines logic '%s' '%s' '%s' '%s'", 'notes', 'lx-remove-contacts-from-related-to.js', '!function()', 'initial');
-                    console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-                    // Notes has already the contact_id field to link Contacts, and the related to field fails when Contact is selected, so is better it not appear at all
-                    $("#parent_type option[value='Contacts']").remove();
+                    if ($("#parent_type option[value='Contacts']").length > 0) {
+                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'notes', 'lx-remove-contacts-from-related-to.js', '!function()', 'initial');
+                        console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
+                        // Notes has already the contact_id field to link Contacts, and the related to field fails when Contact is selected, so is better it not appear at all
+                        $("#parent_type option[value='Contacts']").remove();
+                    }
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();
