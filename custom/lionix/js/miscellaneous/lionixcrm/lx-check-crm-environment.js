@@ -1,8 +1,7 @@
 // function definitions section
 lx.lionixCRM.getEnvironment = function() {
-    lx.lionixCRM.getConfigOption('environment').then(function(data) {
-        console.log("environment:", data);
-        if ($("#LionixCRM-environment").length == 0) {
+    if ($("#LionixCRM-environment").length == 0) {
+        try {
             if (lx.lionixCRM.config.environment.toLowerCase() === 'testing') {
                 let pbclass = "progress-bar bg-info";
                 let probability = 100;
@@ -11,18 +10,25 @@ lx.lionixCRM.getEnvironment = function() {
             } else {
                 $('#content').before('<div id="LionixCRM-environment" data-enviroment="Production Environment" />');
             }
-            console.log("LionixCRM-environment added.");
-        } else {
-            console.log("LionixCRM-environment exists.");
+            console.log("LionixCRM-environment div indicator added.");
+        } catch (error) {
+            console.log('Environment property is not present!');
+            console.log('Retrieving environment property...');
+            lx.lionixCRM.getConfigOption('environment').then(function(data) {
+                console.log('Environment successfully retrieved [' + data + ']');
+                lx.lionixCRM.getEnvironment();
+            });
         }
-    });
+    } else {
+        console.log("LionixCRM-environment div indicator already exists.");
+    }
 } // end function
 
 // This file containts all modules bussines logic
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
     // create an observer instance
