@@ -38,7 +38,7 @@ lx.lionixCRM.getEnvironment = function(forceCheck) {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            console.log("Check environment '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()', 'observer');
+            console.log("Check environment observer '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()');
             console.log('Running lx.lionixCRM.checkEnvironment() function');
             lx.lionixCRM.getEnvironment(false);
             // if needed only once, you can stop observing with observer.disconnect();
