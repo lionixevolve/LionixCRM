@@ -45,8 +45,7 @@ lx.contact.getAccountNameByBusinessType = function(forceCheck) {
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
                 if (crmEditView.module.value == 'Contacts') {
-                    console.log("Bussines logic '%s' '%s' '%s' '%s'", 'contacts', 'lx-account-name.js', '!function()', 'initial');
-                    console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
+                    console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'contacts', 'lx-account-name.js', '!function()', 'initial');
                     lx.contact.getAccountNameByBusinessType(false);
                 }
             }
