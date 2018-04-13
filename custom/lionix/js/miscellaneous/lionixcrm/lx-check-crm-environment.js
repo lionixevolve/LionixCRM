@@ -1,5 +1,8 @@
 // function definitions section
-lx.lionixCRM.getEnvironment = function() {
+lx.lionixCRM.getEnvironment = function(forceCheck) {
+    if (forceCheck) {
+        lx.lionixCRM.config.environment = undefined;
+    }
     if ($("#LionixCRM-environment").length == 0) {
         try {
             if (lx.lionixCRM.config.environment.toLowerCase() === 'testing') {
@@ -16,7 +19,7 @@ lx.lionixCRM.getEnvironment = function() {
             console.log('Retrieving environment property...');
             lx.lionixCRM.getConfigOption('environment').then(function(data) {
                 console.log('Environment successfully retrieved [' + data + ']');
-                lx.lionixCRM.getEnvironment();
+                lx.lionixCRM.getEnvironment(false);
             });
         }
     } else {
@@ -37,7 +40,7 @@ lx.lionixCRM.getEnvironment = function() {
         if (mutations) {
             console.log("Check environment '%s' '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()', 'observer');
             console.log('Running lx.lionixCRM.checkEnvironment() function');
-            lx.lionixCRM.getEnvironment();
+            lx.lionixCRM.getEnvironment(false);
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
         }
