@@ -1,11 +1,12 @@
-// // This file containts opportunities bussines logic
-// // function definitions section
-lx.contact.getAccountNameByBusinessType = function(observer) {
-    lx.lionixCRM.getConfigOption('business_type').then(function(data) {
-        console.log("business_type:", data);
+//  function definitions section
+lx.contact.getAccountNameByBusinessType = function(forceCheck) {
+    if (forceCheck) {
+        lx.lionixCRM.config.business_type = undefined;
+    }
+    try {
+        data = lx.lionixCRM.config.business_type.toLowerCase();
         if ($("#account_name_lxajaxed").length == 0 || $('#account_name_lxajaxed').data('business_type') != data) {
-            $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
-            switch (lx.lionixCRM.config.business_type.toLowerCase()) {
+            switch (data) {
                 case 'b2c':
                     lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
                     lx.field.show('account_name', false);
@@ -15,16 +16,26 @@ lx.contact.getAccountNameByBusinessType = function(observer) {
                     lx.field.show('account_name', true);
                     break;
             }
-            // only comment out during testing please
-            // observer.disconnect();
+            $('#account_name_lxajaxed').remove();
+            $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
+            console.log("account_name_lxajaxed div indicator added.");
+        } else {
+            console.log('account_name_lxajaxed div indicator already exists:', $('#account_name_lxajaxed').data('business_type'));
         }
-    });
+    } catch (error) {
+        console.log('business_type property is not present!');
+        console.log('Retrieving business_type property...');
+        lx.lionixCRM.getConfigOption('business_type').then(function(data) {
+            console.log('business_type successfully retrieved [' + data + ']');
+            lx.contact.getAccountNameByBusinessType(false);
+        });
+    }
 } // end function
 
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
     // create an observer instance
@@ -36,7 +47,7 @@ lx.contact.getAccountNameByBusinessType = function(observer) {
                 if (crmEditView.module.value == 'Contacts') {
                     console.log("Bussines logic '%s' '%s' '%s' '%s'", 'contacts', 'lx-account-name.js', '!function()', 'initial');
                     console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
-                    lx.contact.getAccountNameByBusinessType(observer);
+                    lx.contact.getAccountNameByBusinessType(false);
                 }
             }
             // if needed only once, you can stop observing with observer.disconnect();
