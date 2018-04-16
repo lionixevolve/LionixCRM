@@ -1,5 +1,3 @@
-// This file containts opportunities bussines logic
-
 // function definitions section
 lx.opportunity.maincontact_fields = [
     {
@@ -137,7 +135,7 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         // complete: function(jqXHR, status) {
-        // }, // end complete
+        // },  end complete
         datatype: "text"
     }); // end ajax
     lx.opportunity.getnewMainContactCFields();
@@ -225,9 +223,9 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
 }
 
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
     // create an observer instance
@@ -238,8 +236,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
             if (crmEditView) {
                 if (crmEditView.module.value == 'Opportunities') {
                     if ($("#maincontact_c_lxajaxed").length == 0) {
-                        console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', '!function()', 'initial');
-                        console.log("Loading Lionix code on EditView on module:", crmEditView.module.value);
+                        console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                         lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
