@@ -45,7 +45,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-acco
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
-// when developing use the "activate" cache mode, like this:
+// when developing use the noCache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // ********** Client only specific files
 lx.lionixCRM.scripts.push("custom/lionix/js/styleCustom.js");
@@ -63,10 +63,10 @@ lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lioni
 lx.lionixCRM.scripts.forEach(function(element) {
     if (Array.isArray(element)) {
         current_script = element[0];
-        cache = element[1];
+        noCache = element[1];
     } else {
         current_script = element;
-        cache = false;
+        noCache = false;
     }
     var preloadLink = document.createElement("link");
     preloadLink.href = current_script
@@ -85,12 +85,12 @@ script.onload = function() {
         if (i < scripts.length) {
             if (Array.isArray(scripts[i])) {
                 current_script = scripts[i][0];
-                cache = scripts[i][1];
+                noCache = scripts[i][1];
             } else {
                 current_script = scripts[i];
-                cache = false;
+                noCache = false;
             }
-            lx.lionixCRM.loadScript(current_script, cache, function() {
+            lx.lionixCRM.loadScript(current_script, noCache, function() {
                 load(++i);
             });
         } else {
