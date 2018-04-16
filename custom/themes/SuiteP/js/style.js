@@ -47,6 +47,8 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js"
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
 // when developing use the "activate" cache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
+// ********** Client only specific files
+lx.lionixCRM.scripts.push("custom/lionix/js/styleCustom.js");
 // LionixCRM required css files array list
 lx.lionixCRM.css = new Array();
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
