@@ -30,9 +30,9 @@ lx.contact.renderContactDuplicates = function(duplicates) {
             });
             duplicate_detail += element.phone_mobile + ' ';
             duplicate_detail += element.phone_work;
-            // LaSalle only fields
-            duplicate_detail += ' - ' + element.nombre_sede_ulasalle;
-            // LaSalle only fields
+            // Client specific only fields
+            // duplicate_detail += ' - ' + element.{fieldname};
+            // Client specific only fields
             duplicate_detail += '</li>';
             $('.main_contact_duplicates ul').append(duplicate_detail);
         });
@@ -47,8 +47,8 @@ lx.contact.renderContactDuplicates = function(duplicates) {
         $('.main_contact_duplicates li').off("click.main_contact_duplicates_list");
         $('.main_contact_duplicates li').on("click.main_contact_duplicates_list", function() {
             $('.main_contact_duplicates .yui-ac-content').hide(500);
-            console.log("Test de duplicates on contacts - http://localhost/ulasalle/index.php?module=Contacts&return_module=Contacts&action=EditView&record="+this.id);
-            window.location.href = "http://localhost/ulasalle/index.php?module=Contacts&return_module=Contacts&action=EditView&record="+this.id;
+            console.log("Redirecting to contacts Editview: - " + window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id);
+            window.location.href = window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id;
         });
     }
 }
@@ -102,8 +102,9 @@ lx.contact.renderContactDuplicates = function(duplicates) {
                             fced = $('#maincontactcedula_c');
                             if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
                                 if ($('#main_contact_duplicates_' + this.id).length == 0) {
-                                    // width: 750px La Salle only
-                                    $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 750px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
+                                    // width: 750px can be changed in each Client
+                                    width = 750;
+                                    $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: ' + width + 'px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
                                 }
                                 $('#first_name, #last_name, #lastname2_c').off("focusout.duplicate_results_list");
                                 $('#first_name, #last_name, #lastname2_c').on("focusout.duplicate_results_list", function() {
