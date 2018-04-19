@@ -988,6 +988,8 @@ function post_installModules()
             // 'ok_message'=> '{any success message}',
         // ),
     );
+    $sugar_config['lionixcrm']['modules']['contacts']['results_search_tsecr'] = true;
+    $sugar_config['lionixcrm']['modules']['contacts']['results_list_duplicates'] = true;
     $sugar_config['lionixcrm']['smartchat'] = array(
         'chat_c',
         //'anyOtherField',
