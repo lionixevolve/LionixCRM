@@ -246,7 +246,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                         $('#maincontact_c').on("change.lx-main-contact-c", function() {
                             lx.opportunity.getnewMainContactCFields();
                         });
-                        $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("keypress.duplicate_results_list", function() {
+                        $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("keypress.results_list_duplicates", function() {
                             ffn = $('#maincontactfirstname_c');
                             fln = $('#maincontactlastname_c');
                             fln2 = $('#maincontactlastname2_c');
@@ -256,8 +256,8 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                                 if ($('#main_contact_duplicates_' + this.id).length == 0) {
                                     $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
                                 }
-                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.duplicate_results_list");
-                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.duplicate_results_list", function() {
+                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.results_list_duplicates");
+                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.results_list_duplicates", function() {
                                     $('.main_contact_duplicates .yui-ac-content').hide(500);
                                 });
                                 lx.lionixCRM.getContactDuplicates({
@@ -269,7 +269,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                                 });
                             }
                         });
-                        $('#maincontactcedula_c').on("keyup.tsecr_search_results", function() {
+                        $('#maincontactcedula_c').on("keyup.results_search_tsecr", function() {
                             console.log('key up ->', String.fromCharCode(event.which));
                             if ($(this).val().length != 9) {
                                 $('#maincontactfirstname_c').val('');
