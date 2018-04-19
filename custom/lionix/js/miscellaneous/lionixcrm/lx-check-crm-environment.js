@@ -1,10 +1,11 @@
 // function definitions section
 lx.lionixCRM.getEnvironment = function(forceCheck) {
-    if (forceCheck) {
-        lx.lionixCRM.config.environment = undefined;
-    }
-    if ($("#LionixCRM-environment").length == 0) {
-        try {
+    try {
+        if (forceCheck) {
+            lx.lionixCRM.config.environment = undefined;
+            $("#LionixCRM-environment").remove();
+        }
+        if ($("#LionixCRM-environment").length == 0) {
             if (lx.lionixCRM.config.environment.toLowerCase() === 'testing') {
                 let pbclass = "progress-bar bg-info";
                 let probability = 100;
@@ -14,16 +15,16 @@ lx.lionixCRM.getEnvironment = function(forceCheck) {
                 $('#content').before('<div id="LionixCRM-environment" data-enviroment="Production Environment" />');
             }
             console.log("LionixCRM-environment div indicator added.");
-        } catch (error) {
-            console.log('Environment property is not present!');
-            console.log('Retrieving environment property...');
-            lx.lionixCRM.getConfigOption('environment').then(function(data) {
-                console.log('Environment successfully retrieved [' + data + ']');
-                lx.lionixCRM.getEnvironment(false);
-            });
+        } else {
+            console.log("LionixCRM-environment div indicator already exists.");
         }
-    } else {
-        console.log("LionixCRM-environment div indicator already exists.");
+    } catch (error) {
+        console.log('Environment property is not present!');
+        console.log('Retrieving environment property...');
+        lx.lionixCRM.getConfigOption('environment').then(function(data) {
+            console.log('Environment successfully retrieved', data);
+            lx.lionixCRM.getEnvironment(false);
+        });
     }
 } // end function
 
@@ -39,7 +40,6 @@ lx.lionixCRM.getEnvironment = function(forceCheck) {
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             console.log("Check environment observer '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()');
-            console.log('Running lx.lionixCRM.checkEnvironment() function');
             lx.lionixCRM.getEnvironment(false);
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
