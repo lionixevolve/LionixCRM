@@ -2,7 +2,7 @@
 //  function definitions section
 lx.contact.renderContactDuplicates = function(duplicates) {
     console.log("duplicados devueltos:", duplicates);
-    $('.main_contact_duplicates ul li').remove();
+    $('.contact_duplicates ul li').remove();
     if (duplicates.data.length) {
         duplicates.data.forEach(function(element) {
             primary_address = {};
@@ -34,19 +34,19 @@ lx.contact.renderContactDuplicates = function(duplicates) {
             // duplicate_detail += ' - ' + element.{fieldname};
             // Client specific only fields
             duplicate_detail += '</li>';
-            $('.main_contact_duplicates ul').append(duplicate_detail);
+            $('.contact_duplicates ul').append(duplicate_detail);
         });
         newh = duplicates.data.length * 20 + 18; // last 18px bit is for duplicates title
-        $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').css("height", newh + "px");
-        $('#main_contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').show(500);
-        $('.main_contact_duplicates li').off("mouseover.main_contact_duplicates_list");
-        $('.main_contact_duplicates li').on("mouseover.main_contact_duplicates_list", function() {
+        $('#contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').css("height", newh + "px");
+        $('#contact_duplicates_' + duplicates.fieldname + ' .yui-ac-content').show(500);
+        $('.contact_duplicates li').off("mouseover.contact_duplicates_list");
+        $('.contact_duplicates li').on("mouseover.contact_duplicates_list", function() {
             $(this).toggleClass('yui-ac-highlight');
             $(this).siblings('li').removeClass('yui-ac-highlight');
         });
-        $('.main_contact_duplicates li').off("click.main_contact_duplicates_list");
-        $('.main_contact_duplicates li').on("click.main_contact_duplicates_list", function() {
-            $('.main_contact_duplicates .yui-ac-content').hide(500);
+        $('.contact_duplicates li').off("click.contact_duplicates_list");
+        $('.contact_duplicates li').on("click.contact_duplicates_list", function() {
+            $('.contact_duplicates .yui-ac-content').hide(500);
             console.log("Redirecting to contacts Editview: - " + window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id);
             toastr["info"]("Redireccionando a " + $(this).data('first_name') + "...", "Posibles duplicados encontrados", {
                 "positionClass": "toast-bottom-center",
