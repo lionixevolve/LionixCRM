@@ -48,6 +48,14 @@ lx.contact.renderContactDuplicates = function(duplicates) {
         $('.main_contact_duplicates li').on("click.main_contact_duplicates_list", function() {
             $('.main_contact_duplicates .yui-ac-content').hide(500);
             console.log("Redirecting to contacts Editview: - " + window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id);
+            toastr["info"]("Redireccionando a " + $(this).data('first_name') + "...", "Posibles duplicados encontrados", {
+                "positionClass": "toast-bottom-center",
+                "showDuration": "0",
+                "hideDuration": "0",
+                "timeOut": "4000",
+                "extendedTimeOut": "0",
+                "progressBar": true
+            });
             window.location.href = window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id;
         });
     }
