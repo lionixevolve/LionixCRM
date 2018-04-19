@@ -1,9 +1,10 @@
 //  function definitions section
 lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
-    if (forceCheck) {
-        lx.lionixCRM.config.business_type = undefined;
-    }
     try {
+        if (forceCheck) {
+            lx.lionixCRM.config.business_type = undefined;
+            $("#account_name_lxajaxed").remove();
+        }
         data = lx.lionixCRM.config.business_type.toLowerCase();
         if ($("#account_name_lxajaxed").length == 0 || $('#account_name_lxajaxed').data('business_type') != data) {
             switch (data) {
