@@ -125,6 +125,7 @@ lx.contact.resultsListDuplicatesHandler = function(forceCheck) {
             keyup_status = 'disabled';
             $('#first_name, #last_name, #lastname2_c').off("focusout.results_list_duplicates");
             if (lx.lionixCRM.config.modules.contacts.results_list_duplicates) {
+                keyup_status = 'enabled';
                 $('#first_name, #last_name, #lastname2_c').on("keypress.results_list_duplicates", function() {
                     ffn = $('#first_name');
                     fln = $('#last_name');
@@ -134,7 +135,7 @@ lx.contact.resultsListDuplicatesHandler = function(forceCheck) {
                     if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
                         if ($('#contact_duplicates_' + this.id).length == 0) {
                             // width: 750px can be changed in each Client
-                            width = 750;
+                            width = (lx.lionixCRM.config.modules.contacts.results_list_duplicates_width) ? lx.lionixCRM.config.modules.contacts.results_list_duplicates_width : 750;
                             $(this).before('<div id="contact_duplicates_' + this.id + '" class="contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: ' + width + 'px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
                         }
                         $('#first_name, #last_name, #lastname2_c').off("focusout.results_list_duplicates");
