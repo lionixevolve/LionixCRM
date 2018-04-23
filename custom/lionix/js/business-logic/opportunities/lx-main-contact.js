@@ -222,6 +222,116 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
     }
 }
 
+lx.opportunity.resultsSearchTSECRHandler = function(forceCheck) {
+    try {
+        if (forceCheck) {
+            lx.lionixCRM.config.modules = undefined;
+            $("#maincontactcedula_c_lxajaxed").remove();
+        }
+        if ($("#maincontactcedula_c_lxajaxed").length == 0) {
+            keyup_status = 'disabled';
+            $('#maincontactcedula_c').off("keyup.results_search_tsecr");
+            if (lx.lionixCRM.config.modules.opportunities.results_search_tsecr) {
+                keyup_status = 'enabled';
+                $('#maincontactcedula_c').on("keyup.results_search_tsecr", function() {
+                    if (lx.lionixCRM.config.debuglx) {
+                        console.log('key up ->', String.fromCharCode(event.which));
+                    }
+                    if ($(this).val().length != 9) {
+                        $('#maincontactfirstname_c').val('');
+                        $('#maincontactlastname_c').val('');
+                        $('#maincontactlastname2_c').val('');
+                    } else {
+                        typed_cedula = $(this).val();
+                        lx.lionixCRM.getTSECRData({
+                            // Infoticos must be on same database server this SuiteCRM instance.
+                            "focusfieldname": this.id,
+                            "cedula_c": typed_cedula
+                        }).then(function(tsecrlist) {
+                            console.log('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
+                            $('#maincontactcedula_c').val(tsecrlist.data[0].cedula_c);
+                            $('#maincontactfirstname_c').val(tsecrlist.data[0].first_name);
+                            $('#maincontactlastname_c').val(tsecrlist.data[0].last_name);
+                            $('#maincontactlastname2_c').val(tsecrlist.data[0].lastname2_c);
+                            $('#maincontactfirstname_c').focus();
+                            $('#maincontactfirstname_c').trigger('keypress');
+                        });
+                    }
+                });
+            }
+            $("#maincontactcedula_c").append('<div id="maincontactcedula_c_lxajaxed" data-results_search_tsecr="' + keyup_status + '"/>');
+            console.log('keyup.results_search_tsecr on #maincontactcedula_c ' + keyup_status);
+        } else {
+            if (lx.lionixCRM.config.debuglx) {
+                console.log("maincontactcedula_c_lxajaxed div indicator already exists and it's [" + $('#maincontactcedula_c_lxajaxed').data('results_search_tsecr') + "].");
+            }
+        }
+    } catch (error) {
+        console.log('Modules[contacts] properties are not present!');
+        console.log('Retrieving modules[contacts] properties...');
+        lx.lionixCRM.getConfigOption('modules').then(function(data) {
+            console.log('Modules[contacts] successfully retrieved', data);
+            lx.contact.resultsSearchTSECRHandler(false);
+        });
+    }
+}
+
+lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
+    try {
+        if (forceCheck) {
+            lx.lionixCRM.config.modules = undefined;
+            $("#main_full_name_lxajaxed").remove();
+        }
+        if ($("#main_full_name_lxajaxed").length == 0) {
+            keyup_status = 'disabled';
+            $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("keypress.results_list_duplicates");
+            if (lx.lionixCRM.config.modules.opportunities.results_list_duplicates) {
+                keyup_status = 'enabled';
+                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("keypress.results_list_duplicates", function() {
+                    ffn = $('#maincontactfirstname_c');
+                    fln = $('#maincontactlastname_c');
+                    fln2 = $('#maincontactlastname2_c');
+                    femail = $('#maincontactemailaddress_c');
+                    fced = $('#maincontactcedula_c');
+                    if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
+                        if ($('#main_contact_duplicates_' + this.id).length == 0) {
+                            // width: 750px can be changed in each Client
+                            width = (lx.lionixCRM.config.modules.opportunities.results_list_duplicates_width)
+                                ? lx.lionixCRM.config.modules.opportunities.results_list_duplicates_width
+                                : 750;
+                            $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: ' + width + 'px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
+                        }
+                        $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.results_list_duplicates");
+                        $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.results_list_duplicates", function() {
+                            $('.main_contact_duplicates .yui-ac-content').hide(500);
+                        });
+                        lx.lionixCRM.getContactDuplicates({
+                            "fieldname": this.id, "first_name": $(ffn).val(), "last_name": $(fln).val(), "lastname2_c": $(fln2).val()
+                            // "cedula_c": $(fced).val(),
+                            // "email_address": $(femail).val()
+                        }).then(function(duplicates) {
+                            lx.opportunity.renderMainContactDuplicates(duplicates)
+                        });
+                    }
+                });
+            }
+            $("#maincontactcedula_c").append('<div id="main_full_name_lxajaxed" data-results_list_duplicates="' + keyup_status + '"/>');
+            console.log('keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ' + keyup_status);
+        } else {
+            if (lx.lionixCRM.config.debuglx) {
+                console.log("main_full_name_lxajaxed div indicator already exists and it's [" + $('#main_full_name_lxajaxed').data('results_list_duplicates') + "].");
+            }
+        }
+    } catch (error) {
+        console.log('Modules[opportunities] properties are not present!');
+        console.log('Retrieving modules[opportunities] properties...');
+        lx.lionixCRM.getConfigOption('modules').then(function(data) {
+            console.log('Modules[opportunities] successfully retrieved', data);
+            lx.opportunity.resultsListDuplicatesHandler(false);
+        });
+    }
+}
+
 //Self-Invoking Anonymous Function Notation
 // !function(){}();  easy to read, the result is unimportant.
 // (function(){})();  like above but more parens.
@@ -239,59 +349,15 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
                         console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
                         opid = document.forms['EditView'].record.value;
                         $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
-                        lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //popoulate dropdown once when editview loads.
+                        lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //populate dropdown once when editview loads.
                         $('#account_name').on("focusout.account-name", function() {
-                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val(), $("#account_name").val()); //popoulate dropdown once when editview loads.
+                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val(), $("#account_name").val()); //populate dropdown once when editview loads.
                         });
                         $('#maincontact_c').on("change.lx-main-contact-c", function() {
                             lx.opportunity.getnewMainContactCFields();
                         });
-                        $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("keypress.results_list_duplicates", function() {
-                            ffn = $('#maincontactfirstname_c');
-                            fln = $('#maincontactlastname_c');
-                            fln2 = $('#maincontactlastname2_c');
-                            femail = $('#maincontactemailaddress_c');
-                            fced = $('#maincontactcedula_c');
-                            if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
-                                if ($('#main_contact_duplicates_' + this.id).length == 0) {
-                                    $(this).before('<div id="main_contact_duplicates_' + this.id + '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: 650px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' + this.id + '"></ul></div></div></div>');
-                                }
-                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("focusout.results_list_duplicates");
-                                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("focusout.results_list_duplicates", function() {
-                                    $('.main_contact_duplicates .yui-ac-content').hide(500);
-                                });
-                                lx.lionixCRM.getContactDuplicates({
-                                    "fieldname": this.id, "first_name": $(ffn).val(), "last_name": $(fln).val(), "lastname2_c": $(fln2).val()
-                                    // "cedula_c": $(fced).val(),
-                                    // "email_address": $(femail).val()
-                                }).then(function(duplicates) {
-                                    lx.opportunity.renderMainContactDuplicates(duplicates)
-                                });
-                            }
-                        });
-                        $('#maincontactcedula_c').on("keyup.results_search_tsecr", function() {
-                            console.log('key up ->', String.fromCharCode(event.which));
-                            if ($(this).val().length != 9) {
-                                $('#maincontactfirstname_c').val('');
-                                $('#maincontactlastname_c').val('');
-                                $('#maincontactlastname2_c').val('');
-                            } else {
-                                typed_cedula = $(this).val();
-                                lx.lionixCRM.getTSECRData({
-                                    // Infoticos must be on same database server this SuiteCRM instance.
-                                    "focusfieldname": this.id,
-                                    "cedula_c": typed_cedula
-                                }).then(function(tsecrlist) {
-                                    console.log('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
-                                    $('#maincontactcedula_c').val(tsecrlist.data[0].cedula_c);
-                                    $('#maincontactfirstname_c').val(tsecrlist.data[0].first_name);
-                                    $('#maincontactlastname_c').val(tsecrlist.data[0].last_name);
-                                    $('#maincontactlastname2_c').val(tsecrlist.data[0].lastname2_c);
-                                    $('#maincontactfirstname_c').focus();
-                                    $('#maincontactfirstname_c').trigger('keypress');
-                                });
-                            }
-                        });
+                        lx.opportunity.resultsSearchTSECRHandler(false);
+                        lx.opportunity.resultsListDuplicatesHandler(false);
                     }
                     // only comment out during testing please
                     // observer.disconnect();
