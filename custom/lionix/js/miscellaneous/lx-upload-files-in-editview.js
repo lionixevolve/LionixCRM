@@ -1,7 +1,7 @@
 // This file containts opportunities bussines logic
 // function definitions section
 lx.upload.getFileButton = function(element) {
-    console.log('Rendering button from %s', element.field_name);
+    console.log('Rendering button for %s field', element.field_name);
     if ($('#' + element.field_name).length == 0) {
         console.log('Field %s not present in EditView', element.field_name);
     } else {
@@ -23,7 +23,7 @@ lx.upload.getFileButton = function(element) {
             lx.upload.getFileTemplate(element);
             $('#show_' + element.field_name + '_loader').prop('disabled', true);
             $('#' + element.field_name).prop('disabled', true);
-            // $('#' + element.field_name).toggle(); // to view field
+            // $('#' + element.field_name).toggle();  to view field
         });
         console.log('Field ' + element.field_name + ' rendered.')
     }
@@ -73,7 +73,7 @@ lx.upload.getFileTemplate = function(element) {
                 $('#floating-div-for-upload-' + element.field_name + '-file').hide("slow");
                 $('#show_' + element.field_name + '_loader').prop('disabled', false);
                 $('#' + element.field_name).prop('disabled', false);
-                // $('#' + element.field_name).toggle(); // to view field
+                // $('#' + element.field_name).toggle();  to view field
             });
             $('#upload-' + element.field_name + '-btn').click(function() {
                 $('#' + element.field_name + '-file').hide();
@@ -91,7 +91,7 @@ lx.upload.getFileTemplate = function(element) {
                         settings.url += "&opportunity_id=" + element.opportunity_id;
                         console.log("url modified:", settings.url);
                     }, //end beforeSend
-                    // target: '#preview_fieldname', //It's not required 'cause #preview_fieldname is been handled on success
+                    // target: '#preview_fieldname', It's not required 'cause #preview_fieldname is been handled on success
                     // Progress bar while uploading file...
                     uploadProgress: function(event, position, total, percentComplete) {
                         $('#floating-div-for-upload-' + element.field_name + '-file').css({"height": "260px"});
@@ -160,51 +160,71 @@ lx.upload.getFileTemplate = function(element) {
             console.log("*** finish ***");
         }, // end complete
         datatype: "text"
-    })/*Fin del Ajax*/
+    })/* Fin del Ajax */
 } //lx.upload.getFileTemplate()
 
-lx.upload.getFileFields = function(observer) {
-    var execute = false;
-    var crmEditView = document.forms['EditView'];
-    if (crmEditView) {
-        module_name = crmEditView.module.value.toLowerCase();
-        switch (module_name) {
-            case 'accounts':
-            case 'contacts':
-            case 'opportunities':
-                if (lx.lionixCRM.config.modules[module_name].upload_files_fields != undefined) {
-                    text_fields_to_upload_fields_list = lx.lionixCRM.config.modules[module_name].upload_files_fields;
-                    execute = true;
-                }
-                break;
+lx.upload.getFileFields = function(forceCheck) {
+    try {
+        if (forceCheck) {
+            lx.lionixCRM.config.modules = undefined;
         }
-        if (execute) {
-            console.log('Rendering upload files fields for ' + crmEditView.module.value + ' module...')
-            text_fields_to_upload_fields_list.forEach(function(element) {
-                element.module_name = crmEditView.module.value;
-                element.record_id = crmEditView.record.value;
-            });
-            text_fields_to_upload_fields_list.forEach(function(element) {
-                if ($('#show_' + element.field_name + '_loader').length == 0) {
-                    lx.upload.getFileButton(element);
-                } else {
-                    console.log('Field ' + element.field_name + ' was already rendered.')
+        if (lx.lionixCRM.config.allow_upload_files_fields) {
+            var execute = false;
+            var crmEditView = document.forms['EditView'];
+            if (crmEditView) {
+                module_name = crmEditView.module.value.toLowerCase();
+                switch (module_name) {
+                    case 'accounts':
+                    case 'contacts':
+                    case 'opportunities':
+                        text_fields_to_upload_fields_list = lx.lionixCRM.config.modules[module_name].upload_files_fields;
+                        if (text_fields_to_upload_fields_list.length) {
+                            execute = true;
+                        } else {
+                            if (lx.lionixCRM.config.debuglx) {
+                                console.log('%s module have not upload fields configured.', module_name);
+                            }
+                        }
+                        break;
                 }
-            });
-            // only comment out during testing please
-            // observer.disconnect();
+                if (execute) {
+                    console.log('Rendering upload files fields for ' + crmEditView.module.value + ' module...')
+                    text_fields_to_upload_fields_list.forEach(function(element) {
+                        element.module_name = crmEditView.module.value;
+                        element.record_id = crmEditView.record.value;
+                    });
+                    text_fields_to_upload_fields_list.forEach(function(element) {
+                        if ($('#show_' + element.field_name + '_loader').length == 0) {
+                            lx.upload.getFileButton(element);
+                        } else {
+                            if (lx.lionixCRM.config.debuglx) {
+                                console.log('Field ' + element.field_name + ' was already rendered.')
+                            }
+                        }
+                    });
+                }
+            } else {
+                if (lx.lionixCRM.config.debuglx) {
+                    console.log('We are not in an EditView lx.upload.getFileFields cannot run.');
+                }
+            }
+        } else {
+            console.log('Upload files fields are disabled.');
         }
-    } else {
-        // only comment out during testing please
-        // observer.disconnect();
-        console.log('lx.upload.getFileFields not in EditView');
+    } catch (error) {
+        console.log('Modules[all] properties are not present!');
+        console.log('Retrieving modules[all] properties...');
+        lx.lionixCRM.getConfigOption('modules').then(function(data) {
+            console.log('Modules[all] successfully retrieved', data);
+            lx.upload.getFileFields(false);
+        });
     }
 } // end function
 
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
     // On other modules
@@ -214,11 +234,10 @@ lx.upload.getFileFields = function(observer) {
         if (mutations) {
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
-                console.log("Upload files in EditView '%s' '%s' '%s' '%s'", 'all modules', 'lx-upload-files-in-editview.js', '!function()', 'observer');
-                console.log('Running lx.upload.getFileFields() function');
-                lx.lionixCRM.getConfigOption('modules').then(function() {
-                    lx.upload.getFileFields(observer);
-                });
+                if (lx.lionixCRM.config.debuglx) {
+                    console.log("Upload files in EditView observer for '%s' current module '%s' '%s' '%s'", 'all modules', crmEditView.module.value, 'lx-upload-files-in-editview.js', '!function()');
+                }
+                lx.upload.getFileFields(false);
             }
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
