@@ -964,6 +964,7 @@ function post_installModules()
     $sugar_config['lionixcrm']['environment'] = 'production'; //The options for environment are 'testing' or 'production'
     $sugar_config['lionixcrm']['debuglx'] = false; //The options for debuglx are false or true
     $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c', if null or '' it uses default CRM validation rules
+    $sugar_config['lionixcrm']['allow_upload_files_fields'] = true; //The options for allow_upload_files_fields are true or false
     $sugar_config['lionixcrm']['modules']['opportunities']['exclude_fields_for_update_sales_stages_time_in_mins'] = array(
         'ssclosedwoninmins_c',
         //'anyOtherField'
