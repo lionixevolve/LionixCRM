@@ -271,7 +271,7 @@ lx.opportunity.resultsSearchTSECRHandler = function(forceCheck) {
         console.log('Retrieving modules[contacts] properties...');
         lx.lionixCRM.getConfigOption('modules').then(function(data) {
             console.log('Modules[contacts] successfully retrieved', data);
-            lx.contact.resultsSearchTSECRHandler(false);
+            lx.opportunity.resultsSearchTSECRHandler(false);
         });
     }
 }
