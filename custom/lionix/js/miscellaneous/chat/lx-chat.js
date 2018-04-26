@@ -237,7 +237,7 @@ lx.chat.messagesArrayToHTML = function() {
 }
 
 lx.chat.start = function() {
-    if (!$("#lxchat").length) {
+    if (!lx.current_user_id) {
         var currentForm = document.forms['DetailView'];
         if (!currentForm) {
             currentForm = document.forms['EditView'];
@@ -261,10 +261,8 @@ lx.chat.start = function() {
                 console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax success');
                 console.log("success callback:", status);
                 console.log("data:", data);
-                window.current_user_id = data;
-                if (!$("#lxchat").length) {
-                    lx.chat.findFieldToRender();
-                }
+                lx.current_user_id = data;
+                lx.chat.start();
             },
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
@@ -277,6 +275,10 @@ lx.chat.start = function() {
             // },
             datatype: "text"
         });
+
+    }
+    if (!$("#lxchat").length) {
+        lx.chat.findFieldToRender();
     }
 }
 
