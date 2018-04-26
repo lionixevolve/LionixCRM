@@ -288,29 +288,47 @@ lx.chat.scrollToBottom = function() {
 }
 
 lx.chat.refreshMessagesInterval = function(refresh) {
-    if (lx.chat.interval_ids_list == undefined) {
-        lx.chat.interval_ids_list = [];
+    if (lx.chat.interval_momentjs_ids_list == undefined) {
+        lx.chat.interval_momentjs_ids_list = [];
+    }
+    if (lx.chat.interval_messages_ids_list == undefined) {
+        lx.chat.interval_messages_ids_list = [];
     }
     if (refresh) {
         console.log('Starting new LionixCRM Smart CHAT refresh messages interval...');
-        lx.chat.interval_ids_list.forEach(function(element) {
+        // chat momentjs
+        lx.chat.interval_momentjs_ids_list.forEach(function(element) {
             window.clearInterval(element);
         });
         new_id = window.setInterval(function() {
             if (!$("#lxchatcontent").length) {
                 lx.chat.refreshMessagesInterval(false);
             } else {
-                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
-                console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_ids_list[0]);
+                console.log('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_momentjs_ids_list[0]);
+                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
             }
-        }, 15000)
-        lx.chat.interval_ids_list.unshift(new_id);
-        console.log('New LionixCRM messages interval id set: %s', new_id);
-    } else {
-        lx.chat.interval_ids_list.forEach(function(element) {
+        }, 15000);
+        lx.chat.interval_momentjs_ids_list.unshift(new_id);
+        console.log('New LionixCRM momentjs refresh strings interval id set: %s', new_id);
+        // chat messages
+        lx.chat.interval_messages_ids_list.forEach(function(element) {
             window.clearInterval(element);
         });
-        lx.chat.interval_ids_list = undefined;
+        new_id = window.setInterval(function() {
+            console.log('Retrieving messages from database on LionixCRM Smart CHAT, interval id: %s, see you in 5 mins...', lx.chat.interval_messages_ids_list[0]);
+            lx.chat.getMessages();
+        }, 300000);
+        lx.chat.interval_messages_ids_list.unshift(new_id);
+        console.log('New LionixCRM getMessages interval id set: %s', new_id);
+    } else {
+        lx.chat.interval_momentjs_ids_list.forEach(function(element) {
+            window.clearInterval(element);
+        });
+        lx.chat.interval_messages_ids_list.forEach(function(element) {
+            window.clearInterval(element);
+        });
+        lx.chat.interval_momentjs_ids_list = undefined;
+        lx.chat.interval_messages_ids_list = undefined;
         console.log('LionixCRM messages interval stopped');
     }
 }
