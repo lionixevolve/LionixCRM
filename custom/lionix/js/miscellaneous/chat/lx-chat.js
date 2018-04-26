@@ -60,7 +60,7 @@ lx.chat.saveNewMessage = function(userMessage) {
                     ? "[]"
                     : data;
                 lx.chat.messagesArray = JSON.parse(data);
-                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
+                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
             },
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
@@ -118,14 +118,14 @@ lx.chat.render = function(lxchatfield, lxchat_array_position) {
                         ? "[]"
                         : data;
                     lx.chat.messagesArray = JSON.parse(data);
-                    lxchatfieldtext = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
+                    lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
                     //Current crm field must be hide
                     $('#' + lxchatfield).hide();
                     //lxchat div added
                     $('<div id="lxchat"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + lxchatfield);
                     $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
                     $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
-                    document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML(lx.chat.messagesArray);
+                    document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
                     //Textarea for new messages added
                     $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
                     $(document).on("keypress", "#lxchatnewmsg", function(event) {
@@ -221,7 +221,8 @@ lx.chat.findFieldToRender = function() {
     }
 }
 
-lx.chat.messagesArrayToHTML = function(msgArray) {
+lx.chat.messagesArrayToHTML = function() {
+    msgArray = lx.chat.messagesArray;
     html = "";
     if (Array.isArray(msgArray)) {
         html = "";
