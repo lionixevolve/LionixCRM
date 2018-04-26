@@ -347,6 +347,62 @@ lx.chat.validateNewMessage = function() {
     }
 }
 
+lx.chat.getMessages = function() {
+    // Save button temporary disabled
+    $("#lxchatSave").attr("disabled", true);
+    var currentForm = document.forms['DetailView'];
+    if (!currentForm) {
+        currentForm = document.forms['EditView'];
+    }
+    var record_id = currentForm.record.value;
+    var module_name = currentForm.module.value;
+
+    var data = {
+        "method": "lxChat",
+        "module": module_name,
+        "record_id": record_id,
+        "field_name": lx.chat.field,
+        "save": 0
+    };
+    $.ajax({
+        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
+        beforeSend: function(jqXHR, settings) {
+            console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax beforeSend');
+            console.log("beforeSend url:", settings.url);
+            console.log("beforeSend data:", settings.data);
+        },
+        url: 'lxajax.php',
+        type: 'POST',
+        data: data,
+        // success is a function to be called if the request succeeds.
+        success: function(data, status, jqXHR) {
+            console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax success');
+            console.log("success callback:", status);
+            console.log("data:", data);
+            $("textarea#" + lx.chat.field).val(data);
+            data = (data == '')
+                ? "[]"
+                : data;
+            lx.chat.messagesArray = JSON.parse(data);
+            document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
+        },
+        // error is a function to be called if the request fails.
+        error: function(jqXHR, status, error) {
+            console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax error');
+            console.log("error callback:", status);
+            console.log("Function lx.chat.getMessages error:", error);
+        }, // end error
+        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
+        complete: function(jqXHR, status) {
+            console.log("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax complete');
+            console.log("complete status:", status);
+            lx.chat.scrollToBottom();
+        },
+        datatype: "text"
+    });
+    $("#lxchatSave").removeAttr("disabled");
+}
+
 // Observers definitions
 !function() {
     var lxchatfield = '';
