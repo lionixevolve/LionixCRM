@@ -1,12 +1,13 @@
 // This file containts lxchat bussines logic
 //Self-Invoking Anonymous Function Notation
-// !function(){}(); // easy to read, the result is unimportant.
-// (function(){})(); // like above but more parens.
-// (function(){}()); // Douglas Crockford's style when you need function results.
+// !function(){}();  easy to read, the result is unimportant.
+// (function(){})();  like above but more parens.
+// (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 
 // function definitions section
 lx.chat = {};
+lx.chat.field = '';
 lx.chat.saveNewMessage = function(userMessage) {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
@@ -34,7 +35,7 @@ lx.chat.saveNewMessage = function(userMessage) {
             "method": "lxChat",
             "module": module_name,
             "record_id": record_id,
-            "array_position": lxchat_array_position,
+            "field_name": lx.chat.field,
             "save": 1,
             "chat_c": newMessage
         };
@@ -42,7 +43,6 @@ lx.chat.saveNewMessage = function(userMessage) {
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend url:", settings.url);
                 console.log("beforeSend data:", settings.data);
             },
@@ -55,7 +55,7 @@ lx.chat.saveNewMessage = function(userMessage) {
                 console.log("success callback:", status);
                 console.log("data:", data);
                 $("#lxchatnewmsg").val('');
-                $("textarea#" + lxchatfield).val(data);
+                $("textarea#" + lx.chat.field).val(data);
                 data = (data == '')
                     ? "[]"
                     : data;
@@ -80,7 +80,7 @@ lx.chat.saveNewMessage = function(userMessage) {
     $("#lxchatSave").removeAttr("disabled");
 }
 
-lx.chat.render = function(lxchatfield, lxchat_array_position) {
+lx.chat.render = function(givenField) {
     if (!$("#lxchat").length) {
         var currentForm = document.forms['DetailView'];
         if (!currentForm) {
@@ -93,13 +93,12 @@ lx.chat.render = function(lxchatfield, lxchat_array_position) {
             "method": "lxChat",
             "module": module_name,
             "record_id": record_id,
-            "array_position": lxchat_array_position
+            "field_name": givenField
         };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend url:", settings.url);
                 console.log("beforeSend data:", settings.data);
             },
@@ -113,16 +112,17 @@ lx.chat.render = function(lxchatfield, lxchat_array_position) {
                 console.log("data:", data);
                 if (!$("#lxchat").length) {
                     var currentUser = $(".user_label:eq(0)").text().trim();
-                    //Current lxchatfield text
+                    //Current lx.chat.field text
                     data = (data == '')
                         ? "[]"
                         : data;
                     lx.chat.messagesArray = JSON.parse(data);
                     lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
                     //Current crm field must be hide
-                    $('#' + lxchatfield).hide();
+                    $('#' + givenField).hide();
                     //lxchat div added
-                    $('<div id="lxchat"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + lxchatfield);
+                    $('<div id="lxchat" data-field="' + givenField + '"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + givenField);
+                    lx.chat.field = givenField;
                     $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
                     $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
                     document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
@@ -173,7 +173,6 @@ lx.chat.findFieldToRender = function() {
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend callback:", settings.url);
             },
             url: 'lxajax.php',
@@ -252,7 +251,6 @@ lx.chat.start = function() {
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start()', 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend callback:", settings.url);
             },
             url: 'lxajax.php',
@@ -422,8 +420,6 @@ lx.chat.getMessages = function() {
 
 // Observers definitions
 !function() {
-    var lxchatfield = '';
-    var lxchat_array_position = '';
     if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
         // now it ensures that lxchat isn't already present
         if (!$("#lxchat").length) {
