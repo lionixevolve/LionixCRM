@@ -188,17 +188,15 @@ lx.chat.findFieldToRender = function() {
                     if (data == '') {
                         console.log("lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file");
                     } else {
-                        fieldsArray = JSON.parse(data);
-                        for (var i = 0; i < fieldsArray.length; i++) {
-                            if ($(document).find("#" + fieldsArray[i]).length) {
-                                lxchatfield = fieldsArray[i];
-                                lxchat_array_position = i;
+                        lx.chat.candidateFieldsArray = JSON.parse(data);
+                        for (var i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
+                            if ($(document).find("#" + lx.chat.candidateFieldsArray[i]).length) {
                                 if (!record_id) {
                                     console.log("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
-                                    lx.field.show(lxchatfield, false);
-                                    $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lxchatfield);
+                                    lx.field.show(lx.chat.candidateFieldsArray[i], false);
+                                    $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lx.chat.candidateFieldsArray[i]);
                                 } else {
-                                    lx.chat.render(lxchatfield, lxchat_array_position);
+                                    lx.chat.render(lx.chat.candidateFieldsArray[i]);
                                 }
                             }
                         }
