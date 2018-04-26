@@ -43,7 +43,6 @@ lx.upload.getFileTemplate = function(element) {
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
             console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajax beforeSend');
-            console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
             console.log("beforeSend callback:", settings.data);
         }, //end beforeSend
@@ -85,7 +84,6 @@ lx.upload.getFileTemplate = function(element) {
                 $('#' + element.field_name + '-form').ajaxForm({
                     beforeSend: function(jqXHR, settings) {
                         console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-upload-files-in-detailview.js', 'lx.upload.getFileTemplate()', 'ajaxForm beforeSend');
-                        console.log("*** start ***");
                         console.log("beforeSend callback:", settings.url);
                         // file to be modified
                         settings.url += "&opportunity_id=" + element.opportunity_id;
@@ -209,7 +207,9 @@ lx.upload.getFileFields = function(forceCheck) {
                 }
             }
         } else {
-            console.log('Upload files fields are disabled.');
+            if (lx.lionixCRM.config.debuglx) {
+                console.log('Upload files fields are disabled in LionixCRM config.php file.');
+            }
         }
     } catch (error) {
         console.log('Modules[all] properties are not present!');
