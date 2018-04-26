@@ -97,7 +97,7 @@ class LxAJAX extends LxAJAXCustom
             }
             if ($this->data['use_pdo']) {
                 $result = $this->db->execute($query, 'crm'.'pdo', 'pdo');
-                 while ($row = $result->fetch()) {
+                while ($row = $result->fetch()) {
                     $tests['using_pdo'] = $row;
                 }
             }
@@ -296,37 +296,40 @@ class LxAJAX extends LxAJAXCustom
     public function lxChat()
     {
         $messagesArray = array();
-        if ($this->data['module']) {
+        if ($this->data['module'] && $this->data['record_id']) {
             global $moduleList,$beanList,$beanFiles,$app_list_strings;
             $class_name = $beanList[$this->data['module']];
             $module_object = new $class_name();
             $module_object->retrieve($this->data['record_id']);
-            $smart_chat_field = $GLOBALS['sugar_config']['lionixcrm']['smartchat'][$this->data['array_position']];
 
-            if ($this->data['save']) {
-                if (!empty($module_object->id)) {
-                    $module_object->$smart_chat_field = $this->data['chat_c'];
-                    $module_object->save();
+            if (in_array($this->data['field_name'], $GLOBALS['sugar_config']['lionixcrm']['smartchat'])) {
+                $smart_chat_field = $this->data['field_name'];
+
+                if ($this->data['save']) {
+                    if (!empty($module_object->id)) {
+                        $module_object->$smart_chat_field = $this->data['chat_c'];
+                        $module_object->save();
+                    }
                 }
-            }
 
-            $messagesArray = json_decode(html_entity_decode($module_object->$smart_chat_field, ENT_QUOTES));
-            foreach ($messagesArray as &$msg) {
-                $query = "
-                    SELECT u.id,
-                           ifnull(first_name,'') AS 'first_name',
-                           ifnull(last_name,'') AS 'last_name',
-                           concat(ifnull(first_name,''),' ',ifnull(last_name,'')) AS 'full_name',
-                           if('{$GLOBALS['current_user']->id}'=u.id,1,0) as 'current_user'
-                    FROM users u
-                    WHERE u.id = '{$msg->id}'
-                ";
-                $rs = $GLOBALS['db']->query($query, false);
-                if (($row = $GLOBALS['db']->fetchByAssoc($rs)) != null) {
-                    $msg->firstName = $row['first_name'];
-                    $msg->lastName = $row['last_name'];
-                    $msg->fullName = $row['full_name'];
-                    $msg->currentUser = ($row['current_user']) ? true : false;
+                $messagesArray = json_decode(html_entity_decode($module_object->$smart_chat_field, ENT_QUOTES));
+                foreach ($messagesArray as &$msg) {
+                    $query = "
+                        SELECT u.id,
+                               ifnull(first_name,'') AS 'first_name',
+                               ifnull(last_name,'') AS 'last_name',
+                               concat(ifnull(first_name,''),' ',ifnull(last_name,'')) AS 'full_name',
+                               if('{$GLOBALS['current_user']->id}'=u.id,1,0) as 'current_user'
+                        FROM users u
+                        WHERE u.id = '{$msg->id}'
+                    ";
+                    $rs = $GLOBALS['db']->query($query, false);
+                    if (($row = $GLOBALS['db']->fetchByAssoc($rs)) != null) {
+                        $msg->firstName = $row['first_name'];
+                        $msg->lastName = $row['last_name'];
+                        $msg->fullName = $row['full_name'];
+                        $msg->currentUser = ($row['current_user']) ? true : false;
+                    }
                 }
             }
         }
