@@ -10,7 +10,6 @@ lx.lionixCRM.getConfigOption = function(option) {
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("Bussines logic '%s' '%s' '%s' option '%s' '%s'", 'all modules', 'lx-lionixcrm-get-config-option.js', 'lx.lionixCRM.getConfigOption()', option, 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend callback:", settings.url);
             }, //end beforeSend
             url: 'lxajax.php',

@@ -20,7 +20,6 @@ lx.lionixCRM.getTSECRData = function(searchObject) {
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
                 console.log("Bussines logic '%s' '%s' '%s' '%s'", 'all modules', 'lx-get-tse-cr-data.js', 'lx.lionixCRM.getTSECRData', 'ajax beforeSend');
-                console.log("*** start ***");
                 console.log("beforeSend callback:", settings.url);
             }, //end beforeSend
             url: 'lxajax.php',

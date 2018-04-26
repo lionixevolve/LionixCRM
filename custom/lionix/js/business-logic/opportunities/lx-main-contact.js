@@ -114,7 +114,6 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
             console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
-            console.log("*** start ***");
             console.log("beforeSend callback:", settings.url);
         }, //end beforeSend
         url: 'lxajax.php',
