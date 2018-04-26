@@ -18,8 +18,10 @@ lx.chat.saveNewMessage = function(userMessage) {
         if (!Array.isArray(lx.chat.messagesArray)) {
             lx.chat.messagesArray = [];
         }
-        lx.chat.messagesArray.push({"id": window.current_user_id, "msg": userMessage, "date": m.toISOString()});
-        newMessage = JSON.stringify(lx.chat.messagesArray);
+        lx.chat.messagesArray.push({"id": lx.current_user_id, "msg": userMessage, "date": m.toISOString()});
+        newMessage = JSON.stringify(lx.chat.messagesArray.map(function(e) {
+            return {"id": e.id, "msg": e.msg, "date": e.date}
+        }));
 
         var currentForm = document.forms['DetailView'];
         if (!currentForm) {
