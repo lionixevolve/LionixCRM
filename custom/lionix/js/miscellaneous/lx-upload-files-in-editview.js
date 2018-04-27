@@ -227,7 +227,6 @@ lx.upload.getFileFields = function(forceCheck) {
 // (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
 !function() {
-    // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
