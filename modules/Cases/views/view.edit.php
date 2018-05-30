@@ -67,12 +67,15 @@ class CasesViewEdit extends ViewEdit {
             ?>
             <script>
                 $(document).ready(function(){
-                    $('#update_text').closest('.edit-view-row-item').html('');
-                    $('#update_text_label').closest('.edit-view-row-item').html('');
-                    $('#internal').closest('.edit-view-row-item').html('');
-                    $('#internal_label').closest('.edit-view-row-item').html('');
-                    $('#addFileButton').closest('.edit-view-row-item').html('');
-                    $('#case_update_form_label').closest('.edit-view-row-item').html('');
+                    //lionixcrm
+                    $('#update_text').closest('.edit-view-row-item').hide();
+                    $('#update_text_label').closest('.edit-view-row-item').hide();
+                    $('#internal').closest('.edit-view-row-item').hide();
+                    $('#internal_label').closest('.edit-view-row-item').hide();
+                    $('#addFileButton').closest('.edit-view-row-item').hide();
+                    $('#case_update_form_label').closest('.edit-view-row-item').hide();
+                    tinyMCE.execCommand('mceAddControl', false, document.getElementById('description'));
+                    //lionixcrm
                 });
             </script>
         <?php
