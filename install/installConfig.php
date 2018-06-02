@@ -5,7 +5,7 @@
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2017 SalesAgility Ltd.
+ * Copyright (C) 2011 - 2018 SalesAgility Ltd.
  *
  * LionixCRM is an extension to SuiteCRM developed by Lionix Evolve S.A.
  * Copyright (C) 2016 Lionix Evolve S.A.
@@ -217,7 +217,7 @@ EOQ;
             </div>
 
             <footer id="install_footer">
-                <p id="footer_links"><a href="http://www.lionix.com/crm" target="_blank">Visit lionix.com</a> | <a href="https://suitecrm.com/index.php?option=com_kunena&view=category&Itemid=1137&layout=list" target="_blank">Support Forums</a> | <a href="https://suitecrm.com/wiki/index.php/Installation" target="_blank">Installation Guide</a> | <a href="LICENSE.txt" target="_blank">License</a>
+                <p id="footer_links"><a href="https://suitecrm.com" target="_blank">Visit suitecrm.com</a> | <a href="https://suitecrm.com/index.php?option=com_kunena&view=category&Itemid=1137&layout=list" target="_blank">Support Forums</a> | <a href="https://docs.suitecrm.com/admin/installation-guide/" target="_blank">Installation Guide</a> | <a href="LICENSE.txt" target="_blank">License</a>
             </footer>
         </div>
     </body>
@@ -1918,5 +1918,3 @@ $installConfigLayout->show(get_defined_vars());
 // DisplayErrors::restore();
 
 // TODO--low: add Name Format 	[default_locale_name_format]	[Dr. David Livingstone]	-- ???
-
-?>

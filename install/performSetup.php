@@ -216,7 +216,7 @@ $db                 = DBManagerFactory::getInstance();
 $startTime          = microtime(true);
 $focus              = 0;
 $processed_tables   = array(); // for keeping track of the tables we have worked on
-$empty              = '';
+$empty              = array();
 $new_tables     = 1; // is there ever a scenario where we DON'T create the admin user?
 $new_config         = 1;
 $new_report     = 1;
@@ -473,6 +473,7 @@ FP;
     $enabled_tabs[] = 'AOK_KnowledgeBase';
     $enabled_tabs[] = 'AOK_Knowledge_Base_Categories';
     $enabled_tabs[] = 'EmailTemplates';
+    $enabled_tabs[] = 'Surveys';
 
 //Beginning of the scenario implementations
 //We need to load the tabs so that we can remove those which are scenario based and un-selected
@@ -718,8 +719,7 @@ installLog('DBG: SugarThemeRegistry::getDefault');
 $_POST['user_theme'] = (string) SugarThemeRegistry::getDefault();
 
 // save and redirect to new view
-$_REQUEST['return_module'] = 'Home';
-$_REQUEST['return_action'] = 'index';
+$_REQUEST['do_not_redirect'] = true;
 installLog('DBG: require modules/Users/Save.php');
 require('modules/Users/Save.php');
 
@@ -731,6 +731,12 @@ foreach($varStack['defined_vars'] as $__key => $__value) $$__key = $__value;
 
 $endTime = microtime(true);
 $deltaTime = $endTime - $startTime;
+
+if (!is_array($bottle) || !is_object($bottle)) {
+    $bottle = (array)$bottle;
+    LoggerManager::getLogger()->warn('Bottle needs to be an array to perform setup');
+}
+
 
 if( count( $bottle ) > 0 ){
     foreach( $bottle as $bottle_message ){
@@ -750,7 +756,7 @@ $out =<<<EOQ
 <p><b>{$fpResult}</b></p>
 </div>
 <footer id="install_footer">
-    <p id="footer_links"><a href="http://www.lionix.com/crm" target="_blank">Visit lionix.com</a> | <a href="https://suitecrm.com/index.php?option=com_kunena&view=category&Itemid=1137&layout=list" target="_blank">Support Forums</a> | <a href="https://suitecrm.com/wiki/index.php/Installation" target="_blank">Installation Guide</a> | <a href="LICENSE.txt" target="_blank">License</a>
+    <p id="footer_links"><a href="https://suitecrm.com" target="_blank">Visit suitecrm.com</a> | <a href="https://suitecrm.com/index.php?option=com_kunena&view=category&Itemid=1137&layout=list" target="_blank">Support Forums</a> | <a href="https://docs.suitecrm.com/admin/installation-guide/" target="_blank">Installation Guide</a> | <a href="LICENSE.txt" target="_blank">License</a>
 </footer>
 </div>
 </body>
@@ -764,5 +770,3 @@ echo $out;
 
 $loginURL = str_replace('install.php', 'index.php', "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 installStatus(sprintf($mod_strings['STAT_INSTALL_FINISH_LOGIN'], $loginURL ) , array('function' => 'redirect', 'arguments' => $loginURL) );
-
-?>

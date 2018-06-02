@@ -5,7 +5,7 @@
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
  *
  * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2017 SalesAgility Ltd.
+ * Copyright (C) 2011 - 2018 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -226,11 +226,10 @@ abstract class AbstractMetaDataImplementation
         $this->_variables = $variables;
         // now remove the modulename preamble from the loaded defs
         reset($defs);
-        $temp = each($defs);
 
-        $GLOBALS['log']->debug(get_class($this) . "->_loadFromFile: returning " . print_r($temp['value'], true));
+        $GLOBALS['log']->debug(get_class($this) . "->_loadFromFile: returning " . print_r($defs, true));
 
-        return $temp['value']; // 'value' contains the value part of 'key'=>'value' part
+        return array_shift($defs); // 'value' contains the value part of 'key'=>'value' part
     }
 
     /**
@@ -347,7 +346,7 @@ abstract class AbstractMetaDataImplementation
 /*
 // LionixCRM fix commenting out this block allows panels to be displayed as tab using studio
 */
-        if($this->hasToAppendOriginalViewTemplateDefs($defs)) {
+        if ($this->hasToAppendOriginalViewTemplateDefs($defs)) {
             $templateMeta = var_export($this->_originalViewTemplateDefs, true);
             if(!empty($templateMeta)) {
                 $out .= '$viewdefs[\'' . $this->_moduleName . '\'][\''. $this->_viewName . '\'][\'templateMeta\'] = '.$templateMeta;
@@ -427,14 +426,13 @@ abstract class AbstractMetaDataImplementation
     }
 
     /**
-     * Construct a full pathname for the requested metadata
-     *
-     * @param string $view The view type, that is, EditView, DetailView etc
-     * @param string $moduleName The name of the module that will use this layout
+     * @param string $view
+     * @param string $moduleName
+     * @param string $packageName
      * @param string $type
-     * @return string               The file name
+     * @return string
      */
-    public function getFileName($view, $moduleName, $type = MB_BASEMETADATALOCATION)
+    public function getFileName($view, $moduleName, $packageName, $type = MB_BASEMETADATALOCATION)
     {
         return $this->getFileNameInPackage($view, $moduleName, $this->_packageName, $type);
     }

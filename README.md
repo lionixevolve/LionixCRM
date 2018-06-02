@@ -9,9 +9,9 @@ Estamos basando nuestro trabajo en SuiteCRM, por lo que, en estos primeros pasos
 
 También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empresa"), que es una expansión del término original, en donde se incluye a la microempresa.
 
-##SuiteCRM 7.9.5
+## SuiteCRM 7.10.5
 
-[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=hotfix)](https://travis-ci.org/salesagility/SuiteCRM)
+[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=develop)](https://travis-ci.org/salesagility/SuiteCRM)
 
 
 ### What's in this repository ###
@@ -69,7 +69,7 @@ The following links offer various ways to view, contribute and collaborate to th
 
 [suitecrm_demo]: https://suitecrm.com/demo
 [suitecrm_forums]: https://suitecrm.com/suitecrm/forum/suite-forum
-[suitecrm_docs]: https://suitecrm.com/wiki
+[suitecrm_docs]: https://docs.suitecrm.com/
 [suitecrm_partners]: https://suitecrm.com/about/about-us/partners
 [suitecrm_ext]: https://store.suitecrm.com/
 
