@@ -84,7 +84,7 @@ $mod_strings = array(
     'ERR_DB_ADMIN' => 'The provided database administrator username and/or password is invalid, and a connection to the database could not be established. Please enter a valid user name and password. (Error: ',
     'ERR_DB_ADMIN_MSSQL' => 'The provided database administrator username and/or password is invalid, and a connection to the database could not be established. Please enter a valid user name and password.',
     'ERR_DB_EXISTS_NOT' => 'The specified database does not exist.',
-    'ERR_DB_EXISTS_WITH_CONFIG' => 'Database already exists with config data. To run an install with the chosen database, please re-run the install and choose: "Drop and recreate existing SuiteCRM tables?"  To upgrade, use the Upgrade Wizard in the Admin Console. Please read the upgrade documentation located <a href="http://www.suitecrm.com" target="_new">here</a>.',
+    'ERR_DB_EXISTS_WITH_CONFIG' => 'Database already exists with config data. To run an install with the chosen database, please re-run the install and choose: "Drop and recreate existing SuiteCRM tables?". To upgrade, use the Upgrade Wizard in the Admin Console. Please read the upgrade documentation located <a href="https://suitecrm.com/wiki/index.php/Upgrade" target="_new">here</a>.',
     'ERR_DB_EXISTS' => 'The provided Database Name already exists -- cannot create another one with the same name.',
     'ERR_DB_EXISTS_PROCEED' => 'The provided Database Name already exists. You can<br>1. hit the back button and choose a new database name <br>2. click next and continue but all existing tables on this database will be dropped. <strong>This means your tables and data will be blown away.</strong>',
     'ERR_DB_HOSTNAME' => 'Host name cannot be blank.',
@@ -133,7 +133,6 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE' => 'Upload File Size',
     'ERR_URL_BLANK' => 'Provide the base URL for the SuiteCRM instance.',
     'ERR_UW_NO_UPDATE_RECORD' => 'Could not locate installation record of',
-    'ERROR_FLAVOR_INCOMPATIBLE' => 'The uploaded file is not compatible with this flavor of SuiteCRM: ',
     'ERROR_MANIFEST_TYPE' => 'Manifest file must specify the package type.',
     'ERROR_PACKAGE_TYPE' => 'Manifest file specifies an unrecognized package type',
     'ERROR_VERSION_INCOMPATIBLE' => 'The uploaded file is not compatible with this version of SuiteCRM: ',
@@ -452,6 +451,17 @@ Click on the link below to reset your password:
 $contact_user_link_guid',
         'name' => 'Forgot Password email',
     ),
+    
+    
+    'two_factor_auth_email' => array(
+        'subject' => 'Two Factor Authentication Code',
+        'type' => 'system',
+        'description' => "This template is used to send a user a code for Two Factor Authentication.",
+        'body' => '<div><table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width="550" align=\"\&quot;\&quot;center\&quot;\&quot;\"><tbody><tr><td colspan=\"2\"><p>Two Factor Authentication code is <b>$code</b>.</p>  </td>         </tr><tr><td colspan=\"2\"></td>         </tr> </tbody></table> </div>',
+        'txt_body' =>
+            'Two Factor Authentication code is $code.',
+        'name' => 'Two Factor Authentication email',
+    ),
 
     // SMTP settings
 
@@ -555,9 +565,9 @@ $contact_user_link_guid',
 
     'LBL_DBCONF_TITLE_USER_INFO_LABEL' => 'User',
     'LBL_DBCONFIG_MSG3_LABEL' => 'Database Name',
-    'LBL_DBCONFIG_MSG3' => 'Name of the database that will contain the data for the SuiteCRM instance you are about to install:',
+    'LBL_DBCONFIG_MSG3' => 'Name of the database that will contain the data for the SuiteCRM instance you are about to install.',
     'LBL_DBCONFIG_MSG2_LABEL' => 'Host Name',
-    'LBL_DBCONFIG_MSG2' => 'Name of web server or machine (host) on which the database is located ( such as localhost or www.mydomain.com ):',
+    'LBL_DBCONFIG_MSG2' => 'Name of web server or machine (host) on which the database is located (such as www.mydomain.com). If installing locally, it\'s better to use \'localhost\' than \'127.0.0.1\', for performance reasons.',
     'LBL_DBCONFIG_B_MSG1_LABEL' => '',
     'LBL_DBCONFIG_B_MSG1' => 'The username and password of a database administrator who can create database tables and users and who can write to the database is necessary in order to set up the SuiteCRM database.'
 );

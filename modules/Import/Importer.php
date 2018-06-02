@@ -136,7 +136,7 @@ class Importer
     {
         global $sugar_config, $mod_strings, $current_user;
 
-        $focus = clone $this->bean;
+        $focus = BeanFactory::getBean($this->bean->module_name);
         $focus->unPopulateDefaultValues();
         $focus->save_from_post = false;
         $focus->team_id = null;
@@ -806,14 +806,13 @@ class Importer
      */
     protected function _convertId($string)
     {
+        $function = function ($matches) {
+            return ord($matches[0]);
+        };
+
         return preg_replace_callback(
             '|[^A-Za-z0-9\-\_]|',
-            create_function(
-            // single quotes are essential here,
-            // or alternative escape all $ as \$
-            '$matches',
-            'return ord($matches[0]);'
-                 ) ,
+            $function,
             $string);
     }
 
@@ -920,7 +919,7 @@ class Importer
 
         if ($isFatal)
         {
-            exit(1);
+            throw new Exception('Handle import error' . ($message ? ": $message" : ''));
         }
     }
 
