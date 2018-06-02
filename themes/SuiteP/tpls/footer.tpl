@@ -46,15 +46,15 @@
     <!-- Start generic footer -->
     <footer>
         <div id="copyright_data">
-            <div id="dialog3" title="&copy; {$MOD.LBL_SUITE_EVOLVED_BY}">
-                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_1}</p>
+            <div id="dialog3" title="&copy; {$APP.LBL_SUITE_EVOLVED_BY}">
+                <p>{$APP.LBL_SUITE_EVOLVED_BY_DESC_1}</p>
                 <br>
-                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_2}</p>
+                <p>{$APP.LBL_SUITE_EVOLVED_BY_DESC_2}</p>
                 <br>
-                <p>{$MOD.LBL_SUITE_EVOLVED_BY_DESC_3}</p>
+                <p>{$APP.LBL_SUITE_EVOLVED_BY_DESC_3}</p>
             </div>
-            <div id="dialog2" title="{$MOD.LBL_SUITE_SUPERCHARGED}">
-                <p>{$MOD.LBL_SUITE_DESC1}</p>
+            <div id="dialog2" title="{$APP.LBL_SUITE_SUPERCHARGED}">
+                <p>{$APP.LBL_SUITE_DESC1}</p>
                 <br>
                 <p>{$APP.LBL_SUITE_DESC2}</p>
                 <br>
@@ -65,9 +65,9 @@
                 <p>{$COPYRIGHT}</p>
             </div>
             <div id="copyrightbuttons" class="footer_left">
+                <a id="evolved_by" style="cursor:pointer; font-size:12px;" onMouseOver="this.style.color='#B55F5D'" onMouseOut="this.style.color='#000'">&copy; {$APP.LBL_SUITE_EVOLVED_BY}</a>
                 <a id="admin_options">&copy; {$APP.LBL_SUITE_SUPERCHARGED}</a>
                 <a id="powered_by">&copy; {$APP.LBL_SUITE_POWERED_BY}</a>
-                <a id="evolved_by" style="cursor:pointer; text-decoration:none; color:#EE3523; font-size:14px;">&copy; {$APP.LBL_SUITE_EVOLVED_BY}</a>
             </div>
         </div>
     	<div class="footer_right">

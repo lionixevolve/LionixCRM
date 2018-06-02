@@ -2113,6 +2113,11 @@ $app_strings = array(
     'LBL_CONTACT_HAS_NO_PRIMARY_EMAIL' => 'Confirm Opt In Email sending is not possible because the Contact has not Primary Email Address',
     'LBL_CONFIRM_EMAIL_SENDING_FAILED' => 'Confirm Opt In Email sending failed',
     'LBL_CONFIRM_EMAIL_SENT' => 'Confirm Opt In Email sent successfully',
+    // footer LionixCRM
+    'LBL_SUITE_EVOLVED_BY' => "Evolved by LionixCRM",
+    'LBL_SUITE_EVOLVED_BY_DESC_1' => 'LionixCRM - Open source CRM for SMEs',
+    'LBL_SUITE_EVOLVED_BY_DESC_2' => 'LionixCRM - CRM de código abierto para las PyMEs',
+    'LBL_SUITE_EVOLVED_BY_DESC_3' => '<a href="http://www.lionix.com/crm" target="_blank">http://www.lionix.com/crm</a>',
 );
 
 $app_list_strings['moduleList']['Library'] = 'Library';
