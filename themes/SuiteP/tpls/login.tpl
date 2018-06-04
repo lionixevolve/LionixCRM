@@ -147,9 +147,9 @@
     </div>
 
     <div class="p_login_bottom">
-            <a id="powered_by">&copy; Powered By SugarCRM</a>
-            <a id="admin_options">&copy; Supercharged by SuiteCRM</a>
-            <a id="evolved_by" style="cursor:pointer; text-decoration:none; color:#EE3523; font-size:14px;">&copy; Evolved by LionixCRM</a>
+        <a id="evolved_by" style="cursor:pointer; text-decoration:none; color:#534d64; font-size:12px; margin: 0 20px 0 5px;" onMouseOver="this.style.color='#B55F5D'" onMouseOut="this.style.color='#534d64'">&copy; Evolved by LionixCRM</a>
+        <a id="admin_options">&copy; Supercharged by SuiteCRM</a>
+        <a id="powered_by">&copy; Powered By SugarCRM</a>
 	</div>
 
 </div>
