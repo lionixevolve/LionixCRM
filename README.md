@@ -9,9 +9,10 @@ Estamos basando nuestro trabajo en SuiteCRM, por lo que, en estos primeros pasos
 
 También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empresa"), que es una expansión del término original, en donde se incluye a la microempresa.
 
-## SuiteCRM 7.10.5
+## SuiteCRM 7.10.6
 
 [![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=develop)](https://travis-ci.org/salesagility/SuiteCRM)
+[![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix)
 
 
 ### What's in this repository ###
@@ -53,7 +54,7 @@ SuiteCRM in your language: [ Download and install language packs from][suitecrm_
 
 See our [Code of Conduct][code_of_conduct] on our Wiki.
 
-[code_of_conduct]: https://suitecrm.com/wiki/index.php/Contributing_to_SuiteCRM#Code_of_Conduct
+[code_of_conduct]: https://docs.suitecrm.com/community/code-of-conduct/
 
 
 ### Helpful links for the community ###
