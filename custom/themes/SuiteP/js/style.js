@@ -11,6 +11,7 @@ var lx = {
 };
 // LionixCRM required javascript files array list
 lx.lionixCRM.scripts = new Array();
+lx.lionixCRM.css = new Array();
 //SuiteCRM has jQuery preloaded don't include it.
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"); //Must always be first
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
@@ -50,7 +51,6 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
 // ********** Client only specific files
 lx.lionixCRM.scripts.push("custom/lionix/js/styleCustom.js");
 // LionixCRM required css files array list
-lx.lionixCRM.css = new Array();
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
 lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
