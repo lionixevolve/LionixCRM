@@ -98,7 +98,8 @@ tests/_output/*
 BrowserStackLocal
 browserstack.err
 cache/
-custom/**/
+# LionixCRM needs to keep track of custom folders
+# custom/**/
 .sass-cache/
 .php_cs.cache
 
