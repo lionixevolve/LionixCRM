@@ -344,24 +344,29 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
             var crmEditView = document.forms['EditView'];
             if (crmEditView) {
                 if (crmEditView.module.value == 'Opportunities') {
-                    if ($("#maincontact_c_lxajaxed").length == 0) {
-                        console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
-                        opid = document.forms['EditView'].record.value;
-                        $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
-                        lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //populate dropdown once when editview loads.
-                        $('#account_name').on("focusout.account-name", function() {
-                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val(), $("#account_name").val()); //populate dropdown once when editview loads.
-                        });
-                        $('#maincontact_c').on("change.lx-main-contact-c", function() {
-                            lx.opportunity.getnewMainContactCFields();
-                        });
-                        lx.opportunity.resultsSearchTSECRHandler(false);
-                        lx.opportunity.resultsListDuplicatesHandler(false);
+                    if ($("#maincontact_c").length == 1) {
+                        if ($("#maincontact_c_lxajaxed").length == 0) {
+                            console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
+                            opid = document.forms['EditView'].record.value;
+                            $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
+                            lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //populate dropdown once when editview loads.
+                            $('#account_name').on("focusout.account-name", function() {
+                                lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val(), $("#account_name").val()); //populate dropdown once when editview loads.
+                            });
+                            $('#maincontact_c').on("change.lx-main-contact-c", function() {
+                                lx.opportunity.getnewMainContactCFields();
+                            });
+                            lx.opportunity.resultsSearchTSECRHandler(false);
+                            lx.opportunity.resultsListDuplicatesHandler(false);
+                        }
+                    } else {
+                        $("#content").append('<div id="maincontact_c_lxajaxed"/>');
+                        console.log("maincontact_c is not present on editview, main contact dropdown logic disabled");
+                        observer.disconnect();
                     }
-                    // only comment out during testing please
-                    // observer.disconnect();
                 }
             }
+            // only comment out during testing please
             // if needed only once, you can stop observing with observer.disconnect();
             // observer.disconnect();
         }
