@@ -3,4 +3,6 @@
 $mod_strings = array (
   'LBL_LXCODE' => 'LxCode',
   'LBL_QUOTENUMBER' => 'Número Cotización (lx)',
+  'LBL_PRODUCT_PART_NUMBER_SEARCH_NONDB' => 'Código de Producto',
+  'LBL_PRODUCT_NAME_SEARCH_NONDB' => 'Nombre de Producto',
 );
