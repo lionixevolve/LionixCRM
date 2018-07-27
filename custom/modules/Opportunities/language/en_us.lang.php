@@ -24,4 +24,5 @@ $mod_strings = array (
   'LBL_FPURCHASEORDER' => 'Orden de Compra',
   'LBL_MIGRATEDFROM' => 'Migrado desde',
   'LBL_LOSTDETAIL' => 'Detalle Perdida',
+  'LBL_CONTACT_FULLNAME_CEDULA_SEARCH_NONDB' => 'Nombre Contacto (céd.)',
 );
