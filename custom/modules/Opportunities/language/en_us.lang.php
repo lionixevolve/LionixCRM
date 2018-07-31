@@ -24,5 +24,8 @@ $mod_strings = array (
   'LBL_FPURCHASEORDER' => 'Orden de Compra',
   'LBL_MIGRATEDFROM' => 'Migrado desde',
   'LBL_LOSTDETAIL' => 'Detalle Perdida',
-  'LBL_CONTACT_FULLNAME_CEDULA_SEARCH_NONDB' => 'Nombre Contacto (céd.)',
+  'LBL_CONTACT_FULLNAME_CEDULA_SEARCH_NONDB' => 'Contacto (nomb/tél/céd)',
+  'LBL_AOS_QUOTES_QUOTENUMBER_C_SEARCH_NONDB' => 'Número cotización (lx)',
+  'LBL_LEAD_FULLNAME_CEDULA_SEARCH_NONDB' => 'Nombre lead',
+  'LBL_CONTRACT_NAME_SEARCH_NONDB' => 'Nombre contrato',
 );

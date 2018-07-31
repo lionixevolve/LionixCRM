@@ -270,15 +270,67 @@ $searchFields['Opportunities'] = array (
     'query_type' => 'default',
     'operator' => 'subquery',
     'subquery' => "
-        SELECT o.id
-        FROM contacts c
-        LEFT JOIN contacts_cstm cc ON c.id = cc.id_c
-        LEFT JOIN opportunities_contacts oc ON c.id = oc.contact_id
-        LEFT JOIN opportunities o ON oc.opportunity_id = o.id
+    SELECT o.id
+    FROM contacts c
+    LEFT JOIN contacts_cstm cc ON c.id = cc.id_c
+    LEFT JOIN opportunities_contacts oc ON c.id = oc.contact_id
+    LEFT JOIN opportunities o ON oc.opportunity_id = o.id
+    WHERE c.deleted = 0
+    AND oc.deleted = 0
+    AND o.deleted = 0
+    AND CONCAT(
+        IFNULL(c.first_name,''),' ',IFNULL(c.last_name,''),' ',IFNULL(cc.lastname2_c,''),' ',
+        IFNULL(cc.cedula_c,''),' ',
+        IFNULL(c.phone_fax,''),' ',IFNULL(c.phone_home,''),' ',IFNULL(c.phone_mobile,''),' ',IFNULL(c.phone_other,''),' ',IFNULL(c.phone_work,'')
+    ) LIKE
+    ",
+    'db_field' =>
+    array (
+      0 => 'id',
+    ),
+  ),
+  'aos_quotes_quotenumber_c_search_nondb' =>
+  array (
+    'query_type' => 'default',
+    'operator' => 'subquery',
+    'subquery' => "
+        SELECT q.opportunity_id
+        FROM aos_quotes q
+        LEFT JOIN aos_quotes_cstm qc ON q.id = qc.id_c
+        WHERE q.deleted = 0
+        AND qc.quotenumber_c LIKE
+    ",
+    'db_field' =>
+    array (
+      0 => 'id',
+    ),
+  ),
+  'lead_fullname_cedula_search_nondb' =>
+  array (
+    'query_type' => 'default',
+    'operator' => 'subquery',
+    'subquery' => "
+        SELECT l.opportunity_id
+        FROM leads l
+        WHERE l.deleted = 0
+        AND l.opportunity_id IS NOT NULL
+        AND CONCAT(IFNULL(l.first_name,''),' ',IFNULL(l.last_name,'')) LIKE
+    ",
+    'db_field' =>
+    array (
+      0 => 'id',
+    ),
+  ),
+  'contract_name_search_nondb' =>
+  array (
+    'query_type' => 'default',
+    'operator' => 'subquery',
+    'subquery' => "
+        SELECT c.opportunity_id
+        FROM aos_contracts c
         WHERE c.deleted = 0
-        AND oc.deleted = 0
-        AND o.deleted = 0
-        AND CONCAT(IFNULL(c.first_name,''),' ',IFNULL(c.last_name,''),' ',IFNULL(cc.lastname2_c,''),' ',IFNULL(cc.cedula_c,'')) LIKE
+        AND c.opportunity_id IS NOT NULL
+        AND c.name LIKE
     ",
     'db_field' =>
     array (

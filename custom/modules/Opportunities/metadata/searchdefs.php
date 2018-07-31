@@ -49,6 +49,14 @@ array (
         'type' => 'name',
         'width' => '10%',
       ),
+      'aos_quotes_quotenumber_c_search_nondb' =>
+      array (
+        'name' => 'aos_quotes_quotenumber_c_search_nondb',
+        'vname' => 'LBL_AOS_QUOTES_QUOTENUMBER_C_SEARCH_NONDB',
+        'default' => true,
+        'type' => 'name',
+        'width' => '10%',
+      ),
     ),
     'advanced_search' =>
     array (
@@ -116,6 +124,30 @@ array (
       array (
         'name' => 'contact_fullname_cedula_search_nondb',
         'vname' => 'LBL_CONTACT_FULLNAME_CEDULA_SEARCH_NONDB',
+        'default' => true,
+        'type' => 'name',
+        'width' => '10%',
+      ),
+      'aos_quotes_quotenumber_c_search_nondb' =>
+      array (
+        'name' => 'aos_quotes_quotenumber_c_search_nondb',
+        'vname' => 'LBL_AOS_QUOTES_QUOTENUMBER_C_SEARCH_NONDB',
+        'default' => true,
+        'type' => 'name',
+        'width' => '10%',
+      ),
+      'lead_fullname_cedula_search_nondb' =>
+      array (
+        'name' => 'lead_fullname_cedula_search_nondb',
+        'vname' => 'LBL_LEAD_FULLNAME_CEDULA_SEARCH_NONDB',
+        'default' => true,
+        'type' => 'name',
+        'width' => '10%',
+      ),
+      'contract_name_search_nondb' =>
+      array (
+        'name' => 'contract_name_search_nondb',
+        'vname' => 'LBL_CONTRACT_NAME_SEARCH_NONDB',
         'default' => true,
         'type' => 'name',
         'width' => '10%',
