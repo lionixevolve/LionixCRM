@@ -1,6 +1,5 @@
 - Change environment to testing and check blue Testing notice appears on top
 - Verify global search hides
-- Verify Notes module related to field Contacts option has been deleted
 - Create a new opportunity, with a new account and a new contact in one step
 - Upload a file in a new opportunity (no record_id) and verify it exists on history panel
 - Verify that lx.chat is working
