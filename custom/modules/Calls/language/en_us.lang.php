@@ -14,4 +14,5 @@ $mod_strings = array (
   'LBL_LXTPROCEDURE1' => 'Tópico - Procedimiento 1',
   'LBL_LXTPROCEDURE2' => 'Tópico - Procedimiento 2',
   'LBL_LXTPROCEDURE3' => 'Tópico - Procedimiento 3',
+  'LBL_CONTACT_FULLNAME_CEDULA_SEARCH_NONDB' => 'Contacto (nomb/tél/céd)',
 );
