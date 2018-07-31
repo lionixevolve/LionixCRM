@@ -38,7 +38,6 @@ lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-tse-cr-data.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-contact-duplicates.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/notes/lx-remove-contacts-from-related-to.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-account-name.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-cedula-c.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
