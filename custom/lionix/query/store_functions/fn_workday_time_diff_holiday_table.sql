@@ -1,3 +1,5 @@
+-- Error occurred during SQL script execution  Reason: SQL Error [1418] [HY000]: This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you *might* want to use the less safe log_bin_trust_function_creators variable)
+-- SET GLOBAL log_bin_trust_function_creators = 1;
 -- DROP FUNCTION IF EXISTS workday_time_diff_holiday_table;
 -- DELIMITER $$
 -- Delimiter isn't need on php but on dbeaver it is delimiter reserved word changes the semicolon to the custom delimiter, in this case two dollar sings: delimiter $$
