@@ -1,5 +1,5 @@
 <?php
-// created: 2016-09-21 18:59:34
+// created: 2018-08-01 15:42:31
 $mod_strings = array (
   'LBL_LXCODE' => 'LxCode',
   'LBL_ELAPSEDTIMEINMINS' => 'Elapsed Time (Minutes)',
@@ -16,4 +16,5 @@ $mod_strings = array (
   'LBL_LXTPROCEDURE1' => 'Tópico - Procedimiento 1',
   'LBL_LXTPROCEDURE2' => 'Tópico - Procedimiento 2',
   'LBL_LXTPROCEDURE3' => 'Tópico - Procedimiento 3',
+  'LBL_STATE' => 'State (Condición)',
 );
