@@ -1,11 +1,11 @@
-##LionixCRM
+## LionixCRM
 LionixCRM - Open source CRM for SMEs - CRM de código abierto para las PyMEs - http://www.lionix.com/crm
 
 We are basing our work on SuiteCRM, so, in these first steps, plenty of documentation will overlap with theirs.
 
 Estamos basando nuestro trabajo en SuiteCRM, por lo que, en estos primeros pasos, un montón de documentación se solapará con la de ellos.
 
-##MiPyMEs
+## MiPyMEs
 
 También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empresa"), que es una expansión del término original, en donde se incluye a la microempresa.
 
@@ -124,6 +124,8 @@ Donde NNN representa el código del país, manejado por la Dirección General de
 Para los extranjeros que se participaron en el proceso de amnistía, este formato debe cumplir con la siguiente codificación:
 1OOO-RE-CC...C-NN-AAAA
 Donde OOO es el Código de la oficina regional de la Dirección General de Migración y Extranjería. RE es una constante alfanumérica en mayúsculas, CC...C es un número de consecutivo igual a la posición del solicitante en la lista de cédulas entregadas y cuya longitud depende del número asignado en un momento dado, NN es el núcleo familiar, y AAAA representa el año en que fue vigente la amnistía, actualmente este valor AAAA es constante 1999.
+
+Se registran todas las personas mayores de 18 años que tengan su documento de identificación vigente. En el caso de extranjeros residentes en el país con obligaciones ante la Administración Tributaria, deben registrarse con el DIMEX; en caso de no tenerlo, requiere de un NITE (Número de Identificación Tributario Especial), que debe solicitarse en la administración tributaria más cercana. Se exceptúa de la obligatoriedad del uso de ATV a los obligados tributarios que declaran por medio del portal de Tributación Digital, Resolución DGT-R-33-2015 las ocho horas del veintidós de setiembre del dos mil quince, publicado en La Gaceta N°161 del 1 octubre 2015.
 
 ### Descripción DIMEX Costa Rica Documento de Identidad Migratoria para Extranjeros ###
 RegExp: ^\d{11,12}$
