@@ -111,7 +111,7 @@ lx.chat.render = function(givenField) {
                 console.log("success callback:", status);
                 console.log("data:", data);
                 if (!$("#lxchat").length) {
-                    var currentUser = $(".user_label:eq(0)").text().trim();
+                    var currentUser = $("#with-label").text().trim();
                     //Current lx.chat.field text
                     data = (data == '')
                         ? "[]"
