@@ -5,6 +5,7 @@
 - Verify that lx.chat is working
 - Change business_type to b2c and check that account name is no longer required
 - Add a new panel on detailview on any module (opportunities is a good choice) and check it can be viewed as tab
-- Check for contacts duplicates after create a contact with a valid TSECR cédula and a linked account as well
+- Check for contacts duplicates after create a contact with a valid TSECR cédula and a linked account as well (Opportunities module)
+- Check for contacts duplicates after create a contact with a valid TSECR cédula and a linked account as well (Contacts module)
 - Optional: Make a call to testQuery method on lxajax with postman
 - Optional: Export on any module (opportunities is a good choice) and check it out on excel
