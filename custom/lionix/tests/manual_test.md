@@ -7,5 +7,6 @@
 - Add a new panel on detailview on any module (opportunities is a good choice) and check it can be viewed as tab
 - Check for contacts duplicates after create a contact with a valid TSECR cédula and a linked account as well (Opportunities module)
 - Check for contacts duplicates after create a contact with a valid TSECR cédula and a linked account as well (Contacts module)
+- Check inline editing is working on any module (opportunities is a good choice)
 - Optional: Make a call to testQuery method on lxajax with postman
 - Optional: Export on any module (opportunities is a good choice) and check it out on excel (commas were replaced with semicolons on installation to revert it go to Admin->Locale)
