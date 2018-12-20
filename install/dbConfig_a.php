@@ -1,14 +1,14 @@
 <?php
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-/*********************************************************************************
+if (!defined('sugarEntry') || !sugarEntry) {
+    die('Not A Valid Entry Point');
+}
+/**
+ *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
-
- * SuiteCRM is an extension to SugarCRM Community Edition developed by Salesagility Ltd.
- * Copyright (C) 2011 - 2014 Salesagility Ltd.
  *
- * LionixCRM is an extension to SuiteCRM developed by Lionix Evolve S.A.
- * Copyright (C) 2016 Lionix Evolve S.A.
+ * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
+ * Copyright (C) 2011 - 2018 SalesAgility Ltd.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -19,7 +19,7 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
  * details.
  *
  * You should have received a copy of the GNU Affero General Public License along with
@@ -37,20 +37,20 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the "Powered by
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
-* display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
- ********************************************************************************/
+ * reasonably feasible for technical reasons, the Appropriate Legal Notices must
+ * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ */
 
 
 
 global $sugar_version, $js_custom_version;
 
 
-if(empty($_SESSION['setup_db_host_name'])){
+if (empty($_SESSION['setup_db_host_name'])) {
     $_SESSION['setup_db_host_name'] = (isset($sugar_config['db_host_name']))  ? $sugar_config['db_host_name'] :  $_SERVER['SERVER_NAME'];
 }
 
-if( !isset( $install_script ) || !$install_script ){
+if (!isset($install_script) || !$install_script) {
     die($mod_strings['ERR_NO_DIRECT_SCRIPT']);
 }
 
@@ -60,12 +60,12 @@ $createDbCheckbox = '';
 $createDb = (!empty($_SESSION['setup_db_create_database'])) ? 'checked="checked"' : '';
 $dropCreate = (!empty($_SESSION['setup_db_drop_tables'])) ? 'checked="checked"' : '';
 $instanceName = '';
-if (isset($_SESSION['setup_db_host_instance']) && !empty($_SESSION['setup_db_host_instance'])){
+if (isset($_SESSION['setup_db_host_instance']) && !empty($_SESSION['setup_db_host_instance'])) {
     $instanceName = $_SESSION['setup_db_host_instance'];
 }
 
 $setupDbPortNum ='';
-if (isset($_SESSION['setup_db_port_num']) && !empty($_SESSION['setup_db_port_num'])){
+if (isset($_SESSION['setup_db_port_num']) && !empty($_SESSION['setup_db_port_num'])) {
     $setupDbPortNum = $_SESSION['setup_db_port_num'];
 }
 
@@ -106,7 +106,7 @@ $out2 =<<<EOQ2
         <div id="install_content">
             <header id="install_header">
                 <div id="steps"><p>{$mod_strings['LBL_STEP5']}</p><i class="icon-progress-0" id="complete"></i><i class="icon-progress-1" id="complete"></i><i class="icon-progress-2" id="complete"></i><i class="icon-progress-3" id="complete"></i><i class="icon-progress-4" id="complete"></i><i class="icon-progress-5"></i><i class="icon-progress-6"></i><i class="icon-progress-7"></i></div>
-                <div class="install_img"><a href="http://lionix.com/crm" target="_blank"><img src="{$sugar_md}" alt="LionixCRM"></a></div>
+                <div class="install_img"><a href="https://suitecrm.com" target="_blank"><img src="{$sugar_md}" alt="SuiteCRM"></a></div>
             </header>
             <input type='hidden' name='setup_db_drop_tables' id='setup_db_drop_tables' value=''>
             <input type="hidden" id="hidden_goto" name="goto" value="{$mod_strings['LBL_BACK']}" />
@@ -120,23 +120,21 @@ EOQ2;
 
 $config_params = $db->installConfig();
 $form = '';
-foreach($config_params as $group => $gdata) {
+foreach ($config_params as $group => $gdata) {
     $form.= "<div class='install_block'>";
     $form .= "<label>{$mod_strings[$group]}</label><br>\n";
-    foreach($gdata as $name => $value) {
-
-        if(!empty($value)) {
-            if(!empty($value['required'])) {
+    foreach ($gdata as $name => $value) {
+        if (!empty($value)) {
+            if (!empty($value['required'])) {
                 $form .= "<span class=\"required\">*</span>";
             }
-             else {
-            }
-            if(!empty($_SESSION[$name])) {
+            
+            if (!empty($_SESSION[$name])) {
                 $sessval = $_SESSION[$name];
             } else {
                 $sessval = '';
             }
-            if(!empty($value["type"])) {
+            if (!empty($value["type"])) {
                 $type = $value["type"];
             } else {
                 $type = '';
@@ -146,9 +144,9 @@ foreach($config_params as $group => $gdata) {
 
 FORM;
             //if the type is password, set a hidden field to capture the value.  This is so that we can properly encode special characters, which is a limitation with password fields
-            if($type=='password'){
+            if ($type=='password') {
                 $form .= "<input type='$type' name='{$name}_entry' id='{$name}_entry' value='".urldecode($sessval)."'><input type='hidden' name='$name' id='$name' value='".urldecode($sessval)."'>";
-            }else{
+            } else {
                 $form .= "<input type='$type' name='$name' id='$name' value='$sessval'>";
             }
 
@@ -156,7 +154,6 @@ FORM;
 
             $form .= <<<FORM
 FORM;
-
         } else {
             $form .= "<input name=\"$name\" id=\"$name\" value=\"\" type=\"hidden\">\n";
         }
@@ -167,17 +164,26 @@ FORM;
 $out2 .= $form;
 
 //if we are installing in custom mode, include the following html
-if($db->supports("create_user")){
-// create / set db user dropdown
-    $auto_select = '';$provide_select ='';$create_select = '';$same_select = '';
-    if(isset($_SESSION['dbUSRData'])){
+if ($db->supports("create_user")) {
+    // create / set db user dropdown
+    $auto_select = '';
+    $provide_select ='';
+    $create_select = '';
+    $same_select = '';
+    if (isset($_SESSION['dbUSRData'])) {
 //    if($_SESSION['dbUSRData']=='auto')    {$auto_select ='selected';}
-        if($_SESSION['dbUSRData']=='provide') {$provide_select ='selected';}
-        if(isset($_SESSION['install_type'])  && !empty($_SESSION['install_type'])  && strtolower($_SESSION['install_type'])=='custom'){
-            if($_SESSION['dbUSRData']=='create')  {$create_select ='selected';}
+        if ($_SESSION['dbUSRData']=='provide') {
+            $provide_select ='selected';
         }
-        if($_SESSION['dbUSRData']=='same')  {$same_select ='selected';}
-    }else{
+        if (isset($_SESSION['install_type'])  && !empty($_SESSION['install_type'])  && strtolower($_SESSION['install_type'])=='custom') {
+            if ($_SESSION['dbUSRData']=='create') {
+                $create_select ='selected';
+            }
+        }
+        if ($_SESSION['dbUSRData']=='same') {
+            $same_select ='selected';
+        }
+    } else {
         $same_select ='selected';
     }
     $dbUSRDD   = "<select name='dbUSRData' id='dbUSRData' onchange='toggleDBUser();'>";
@@ -197,10 +203,10 @@ if($db->supports("create_user")){
     <hr>
 <br>
 {$mod_strings['LBL_DBCONFIG_SECURITY']}
-<div class='install_block'><label><b>{$mod_strings['LBL_DBCONF_SUGAR_DB_USER']}</b></label>$dbUSRDD
+<div class='install_block'><label><b>{$mod_strings['LBL_DBCONF_SUITE_DB_USER']}</b></label>$dbUSRDD
     <span id='connection_user_div' style="display:none">
         <span class="required">*</span>
-            <label><b>{$mod_strings['LBL_DBCONF_SUGAR_DB_USER']}</b></label>
+            <label><b>{$mod_strings['LBL_DBCONF_SUITE_DB_USER']}</b></label>
             <input type="text" name="setup_db_sugarsales_user" value="{$_SESSION['setup_db_sugarsales_user']}" />
             <label><b>{$mod_strings['LBL_DBCONF_DB_PASSWORD']}</b></label>
             <input type="password" name="setup_db_sugarsales_password_entry" value="{$setup_db_sugarsales_password}" />

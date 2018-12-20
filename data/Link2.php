@@ -20,7 +20,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
  *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for more
+ * FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
  * details.
  *
  * You should have received a copy of the GNU Affero General Public License along with
@@ -38,8 +38,8 @@ if (!defined('sugarEntry') || !sugarEntry) {
  * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
  * these Appropriate Legal Notices must retain the display of the "Powered by
  * SugarCRM" logo and "Supercharged by SuiteCRM" logo. If the display of the logos is not
- * reasonably feasible for  technical reasons, the Appropriate Legal Notices must
- * display the words  "Powered by SugarCRM" and "Supercharged by SuiteCRM".
+ * reasonably feasible for technical reasons, the Appropriate Legal Notices must
+ * display the words "Powered by SugarCRM" and "Supercharged by SuiteCRM".
  */
 
 
@@ -195,10 +195,9 @@ class Link2
     {
         if (is_object($this->relationship) && method_exists($this->relationship, 'load')) {
             return $this->relationship->load($this, $params);
-        } else {
-            $GLOBALS['log']->fatal('load() function is not implemented in a relationship');
-            return null;
         }
+        $GLOBALS['log']->fatal('load() function is not implemented in a relationship');
+        return null;
     }
 
     /**
@@ -225,9 +224,8 @@ class Link2
 
         if ($this->getSide() == REL_LHS) {
             return $this->relationship->getRHSModule();
-        } else {
-            return $this->relationship->getLHSModule();
         }
+        return $this->relationship->getLHSModule();
     }
 
     /**
@@ -241,9 +239,8 @@ class Link2
 
         if ($this->getSide() == REL_LHS) {
             return $this->relationship->getRHSLink();
-        } else {
-            return $this->relationship->getLHSLink();
         }
+        return $this->relationship->getLHSLink();
     }
 
     /**
@@ -279,7 +276,7 @@ class Link2
     {
         return $this->relationship_fields;
     }
-    
+
     /**
      * @param $name
      *
@@ -289,11 +286,11 @@ class Link2
     {
         if (!empty($this->relationship_fields) && !empty($this->relationship_fields[$name])) {
             return $this->relationship_fields[$name];
-        } else {
-            return null;
-        } //For now return null. Later try the relationship object directly.
+        }
+        return null;
+        //For now return null. Later try the relationship object directly.
     }
-    
+
     /**
      * @return SugarRelationship the relationship object this link references
      */
@@ -308,6 +305,14 @@ class Link2
     public function getSide()
     {
         //First try the relationship
+
+        $focusModuleName = null;
+        if (isset($this->focus->module_name)) {
+            $focusModuleName = $this->focus->module_name;
+        } else {
+            LoggerManager::getLogger()->error('Focus Module Name is not set for Link2 get side.');
+        }
+
         if ($this->relationship->getLHSLink() == $this->name &&
             ($this->relationship->getLHSModule() == (isset($this->focus->module_name) ? $this->focus->module_name : null))
         ) {
@@ -325,7 +330,7 @@ class Link2
         } else {
             $focusModuleName = $this->focus->module_name;
         }
-        
+
         if ($rhsLink == $this->name &&
             ($rhsModule == $focusModuleName)
         ) {
@@ -340,9 +345,8 @@ class Link2
                     || $this->name != $this->relationship->def['join_key_lhs'])
             ) {
                 return REL_LHS;
-            } else {
-                return REL_RHS;
             }
+            return REL_RHS;
         } elseif (!empty($this->def['id_name'])) {
             //Next try using the id_name and relationship join keys
             if (isset($this->relationship->def['join_key_lhs'])
@@ -621,12 +625,10 @@ class Link2
             }
             if ($this->getSide() == REL_LHS) {
                 return $this->relationship->remove($this->focus, $related_id);
-            } else {
-                return $this->relationship->remove($related_id, $this->focus);
             }
-        } else {
-            return $this->relationship->removeAll($this);
+            return $this->relationship->remove($related_id, $this->focus);
         }
+        return $this->relationship->removeAll($this);
     }
 
     /**

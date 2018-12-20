@@ -9,10 +9,10 @@ Estamos basando nuestro trabajo en SuiteCRM, por lo que, en estos primeros pasos
 
 También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empresa"), que es una expansión del término original, en donde se incluye a la microempresa.
 
-## SuiteCRM 7.10.7
+## SuiteCRM 7.10.11
 
-[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=develop)](https://travis-ci.org/salesagility/SuiteCRM)
-[![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix)
+[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=master)](https://travis-ci.org/salesagility/SuiteCRM)
+[![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/master)
 
 
 ### What's in this repository ###
@@ -78,7 +78,7 @@ The following links offer various ways to view, contribute and collaborate to th
 
 [ View the Community Roadmap here and get involved][suitecrm_roadmap]
 
-[suitecrm_roadmap]: https://suitecrm.com/community/roadmap
+[suitecrm_roadmap]: https://suitecrm.com/roadmap
 
 [More detailed SuiteCRM Community LTS Roadmap][suitecrm_detailed_roadmap]
 
