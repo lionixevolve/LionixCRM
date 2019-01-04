@@ -406,7 +406,24 @@ EOD;
         return $groupBy;
     }
 
-    protected function prepareChartData($dataset, $currency_symbol, $thousands_symbol)
+    //LXCRM / LIONIX FIX
+    /**
+     * @param  $dataset array
+     * @return array
+     */
+    private function constructCEChartData(
+        $dataset
+    )
+    {
+        $newData = array();
+        foreach($dataset as $key=>$value){
+            $newData[$value['sales_stage']] = $value['total'];
+        }
+        return $newData;
+    }
+    //LXCRM / LIONIX FIX
+
+    protected function prepareChartData($dataset,$currency_symbol, $thousands_symbol)
     {
         //Use the  lead_source to categorise the data for the charts
         $chart['labels'] = array();
