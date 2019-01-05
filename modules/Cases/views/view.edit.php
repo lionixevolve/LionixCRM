@@ -65,19 +65,21 @@ class CasesViewEdit extends ViewEdit
     {
         parent::display();
 
-        $newScript = '';
+        //LionixCRM fix variable name
+        $script = '';
 
         if (empty($this->bean->id)) {
-            $newScript = "
+            //LionixCRM fix variable name
+            $script = "
                     $('#update_text').closest('.edit-view-row-item').hide();
                     $('#update_text_label').closest('.edit-view-row-item').hide();
                     $('#internal').closest('.edit-view-row-item').hide();
                     $('#internal_label').closest('.edit-view-row-item').hide();
                     $('#addFileButton').closest('.edit-view-row-item').hide();
                     $('#case_update_form_label').closest('.edit-view-row-item').hide();";
-            $script .= "tinyMCE.execCommand('mceAddControl', false, document.getElementById('description'));";
-
-            echo '<script>$(document).ready(function(){' . $script . '})</script>';
         }
+        //LionixCRM closing paren location
+        $script .= "tinyMCE.execCommand('mceAddControl', false, document.getElementById('description'));";
+        echo '<script>$(document).ready(function(){' . $script . '})</script>';
     }
 }
