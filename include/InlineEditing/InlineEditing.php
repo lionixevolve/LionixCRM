@@ -423,10 +423,14 @@ function formatDisplayValue($bean, $value, $vardef, $method = "save")
             if ($method != "save") {
                 $value = convertDateUserToDB($value);
             }
-            $datetime_format = $timedate->get_date_time_format();
+            // LionixCRM - Fix date inline editing - Adding this if
+            if ($vardef['type'] == "datetime" || $vardef['type'] ==  "datetimecombo" ){
+                $datetime_format = $timedate->get_date_time_format($current_user);
+            }
 
             if ($vardef['type'] == "date") {
-                $value = $value . ' 00:00:00';
+		// LionixCRM - Fix date inline editing - Adding $current_user format
+                $datetime_format = $timedate->get_date_format($current_user);
             }
             // create utc date (as it's utc in db)
             // use the calculated datetime_format
@@ -517,9 +521,10 @@ function formatDisplayValue($bean, $value, $vardef, $method = "save")
             $value = format_number($value);
         }
     }
-    if ($vardef['type'] == "date" && $method == "save") {
-        $value = substr($value, 0, strlen($value) - 6);
-    }
+// LionixCRM - Fix date inline editing - Commenting out this if
+//    if ($vardef['type'] == "date" && $method == "save") {
+//        $value = substr($value, 0, strlen($value) - 6);
+//    }
     return $value;
 }
 
