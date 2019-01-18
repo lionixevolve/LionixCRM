@@ -240,8 +240,7 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                         $configurator = new Configurator();
                         if ($configurator->isConfirmOptInEnabled()) {
                             $emailman = new EmailMan();
-                            $date = new DateTime();
-                            $now = $date->format($timedate::DB_DATETIME_FORMAT);
+                            $now = TimeDate::getInstance()->nowDb();
                             
                             if (!$emailman->sendOptInEmail($sea, $person->module_name, $person->id)) {
                                 $errors[] = 'Confirm Opt In email sending failed, please check email address is correct: ' . $sea->email_address;
@@ -342,7 +341,7 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
             } else {
                 if (isset($errors) && $errors) {
                     $log = LoggerManager::getLogger();
-                    $log->error('Success but some error occured: ' . implode(', ', $errors));
+                    $log->error('Success but some error occurred: ' . implode(', ', $errors));
                 }
                 
                 //If the custom module does not have a LBL_THANKS_FOR_SUBMITTING label, default to this general one
