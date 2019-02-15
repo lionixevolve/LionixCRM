@@ -6,7 +6,7 @@ global $ADODB_INCLUDED_LIB;
 $ADODB_INCLUDED_LIB = 1;
 
 /*
-  @version   v5.20.14  06-Jan-2019
+  @version   v5.21.0-dev  ??-???-2016
   @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
   @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
@@ -135,6 +135,9 @@ function _array_change_key_case($an_array)
 
 function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_autoinc)
 {
+		// Add Quote around table name to support use of spaces / reserve keywords
+		$table=sprintf('%s%s%s', $zthis->nameQuote,$table,$zthis->nameQuote); 
+	
 		if (count($fieldArray) == 0) return 0;
 		$first = true;
 		$uSet = '';
@@ -152,18 +155,22 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 			}
 			if (in_array($k,$keyCol)) continue; // skip UPDATE if is key
 
+			// Add Quote around column name to support use of spaces / reserve keywords
 			if ($first) {
 				$first = false;
-				$uSet = "$k=$v";
+				$uSet = sprintf('%s%s%s=%s', $zthis->nameQuote,$k,$zthis->nameQuote,$v);
 			} else
-				$uSet .= ",$k=$v";
+				$uSet .= sprintf(',%s%s%s=%s',$zthis->nameQuote,$k,$zthis->nameQuote,$v);
 		}
 
+		// Add Quote around column name in where clause
 		$where = false;
 		foreach ($keyCol as $v) {
 			if (isset($fieldArray[$v])) {
-				if ($where) $where .= ' and '.$v.'='.$fieldArray[$v];
-				else $where = $v.'='.$fieldArray[$v];
+				if ($where) 
+					$where .= sprintf(' and %s%s%s=%s ', $zthis->nameQuote,$v,$zthis->nameQuote,$fieldArray[$v]);
+				else 
+					$where = sprintf('%s%s%s=%s', $zthis->nameQuote,$v,$zthis->nameQuote,$fieldArray[$v]);
 			}
 		}
 
@@ -197,13 +204,13 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 		$first = true;
 		foreach($fieldArray as $k => $v) {
 			if ($has_autoinc && in_array($k,$keyCol)) continue; // skip autoinc col
-
+			// Add Quote around Column Name
 			if ($first) {
 				$first = false;
-				$iCols = "$k";
+				$iCols = sprintf('%s%s%s',$zthis->nameQuote,$k,$zthis->nameQuote);
 				$iVals = "$v";
 			} else {
-				$iCols .= ",$k";
+				$iCols .= sprintf(',%s%s%s',$zthis->nameQuote,$k,$zthis->nameQuote);
 				$iVals .= ",$v";
 			}
 		}
@@ -217,6 +224,13 @@ function _adodb_getmenu(&$zthis, $name,$defstr='',$blank1stItem=true,$multiple=f
 			$size=0, $selectAttr='',$compareFields0=true)
 {
 	$hasvalue = false;
+	
+	if (is_array($name))
+	{
+		/*
+		* Reserved for future use
+		*/
+	}
 
 	if (is_array($name))
 	{
@@ -473,18 +487,11 @@ function _adodb_getcount(&$zthis, $sql,$inputarr=false,$secs2cache=0)
 		if (!$rstest) $rstest = $zthis->Execute($sql,$inputarr);
 	}
 	if ($rstest) {
-	  		$qryRecs = $rstest->RecordCount();
+		$qryRecs = $rstest->RecordCount();
 		if ($qryRecs == -1) {
-		global $ADODB_EXTENSION;
-		// some databases will return -1 on MoveLast() - change to MoveNext()
-			if ($ADODB_EXTENSION) {
-				while(!$rstest->EOF) {
-					adodb_movenext($rstest);
-				}
-			} else {
-				while(!$rstest->EOF) {
-					$rstest->MoveNext();
-				}
+			// some databases will return -1 on MoveLast() - change to MoveNext()
+			while(!$rstest->EOF) {
+				$rstest->MoveNext();
 			}
 			$qryRecs = $rstest->_currentRow;
 		}
@@ -741,6 +748,20 @@ function _adodb_getupdatesql(&$zthis,&$rs, $arrFields,$forceUpdate=false,$magicq
                                 $setFields .= _adodb_column_sql($zthis, 'U', $type, $upperfname, $fnameq,$arrFields, $magicq);
                             }
                         break;
+		        case ADODB_FORCE_NULL_AND_ZERO:
+					
+			    switch ($type)
+			    {
+				case 'N':
+				case 'I':
+				case 'L':
+				$setFields .= $field->name . ' = 0, ';
+				break;
+				default:
+				$setFields .= $field->name . ' = null, ';
+				break;
+			    }
+			    break;
                     }
                 //********************************************************//
                 } else {
@@ -890,22 +911,22 @@ static $cacheCols;
                {
                     switch ($force) {
 
-                        case 0: // we must always set null if missing
+                        case ADODB_FORCE_IGNORE: // we must always set null if missing
 							$bad = true;
 							break;
 
-                        case 1:
+                        case ADODB_FORCE_NULL:
                             $values  .= "null, ";
                         break;
 
-                        case 2:
+                        case ADODB_FORCE_EMPTY:
                             //Set empty
                             $arrFields[$upperfname] = "";
                             $values .= _adodb_column_sql($zthis, 'I', $type, $upperfname, $fnameq,$arrFields, $magicq);
                         break;
 
 						default:
-                        case 3:
+                        case ADODB_FORCE_VALUE:
                             //Set the value that was given in array, so you can give both null and empty values
 							if (is_null($arrFields[$upperfname]) || $arrFields[$upperfname] === $zthis->null2null) {
 								$values  .= "null, ";
@@ -913,6 +934,21 @@ static $cacheCols;
                         		$values .= _adodb_column_sql($zthis, 'I', $type, $upperfname, $fnameq, $arrFields, $magicq);
              				}
               			break;
+
+						case ADODB_FORCE_NULL_AND_ZERO:
+							switch ($type)
+							{
+								case 'N':
+								case 'I':
+								case 'L':
+									$values .= '0, ';
+									break;
+								default:
+									$values .= "null, ";
+									break;
+							}
+						break;
+
              		} // switch
 
             /*********************************************************/

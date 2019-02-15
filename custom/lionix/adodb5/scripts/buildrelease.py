@@ -27,7 +27,9 @@ release_branch = "master"
 release_prefix = "adodb"
 
 # Directories and files to exclude from release tarballs
+# For consistency, this should match the list in .gitattributes
 exclude_list = (".git*",
+                ".mailmap",
                 "replicate",
                 "scripts",
                 "tests",
@@ -41,7 +43,7 @@ exclude_list = (".git*",
 
 # Command-line options
 options = "hb:dfk"
-long_options = ["help", "branch", "debug", "fresh", "keep"]
+long_options = ["help", "branch=", "debug", "fresh", "keep"]
 
 # Global flags
 debug_mode = False

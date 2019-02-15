@@ -1,6 +1,6 @@
 <?php
 /*
-@version   v5.20.14  06-Jan-2019
+@version   v5.21.0-dev  ??-???-2016
 @copyright (c) 2000-2013 John Lim. All rights reserved.
 @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
@@ -33,7 +33,6 @@ class ADODB_oci8po extends ADODB_oci8 {
 	function __construct()
 	{
 		$this->_hasOCIFetchStatement = ADODB_PHPVER >= 0x4200;
-		# oci8po does not support adodb extension: adodb_movenext()
 	}
 
 	function Param($name,$type='C')
@@ -86,6 +85,7 @@ class ADODB_oci8po extends ADODB_oci8 {
 		}
 		return ADODB_oci8::_query($sql,$inputarr);
 	}
+	
 	/**
 	* Replaces compatibility bind markers with oracle ones and returns a
 	* valid sql statement
@@ -94,7 +94,7 @@ class ADODB_oci8po extends ADODB_oci8 {
 	* to numerous tweaks, as more extreme test cases have appeared. This
 	* is now done this like this to help maintainability and avoid the 
 	* need to rely on regexp experienced maintainers
-        *
+	*
 	* @param	string		$sql		The sql statement
 	* @param	string[]	$inputarr	The bind array
 	*
@@ -172,11 +172,6 @@ class ADODB_oci8po extends ADODB_oci8 {
 class ADORecordset_oci8po extends ADORecordset_oci8 {
 
 	var $databaseType = 'oci8po';
-
-	function __construct($queryID,$mode=false)
-	{
-		parent::__construct($queryID,$mode);
-	}
 
 	function Fields($colname)
 	{
