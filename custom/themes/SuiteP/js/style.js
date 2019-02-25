@@ -42,6 +42,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-account-n
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-cedula-c.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/aos-quotes/lx-product-name-size.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
