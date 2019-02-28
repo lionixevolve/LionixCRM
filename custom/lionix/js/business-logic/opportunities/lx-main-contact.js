@@ -359,10 +359,6 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
                             lx.opportunity.resultsSearchTSECRHandler(false);
                             lx.opportunity.resultsListDuplicatesHandler(false);
                         }
-                    } else {
-                        $("#content").append('<div id="maincontact_c_lxajaxed"/>');
-                        console.log("maincontact_c is not present on editview, main contact dropdown logic disabled");
-                        observer.disconnect();
                     }
                 }
             }
