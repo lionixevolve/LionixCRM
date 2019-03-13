@@ -55,15 +55,24 @@ class TemplateDatetimecombo extends TemplateRange
         'tomorrow'=>'+1 day',
         'next week'=> '+1 week',
         'next monday'=>'next monday',
+        'next tuesday'=>'next tuesday', //LionixCRM
+        'next wednesday'=>'next wednesday', //LionixCRM
+        'next thursday'=>'next thursday', //LionixCRM
         'next friday'=>'next friday',
+        'next saturday'=>'next saturday', //LionixCRM
+        'next sunday'=>'next sunday', //LionixCRM
         'two weeks'=> '+2 weeks',
+        'two weeks'=>'+3 weeks', //LionixCRM
         'next month'=> '+1 month',
         'first day of next month'=> 'first of next month', // must handle this non-GNU date string in SugarBean->populateDefaultValues; if we don't this will evaluate to 1969...
+        'two months'=>'+2 months', //LionixCRM
         'three months'=> '+3 months',  //kbrill Bug #17023
+        'four months'=>'+4 months', //LionixCRM
+        'five months'=>'+5 months', //LionixCRM
         'six months'=> '+6 months',
         'next year'=> '+1 year',
     );
-    
+
     public $hoursStrings = array(
         '' => '',
         '01' => '01',
@@ -79,7 +88,7 @@ class TemplateDatetimecombo extends TemplateRange
         '11' => '11',
         '12' => '12',
     );
-    
+
     public $hoursStrings24 = array(
         '' => '',
         '00' => '00',
@@ -107,7 +116,7 @@ class TemplateDatetimecombo extends TemplateRange
         '22' => '22',
         '23' => '23',
     );
-    
+
     public $minutesStrings = array(
         '' => '',
         '00' => '00',
@@ -115,7 +124,7 @@ class TemplateDatetimecombo extends TemplateRange
         '30' => '30',
         '45' => '45',
     );
-    
+
     public $meridiemStrings = array(
         '' => '',
         'am' => 'am',
@@ -137,7 +146,7 @@ class TemplateDatetimecombo extends TemplateRange
         }
         return $def;
     }
-    
+
     public function populateFromPost()
     {
         parent::populateFromPost();
@@ -169,7 +178,7 @@ class TemplateDatetimecombo extends TemplateRange
         }
         unset($_REQUEST['defaultDate']);
         unset($_REQUEST['defaultTime']);
-        
+
         foreach ($this->vardef_map as $vardef=>$field) {
             if (isset($_REQUEST[$vardef])) {
                 //  Bug #48826. Some fields are allowed to have special characters and must be decoded from the request
