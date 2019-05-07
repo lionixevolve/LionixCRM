@@ -276,6 +276,7 @@ function updateSalesStagesTimeInMins()
 
 function updateDateClosedLostC()
 {
+    global $db;
     $query = "
         UPDATE opportunities o
         LEFT JOIN opportunities_cstm oc ON o.id = oc.id_c
