@@ -553,15 +553,15 @@ class SugarView
             );
             $ss->assign("CURRENT_USER_ID", $current_user->id);
 
-	    // get the last viewed records
-	    $favorites = BeanFactory::getBean('Favorites');
-	    $favorite_records = $favorites->getCurrentUserSidebarFavorites();
-	    $ss->assign("favoriteRecords", $favorite_records);
- 	    
-	    $tracker = BeanFactory::getBean('Trackers');
-	    $history = $tracker->get_recently_viewed($current_user->id);
-	    $ss->assign("recentRecords", $this->processRecentRecords($history));
-	}
+            // get the last viewed records
+            $favorites = BeanFactory::getBean('Favorites');
+            $favorite_records = $favorites->getCurrentUserSidebarFavorites();
+            $ss->assign("favoriteRecords", $favorite_records);
+        
+            $tracker = BeanFactory::getBean('Trackers');
+            $history = $tracker->get_recently_viewed($current_user->id);
+            $ss->assign("recentRecords", $this->processRecentRecords($history));
+        }
 
         $bakModStrings = $mod_strings;
         if (isset($_SESSION["authenticated_user_id"])) {
@@ -1363,13 +1363,13 @@ EOHTML;
 
         $module_menu = array();
 
-        if (file_exists('modules/' . $module . '/Menu.php')) {
-            require('modules/' . $module . '/Menu.php');
+        if (file_exists(get_custom_file_if_exists('modules/' . $module . '/Menu.php'))) {
+            require(get_custom_file_if_exists('modules/' . $module . '/Menu.php'));
         }
         if (file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php')) {
             require('custom/modules/' . $module . '/Ext/Menus/menu.ext.php');
         }
-        if (!file_exists('modules/' . $module . '/Menu.php') &&
+        if (!file_exists(get_custom_file_if_exists('modules/' . $module . '/Menu.php')) &&
             !file_exists('custom/modules/' . $module . '/Ext/Menus/menu.ext.php') &&
             !empty($GLOBALS['mod_strings']['LNK_NEW_RECORD'])
         ) {

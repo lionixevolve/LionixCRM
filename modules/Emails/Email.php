@@ -404,14 +404,14 @@ class Email extends Basic
 
     /**
      * Should be a From Address (From Name should be stored in $FromName class variable)
-     * 
+     *
      * @var string
      */
     public $From;
 
     /**
      * Should be a From Name (From Address should be stored in $From class variable)
-     * 
+     *
      * @var string
      */
     public $FromName;
@@ -491,7 +491,9 @@ class Email extends Basic
         if (null !== $this->lastSaveAndStoreInSentError) {
             throw new EmailException(
                 'Last Error for method SaveAndStoreInSentFolder() already set but never checked: ' .
-                $this->lastSaveAndStoreInSentError, self::UNHANDLED_LAST_ERROR);
+                $this->lastSaveAndStoreInSentError,
+                self::UNHANDLED_LAST_ERROR
+            );
         }
         $this->lastSaveAndStoreInSentError = $err;
     }
@@ -1955,7 +1957,7 @@ class Email extends Basic
         }
 
         $noteArray = array();
-        $q = "SELECT id FROM notes WHERE deleted = 0 AND parent_id = '" . $id . "'";
+        $q = "SELECT id FROM notes WHERE deleted = 0 AND parent_id = " . $this->db->quoted($id);
         $r = $this->db->query($q);
 
         while ($a = $this->db->fetchByAssoc($r)) {
@@ -2909,8 +2911,8 @@ class Email extends Basic
         InboundEmail $ie = null,
         Email $tempEmail = null,
         $check_notify = false,
-        $options = "\\Seen")
-    {
+        $options = "\\Seen"
+    ) {
         global $mod_strings, $app_strings;
         global $current_user;
         global $sugar_config;
@@ -3092,10 +3094,10 @@ class Email extends Basic
         ///////////////////////////////////////////////////////////////////////
         
         $validator = new EmailFromValidator();
-        if (!$validator->isValid($this)) { 
+        if (!$validator->isValid($this)) {
             
-            // if an email is invalid before sending, 
-            // maybe at this point sould "return false;" because the email having 
+            // if an email is invalid before sending,
+            // maybe at this point sould "return false;" because the email having
             // invalid from address and/or name but we will trying to send it..
             // and we should log the problem at least:
             
@@ -3147,8 +3149,8 @@ class Email extends Basic
         SugarPHPMailer $mail,
         NonGmailSentFolderHandler $nonGmailSentFolder,
         $check_notify = false,
-        $options = "\\Seen")
-    {
+        $options = "\\Seen"
+    ) {
         $ieMailId = null;
         if (!$ie) {
             $ie = new InboundEmail();
@@ -3181,8 +3183,8 @@ class Email extends Basic
         InboundEmail $ie,
         NonGmailSentFolderHandler $nonGmailSentFolder = null,
         $check_notify = false,
-        $options = "\\Seen")
-    {
+        $options = "\\Seen"
+    ) {
         $ieMailId = $this->save($check_notify);
         if ($ieMailId) {
             // mark SEEN (STORE MAIL IN SENT BOX)
@@ -4547,7 +4549,7 @@ eoq;
 
             $bean->to_addrs_arr[] = array(
                 'email' => $email,
-                'display' => mb_encode_mimeheader($display, 'UTF-8', 'Q')
+                'display' => $display
             );
         }
 
@@ -4728,12 +4730,12 @@ eoq;
 
             if (
                 $emailAddress !== null
-                && $emailAddress->getConfirmedOptInState() != EmailAddress::COI_STAT_CONFIRMED_OPT_IN
-                && empty($emailAddress->confirm_opt_in_sent_date)
+                && $emailAddress->confirm_opt_in_sent_date === null
+                && $emailAddress->email_address !== null && $emailAddress->getConfirmedOptInState() === EmailAddress::COI_STAT_CONFIRMED_OPT_IN
             ) {
                 $ret = $this->sendOptInEmail($emailAddress);
                 if (!$ret) {
-                    LoggerManager::getLogger()->error('Error sending opt-in email to: ' . $emailAddress);
+                    LoggerManager::getLogger()->error('Error sending opt-in email to: ' . $emailAddress->email_address);
                 }
             }
         }

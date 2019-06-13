@@ -234,8 +234,8 @@ $mod_strings = array(
     'LBL_HOUR_ABBREV' => 'hour',
     'LBL_HOURS_ABBREV' => 'hours',
     'LBL_MINSS_ABBREV' => 'minutes',
-    'LBL_LOCATION' => 'Location: ',
-    'LBL_STATUS' => 'Status: ',
+    'LBL_LOCATION' => 'Location:',
+    'LBL_STATUS' => 'Status:',
     'LBL_DESCRIPTION' => 'Description: ',
     //End Events
     'LBL_CONTRIBUTOR_LIONIXCRM' => 'LionixCRM - Open source CRM for SMEs - CRM de código abierto para las PyMEs',
