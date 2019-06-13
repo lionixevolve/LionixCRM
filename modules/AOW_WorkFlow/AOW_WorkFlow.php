@@ -152,9 +152,8 @@ class AOW_WorkFlow extends Basic
     {
         global $beanList, $app_list_strings;
 
-        $app_list_strings['aow_moduleList'] = $app_list_strings['moduleList'];
-
-        if (!empty($app_list_strings['aow_moduleList'])) {
+        if (!empty($app_list_strings['moduleList'])) {
+            $app_list_strings['aow_moduleList'] = $app_list_strings['moduleList'];
             foreach ($app_list_strings['aow_moduleList'] as $mkey => $mvalue) {
                 if (!isset($beanList[$mkey]) || str_begin($mkey, 'AOW_')) {
                     unset($app_list_strings['aow_moduleList'][$mkey]);
@@ -694,7 +693,9 @@ class AOW_WorkFlow extends Basic
                             && isset($condition_bean->rel_fields_before_value[$condition->field])) {
                             $value = $condition_bean->rel_fields_before_value[$condition->field];
                         } else {
-                            $value = $condition_bean->fetched_row[$condition->field];
+                            $value = from_html($condition_bean->fetched_row[$condition->field]);
+                            // Bug - on delete bean action CRM load bean in a different way and bean can contain html characters
+                            $field = from_html($field);
                         }
                         if (in_array($data['type'], $dateFields)) {
                             $value = strtotime($value);

@@ -430,22 +430,25 @@ eoq;
      * @param string $text
      * @return string
      */
-    private function createEmailLink($module_name, $record_id, $name, $addr, $text) {
+    private function createEmailLink($module_name, $record_id, $name, $addr, $text)
+    {
         global $current_user;
 
         if ($current_user->getEmailClient() == 'sugar') {
-            return '<a class="email-link"'
-                . ' onclick="$(document).openComposeViewModal(this);"'
-                . ' data-module="' . $module_name
-                . '" data-record-id="' . $record_id
-                . '" data-module-name="' . $name
-                . '" data-email-address="' . $addr  . '">'
-                . $text . '</a>';
+            $html =<<<HTML
+            <a class="email-link" href="mailto:{$addr}"
+                    onclick="$(document).openComposeViewModal(this);"
+                    data-module="{$module_name}" data-record-id="{$record_id}"
+                    data-module-name="{$name}" data-email-address="{$addr}"
+                >{$text}</a>
+HTML;
+        } else {
+            $html =<<<HTML
+                <a class="email-link" href="mailto:{$addr}">{$text}</a>
+HTML;
         }
 
-        return '<a class="email-link"'
-            . ' href="mailto:' .  $addr . '">'
-            . $text . '</a>';
+        return $html;
     }
 
     /**
@@ -485,7 +488,12 @@ eoq;
         }
 
         $emailLink = $this->createEmailLink(
-            $myBean->module_name, $myBean->id, $myBean->name, '', $innerText);
+            $myBean->module_name,
+            $myBean->id,
+            $myBean->name,
+            '',
+            $innerText
+        );
 
         // focus is set?
         if (!is_object($myBean)) {
@@ -512,19 +520,25 @@ eoq;
             foreach ($emailFields as $emailField) {
                 if (!empty($composeData)) {
                     $emailLink = $this->createEmailLink(
-                        $composeData['parent_type'], $composeData['parent_id'],
-                        $composeData['parent_name'], $composeData['to_addrs'],
-                        '');
+                        $composeData['parent_type'],
+                        $composeData['parent_id'],
+                        $composeData['parent_name'],
+                        $composeData['to_addrs'],
+                        ''
+                    );
                 } elseif (is_object($myBean) && (property_exists($myBean, $emailField))) {
                     $email_tick = $this->getEmailAddressConfirmOptInTick($myBean, $emailField);
                     $optOut = false;
                     $invalid = false;
 
                     if ($enableConfirmedOptIn === SugarEmailAddress::COI_STAT_DISABLED) {
-
                         $emailLink = $this->createEmailLink(
-                            $myBean->module_name, $myBean->id, $myBean->name,
-                            $myBean->{$emailField}, $myBean->{$emailField});
+                            $myBean->module_name,
+                            $myBean->id,
+                            $myBean->name,
+                            $myBean->{$emailField},
+                            $myBean->{$emailField}
+                        );
                         return $emailLink;
                     }
 
@@ -562,10 +576,13 @@ eoq;
                                         $emailLink .= '</span>';
 
                                         $emailLink = $this->createEmailLink(
-                                            $myBean->module_name, $myBean->id, $myBean->name,
-                                            $myBean->{$emailField}, $emailText);
+                                            $myBean->module_name,
+                                            $myBean->id,
+                                            $myBean->name,
+                                            $myBean->{$emailField},
+                                            $emailText
+                                        );
                                     } else {
-
                                         $emailText = '';
                                         if ($this->appendTick) {
                                             $emailText .= $email_tick;
@@ -574,8 +591,12 @@ eoq;
                                         $emailText .= $myBean->{$emailField};
 
                                         $emailLink = $this->createEmailLink(
-                                            $myBean->module_name, $myBean->id, $myBean->name,
-                                            $myBean->{$emailField}, $emailText);
+                                            $myBean->module_name,
+                                            $myBean->id,
+                                            $myBean->name,
+                                            $myBean->{$emailField},
+                                            $emailText
+                                        );
                                     }
                                     return $emailLink;
                                 }
@@ -2564,7 +2585,7 @@ eoq;
      */
     public function getRelatedEmail($beanType, $whereArr, $relatedBeanInfoArr = '')
     {
-        global $beanList, $current_user, $app_strings, $db;
+        global $beanList, $current_user, $app_strings;
         $finalQuery = '';
         $searchBeans = null;
         if ($beanType === 'LBL_DROPDOWN_LIST_ALL') {

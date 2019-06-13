@@ -41,6 +41,7 @@
 if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
+
 use SuiteCRM\Utility\SuiteValidator;
 
 require_once('include/ListView/ListViewData.php');
@@ -143,16 +144,10 @@ class ListViewDataEmails extends ListViewData
      */
     protected function getInboundEmail($currentUser, $folder)
     {
+        $inboundEmailID = $currentUser->getPreference('defaultIEAccount', 'Emails');
         $id = $folder->getId();
         if (!empty($id)) {
-            $inboundEmailID = $id;
-        } else {
-            $inboundEmailID = $currentUser->getPreference('defaultIEAccount', 'Emails');
-        }
-        
-        if (!$inboundEmailID) {
-            LoggerManager::getLogger()->warn('Unable to resolve inbound email ID.');
-            return false;
+            $inboundEmailID = $folder->getId();
         }
 
         $isValidator = new SuiteValidator();
@@ -599,7 +594,7 @@ class ListViewDataEmails extends ListViewData
                     $is_imported = [];
                 }
 
-                if ($is_imported instanceof Countable) {
+                if (is_array($is_imported) || $is_imported instanceof Countable) {
                     $count = count($is_imported);
                 } else {
                     LoggerManager::getLogger()->warn('ListViewDataEmails::getEmailRecordFieldValue: email list should be a Countable');
@@ -741,7 +736,7 @@ class ListViewDataEmails extends ListViewData
             $folderObj = new Folder();
             $folderObj->retrieveFromRequest($request);
 
-            $inboundEmail = $this->getInboundEmail($current_user, $folderObj);            
+            $inboundEmail = $this->getInboundEmail($current_user, $folderObj);
             if (!$inboundEmail || $inboundEmail && !$inboundEmail->id) {
                 LoggerManager::getLogger()->warn('Unable get Inbound Email for List View. Please check your settings and try again.');
                 return false;

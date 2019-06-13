@@ -1595,7 +1595,7 @@ class SugarBean
                                 " FROM " . $templates[$child_info['parent_type']]->table_name .
                                 " WHERE id IN ('$childInfoParentId'";
                         }
-                    } else{
+                    } else {
                         if (isset($child_info['parent_id']) && empty($parent_child_map[$child_info['parent_id']]) && isset($child_info['parent_type'])) {
                             $queries[$child_info['parent_type']] .= " ,'{$child_info['parent_id']}'";
                         }
@@ -2532,7 +2532,7 @@ class SugarBean
                     case 'currency':
                     case 'float':
                         if ($this->$field === '' || $this->$field == null || $this->$field == 'NULL') {
-                            continue;
+                            break;
                         }
                         if (is_string($this->$field)) {
                             $this->$field = (float)unformat_number($this->$field);
@@ -2546,7 +2546,7 @@ class SugarBean
                     case 'tinyint':
                     case 'int':
                         if ($this->$field === '' || $this->$field == null || $this->$field == 'NULL') {
-                            continue;
+                            break;
                         }
                         if (is_string($this->$field)) {
                             $this->$field = (int)unformat_number($this->$field);
