@@ -283,16 +283,20 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
         }
         if ($("#main_full_name_lxajaxed").length == 0) {
             keyup_status = 'disabled';
-            $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').off("keypress.results_list_duplicates");
+            $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c, #maincontactemailaddress_c').off("keypress.results_list_duplicates");
             if (lx.lionixCRM.config.modules.opportunities.results_list_duplicates) {
                 keyup_status = 'enabled';
-                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c').on("keypress.results_list_duplicates", function() {
+                $('#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c, #maincontactemailaddress_c').on("keypress.results_list_duplicates", function() {
                     ffn = $('#maincontactfirstname_c');
                     fln = $('#maincontactlastname_c');
                     fln2 = $('#maincontactlastname2_c');
                     femail = $('#maincontactemailaddress_c');
                     fced = $('#maincontactcedula_c');
-                    if ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2)) {
+                    if (
+                        ($(ffn).val().length > 2 && ($(fln).val().length > 2 || $(fln2).val().length > 2))
+                        ||
+                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(femail.val())
+                    ) {
                         if ($('#main_contact_duplicates_' + this.id).length == 0) {
                             // width: 750px can be changed in each Client
                             width = (lx.lionixCRM.config.modules.opportunities.results_list_duplicates_width)
@@ -306,8 +310,8 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
                         });
                         lx.lionixCRM.getContactDuplicates({
                             "fieldname": this.id, "first_name": $(ffn).val(), "last_name": $(fln).val(), "lastname2_c": $(fln2).val()
-                            // "cedula_c": $(fced).val(),
-                            // "email_address": $(femail).val()
+                            // ,"cedula_c": $(fced).val(),
+                            ,"email_address": $(femail).val()
                         }).then(function(duplicates) {
                             lx.opportunity.renderMainContactDuplicates(duplicates)
                         });
