@@ -246,6 +246,7 @@ $("button").click(function () {
 });
 
 var initFooterPopups = function() {
+    // LionixCRM
     $( "#dialog, #dialog2, #dialog3" ).dialog({
         autoOpen: false,
         show: {
@@ -264,6 +265,7 @@ var initFooterPopups = function() {
     $("#admin_options").click(function() {
         $("#dialog2").dialog("open");
     });
+    // LionixCRM
     $( "#evolved_by" ).click(function() {
         $( "#dialog3" ).dialog( "open" );
     });
