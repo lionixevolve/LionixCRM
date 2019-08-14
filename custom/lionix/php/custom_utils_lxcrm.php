@@ -321,6 +321,13 @@ function lxSetSuiteCRMList($suitecrm_list, $list_value_string_or_mysqli_result, 
     } else {
         $list_value = $list_value_string_or_mysqli_result;
     }
+    $special_whitespaces = array();
+    $special_whitespaces[] = "\t";   // "\t"   ( ASCII 9 (0x09)), a tab.
+    $special_whitespaces[] = "\0";   // "\0"   ( ASCII 0 (0x00)), the NUL-byte.
+    $special_whitespaces[] = "\x0B"; // "\x0B" (ASCII 11 (0x0B)), a vertical tab.
+    $special_whitespaces[] = "\n";   // "\n"   (ASCII 10 (0x0A)), a new line (line feed).
+    $special_whitespaces[] = "\r";   // "\r"   (ASCII 13 (0x0D)), a carriage return.
+    $list_value = str_replace($special_whitespaces,'',$list_value);
     if (!empty($list_value)) {
         require_once 'modules/ModuleBuilder/parsers/parser.dropdown.php';
         $parser = new ParserDropDown();
