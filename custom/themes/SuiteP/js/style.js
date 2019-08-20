@@ -46,6 +46,7 @@ lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/aos-quotes/lx-product
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-run-spoon-file.js");
 // when developing use the noCache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // ********** Client only specific files

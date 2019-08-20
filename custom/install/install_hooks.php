@@ -961,6 +961,9 @@ function post_installModules()
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtime'] = '18:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['starttimeweekend'] = '09:00';
     $sugar_config['lionixcrm']['workday_time_diff_holiday_table']['endtimeweekend'] = '12:00';
+    $sugar_config['lionixcrm']['spoon_path'] = '/home/qma/linux/spoon/pdi-ce-8.3.0.0-371/data-integration/';
+    $sugar_config['lionixcrm']['crm_path'] = '/home/qma/public_html/test/lionixcrm/';
+    $sugar_config['lionixcrm']['log_file_path'] = '/home/qma/public_html/lx.log';
     $sugar_config['lionixcrm']['environment'] = 'production'; //The options for environment are 'testing' or 'production'
     $sugar_config['lionixcrm']['debuglx'] = false; //The options for debuglx are false or true
     $sugar_config['lionixcrm']['business_type'] = 'b2b'; //The options for business_type are 'b2b' or 'b2c', if null or '' it uses default CRM validation rules

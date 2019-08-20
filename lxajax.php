@@ -589,6 +589,23 @@ class LxAJAX extends LxAJAXCustom
         }
         return json_encode($list);
     }
+
+    public function runSpoonFile()
+    {
+        global $db,$sugar_config;
+        $answer = "Archivo no existe";
+        $log_file_path = $sugar_config['lionixcrm']['log_file_path'];
+        $spoon_path = $sugar_config['lionixcrm']['spoon_path'];
+        $crm_path = $sugar_config['lionixcrm']['crm_path'];
+        $file = $this->data['file'];
+        if (file_exists($crm_path.$file)) {
+            $answer = $this->data['answer'];
+            $command = "cd ".$spoon_path." ; ./kitchen.sh -file='".$crm_path.$file."' --level=Detailed 2>&1 >> ".$log_file_path;
+            file_put_contents($_SERVER["DOCUMENT_ROOT"]."/lx.log", PHP_EOL. date_format(date_create(), "Y-m-d H:i:s ")  .__FILE__ .":". __LINE__." -- ".print_r($command, 1).PHP_EOL, FILE_APPEND);
+            exec($command);
+        }
+        return json_encode($answer);
+    }
 }//end class LxAJAX
 
 // Session variables passed to this page
