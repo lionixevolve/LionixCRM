@@ -208,6 +208,7 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
             $('#maincontacttitle_c').css('border', '1px solid #0045ff')
 
             main_contact_clear_button = '<span class="id-ff multiple"> <button type="button" style="margin: 8px" class="button lastChild lx-clear-duplicate" value="Limpiar nuevo contacto" onclick="lx.opportunity.clearMainContactCFields(true)"><img src="themes/SuiteP/images/id-ff-clear.png"></button></span>';
+            $('.lx-clear-duplicate').remove();
 
             $('#maincontactcedula_c').after(main_contact_clear_button);
             $('#maincontactfirstname_c').after(main_contact_clear_button);
