@@ -737,6 +737,7 @@ function post_installModules()
     }
     installLog('...LionixCRM added roles successfully.');
     $queries_array = array(
+        'custom/lionix/query/views/contactslx.sql',
         'custom/lionix/query/prospect_list/vista_cron_pl_daily_email_birthday_congratulations_contacts.sql',
         'custom/lionix/query/store_procedures/sp_infoticos.sql',
         'custom/lionix/query/store_functions/fn_create_holiday_table.sql',
