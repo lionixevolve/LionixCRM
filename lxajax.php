@@ -244,6 +244,9 @@ class LxAJAX extends LxAJAXCustom
 
     public function getSuiteCRMList()
     {
+        global $app_list_strings,$sugar_config;
+        $default_language = $sugar_config['default_language'];
+        $app_list_strings = return_app_list_strings_language($default_language);
         $suitecrm_list = $GLOBALS['app_list_strings'][$this->data['suitecrm_list']];
         $filters_array = explode(',', $this->data['filter_csv']);
         $selected_array = explode(',', $this->data['selected_csv']);
