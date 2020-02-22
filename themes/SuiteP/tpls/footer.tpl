@@ -48,6 +48,11 @@
 {if $AUTHENTICATED}
     <!-- Start generic footer -->
     <footer>
+	{if $STATISTICS}
+		<div class="serverstats">
+            <span class="glyphicon glyphicon-globe"></span> {$STATISTICS}
+        </div>
+	{/if}
         <div id="copyright_data">
             <div id="dialog3" title="&copy; {$APP.LBL_SUITE_EVOLVED_BY}">
                 <p>{$APP.LBL_SUITE_EVOLVED_BY_DESC_1}</p>
@@ -151,12 +156,6 @@
                 height += 50;
                 $('#content').css({
                     'min-height': height + 'px'
-                });
-
-                // uploader fix
-                $('#step1_uploader').css({
-                    position: 'relative',
-                    top: ($('#wizard').height() - 90) + 'px'
                 });
             }
         });

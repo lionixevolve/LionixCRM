@@ -87,11 +87,7 @@ function handleSubs($subs, $email, $json, $user = null)
     return $out;
 }
 
-/*********************************************************************************
- * Description:
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc. All Rights
- * Reserved. Contributor(s): ______________________________________..
- *********************************************************************************/
+
 //increate timeout for phpo script execution
 ini_set('max_execution_time', 300);
 //ajaxInit();
@@ -353,12 +349,12 @@ if (isset($_REQUEST['emailUIAction'])) {
 
             switch ($_REQUEST['type']) {
                 case "headers":
-                    $title = "{$app_strings['LBL_EMAIL_VIEW_HEADERS']}";
+                    $title = (string)($app_strings['LBL_EMAIL_VIEW_HEADERS']);
                     $text = $ie->getFormattedHeaders($_REQUEST['uid']);
                     break;
 
                 case "raw":
-                    $title = "{$app_strings['LBL_EMAIL_VIEW_RAW']}";
+                    $title = (string)($app_strings['LBL_EMAIL_VIEW_RAW']);
                     $text = $ie->getFormattedRawSource($_REQUEST['uid']);
                     break;
 
@@ -1445,7 +1441,7 @@ eoq;
 
                     if (isset($_REQUEST['account_signature_id'])) {
                         $email_signatures = $current_user->getPreference('account_signatures', 'Emails');
-                        $email_signatures = unserialize(base64_decode($email_signatures));
+                        $email_signatures = sugar_unserialize(base64_decode($email_signatures));
                         if (empty($email_signatures)) {
                             $email_signatures = array();
                         }
@@ -1460,7 +1456,7 @@ eoq;
                             continue;
                         }
                         if ($k == 'stored_options') {
-                            $ie->$k = unserialize(base64_decode($ie->$k));
+                            $ie->$k = sugar_unserialize(base64_decode($ie->$k));
                             if (isset($ie->stored_options['from_name'])) {
                                 $ie->stored_options['from_name'] = from_html($ie->stored_options['from_name']);
                             }
@@ -1534,7 +1530,7 @@ eoq;
                 unset($ret['email_password']); // no need to send the password out
 
                 $email_signatures = $current_user->getPreference('account_signatures', 'Emails');
-                $email_signatures = unserialize(base64_decode($email_signatures));
+                $email_signatures = sugar_unserialize(base64_decode($email_signatures));
 
                 if (!empty($email_signatures) && isset($email_signatures[$ieId])) {
                     $ret['email_signatures'] = $email_signatures[$ieId];
@@ -1692,7 +1688,6 @@ eoq;
             if (isset($_REQUEST['contactData'])) {
                 $contacts = $json->decode(from_HTML($_REQUEST['contactData']));
                 if ($contacts) {
-                    //_ppd($contacts);
                     $email->et->setContacts($contacts);
                 }
             }
@@ -1765,7 +1760,7 @@ eoq;
                 $person = $_REQUEST['person'];
             }
             if (!empty($_REQUEST['start'])) {
-                $start = intval($_REQUEST['start']);
+                $start = (int)$_REQUEST['start'];
             } else {
                 $start = 0;
             }
