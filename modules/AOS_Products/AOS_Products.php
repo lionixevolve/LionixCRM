@@ -55,7 +55,7 @@ class AOS_Products extends AOS_Products_sugar
             return com_create_guid();
         }
         mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
-        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $charid = strtoupper(md5(uniqid(mt_rand(), true)));
         $hyphen = chr(45);// "-"
         $uuid = substr($charid, 0, 8).$hyphen
                 .substr($charid, 8, 4).$hyphen
@@ -65,25 +65,24 @@ class AOS_Products extends AOS_Products_sugar
         return $uuid;
     }
 
-    public function save($check_notify=false)
+    public function save($check_notify = false)
     {
-        global $sugar_config,$mod_strings;
+        global $sugar_config, $mod_strings;
 
-        if (isset($_POST['deleteAttachment']) && $_POST['deleteAttachment']=='1') {
+        if (isset($_POST['deleteAttachment']) && $_POST['deleteAttachment'] == '1') {
             $this->product_image = '';
         }
 
         require_once('include/upload_file.php');
         $GLOBALS['log']->debug('UPLOADING PRODUCT IMAGE');
-        $upload_file = new UploadFile('uploadfile');
 
-        if (isset($_FILES['uploadimage']['tmp_name'])&&$_FILES['uploadimage']['tmp_name']!="") {
+        if (!empty($_FILES['uploadimage']['tmp_name']) && verify_uploaded_image($_FILES['uploadimage']['tmp_name'])) {
             if ($_FILES['uploadimage']['size'] > $sugar_config['upload_maxsize']) {
-                die($mod_strings['LBL_IMAGE_UPLOAD_FAIL'].$sugar_config['upload_maxsize']);
+                die($mod_strings['LBL_IMAGE_UPLOAD_FAIL'] . $sugar_config['upload_maxsize']);
             }
-            $prefix_image = $this->getGUID().'_';
-            $this->product_image=$sugar_config['site_url'].'/'.$sugar_config['upload_dir'].$prefix_image.$_FILES['uploadimage']['name'];
-            move_uploaded_file($_FILES['uploadimage']['tmp_name'], $sugar_config['upload_dir'].$prefix_image.$_FILES['uploadimage']['name']);
+            $prefix_image = $this->getGUID() . '_';
+            $this->product_image = $sugar_config['site_url'] . '/' . $sugar_config['upload_dir'] . $prefix_image . $_FILES['uploadimage']['name'];
+            move_uploaded_file($_FILES['uploadimage']['tmp_name'], $sugar_config['upload_dir'] . $prefix_image . $_FILES['uploadimage']['name']);
         }
 
         require_once('modules/AOS_Products_Quotes/AOS_Utils.php');
@@ -114,7 +113,7 @@ class AOS_Products extends AOS_Products_sugar
 				JOIN aos_quotes ON aos_quotes.id = aos_products_quotes.parent_id AND aos_quotes.stage = 'Closed Accepted' AND aos_quotes.deleted = 0
 				JOIN accounts ON accounts.id = aos_quotes.billing_account_id -- AND accounts.deleted = 0
 
-				GROUP BY accounts.id
+				GROUP BY aos_quotes.id
 			) AS aos_quotes
 
 		";
