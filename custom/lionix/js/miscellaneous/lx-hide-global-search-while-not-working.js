@@ -17,7 +17,7 @@
                 $('.tablet-bar > ul > li.navbar-search').is(':visible') ||
                 $('.mobile-bar > ul > li.navbar-search').is(':visible')
             ) {
-                console.log("Hidding UnifiedSearch '%s' '%s' '%s' '%s'", 'all modules', 'lx-hide-global-search-while-not-working.js', '!function()', 'observer');
+                console.warn("Hidding UnifiedSearch '%s' '%s' '%s' '%s'", 'all modules', 'lx-hide-global-search-while-not-working.js', '!function()', 'observer');
                 $('.desktop-bar > ul > li > form[name=UnifiedSearch]').hide();
                 $('.desktop-bar > ul > li.navbar-search').hide();
                 $('.tablet-bar > ul > li.navbar-search').hide();

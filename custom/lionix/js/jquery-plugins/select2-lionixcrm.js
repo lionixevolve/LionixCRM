@@ -12,7 +12,7 @@
             // select2 disabled for specific detailview
             let applySelect2 = true;
             var crmDetailView = document.forms["DetailView"];
-            if (crmDetailView) {
+            if (crmDetailView && !!crmDetailView.module) {
                 switch (crmDetailView.module.value) {
                     case "AOW_WorkFlow":
                         applySelect2 = false;
@@ -21,7 +21,7 @@
             }
             // select2 disabled for specific editview
             var crmEditView = document.forms["EditView"];
-            if (crmEditView) {
+            if (crmEditView && !!crmEditView.module) {
                 switch (crmEditView.module.value) {
                     case "AOW_WorkFlow":
                     case "AOS_Quotes":

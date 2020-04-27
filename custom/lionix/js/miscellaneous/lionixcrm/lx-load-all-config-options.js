@@ -10,8 +10,8 @@
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             if (Object.keys(lx.lionixCRM.config).length === 0 && lx.lionixCRM.config.constructor === Object) {
-                console.log("Check environment observer '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-load-config-options.js', '!function()');
-                console.log('Loading all LionixCRM config options...');
+                console.warn("Check environment observer '%s' '%s' '%s'", 'all modules', 'lx-lionixcrm-load-config-options.js', '!function()');
+                console.warn('Loading all LionixCRM config options...');
                 lx.lionixCRM.getConfigOption('all');
             }
             // if needed only once, you can stop observing with observer.disconnect();

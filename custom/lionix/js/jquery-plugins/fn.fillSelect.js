@@ -1,4 +1,4 @@
-console.log("jQuery plugin $.fn.fillSelect added.");
+console.warn("jQuery plugin $.fn.fillSelect added.");
 (function ( $ ) {
     $.fn.fillSelect = function(data) {
         return this.clearSelect().each(function() {

@@ -9,13 +9,13 @@
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             var crmEditView = document.forms['EditView'];
-            if (crmEditView) {
+            if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == 'AOS_Quotes') {
                     // input field size
                     $("input[name^='product_name']").css("width", "400px");
                     // search bar below input field
                     $(".yui-ac-content").css("width", "600px");
-                    console.log("Bussines logic observer, Inputs product_name{#} size set to 400px. '%s' '%s' '%s'", 'aos_quotes', 'lx-product-name-size.js', '!function()');
+                    console.warn("Bussines logic observer, Inputs product_name{#} size set to 400px. '%s' '%s' '%s'", 'aos_quotes', 'lx-product-name-size.js', '!function()');
                     // if needed only once, you can stop observing with observer.disconnect();
                     // observer.disconnect();
                     // if needed more, add some element and check its existence.

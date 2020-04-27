@@ -113,24 +113,24 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
         beforeSend: function(jqXHR, settings) {
-            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
-            console.log("beforeSend callback:", settings.url);
+            console.warn("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax beforeSend');
+            console.warn("beforeSend callback:", settings.url);
         }, //end beforeSend
         url: 'lxajax.php',
         type: 'GET',
         data: data,
         // success is a function to be called if the request succeeds.
         success: function(data, status, jqXHR) {
-            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax success');
-            console.log("success callback:", status);
-            console.log("data:", data);
+            console.warn("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax success');
+            console.warn("success callback:", status);
+            console.warn("data:", data);
             $('#maincontact_c').fillSelect($.parseJSON(data));
         }, // end success
         // error is a function to be called if the request fails.
         error: function(jqXHR, status, error) {
-            console.log("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax error');
-            console.log("error callback:", status);
-            console.log("Function lx.opportunity.getMainContactDropdown error:", error);
+            console.warn("Bussines logic '%s' '%s' '%s' '%s'", 'opportunities', 'lx-main-contact.js', 'lx.opportunity.getMainContactDropdown()', 'ajax error');
+            console.warn("error callback:", status);
+            console.warn("Function lx.opportunity.getMainContactDropdown error:", error);
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
         // complete: function(jqXHR, status) {
@@ -141,7 +141,7 @@ lx.opportunity.getMainContactDropdown = function(opportunityId, currentValue, ac
 }
 
 lx.opportunity.renderMainContactDuplicates = function(duplicates) {
-    console.log("duplicados devueltos:", duplicates);
+    console.warn("duplicados devueltos:", duplicates);
     $('.main_contact_duplicates ul li').remove();
     if (duplicates.data.length) {
         duplicates.data.forEach(function(element) {
@@ -185,8 +185,8 @@ lx.opportunity.renderMainContactDuplicates = function(duplicates) {
         $('.main_contact_duplicates li').on("click.main_contact_duplicates_list", function() {
             $('.main_contact_duplicates .yui-ac-content').hide(500);
 
-            console.log('contact_id', $(this).prop('id'));
-            console.log('email_id', $(this).data('primary_email_address_id'));
+            console.warn('contact_id', $(this).prop('id'));
+            console.warn('email_id', $(this).data('primary_email_address_id'));
             $('#maincontactduplicateid_c').val($(this).prop('id'));
             $('#account_id').val($(this).data('account_id'));
             $('#maincontactcedula_c').val($(this).data('cedula_c'));
@@ -235,7 +235,7 @@ lx.opportunity.resultsSearchTSECRHandler = function(forceCheck) {
                 keyup_status = 'enabled';
                 $('#maincontactcedula_c').on("keyup.results_search_tsecr", function() {
                     if (lx.lionixCRM.config.debuglx) {
-                        console.log('key up ->', String.fromCharCode(event.which));
+                        console.warn('key up ->', String.fromCharCode(event.which));
                     }
                     if ($(this).val().length != 9) {
                         $('#maincontactfirstname_c').val('');
@@ -248,7 +248,7 @@ lx.opportunity.resultsSearchTSECRHandler = function(forceCheck) {
                             "focusfieldname": this.id,
                             "cedula_c": typed_cedula
                         }).then(function(tsecrlist) {
-                            console.log('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
+                            console.warn('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
                             $('#maincontactcedula_c').val(tsecrlist.data[0].cedula_c);
                             $('#maincontactfirstname_c').val(tsecrlist.data[0].first_name);
                             $('#maincontactlastname_c').val(tsecrlist.data[0].last_name);
@@ -260,17 +260,17 @@ lx.opportunity.resultsSearchTSECRHandler = function(forceCheck) {
                 });
             }
             $("#maincontactcedula_c").append('<div id="maincontactcedula_c_lxajaxed" data-results_search_tsecr="' + keyup_status + '"/>');
-            console.log('keyup.results_search_tsecr on #maincontactcedula_c ' + keyup_status);
+            console.warn('keyup.results_search_tsecr on #maincontactcedula_c ' + keyup_status);
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.log("maincontactcedula_c_lxajaxed div indicator already exists and it's [" + $('#maincontactcedula_c_lxajaxed').data('results_search_tsecr') + "].");
+                console.warn("maincontactcedula_c_lxajaxed div indicator already exists and it's [" + $('#maincontactcedula_c_lxajaxed').data('results_search_tsecr') + "].");
             }
         }
     } catch (error) {
-        console.log('Modules[contacts] properties are not present!');
-        console.log('Retrieving modules[contacts] properties...');
+        console.warn('Modules[contacts] properties are not present!');
+        console.warn('Retrieving modules[contacts] properties...');
         lx.lionixCRM.getConfigOption('modules').then(function(data) {
-            console.log('Modules[contacts] successfully retrieved', data);
+            console.warn('Modules[contacts] successfully retrieved', data);
             lx.opportunity.resultsSearchTSECRHandler(false);
         });
     }
@@ -320,17 +320,17 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
                 });
             }
             $("#maincontactcedula_c").append('<div id="main_full_name_lxajaxed" data-results_list_duplicates="' + keyup_status + '"/>');
-            console.log('keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ' + keyup_status);
+            console.warn('keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ' + keyup_status);
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.log("main_full_name_lxajaxed div indicator already exists and it's [" + $('#main_full_name_lxajaxed').data('results_list_duplicates') + "].");
+                console.warn("main_full_name_lxajaxed div indicator already exists and it's [" + $('#main_full_name_lxajaxed').data('results_list_duplicates') + "].");
             }
         }
     } catch (error) {
-        console.log('Modules[opportunities] properties are not present!');
-        console.log('Retrieving modules[opportunities] properties...');
+        console.warn('Modules[opportunities] properties are not present!');
+        console.warn('Retrieving modules[opportunities] properties...');
         lx.lionixCRM.getConfigOption('modules').then(function(data) {
-            console.log('Modules[opportunities] successfully retrieved', data);
+            console.warn('Modules[opportunities] successfully retrieved', data);
             lx.opportunity.resultsListDuplicatesHandler(false);
         });
     }
@@ -347,11 +347,11 @@ lx.opportunity.resultsListDuplicatesHandler = function(forceCheck) {
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             var crmEditView = document.forms['EditView'];
-            if (crmEditView) {
+            if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == 'Opportunities') {
                     if ($("#maincontact_c").length == 1) {
                         if ($("#maincontact_c_lxajaxed").length == 0) {
-                            console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
+                            console.warn("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-main-contact.js', '!function()', 'initial');
                             opid = document.forms['EditView'].record.value;
                             $("#maincontact_c").append('<div id="maincontact_c_lxajaxed"/>');
                             lx.opportunity.getMainContactDropdown(opid, $("#maincontact_c").val(), $("#account_id").val()); //populate dropdown once when editview loads.
