@@ -250,6 +250,7 @@ class LxAJAX extends LxAJAXCustom
         $suitecrm_list = $GLOBALS['app_list_strings'][$this->data['suitecrm_list']];
         $filters_array = explode(',', $this->data['filter_csv']);
         $selected_array = explode(',', $this->data['selected_csv']);
+        $sorted = !!$this->data['sorted'];
         $list = array();
         if ($this->data['empty_value']) {
             $list[] = array('' => ''); // uncomment when empty value is needed
@@ -281,7 +282,9 @@ class LxAJAX extends LxAJAXCustom
                 }
             }
         }
-        usort($list, array($this, "callbackOrderArrayByName")); //this orders $list array alphabetically by name
+        if ($sorted) {
+            usort($list, array($this, "callbackOrderArrayByName")); //this orders $list array alphabetically by name
+        }
         return json_encode($list);
     }
 
