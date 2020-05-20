@@ -15,6 +15,9 @@ lx.lionixCRM.css = new Array();
 //SuiteCRM has jQuery preloaded don't include it.
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"); //Must always be first
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
+// ********** Client only specific files with higher priority
+lx.lionixCRM.scripts.push("custom/lionix/js/styleCustomPriority.js");
+// ********** Client only specific files with higher priority
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"); //momentjs x-pseudo usefult for testing
