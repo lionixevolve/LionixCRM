@@ -253,7 +253,7 @@ class LxAJAX extends LxAJAXCustom
         $sorted = !!$this->data['sorted'];
         $list = array();
         if ($this->data['empty_value']) {
-            $list[] = array('' => ''); // uncomment when empty value is needed
+            $list[] = array('value' => '', 'name' => '', 'selected' => false); // uncomment when empty value is needed
         }
         $found = false;
         $selected = false;
