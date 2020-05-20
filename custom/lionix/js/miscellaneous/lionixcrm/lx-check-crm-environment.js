@@ -14,15 +14,15 @@ lx.lionixCRM.getEnvironment = function(forceCheck) {
             } else {
                 $('#content').before('<div id="LionixCRM-environment" data-enviroment="Production Environment" />');
             }
-            console.log("LionixCRM-environment div indicator added.");
+            console.warn("LionixCRM-environment div indicator added.");
         } else {
-            console.log("LionixCRM-environment div indicator already exists.");
+            console.warn("LionixCRM-environment div indicator already exists.");
         }
     } catch (error) {
-        console.log('Environment property is not present!');
-        console.log('Retrieving environment property...');
+        console.error('Environment property is not present!');
+        console.error('Retrieving environment property...');
         lx.lionixCRM.getConfigOption('environment').then(function(data) {
-            console.log('Environment successfully retrieved', data);
+            console.warn('Environment successfully retrieved', data);
             lx.lionixCRM.getEnvironment(false);
         });
     }
@@ -39,7 +39,7 @@ lx.lionixCRM.getEnvironment = function(forceCheck) {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
-            console.log("Check environment observer '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()');
+            console.warn("Check environment observer '%s' '%s' '%s'", 'all modules', 'lx-check-crm-environment.js', '!function()');
             lx.lionixCRM.getEnvironment(false);
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();

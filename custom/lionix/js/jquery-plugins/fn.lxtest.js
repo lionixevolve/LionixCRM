@@ -1,7 +1,7 @@
-console.log("jQuery plugin $.fn.lxtest added.");
+console.warn("jQuery plugin $.fn.lxtest added.");
 (function ( $ ) {
     $.fn.lxtest = function(options) {
-        console.log("lxtest jQuery running");
+        console.warn("lxtest jQuery running");
         // This is the easiest way to have default options.
         var settings = $.extend({
             // These are the defaults.

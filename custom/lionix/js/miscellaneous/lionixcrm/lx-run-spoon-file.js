@@ -10,22 +10,22 @@ lx.lionixCRM.runSpoonFile = function(file,answer) {
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
             beforeSend: function(jqXHR, settings) {
-                console.log("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax beforeSend');
-                console.log("beforeSend callback:", settings.url);
+                console.warn("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax beforeSend');
+                console.warn("beforeSend callback:", settings.url);
             }, //end beforeSend
             url: 'lxajax.php',
             type: 'POST',
             data: data,
             // success is a function to be called if the request succeeds.
             success: function(data, status, jqXHR) {
-                console.log("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax success');
-                console.log("success callback:", status);
-                console.log("data:", data);
+                console.warn("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax success');
+                console.warn("success callback:", status);
+                console.warn("data:", data);
                 if (data == '') {
-                    console.log("Spoon file " + file + " not found.")
+                    console.warn("Spoon file " + file + " not found.")
                 } else {
                     data = JSON.parse(data);
-                    console.log("Spoon file (" + file + ") executed.")
+                    console.warn("Spoon file (" + file + ") executed.")
                     $("#preview").html('');
                     alert(data);
                 }
@@ -33,9 +33,9 @@ lx.lionixCRM.runSpoonFile = function(file,answer) {
             }, // end success
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
-                console.log("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax error');
-                console.log("error callback:", status);
-                console.log("Function lx.lionixCRM.runSpoonFile error:", error);
+                console.error("Bussines logic '%s' '%s' '%s' file '%s' '%s'", 'all modules', 'lx-run-spoon-file.js', 'lx.lionixCRM.runSpoonFile()', file, 'ajax error');
+                console.error("error callback:", status);
+                console.error("Function lx.lionixCRM.runSpoonFile error:", error);
                 $("#preview").html('');
                 reject(error);
             }, // end error

@@ -8,7 +8,7 @@ lx.field.validateCallback = function(form_name, field_name, label, callback, lxv
         ? "(Function " + fnCallerName + ")"
         : "";
     label_field_name_without_c = field_name.replace(/_c$/, '');
-    console.log("lx.field.validateCallback adding validation on form " + form_name + " to field " + field_name, fnCallerName);
+    console.warn("lx.field.validateCallback adding validation on form " + form_name + " to field " + field_name, fnCallerName);
     //addToValidateCallback is defined somewhere on SuiteCRM by default, we only use it here
     addToValidateCallback(form_name, field_name, 'varchar', lxvalidate, "Formato inválido: " + label, callback);
     $(".label[data-label='LBL_" + field_name.toUpperCase() + "']").html(label + ': <font color="red">*</font>');

@@ -29,17 +29,17 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
             }
             $('#account_name_lxajaxed').remove();
             $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
-            console.log("account_name_lxajaxed div indicator added.");
+            console.warn("account_name_lxajaxed div indicator added.");
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.log('account_name_lxajaxed div indicator already exists:', $('#account_name_lxajaxed').data('business_type'));
+                console.warn('account_name_lxajaxed div indicator already exists:', $('#account_name_lxajaxed').data('business_type'));
             }
         }
     } catch (error) {
-        console.log('business_type property is not present!');
-        console.log('Retrieving business_type property...');
+        console.warn('business_type property is not present!');
+        console.warn('Retrieving business_type property...');
         lx.lionixCRM.getConfigOption('business_type').then(function(data) {
-            console.log('business_type successfully retrieved', data);
+            console.warn('business_type successfully retrieved', data);
             lx.opportunity.getAccountNameByBusinessType(false);
         });
     }
@@ -56,10 +56,10 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             var crmEditView = document.forms['EditView'];
-            if (crmEditView) {
+            if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == 'Opportunities') {
                     if (lx.lionixCRM.config.debuglx) {
-                        console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-account-name.js', '!function()', 'initial');
+                        console.warn("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-account-name.js', '!function()', 'initial');
                     }
                     lx.opportunity.getAccountNameByBusinessType(false);
                 }

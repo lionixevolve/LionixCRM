@@ -1,7 +1,7 @@
 //  This file containts opportunities bussines logic
 //  function definitions section
 lx.contact.renderContactDuplicates = function(duplicates) {
-    console.log("duplicados devueltos:", duplicates);
+    console.warn("duplicados devueltos:", duplicates);
     $('.contact_duplicates ul li').remove();
     if (duplicates.data.length) {
         duplicates.data.forEach(function(element) {
@@ -47,7 +47,7 @@ lx.contact.renderContactDuplicates = function(duplicates) {
         $('.contact_duplicates li').off("click.contact_duplicates_list");
         $('.contact_duplicates li').on("click.contact_duplicates_list", function() {
             $('.contact_duplicates .yui-ac-content').hide(500);
-            console.log("Redirecting to contacts Editview: - " + window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id);
+            console.warn("Redirecting to contacts Editview: - " + window.location.origin + window.location.pathname + "?module=Contacts&return_module=Contacts&action=EditView&record=" + this.id);
             toastr["info"]("Redireccionando a " + $(this).data('first_name') + "...", "Posibles duplicados encontrados", {
                 "positionClass": "toast-bottom-center",
                 "showDuration": "0",
@@ -74,7 +74,7 @@ lx.contact.resultsSearchTSECRHandler = function(forceCheck) {
                 keyup_status = 'enabled';
                 $('#cedula_c').on("keyup.results_search_tsecr", function() {
                     if (lx.lionixCRM.config.debuglx) {
-                        console.log('key up ->', String.fromCharCode(event.which));
+                        console.warn('key up ->', String.fromCharCode(event.which));
                     }
                     if ($(this).val().length != 9) {
                         $('#first_name').val('');
@@ -87,7 +87,7 @@ lx.contact.resultsSearchTSECRHandler = function(forceCheck) {
                             "focusfieldname": this.id,
                             "cedula_c": typed_cedula
                         }).then(function(tsecrlist) {
-                            console.log('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
+                            console.warn('After query to lx.lionixCRM.getTSECRData:', tsecrlist);
                             $('#cedula_c').val(tsecrlist.data[0].cedula_c);
                             $('#first_name').val(tsecrlist.data[0].first_name);
                             $('#last_name').val(tsecrlist.data[0].last_name);
@@ -99,17 +99,17 @@ lx.contact.resultsSearchTSECRHandler = function(forceCheck) {
                 });
             }
             $("#cedula_c").append('<div id="cedula_c_lxajaxed" data-results_search_tsecr="' + keyup_status + '"/>');
-            console.log('keyup.results_search_tsecr on #cedula_c ' + keyup_status);
+            console.warn('keyup.results_search_tsecr on #cedula_c ' + keyup_status);
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.log("cedula_c_lxajaxed div indicator already exists and it's [" + $('#cedula_c_lxajaxed').data('results_search_tsecr') + "].");
+                console.warn("cedula_c_lxajaxed div indicator already exists and it's [" + $('#cedula_c_lxajaxed').data('results_search_tsecr') + "].");
             }
         }
     } catch (error) {
-        console.log('Modules[contacts] properties are not present!');
-        console.log('Retrieving modules[contacts] properties...');
+        console.warn('Modules[contacts] properties are not present!');
+        console.warn('Retrieving modules[contacts] properties...');
         lx.lionixCRM.getConfigOption('modules').then(function(data) {
-            console.log('Modules[contacts] successfully retrieved', data);
+            console.warn('Modules[contacts] successfully retrieved', data);
             lx.contact.resultsSearchTSECRHandler(false);
         });
     }
@@ -153,17 +153,17 @@ lx.contact.resultsListDuplicatesHandler = function(forceCheck) {
                 });
             }
             $("#cedula_c").append('<div id="full_name_lxajaxed" data-results_list_duplicates="' + keyup_status + '"/>');
-            console.log('keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ' + keyup_status);
+            console.warn('keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ' + keyup_status);
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.log("full_name_lxajaxed div indicator already exists and it's [" + $('#full_name_lxajaxed').data('results_list_duplicates') + "].");
+                console.warn("full_name_lxajaxed div indicator already exists and it's [" + $('#full_name_lxajaxed').data('results_list_duplicates') + "].");
             }
         }
     } catch (error) {
-        console.log('Modules[contacts] properties are not present!');
-        console.log('Retrieving modules[contacts] properties...');
+        console.warn('Modules[contacts] properties are not present!');
+        console.warn('Retrieving modules[contacts] properties...');
         lx.lionixCRM.getConfigOption('modules').then(function(data) {
-            console.log('Modules[contacts] successfully retrieved', data);
+            console.warn('Modules[contacts] successfully retrieved', data);
             lx.contact.resultsListDuplicatesHandler(false);
         });
     }
@@ -180,10 +180,10 @@ lx.contact.resultsListDuplicatesHandler = function(forceCheck) {
     var observer = new MutationObserver(function(mutations) {
         if (mutations) {
             var crmEditView = document.forms['EditView'];
-            if (crmEditView) {
+            if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == 'Contacts') {
                     if (lx.lionixCRM.config.debuglx) {
-                        console.log("Bussines logic observer '%s' '%s' '%s' '%s'", 'contacts', 'lx-cedula-c.js', '!function()', 'initial');
+                        console.warn("Bussines logic observer '%s' '%s' '%s' '%s'", 'contacts', 'lx-cedula-c.js', '!function()', 'initial');
                     }
                     lx.contact.resultsSearchTSECRHandler(false);
                     lx.contact.resultsListDuplicatesHandler(false);
