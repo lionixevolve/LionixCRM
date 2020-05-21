@@ -78,7 +78,7 @@ function implodeVersion($version, $size = 0, $lastSymbol = '', $delimiter = '')
     $parsedVersion = array_slice($parsedVersion, 0, $size);
     if ($lastSymbol !== '') {
         array_pop($parsedVersion);
-        array_push($parsedVersion, $lastSymbol);
+        $parsedVersion[] = $lastSymbol;
     }
 
     return implode($delimiter, $parsedVersion);
@@ -118,8 +118,13 @@ function commitMakeBackupFiles($rest_dir, $install_file, $unzip_dir, $zip_from_d
 
     if (file_exists($rest_dir) && is_dir($rest_dir)) {
         logThis('backing up files to be overwritten...', $path);
-        $newFiles = findAllFiles(clean_path($unzip_dir . '/' . $zip_from_dir), array());
-
+        $newFiles = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                clean_path($unzip_dir . '/' . $zip_from_dir),
+                RecursiveDirectoryIterator::SKIP_DOTS | RecursiveIteratorIterator::SELF_FIRST
+            )
+        );
+	    
         // keep this around for canceling
         $_SESSION['uw_restore_dir'] = getUploadRelativeName($rest_dir);
 
@@ -171,8 +176,6 @@ function commitMakeBackupFiles($rest_dir, $install_file, $unzip_dir, $zip_from_d
 function commitCopyNewFiles($unzip_dir, $zip_from_dir, $path='')
 {
     logThis('Starting file copy process...', $path);
-    global $sugar_version;
-    $backwardModules='';
 
     $modules = getAllModules();
     $backwardModules = array();
@@ -187,8 +190,13 @@ function commitCopyNewFiles($unzip_dir, $zip_from_dir, $path='')
         }
     }
 
-    $newFiles = findAllFiles(clean_path($unzip_dir . '/' . $zip_from_dir), array());
     $zipPath = clean_path($unzip_dir . '/' . $zip_from_dir);
+    $newFiles = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator(
+            $zipPath,
+            RecursiveDirectoryIterator::SKIP_DOTS | RecursiveIteratorIterator::SELF_FIRST
+        )
+    );
 
     // handle special do-not-overwrite conditions
     $doNotOverwrite = array();
@@ -226,8 +234,6 @@ function commitCopyNewFiles($unzip_dir, $zip_from_dir, $path='')
                 $_SESSION['sugar_version_file'] = $srcFile;
                 continue;
             }
-
-            //logThis('Copying file to destination: ' . $targetFile, $path);
 
             if (!copy($srcFile, $targetFile)) {
                 logThis('*** ERROR: could not copy file: ' . $targetFile, $path);
@@ -525,7 +531,7 @@ function getAllCustomizedModules()
 }
 
 /**
- * Array of all Modules in the version bein upgraded
+ * Array of all Modules in the version being upgraded
  * This method returns an Array of all modules
  * @return $modules Array of modules.
  */
@@ -733,29 +739,26 @@ function upgradeUWFiles($file)
     }
     // upgradeWizard
     if (file_exists("$from_dir/modules/UpgradeWizard")) {
-        $allFiles[] = findAllFiles("$from_dir/modules/UpgradeWizard", $allFiles);
+        $allFiles[] = findAllFiles("$from_dir/modules/UpgradeWizard", []);
     }
     // moduleInstaller
     if (file_exists("$from_dir/ModuleInstall")) {
-        $allFiles[] = findAllFiles("$from_dir/ModuleInstall", $allFiles);
+        $allFiles[] = findAllFiles("$from_dir/ModuleInstall", []);
     }
     if (file_exists("$from_dir/include/javascript/yui")) {
-        $allFiles[] = findAllFiles("$from_dir/include/javascript/yui", $allFiles);
+        $allFiles[] = findAllFiles("$from_dir/include/javascript/yui", []);
     }
     if (file_exists("$from_dir/HandleAjaxCall.php")) {
         $allFiles[] = "$from_dir/HandleAjaxCall.php";
     }
     if (file_exists("$from_dir/include/SugarTheme")) {
-        $allFiles[] = findAllFiles("$from_dir/include/SugarTheme", $allFiles);
+        $allFiles[] = findAllFiles("$from_dir/include/SugarTheme", []);
     }
     if (file_exists("$from_dir/include/SugarCache")) {
-        $allFiles[] = findAllFiles("$from_dir/include/SugarCache", $allFiles);
+        $allFiles[] = findAllFiles("$from_dir/include/SugarCache", []);
     }
     if (file_exists("$from_dir/include/utils/external_cache.php")) {
         $allFiles[] = "$from_dir/include/utils/external_cache.php";
-    }
-    if (file_exists("$from_dir/include/upload_file.php")) {
-        $allFiles[] = "$from_dir/include/upload_file.php";
     }
     if (file_exists("$from_dir/include/file_utils.php")) {
         $allFiles[] = "$from_dir/include/file_utils.php";
@@ -1130,7 +1133,7 @@ function checkSystemCompliance()
 
     if (check_php_version() === 1) {
         $ret['phpVersion'] = "<b><span class=go>{$installer_mod_strings['LBL_CHECKSYS_PHP_OK']} ".constant('PHP_VERSION')." )</span></b>";
-    };
+    }
 
     // database and connect
     $canInstall = $db->canInstall();
@@ -1336,7 +1339,7 @@ function updateQuickCreateDefs()
             continue;
         }
         if (file_exists('modules/' . $e . '/metadata/studio.php')) {
-            array_push($studio_modules, $e);
+            $studio_modules[] = $e;
         }
     }
 
@@ -2233,9 +2236,61 @@ if (!function_exists('validate_manifest')) {
     }
 }
 
+/**
+ * upgradeSugarCache
+ * @deprecated This function is unused and will be removed in a future release.
+ * change from using the older SugarCache in 6.1 and below to the new one in 6.2
+ */
+function upgradeSugarCache($file)
+{
+    global $sugar_config;
+    $cacheUploadUpgradesTemp = mk_temp_dir(sugar_cached('upgrades/temp'));
+    unzip($file, $cacheUploadUpgradesTemp);
+    if (!file_exists(clean_path("{$cacheUploadUpgradesTemp}/manifest.php"))) {
+        logThis("*** ERROR: no manifest file detected while bootstraping upgrade wizard files!");
+        return;
+    }
+    include(clean_path("{$cacheUploadUpgradesTemp}/manifest.php"));
+    $from_dir = "{$cacheUploadUpgradesTemp}/{$manifest['copy_files']['from_dir']}";
+    $allFiles = array();
+    if (file_exists("$from_dir/include/SugarCache")) {
+        $allFiles = findAllFiles("$from_dir/include/SugarCache", $allFiles);
+    }
+    if (file_exists("$from_dir/include/database")) {
+        $allFiles = findAllFiles("$from_dir/include/database", $allFiles);
+    }
+    if (file_exists("$from_dir/include/utils/external_cache.php")) {
+        $allFiles[] = "$from_dir/include/utils/external_cache.php";
+    }
+    if (file_exists("$from_dir/include/utils/sugar_file_utils.php")) {
+        $allFiles[] = "$from_dir/include/utils/sugar_file_utils.php";
+    }
+    if (file_exists("$from_dir/include/utils/sugar_file_utils.php")) {
+        $allFiles[] = "$from_dir/include/utils/sugar_file_utils.php";
+    }
+    if (file_exists("$from_dir/include/utils/autoloader.php")) {
+        $allFiles[] = "$from_dir/include/utils/autoloader.php";
+    }
+    foreach ($allFiles as $k => $file) {
+        $destFile = str_replace($from_dir . "/", "", $file);
+        if (!is_dir(dirname($destFile))) {
+            mkdir_recursive(dirname($destFile)); // make sure the directory exists
+        }
+        if (stristr($file, 'uw_main.tpl')) {
+            logThis('Skipping "' . $file . '" - file copy will during commit step.');
+        } else {
+            logThis('updating UpgradeWizard code: ' . $destFile);
+            copy_recursive($file, $destFile);
+        }
+    }
+}
+
+/**
+ * unlinkUploadFiles
+ * @deprecated This function is unused and will be removed in a future release.
+ */
 function unlinkUploadFiles()
 {
-    return;
     //	logThis('at unlinkUploadFiles()');
 //
 //	if(isset($_SESSION['install_file']) && !empty($_SESSION['install_file'])) {
@@ -2249,41 +2304,59 @@ function unlinkUploadFiles()
 }
 
 /**
+ * Recursively deletes a directory tree.
+ *
+ * @param string $folder The directory path.
+ * @param bool $keepRootFolder Whether to keep the top-level folder.
+ *
+ * @return bool TRUE on success, otherwise FALSE.
+ */
+function deleteTree($folder, $keepRootFolder = false)
+{
+    // Handle bad arguments.
+    if (empty($folder) || !file_exists($folder)) {
+        // No such file/folder exists.
+        return true;
+    }
+
+    if (is_file($folder) || is_link($folder)) {
+        // Delete file/link.
+        return @unlink($folder);
+    }
+
+    // Delete all children.
+    $files = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($folder, RecursiveDirectoryIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+
+    foreach ($files as $fileInfo) {
+        $action = ($fileInfo->isDir() ? 'rmdir' : 'unlink');
+        if (!@$action($fileInfo->getRealPath())) {
+            // Abort due to the failure:
+            return false;
+        }
+    }
+
+    // Delete the root folder itself?
+    return (!$keepRootFolder ? @rmdir($folder) : true);
+}
+
+/**
  * deletes files created by unzipping a package
  */
 function unlinkUWTempFiles()
 {
-    global $sugar_config;
     global $path;
 
-    logThis('at unlinkUWTempFiles()');
-    $tempDir='';
-    list($upgDir, $tempDir) = getUWDirs();
+    list(/* ignore first element */, $tempDir) = getUWDirs();
+    deleteTree($tempDir, true);
 
-    if (file_exists($tempDir) && is_dir($tempDir)) {
-        $files = findAllFiles($tempDir, array(), false);
-        rsort($files);
-        foreach ($files as $file) {
-            if (!is_dir($file)) {
-                //logThis('unlinking ['.$file.']', $path);
-                @unlink($file);
-            }
-        }
-        // now do dirs
-        $files = findAllFiles($tempDir, array(), true);
-        foreach ($files as $dir) {
-            if (is_dir($dir)) {
-                //logThis('removing dir ['.$dir.']', $path);
-                @rmdir($dir);
-            }
-        }
-        $cacheFile = sugar_cached("modules/UpgradeWizard/_persistence.php");
-        if (is_file($cacheFile)) {
-            logThis("Unlinking Upgrade cache file: '_persistence.php'", $path);
-            @unlink($cacheFile);
-        }
+    $cacheFile = sugar_cached('modules/UpgradeWizard/_persistence.php');
+    if (is_file($cacheFile)) {
+        logThis("Unlinking Upgrade cache file: '_persistence.php'", $path);
+        @unlink($cacheFile);
     }
-    logThis("finished!");
 }
 
 /**
@@ -2749,7 +2822,7 @@ function parseAndExecuteSqlFile($sqlScript, $forStepQuery='', $resumeFromQuery='
                             if (!$resumeAfterFound) {
                                 if (strpos($query, ",") != false) {
                                     $queArray = explode(",", $query);
-                                    for ($i=0; $i<count($resumeFromQuery); $i++) {
+                                    for ($i=0, $iMax = count($resumeFromQuery); $i< $iMax; $i++) {
                                         if (strcasecmp(trim($resumeFromQuery[$i]), trim($queArray[$i]))==0) {
                                             $resumeAfterFound = true;
                                         } else {
@@ -3037,7 +3110,7 @@ function didThisStepRunBefore($step, $SubStep='')
     if (file_exists($upgrade_progress_file)) {
         include($upgrade_progress_file);
         if (isset($upgrade_config) && $upgrade_config != null && is_array($upgrade_config) && count($upgrade_config) >0) {
-            for ($i=1; $i<=count($upgrade_config); $i++) {
+            for ($i=1, $iMax = count($upgrade_config); $i<= $iMax; $i++) {
                 if (is_array($upgrade_config[$i])) {
                     foreach ($upgrade_config[$i] as $key=>$val) {
                         if ($key==$step) {
@@ -4358,58 +4431,6 @@ function add_unified_search_to_custom_modules_vardefs()
 }
 
 /**
- * change from using the older SugarCache in 6.1 and below to the new one in 6.2
- */
-function upgradeSugarCache($file)
-{
-    global $sugar_config;
-    $cacheUploadUpgradesTemp = mk_temp_dir(sugar_cached('upgrades/temp'));
-
-    unzip($file, $cacheUploadUpgradesTemp);
-
-    if (!file_exists(clean_path("{$cacheUploadUpgradesTemp}/manifest.php"))) {
-        logThis("*** ERROR: no manifest file detected while bootstraping upgrade wizard files!");
-        return;
-    }
-    include(clean_path("{$cacheUploadUpgradesTemp}/manifest.php"));
-
-
-    $from_dir = "{$cacheUploadUpgradesTemp}/{$manifest['copy_files']['from_dir']}";
-    $allFiles = array();
-    if (file_exists("$from_dir/include/SugarCache")) {
-        $allFiles = findAllFiles("$from_dir/include/SugarCache", $allFiles);
-    }
-    if (file_exists("$from_dir/include/database")) {
-        $allFiles = findAllFiles("$from_dir/include/database", $allFiles);
-    }
-    if (file_exists("$from_dir/include/utils/external_cache.php")) {
-        $allFiles[] = "$from_dir/include/utils/external_cache.php";
-    }
-    if (file_exists("$from_dir/include/utils/sugar_file_utils.php")) {
-        $allFiles[] = "$from_dir/include/utils/sugar_file_utils.php";
-    }
-    if (file_exists("$from_dir/include/utils/sugar_file_utils.php")) {
-        $allFiles[] = "$from_dir/include/utils/sugar_file_utils.php";
-    }
-    if (file_exists("$from_dir/include/utils/autoloader.php")) {
-        $allFiles[] = "$from_dir/include/utils/autoloader.php";
-    }
-
-    foreach ($allFiles as $k => $file) {
-        $destFile = str_replace($from_dir."/", "", $file);
-        if (!is_dir(dirname($destFile))) {
-            mkdir_recursive(dirname($destFile)); // make sure the directory exists
-        }
-        if (stristr($file, 'uw_main.tpl')) {
-            logThis('Skipping "'.$file.'" - file copy will during commit step.');
-        } else {
-            logThis('updating UpgradeWizard code: '.$destFile);
-            copy_recursive($file, $destFile);
-        }
-    }
-}
-
-/**
  * unlinkUpgradeFiles
  * This is a helper function to clean up
  *
@@ -4532,7 +4553,7 @@ function getUWDirs()
 }
 
 /**
- * Whether directory exists within list of directories to skip
+ * Whether directory exists within list of directories to skip, matching anywhere in path
  * @param string $dir dir to be checked
  * @param array $skipDirs list with skipped dirs
  * @return boolean
@@ -4547,6 +4568,24 @@ function whetherNeedToSkipDir($dir, $skipDirs)
     return false;
 }
 
+/**
+ * Whether directory exists within list of directories, matching only beginning of path
+ * @param string $dir dir to be checked
+ * @param array $dirsArray the list of directories to check
+ * @return boolean
+ */
+function dirInArray($dir, $dirsArray)
+{
+    $dir = clean_path($dir);
+    foreach ($dirsArray as $aDir) {
+        // Match the substring only at the beginning of the path:
+        if (strpos($dir, getcwd() . '/' . $aDir) === 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /*
  * rebuildSprites
