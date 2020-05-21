@@ -102,7 +102,7 @@ script.onload = function() {
                 $('head').append(element);
             });
             $(document).ready(function() { //Primer document ready
-                console.log("You are running jQuery version:", $.fn.jquery);
+                console.warn("You are running jQuery version:", $.fn.jquery);
                 // Add "Metas" option on main nav menu
                 //Any code you may need please added on another scripts.push(file) on the beginning
             }); //final primer document ready
