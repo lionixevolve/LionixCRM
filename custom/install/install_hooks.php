@@ -1018,9 +1018,13 @@ function post_installModules()
     ksort($sugar_config);
     write_array_to_file('sugar_config', $sugar_config, 'config.php');
     installLog('...LionixCRM added sugar_config values successfully.');
+    installLog('LionixCRM starting to run cache and language files resetter ...');
+    sugar_cache_reset();
+    installLog('...LionixCRM ran sugar_cache_reset() successfully.');
+    clearAllJsAndJsLangFilesWithoutOutput();
+    installLog('...LionixCRM ran clearAllJsAndJsLangFilesWithoutOutput() successfully.');
     // el fin
     $finmsg = 'LionixCRM install finished';
     installLog($finmsg);
-
     return $finmsg;
 }
