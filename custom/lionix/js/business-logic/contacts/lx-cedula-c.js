@@ -107,45 +107,41 @@ lx.contact.resultsSearchTSECRHandler = function (forceCheck) {
             $("#cedula_c").off("keyup.results_search_tsecr");
             if (lx.lionixCRM.config.modules.contacts.results_search_tsecr) {
                 keyup_status = "enabled";
-                $("#cedula_c").on("keyup.results_search_tsecr", function () {
-                    if (lx.lionixCRM.config.debuglx) {
-                        console.warn(
-                            "key up ->",
-                            String.fromCharCode(event.which)
-                        );
-                    }
-                    if ($(this).val().length != 9) {
-                        $("#first_name").val("");
-                        $("#last_name").val("");
-                        $("#lastname2_c").val("");
-                    } else {
-                        typed_cedula = $(this).val();
-                        lx.lionixCRM
-                            .getTSECRData({
+                $("#cedula_c").on(
+                    "keyup.results_search_tsecr",
+                    async function () {
+                        if (lx.lionixCRM.config.debuglx) {
+                            console.warn(
+                                "key up ->",
+                                String.fromCharCode(event.which)
+                            );
+                        }
+                        if ($(this).val().length != 9) {
+                            $("#first_name").val("");
+                            $("#last_name").val("");
+                            $("#lastname2_c").val("");
+                        } else {
+                            typed_cedula = $(this).val();
+                            tsecrlist = await lx.lionixCRM.getTSECRData({
                                 // Infoticos must be on same database server this SuiteCRM instance.
                                 focusfieldname: this.id,
                                 cedula_c: typed_cedula,
-                            })
-                            .then(function (tsecrlist) {
-                                console.warn(
-                                    "After query to lx.lionixCRM.getTSECRData:",
-                                    tsecrlist
-                                );
-                                $("#cedula_c").val(tsecrlist.data[0].cedula_c);
-                                $("#first_name").val(
-                                    tsecrlist.data[0].first_name
-                                );
-                                $("#last_name").val(
-                                    tsecrlist.data[0].last_name
-                                );
-                                $("#lastname2_c").val(
-                                    tsecrlist.data[0].lastname2_c
-                                );
-                                $("#first_name").focus();
-                                $("#first_name").trigger("keypress");
                             });
+                            console.warn(
+                                "After query to lx.lionixCRM.getTSECRData:",
+                                tsecrlist
+                            );
+                            $("#cedula_c").val(tsecrlist.data[0].cedula_c);
+                            $("#first_name").val(tsecrlist.data[0].first_name);
+                            $("#last_name").val(tsecrlist.data[0].last_name);
+                            $("#lastname2_c").val(
+                                tsecrlist.data[0].lastname2_c
+                            );
+                            $("#first_name").focus();
+                            $("#first_name").trigger("keypress");
+                        }
                     }
-                });
+                );
             }
             $("#cedula_c").append(
                 '<div id="cedula_c_lxajaxed" data-results_search_tsecr="' +
