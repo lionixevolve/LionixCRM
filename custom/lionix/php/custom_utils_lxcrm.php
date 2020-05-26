@@ -2,8 +2,9 @@
 include_once 'custom/lionix/php/fields_functions_lionixcrm.php';
 include_once 'custom/lionix/php/fields_functions_custom.php';
 
-function lxlog($obj, $file = __FILE__, $line = __LINE__, $func = __FUNCTION__, $append = 1)
+function legacylxlog($obj, $file = __FILE__, $line = __LINE__, $func = __FUNCTION__, $append = 1)
 {
+    //? rename from lxlog to legacylxlog to be deprecated?
     /* lxlog function is intended for temporal use only, during development stage, so, is subject of changes without further notice
     * http://php.net/manual/en/language.constants.predefined.php
     * http://www.php.net/manual/en/functions.arguments.php
@@ -234,9 +235,9 @@ function createEmailsBeans($mail, $dataMail)
 
     //...
     // now emails_email_addr_rel record is added, for all emails created, in other words user id=2
-    //lxlog('',0);
+    //legacylxlog('',0);
     foreach ($arrEmails as &$objBean) {
-        //      lxlog($objBean,1);
+        //legacylxlog($objBean,1);
         if ($objBean['conBean'] == 1) {
             $queryInsert3 = "insert into emails_email_addr_rel
                                                           (id,
@@ -279,7 +280,7 @@ function createEmailsBeans($mail, $dataMail)
     }
 
     // 5th - Email body is inserted on emails_text to each email
-    //lxlog($mail->Body,0);
+    //legacylxlog($mail->Body,0);
     foreach ($arrEmails as &$objBean) {
         if ($objBean['conBean'] == 1) {
             $queryInsert4 = "insert into emails_text(
