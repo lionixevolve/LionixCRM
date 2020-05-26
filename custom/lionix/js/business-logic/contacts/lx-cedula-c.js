@@ -96,7 +96,7 @@ lx.contact.renderContactDuplicates = function (duplicates) {
     }
 };
 
-lx.contact.resultsSearchTSECRHandler = function (forceCheck) {
+lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
@@ -161,12 +161,11 @@ lx.contact.resultsSearchTSECRHandler = function (forceCheck) {
             }
         }
     } catch (error) {
-        console.warn("Modules[contacts] properties are not present!");
-        console.warn("Retrieving modules[contacts] properties...");
-        lx.lionixCRM.getConfigOption("modules").then(function (data) {
-            console.warn("Modules[contacts] successfully retrieved", data);
-            lx.contact.resultsSearchTSECRHandler(false);
-        });
+        console.error("Modules[contacts] properties are not present!");
+        console.error("Retrieving modules[contacts] properties...");
+        data = await lx.lionixCRM.getConfigOption("modules");
+        console.error("Modules[contacts] successfully retrieved", data);
+        lx.contact.resultsSearchTSECRHandler(false);
     }
 };
 
