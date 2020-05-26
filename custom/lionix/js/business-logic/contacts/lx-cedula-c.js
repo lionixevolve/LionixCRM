@@ -154,9 +154,9 @@ lx.contact.resultsSearchTSECRHandler = function (forceCheck) {
         } else {
             if (lx.lionixCRM.config.debuglx) {
                 console.warn(
-                    "cedula_c_lxajaxed div indicator already exists and it's [" +
-                        $("#cedula_c_lxajaxed").data("results_search_tsecr") +
-                        "]."
+                    `cedula_c_lxajaxed div indicator already exists and it's [${$(
+                        "#cedula_c_lxajaxed"
+                    ).data("results_search_tsecr")}].`
                 );
             }
         }
