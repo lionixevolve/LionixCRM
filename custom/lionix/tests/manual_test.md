@@ -1,6 +1,7 @@
 - Recommended: To make easy the testing copy this lines as required on config_override.php
-$sugar_config['lionixcrm']['environment'] = 'testing';
-$sugar_config['lionixcrm']['business_type'] = 'b2c';
+$sugar_config['lionixcrm']['environment'] = 'testing'; // This show a blue banner with "Testing Environment" on top in every view
+$sugar_config['lionixcrm']['business_type'] = 'b2c'; // This makes account not required on contact and opportunity creation
+$sugar_config['lionixcrm']['allow_smartchat'] = false; // This disable lx_chat
 - Change environment to testing and check blue Testing notice appears on top
 - Verify global search hides
 - Create a new opportunity, with a new account and a new contact and Upload a file in a new opportunity (no record_id) and verify it exists on history panel in one step
