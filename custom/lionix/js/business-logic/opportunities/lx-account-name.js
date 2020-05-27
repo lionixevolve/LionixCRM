@@ -6,33 +6,69 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
             $("#account_name_lxajaxed").remove();
         }
         data = lx.lionixCRM.config.business_type.toLowerCase();
-        if ($("#account_name_lxajaxed").length == 0 || $('#account_name_lxajaxed').data('business_type') != data) {
+        if (
+            $("#account_name_lxajaxed").length == 0 ||
+            $("#account_name_lxajaxed").data("business_type") != data
+        ) {
             switch (data) {
-                case 'b2c':
-                    lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
-                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
-                        lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', false);
-                        if ($("#maincontact_c").val() == 'new') {
-                            $('#account_id').val('');
-                            lx.field.show("account_name", false);
-                        } else {
-                            lx.field.show("account_name", true);
+                case "b2c":
+                    lx.field.validate(
+                        "EditView",
+                        "account_name",
+                        "Nombre de Cuenta",
+                        false
+                    );
+                    $("#maincontact_c").on(
+                        "change.lx-hide-account-name",
+                        function () {
+                            lx.field.validate(
+                                "EditView",
+                                "account_name",
+                                "Nombre de Cuenta",
+                                false
+                            );
+                            if ($("#maincontact_c").val() == "new") {
+                                $("#account_id").val("");
+                                lx.field.show("account_name", false);
+                            } else {
+                                lx.field.show("account_name", true);
+                            }
                         }
-                    });
+                    );
                     break;
-                case 'b2b':
-                    lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', true);
-                    $('#maincontact_c').on("change.lx-hide-account-name", function() {
-                        lx.field.validate('EditView', 'account_name', 'Nombre de Cuenta', true);
-                    });
+                case "b2b":
+                    lx.field.validate(
+                        "EditView",
+                        "account_name",
+                        "Nombre de Cuenta",
+                        true
+                    );
+                    $("#maincontact_c").on(
+                        "change.lx-hide-account-name",
+                        function () {
+                            lx.field.validate(
+                                "EditView",
+                                "account_name",
+                                "Nombre de Cuenta",
+                                true
+                            );
+                        }
+                    );
                     break;
             }
-            $('#account_name_lxajaxed').remove();
-            $("#account_name").append('<div id="account_name_lxajaxed" data-business_type="' + data + '" />');
+            $("#account_name_lxajaxed").remove();
+            $("#account_name").append(
+                '<div id="account_name_lxajaxed" data-business_type="' +
+                    data +
+                    '" />'
+            );
             console.warn("account_name_lxajaxed div indicator added.");
         } else {
             if (lx.lionixCRM.config.debuglx) {
-                console.warn('account_name_lxajaxed div indicator already exists:', $('#account_name_lxajaxed').data('business_type'));
+                console.warn(
+                    "account_name_lxajaxed div indicator already exists:",
+                    $("#account_name_lxajaxed").data("business_type")
+                );
             }
         }
     } catch (error) {
@@ -43,23 +79,29 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
             lx.opportunity.getAccountNameByBusinessType(false);
         });
     }
-} // end function
+}; // end function
 
 //Self-Invoking Anonymous Function Notation
 // !function(){}();  easy to read, the result is unimportant.
 // (function(){})();  like above but more parens.
 // (function(){}());  Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
-!function() {
+!(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function(mutations) {
+    var observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            var crmEditView = document.forms['EditView'];
+            var crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
-                if (crmEditView.module.value == 'Opportunities') {
+                if (crmEditView.module.value == "Opportunities") {
                     if (lx.lionixCRM.config.debuglx) {
-                        console.warn("Bussines logic observer '%s' '%s' '%s' '%s'", 'Opportunities', 'lx-account-name.js', '!function()', 'initial');
+                        console.warn(
+                            "Bussines logic observer '%s' '%s' '%s' '%s'",
+                            "Opportunities",
+                            "lx-account-name.js",
+                            "!function()",
+                            "initial"
+                        );
                     }
                     lx.opportunity.getAccountNameByBusinessType(false);
                 }
@@ -69,7 +111,7 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
         }
     });
     // Observer target
-    var target = document.querySelector('#content');
+    var target = document.querySelector("#content");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
@@ -77,11 +119,11 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
             attributes: true,
             childList: true,
             // characterData: true,
-            subtree: true
+            subtree: true,
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config);
     }
     // end observer
-}();
+})();
 //eof
