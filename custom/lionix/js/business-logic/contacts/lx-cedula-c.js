@@ -184,7 +184,7 @@ lx.contact.resultsListDuplicatesHandler = function (forceCheck) {
                 keyup_status = "enabled";
                 $("#first_name, #last_name, #lastname2_c").on(
                     "keypress.results_list_duplicates",
-                    function () {
+                    async function () {
                         ffn = $("#first_name");
                         fln = $("#last_name");
                         fln2 = $("#lastname2_c");
@@ -225,20 +225,17 @@ lx.contact.resultsListDuplicatesHandler = function (forceCheck) {
                                     ).hide(500);
                                 }
                             );
-                            lx.lionixCRM
-                                .getContactDuplicates({
+                            duplicates = await lx.lionixCRM.getContactDuplicates(
+                                {
                                     fieldname: this.id,
                                     first_name: $(ffn).val(),
                                     last_name: $(fln).val(),
                                     lastname2_c: $(fln2).val(),
                                     // "cedula_c": $(fced).val(),
                                     // "email_address": $(femail).val()
-                                })
-                                .then(function (duplicates) {
-                                    lx.contact.renderContactDuplicates(
-                                        duplicates
-                                    );
-                                });
+                                }
+                            );
+                            lx.contact.renderContactDuplicates(duplicates);
                         }
                     }
                 );
