@@ -1,5 +1,5 @@
 //  function definitions section
-lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
+lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.business_type = undefined;
@@ -72,12 +72,11 @@ lx.opportunity.getAccountNameByBusinessType = function(forceCheck) {
             }
         }
     } catch (error) {
-        console.warn('business_type property is not present!');
-        console.warn('Retrieving business_type property...');
-        lx.lionixCRM.getConfigOption('business_type').then(function(data) {
-            console.warn('business_type successfully retrieved', data);
-            lx.opportunity.getAccountNameByBusinessType(false);
-        });
+        console.error("business_type property is not present!");
+        console.error("Retrieving business_type property...");
+        data = await lx.lionixCRM.getConfigOption("business_type");
+        console.error("business_type successfully retrieved", data);
+        lx.opportunity.getAccountNameByBusinessType(false);
     }
 }; // end function
 
