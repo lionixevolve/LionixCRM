@@ -364,13 +364,12 @@ lx.chat.messagesArrayToHTML = function () {
     return html;
 };
 
-lx.chat.start = function (forceCheck) {
+lx.chat.start = async function (forceCheck) {
     if (forceCheck) {
         console.warn("Retrieving allow_smartchat property...");
-        lx.lionixCRM.getConfigOption("allow_smartchat").then(function (data) {
-            console.warn("allow_smartchat successfully retrieved", data);
-            lx.chat.start(false);
-        });
+        data = await lx.lionixCRM.getConfigOption("allow_smartchat");
+        console.warn("allow_smartchat successfully retrieved", data);
+        lx.chat.start(false);
     }
     if (lx.lionixCRM.config.allow_smartchat) {
         if (!lx.current_user_id) {
