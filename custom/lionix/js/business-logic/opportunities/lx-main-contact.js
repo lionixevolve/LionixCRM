@@ -326,7 +326,7 @@ lx.opportunity.renderMainContactDuplicates = function (duplicates) {
     }
 };
 
-lx.opportunity.resultsSearchTSECRHandler = function (forceCheck) {
+lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
@@ -341,7 +341,7 @@ lx.opportunity.resultsSearchTSECRHandler = function (forceCheck) {
                 keyup_status = "enabled";
                 $("#maincontactcedula_c").on(
                     "keyup.results_search_tsecr",
-                    function () {
+                    async function () {
                         if (lx.lionixCRM.config.debuglx) {
                             console.warn(
                                 "key up ->",
@@ -354,34 +354,29 @@ lx.opportunity.resultsSearchTSECRHandler = function (forceCheck) {
                             $("#maincontactlastname2_c").val("");
                         } else {
                             typed_cedula = $(this).val();
-                            lx.lionixCRM
-                                .getTSECRData({
-                                    // Infoticos must be on same database server this SuiteCRM instance.
-                                    focusfieldname: this.id,
-                                    cedula_c: typed_cedula,
-                                })
-                                .then(function (tsecrlist) {
-                                    console.warn(
-                                        "After query to lx.lionixCRM.getTSECRData:",
-                                        tsecrlist
-                                    );
-                                    $("#maincontactcedula_c").val(
-                                        tsecrlist.data[0].cedula_c
-                                    );
-                                    $("#maincontactfirstname_c").val(
-                                        tsecrlist.data[0].first_name
-                                    );
-                                    $("#maincontactlastname_c").val(
-                                        tsecrlist.data[0].last_name
-                                    );
-                                    $("#maincontactlastname2_c").val(
-                                        tsecrlist.data[0].lastname2_c
-                                    );
-                                    $("#maincontactfirstname_c").focus();
-                                    $("#maincontactfirstname_c").trigger(
-                                        "keypress"
-                                    );
-                                });
+                            tsecrlist = await lx.lionixCRM.getTSECRData({
+                                // Infoticos must be on same database server this SuiteCRM instance.
+                                focusfieldname: this.id,
+                                cedula_c: typed_cedula,
+                            });
+                            console.warn(
+                                "After query to lx.lionixCRM.getTSECRData:",
+                                tsecrlist
+                            );
+                            $("#maincontactcedula_c").val(
+                                tsecrlist.data[0].cedula_c
+                            );
+                            $("#maincontactfirstname_c").val(
+                                tsecrlist.data[0].first_name
+                            );
+                            $("#maincontactlastname_c").val(
+                                tsecrlist.data[0].last_name
+                            );
+                            $("#maincontactlastname2_c").val(
+                                tsecrlist.data[0].lastname2_c
+                            );
+                            $("#maincontactfirstname_c").focus();
+                            $("#maincontactfirstname_c").trigger("keypress");
                         }
                     }
                 );
@@ -398,21 +393,18 @@ lx.opportunity.resultsSearchTSECRHandler = function (forceCheck) {
         } else {
             if (lx.lionixCRM.config.debuglx) {
                 console.warn(
-                    "maincontactcedula_c_lxajaxed div indicator already exists and it's [" +
-                        $("#maincontactcedula_c_lxajaxed").data(
-                            "results_search_tsecr"
-                        ) +
-                        "]."
+                    `maincontactcedula_c_lxajaxed div indicator already exists and it's [${$(
+                        "#maincontactcedula_c_lxajaxed"
+                    ).data("results_search_tsecr")}].`
                 );
             }
         }
     } catch (error) {
-        console.warn("Modules[contacts] properties are not present!");
-        console.warn("Retrieving modules[contacts] properties...");
-        lx.lionixCRM.getConfigOption("modules").then(function (data) {
-            console.warn("Modules[contacts] successfully retrieved", data);
-            lx.opportunity.resultsSearchTSECRHandler(false);
-        });
+        console.error("Modules[contacts] properties are not present!");
+        console.error("Retrieving modules[contacts] properties...");
+        data = await lx.lionixCRM.getConfigOption("modules");
+        console.error("Modules[contacts] successfully retrieved", data);
+        lx.opportunity.resultsSearchTSECRHandler(false);
     }
 };
 
