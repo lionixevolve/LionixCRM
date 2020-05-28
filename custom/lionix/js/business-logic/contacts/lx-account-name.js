@@ -46,17 +46,11 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error(
-            "LionixCRM catched on lx.contact.getAccountNameByBusinessType 👇🏻"
-        );
-        console.error(error);
+        console.error("lx.contact.getAccountNameByBusinessType ", error);
         console.error("business_type property is not present!");
         console.error("Retrieving business_type property...");
         data = await lx.lionixCRM.getConfigOption("business_type");
-        console.error(
-            "business_type successfully retrieved on lx.contact.getAccountNameByBusinessType catch",
-            data
-        );
+        console.error("business_type successfully retrieved", data);
         lx.contact.getAccountNameByBusinessType(false);
     }
 }; // end function

@@ -18,10 +18,7 @@ lx.lionixCRM.getContactDuplicates = async function (searchObject) {
         }),
     });
     data = await response.json().catch((error) => {
-        console.error(
-            "Function lx.lionixcrm.getContactDuplicates error:",
-            error
-        );
+        console.error("lx.lionixcrm.getContactDuplicates error:", error);
         return error;
     });
     if (data == "") {
