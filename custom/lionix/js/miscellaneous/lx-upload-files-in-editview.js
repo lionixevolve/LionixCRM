@@ -296,7 +296,7 @@ lx.upload.getFileTemplate = function (element) {
     }); /* Fin del Ajax */
 }; //lx.upload.getFileTemplate()
 
-lx.upload.getFileFields = function (forceCheck) {
+lx.upload.getFileFields = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
@@ -373,10 +373,9 @@ lx.upload.getFileFields = function (forceCheck) {
     } catch (error) {
         console.error("Modules[all] properties are not present!");
         console.error("Retrieving modules[all] properties...");
-        lx.lionixCRM.getConfigOption("modules").then(function (data) {
-            console.warn("Modules[all] successfully retrieved", data);
-            lx.upload.getFileFields(false);
-        });
+        data = await lx.lionixCRM.getConfigOption("modules");
+        console.warn("Modules[all] successfully retrieved", data);
+        lx.upload.getFileFields(false);
     }
 }; // end function
 
