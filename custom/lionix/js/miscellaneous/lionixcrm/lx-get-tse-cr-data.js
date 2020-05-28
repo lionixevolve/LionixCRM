@@ -1,20 +1,11 @@
 // function definitions section
 lx.lionixCRM.getTSECRData = function(searchObject) {
-    /*
-    // searchObject example
-    searchObject = {
-        // Infoticos must be on same database server this SuiteCRM instance.
-        "focusfieldname": "replace with input textfield id",
-        "cedula_c": "replace with cédula to looking for"
-    }
-    */
-    so = searchObject;
     return new Promise(function(resolve, reject) {
         // var method = "getContactDuplicates";
         var method = "getTSEData";
         var data = {
             "method": method,
-            "cedula_c": so.cedula_c
+            "cedula_c": searchObject.cedula_c
         };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
@@ -32,10 +23,10 @@ lx.lionixCRM.getTSECRData = function(searchObject) {
                 console.warn("data:", data);
                 data = JSON.parse(data);
                 if (data.length == 0) {
-                    console.warn("TSE Costa Rica entry NOT FOUND:", so.cedula_c);
+                    console.warn("TSE Costa Rica entry NOT FOUND:", searchObject.cedula_c);
                     data = [
                         {
-                            cedula_c: so.cedula_c,
+                            cedula_c: searchObject.cedula_c,
                             first_name: "",
                             last_name: "",
                             lastname2_c: "",
@@ -50,14 +41,14 @@ lx.lionixCRM.getTSECRData = function(searchObject) {
                         "extendedTimeOut": "0",
                         "progressBar": true,
                         "onShown": function() {
-                            console.warn('Focus on ' + so.focusfieldname + 'after toastr.');
-                            $('#' + so.focusfieldname).focus();
+                            console.warn('Focus on ' + searchObject.focusfieldname + 'after toastr.');
+                            $('#' + searchObject.focusfieldname).focus();
                         }
                     });
                 } else {
                     console.warn("TSE Costa Rica entry found:", data.length, data);
                 }
-                resolve({"focusfieldname": so.focusfieldname, "data": data});
+                resolve({"focusfieldname": searchObject.focusfieldname, "data": data});
             }, // end success
             // error is a function to be called if the request fails.
             error: function(jqXHR, status, error) {
