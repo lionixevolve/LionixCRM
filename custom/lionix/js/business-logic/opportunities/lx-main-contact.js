@@ -408,7 +408,7 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
     }
 };
 
-lx.opportunity.resultsListDuplicatesHandler = function (forceCheck) {
+lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
@@ -426,7 +426,7 @@ lx.opportunity.resultsListDuplicatesHandler = function (forceCheck) {
                 keyup_status = "enabled";
                 $(
                     "#maincontactfirstname_c, #maincontactlastname_c, #maincontactlastname2_c, #maincontactemailaddress_c"
-                ).on("keypress.results_list_duplicates", function () {
+                ).on("keypress.results_list_duplicates", async function () {
                     ffn = $("#maincontactfirstname_c");
                     fln = $("#maincontactlastname_c");
                     fln2 = $("#maincontactlastname2_c");
@@ -469,50 +469,38 @@ lx.opportunity.resultsListDuplicatesHandler = function (forceCheck) {
                                 500
                             );
                         });
-                        lx.lionixCRM
-                            .getContactDuplicates({
-                                fieldname: this.id,
-                                first_name: $(ffn).val(),
-                                last_name: $(fln).val(),
-                                lastname2_c: $(fln2).val(),
-                                // ,"cedula_c": $(fced).val(),
-                                email_address: $(femail).val(),
-                            })
-                            .then(function (duplicates) {
-                                lx.opportunity.renderMainContactDuplicates(
-                                    duplicates
-                                );
-                            });
+                        duplicates = await lx.lionixCRM.getContactDuplicates({
+                            fieldname: this.id,
+                            first_name: $(ffn).val(),
+                            last_name: $(fln).val(),
+                            lastname2_c: $(fln2).val(),
+                            // ,"cedula_c": $(fced).val(),
+                            email_address: $(femail).val(),
+                        });
+                        lx.opportunity.renderMainContactDuplicates(duplicates);
                     }
                 });
             }
             $("#maincontactcedula_c").append(
-                '<div id="main_full_name_lxajaxed" data-results_list_duplicates="' +
-                    keyup_status +
-                    '"/>'
+                `<div id="main_full_name_lxajaxed" data-results_list_duplicates="${keyup_status}"/>`
             );
-            console.warn(
-                "keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c " +
-                    keyup_status
-            );
+            console.warn(`keypress.results_list_duplicates ${keyup_status}`);
         } else {
             if (lx.lionixCRM.config.debuglx) {
+                console.warn("main_full_name_lxajaxed div already exists");
                 console.warn(
-                    "main_full_name_lxajaxed div indicator already exists and it's [" +
-                        $("#main_full_name_lxajaxed").data(
-                            "results_list_duplicates"
-                        ) +
-                        "]."
+                    $("#main_full_name_lxajaxed").data(
+                        "results_list_duplicates"
+                    )
                 );
             }
         }
     } catch (error) {
-        console.warn("Modules[opportunities] properties are not present!");
-        console.warn("Retrieving modules[opportunities] properties...");
-        lx.lionixCRM.getConfigOption("modules").then(function (data) {
-            console.warn("Modules[opportunities] successfully retrieved", data);
-            lx.opportunity.resultsListDuplicatesHandler(false);
-        });
+        console.error("Modules[opportunities] properties are not present!");
+        console.error("Retrieving modules[opportunities] properties...");
+        data = await lx.lionixCRM.getConfigOption("modules");
+        console.error("Modules[opportunities] successfully retrieved", data);
+        lx.opportunity.resultsListDuplicatesHandler(false);
     }
 };
 
