@@ -3,7 +3,7 @@
 // !function(){}();  easy to read, the result is unimportant.
 // (function(){})();  like above but more parens.
 // (function(){}());  Douglas Crockford's style when you need function results.
-// Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
+// Further reading: http://javascript.crockford.com/code.html and look for invoked immediately
 
 // function definitions section
 lx.chat = {};
@@ -451,9 +451,13 @@ lx.chat.getMessages = function() {
                 currentForm = document.forms['EditView'];
             }
             if (currentForm) {
-                $(document).ready(function() {
-                    // if #edit_button exists is a detailview, if not, then if a #SAVE or #SAVE_HEADER button exists is a editview
-                    if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
+                $(document).ready(function () {
+                    // if #edit_button exists is a detailview, else if a #SAVE or #SAVE_HEADER button exists is a editview
+                    if (
+                        $("#edit_button").length ||
+                        $("#SAVE").length ||
+                        $("#SAVE_HEADER").length
+                    ) {
                         // now it ensures that lxchat isn't already present
                         if (!$("#lxchat").length) {
                             lx.chat.start(false);

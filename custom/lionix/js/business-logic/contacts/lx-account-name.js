@@ -59,7 +59,7 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
 // !function(){}();  easy to read, the result is unimportant.
 // (function(){})();  like above but more parens.
 // (function(){}());  Douglas Crockford's style when you need function results.
-// Further reading: http://javascript.crockford.com/code.html then search for invoked immediately
+// Further reading: http://javascript.crockford.com/code.html and look for invoked immediately
 !(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver

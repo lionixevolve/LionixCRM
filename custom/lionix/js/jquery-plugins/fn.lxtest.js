@@ -35,14 +35,14 @@ console.warn("jQuery plugin $.fn.lxtest added.");
 // Protecting the $ Alias and Adding Scope
 // The $ variable is very popular among JavaScript libraries, and if you're using another library with jQuery, you will have to make jQuery not use the $ with jQuery.noConflict().
 // However, this will break our plugin since it is written with the assumption that $ is an alias to the jQuery function.
-// To work well with other plugins, and still use the jQuery $ alias, we need to put all of our code inside of an Immediately Invoked Function Expression, and then pass the function jQuery, and name the parameter $
+// To work well with other plugins, and still use the jQuery $ alias, we need to put all of our code inside of an Immediately Invoked Function Expression, and after that pass the function jQuery, and name the parameter $
 
 // Minimizing Plugin Footprint
 // It's good practice when writing plugins to only take up one slot within $.fn. This reduces both the chance that your plugin will be overridden, and the chance that your plugin will override other plugins.
 
 // Using the each() Method
 // Your typical jQuery object will contain references to any number of DOM elements, and that's why jQuery objects are often referred to as collections.
-// If you want to do any manipulating with specific elements (e.g. getting a data attribute, calculating specific positions) then you need to use .each() to loop through the elements.
+// If you want to do any manipulating with specific elements (e.g. getting a data attribute, calculating specific positions) after that you need to use .each() to loop through the elements.
 
 // Accepting Options
 // As your plugins get more and more complex, it's a good idea to make your plugin customizable by accepting options. The easiest way to do this, especially if there are lots of options, is with an object literal.
