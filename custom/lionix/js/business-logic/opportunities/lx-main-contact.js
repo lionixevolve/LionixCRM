@@ -204,7 +204,7 @@ lx.opportunity.renderMainContactDuplicates = function (duplicates) {
     $(".main_contact_duplicates ul li").remove();
     if (duplicates.data.length) {
         duplicates.data.forEach(function (element) {
-            primary_address = {};
+            primary_address = { id: "", email_address: "" };
             element.emails.forEach(function (element) {
                 if (element.primary_address === "1") {
                     primary_address.id = element.id;
