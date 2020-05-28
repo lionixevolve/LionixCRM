@@ -7,195 +7,299 @@
 
 // function definitions section
 lx.chat = {};
-lx.chat.field = '';
-lx.chat.saveNewMessage = function(userMessage) {
+lx.chat.field = "";
+lx.chat.saveNewMessage = function (userMessage) {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
-    if (userMessage === '') {
-        console.warn('lx.chat.saveNewMessage do not stores empty messages');
+    if (userMessage === "") {
+        console.warn("lx.chat.saveNewMessage do not stores empty messages");
     } else {
         // message creation
         var m = moment();
         if (!Array.isArray(lx.chat.messagesArray)) {
             lx.chat.messagesArray = [];
         }
-        lx.chat.messagesArray.push({"id": lx.current_user_id, "msg": userMessage, "date": m.toISOString()});
-        newMessage = JSON.stringify(lx.chat.messagesArray.map(function(e) {
-            return {"id": e.id, "msg": e.msg, "date": e.date}
-        }));
+        lx.chat.messagesArray.push({
+            id: lx.current_user_id,
+            msg: userMessage,
+            date: m.toISOString(),
+        });
+        newMessage = JSON.stringify(
+            lx.chat.messagesArray.map(function (e) {
+                return { id: e.id, msg: e.msg, date: e.date };
+            })
+        );
 
-        var currentForm = document.forms['DetailView'];
+        var currentForm = document.forms["DetailView"];
         if (!currentForm) {
-            currentForm = document.forms['EditView'];
+            currentForm = document.forms["EditView"];
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
 
         var data = {
-            "method": "lxChat",
-            "module": module_name,
-            "record_id": record_id,
-            "field_name": lx.chat.field,
-            "save": 1,
-            "chat_c": newMessage
+            method: "lxChat",
+            module: module_name,
+            record_id: record_id,
+            field_name: lx.chat.field,
+            save: 1,
+            chat_c: newMessage,
         };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function(jqXHR, settings) {
-                console.warn("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax beforeSend');
+            beforeSend: function (jqXHR, settings) {
+                console.warn(
+                    "LxChat Logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.saveNewMessage()",
+                    "ajax beforeSend"
+                );
                 console.warn("beforeSend url:", settings.url);
                 console.warn("beforeSend data:", settings.data);
             },
-            url: 'lxajax.php',
-            type: 'POST',
+            url: "lxajax.php",
+            type: "POST",
             data: data,
             // success is a function to be called if the request succeeds.
-            success: function(data, status, jqXHR) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax success');
+            success: function (data, status, jqXHR) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.saveNewMessage()",
+                    "ajax success"
+                );
                 console.warn("success callback:", status);
                 console.warn("data:", data);
-                $("#lxchatnewmsg").val('');
+                $("#lxchatnewmsg").val("");
                 $("textarea#" + lx.chat.field).val(data);
-                data = (data == '')
-                    ? "[]"
-                    : data;
+                data = data == "" ? "[]" : data;
                 lx.chat.messagesArray = JSON.parse(data);
-                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
+                document.getElementById(
+                    "lxchatcontent"
+                ).innerHTML = lx.chat.messagesArrayToHTML();
             },
             // error is a function to be called if the request fails.
-            error: function(jqXHR, status, error) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax error');
+            error: function (jqXHR, status, error) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.saveNewMessage()",
+                    "ajax error"
+                );
                 console.warn("error callback:", status);
                 console.warn("Function lx.chat.saveNewMessage error:", error);
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            complete: function(jqXHR, status) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.saveNewMessage()', 'ajax complete');
+            complete: function (jqXHR, status) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.saveNewMessage()",
+                    "ajax complete"
+                );
                 console.warn("complete status:", status);
                 lx.chat.scrollToBottom();
             },
-            datatype: "text"
+            datatype: "text",
         });
     }
     $("#lxchatSave").removeAttr("disabled");
-}
+};
 
-lx.chat.render = function(givenField) {
+lx.chat.render = function (givenField) {
     if (!$("#lxchat").length) {
-        var currentForm = document.forms['DetailView'];
+        var currentForm = document.forms["DetailView"];
         if (!currentForm) {
-            currentForm = document.forms['EditView'];
+            currentForm = document.forms["EditView"];
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
 
         var data = {
-            "method": "lxChat",
-            "module": module_name,
-            "record_id": record_id,
-            "field_name": givenField
+            method: "lxChat",
+            module: module_name,
+            record_id: record_id,
+            field_name: givenField,
         };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function(jqXHR, settings) {
-                console.warn("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax beforeSend');
+            beforeSend: function (jqXHR, settings) {
+                console.warn(
+                    "LxChat Logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.render()",
+                    "ajax beforeSend"
+                );
                 console.warn("beforeSend url:", settings.url);
                 console.warn("beforeSend data:", settings.data);
             },
-            url: 'lxajax.php',
-            type: 'POST',
+            url: "lxajax.php",
+            type: "POST",
             data: data,
             // success is a function to be called if the request succeeds.
-            success: function(data, status, jqXHR) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax success');
+            success: function (data, status, jqXHR) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.render()",
+                    "ajax success"
+                );
                 console.warn("success callback:", status);
                 console.warn("data:", data);
                 if (!$("#lxchat").length) {
                     var currentUser = $("#with-label").text().trim();
                     //Current lx.chat.field text
-                    data = (data == '')
-                        ? "[]"
-                        : data;
+                    data = data == "" ? "[]" : data;
                     lx.chat.messagesArray = JSON.parse(data);
                     lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
                     //Current crm field must be hide
-                    $('#' + givenField).hide();
+                    $("#" + givenField).hide();
                     //lxchat div added
-                    $('<div id="lxchat" data-field="' + givenField + '"><center><b>LionixCRM Smart CHAT</b></center></div>').insertAfter('#' + givenField);
+                    $(
+                        '<div id="lxchat" data-field="' +
+                            givenField +
+                            '"><center><b>LionixCRM Smart CHAT</b></center></div>'
+                    ).insertAfter("#" + givenField);
                     lx.chat.field = givenField;
-                    $('#lxchat').attr('style', 'position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;');
-                    $('#lxchat').append('<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>');
-                    document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
+                    $("#lxchat").attr(
+                        "style",
+                        "position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;"
+                    );
+                    $("#lxchat").append(
+                        '<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>'
+                    );
+                    document.getElementById(
+                        "lxchatcontent"
+                    ).innerHTML = lx.chat.messagesArrayToHTML();
                     //Textarea for new messages added
-                    $('<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' + currentUser.split(" ")[0] + '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>').insertAfter('#lxchat');
-                    $(document).on("keypress", "#lxchatnewmsg", function(event) {
+                    $(
+                        '<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' +
+                            currentUser.split(" ")[0] +
+                            '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>'
+                    ).insertAfter("#lxchat");
+                    $(document).on("keypress", "#lxchatnewmsg", function (
+                        event
+                    ) {
                         if (event.which == 13 && !event.shiftKey) {
                             lx.chat.validateNewMessage();
                         }
                     });
                     //Save new messages button added
-                    $('<br><input id="lxchatSave" type="button" value="enviar mensaje" />').insertAfter('#lxchatnewmsg');
-                    $(document).on("click", "#lxchatSave", function(event) {
+                    $(
+                        '<br><input id="lxchatSave" type="button" value="enviar mensaje" />'
+                    ).insertAfter("#lxchatnewmsg");
+                    $(document).on("click", "#lxchatSave", function (event) {
                         lx.chat.validateNewMessage();
                     });
                 }
             },
             // error is a function to be called if the request fails.
-            error: function(jqXHR, status, error) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax error');
+            error: function (jqXHR, status, error) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.render()",
+                    "ajax error"
+                );
                 console.warn("error callback:", status);
                 console.warn("Function lx.chat.render error:", error);
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            complete: function(jqXHR, status) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.render()', 'ajax complete');
+            complete: function (jqXHR, status) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.render()",
+                    "ajax complete"
+                );
                 console.warn("complete status:", status);
                 lx.chat.scrollToBottom();
                 lx.chat.refreshMessagesInterval(true);
             },
-            datatype: "text"
+            datatype: "text",
         });
     }
-}
+};
 
-lx.chat.findFieldToRender = function() {
+lx.chat.findFieldToRender = function () {
     if (!$("#lxchat").length) {
-        var currentForm = document.forms['DetailView'];
+        var currentForm = document.forms["DetailView"];
         if (!currentForm) {
-            currentForm = document.forms['EditView'];
+            currentForm = document.forms["EditView"];
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
         var lxajaxdata = {
-            "method": "lxChatGetSmartChatField"
-        }
+            method: "lxChatGetSmartChatField",
+        };
         $.ajax({
             // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function(jqXHR, settings) {
-                console.warn("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax beforeSend');
+            beforeSend: function (jqXHR, settings) {
+                console.warn(
+                    "LxChat Logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.findFieldToRender()",
+                    "ajax beforeSend"
+                );
                 console.warn("beforeSend callback:", settings.url);
             },
-            url: 'lxajax.php',
-            type: 'POST',
+            url: "lxajax.php",
+            type: "POST",
             data: lxajaxdata,
             // success is a function to be called if the request succeeds.
-            success: function(data, status, jqXHR) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax success');
+            success: function (data, status, jqXHR) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.findFieldToRender()",
+                    "ajax success"
+                );
                 console.warn("success callback:", status);
                 console.warn("data:", data);
                 if (!$("#lxchat").length) {
-                    if (data == '') {
-                        console.warn("lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file");
+                    if (data == "") {
+                        console.warn(
+                            "lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file"
+                        );
                     } else {
                         lx.chat.candidateFieldsArray = JSON.parse(data);
-                        for (var i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
-                            if ($(document).find("#" + lx.chat.candidateFieldsArray[i]).length) {
+                        for (
+                            var i = 0;
+                            i < lx.chat.candidateFieldsArray.length;
+                            i++
+                        ) {
+                            if (
+                                $(document).find(
+                                    "#" + lx.chat.candidateFieldsArray[i]
+                                ).length
+                            ) {
                                 if (!record_id) {
-                                    console.warn("lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present");
-                                    lx.field.show(lx.chat.candidateFieldsArray[i], false);
-                                    $('<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>').insertAfter('#' + lx.chat.candidateFieldsArray[i]);
+                                    console.warn(
+                                        "lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present"
+                                    );
+                                    lx.field.show(
+                                        lx.chat.candidateFieldsArray[i],
+                                        false
+                                    );
+                                    $(
+                                        '<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>'
+                                    ).insertAfter(
+                                        "#" + lx.chat.candidateFieldsArray[i]
+                                    );
                                 } else {
-                                    lx.chat.render(lx.chat.candidateFieldsArray[i]);
+                                    lx.chat.render(
+                                        lx.chat.candidateFieldsArray[i]
+                                    );
                                 }
                             }
                         }
@@ -203,10 +307,19 @@ lx.chat.findFieldToRender = function() {
                 }
             },
             // error is a function to be called if the request fails.
-            error: function(jqXHR, status, error) {
-                console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.findFieldToRender()', 'ajax error');
+            error: function (jqXHR, status, error) {
+                console.warn(
+                    "LxChat logic '%s' '%s' '%s' '%s'",
+                    module_name,
+                    "lx-chat.js",
+                    "lx.chat.findFieldToRender()",
+                    "ajax error"
+                );
                 console.warn("error callback:", status);
-                console.warn("Function lx.chat.findFieldToRender error:", error);
+                console.warn(
+                    "Function lx.chat.findFieldToRender error:",
+                    error
+                );
             }, // end error
             // complete is a function to be called when the request finishes (after success and error callbacks are executed).
             // complete: function(jqXHR, status) {
@@ -214,94 +327,126 @@ lx.chat.findFieldToRender = function() {
             //     console.warn("complete status:", status);
             //
             // },
-            datatype: "text"
-        })
+            datatype: "text",
+        });
         // }
     }
-}
+};
 
-lx.chat.messagesArrayToHTML = function() {
+lx.chat.messagesArrayToHTML = function () {
     msgArray = lx.chat.messagesArray;
     html = "";
     if (Array.isArray(msgArray)) {
         html = "";
-        msgArray.forEach(function(msg, i) {
+        msgArray.forEach(function (msg, i) {
             var m = moment(msg.date);
-            pStyle = (msg.currentUser)
+            pStyle = msg.currentUser
                 ? 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
-                : 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"' // their msgs
-            html += '<p id="lxchatmsg' + i + '"' + pStyle + '>' + '<b>' + msg.fullName + '</b>' + '</br>' + msg.msg + '</br>' + '<i>' + m.calendar() + '</i>' + '</p>';
+                : 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"'; // their msgs
+            html +=
+                '<p id="lxchatmsg' +
+                i +
+                '"' +
+                pStyle +
+                ">" +
+                "<b>" +
+                msg.fullName +
+                "</b>" +
+                "</br>" +
+                msg.msg +
+                "</br>" +
+                "<i>" +
+                m.calendar() +
+                "</i>" +
+                "</p>";
         });
     }
     return html;
-}
+};
 
-lx.chat.start = function(forceCheck) {
+lx.chat.start = function (forceCheck) {
     if (forceCheck) {
-        console.warn('Retrieving allow_smartchat property...');
-        lx.lionixCRM.getConfigOption('allow_smartchat').then(function(data) {
-            console.warn('allow_smartchat successfully retrieved', data);
+        console.warn("Retrieving allow_smartchat property...");
+        lx.lionixCRM.getConfigOption("allow_smartchat").then(function (data) {
+            console.warn("allow_smartchat successfully retrieved", data);
             lx.chat.start(false);
         });
     }
     if (lx.lionixCRM.config.allow_smartchat) {
         if (!lx.current_user_id) {
-            var currentForm = document.forms['DetailView'];
+            var currentForm = document.forms["DetailView"];
             if (!currentForm) {
-                currentForm = document.forms['EditView'];
+                currentForm = document.forms["EditView"];
             }
             var record_id = currentForm.record.value;
             var module_name = currentForm.module.value;
             var lxajaxdata = {
-                "method": "getCurrentUserId"
-            }
+                method: "getCurrentUserId",
+            };
             $.ajax({
                 // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-                beforeSend: function(jqXHR, settings) {
-                    console.warn("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start', 'ajax beforeSend');
+                beforeSend: function (jqXHR, settings) {
+                    console.warn(
+                        "LxChat Logic '%s' '%s' '%s' '%s'",
+                        module_name,
+                        "lx-chat.js",
+                        "lx.chat.start",
+                        "ajax beforeSend"
+                    );
                     console.warn("beforeSend callback:", settings.url);
                 },
-                url: 'lxajax.php',
-                type: 'POST',
+                url: "lxajax.php",
+                type: "POST",
                 data: lxajaxdata,
                 // success is a function to be called if the request succeeds.
-                success: function(data, status, jqXHR) {
-                    console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start', 'ajax success');
+                success: function (data, status, jqXHR) {
+                    console.warn(
+                        "LxChat logic '%s' '%s' '%s' '%s'",
+                        module_name,
+                        "lx-chat.js",
+                        "lx.chat.start",
+                        "ajax success"
+                    );
                     console.warn("success callback:", status);
                     console.warn("data:", data);
                     lx.current_user_id = data;
                     lx.chat.start(false);
                 },
                 // error is a function to be called if the request fails.
-                error: function(jqXHR, status, error) {
-                    console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.start', 'ajax error');
+                error: function (jqXHR, status, error) {
+                    console.warn(
+                        "LxChat logic '%s' '%s' '%s' '%s'",
+                        module_name,
+                        "lx-chat.js",
+                        "lx.chat.start",
+                        "ajax error"
+                    );
                     console.warn("error callback:", status);
                     console.warn("Function lx.chat.start error:", error);
                 }, // end error
                 // complete is a function to be called when the request finishes (after success and error callbacks are executed).
                 // complete: function(jqXHR, status) {
                 // },
-                datatype: "text"
+                datatype: "text",
             });
-
         }
         if (!$("#lxchat").length) {
             lx.chat.findFieldToRender();
         }
     } else {
         if (lx.lionixCRM.config.debuglx) {
-            console.warn('smartchat is disabled in LionixCRM config.php file.');
+            console.warn("smartchat is disabled in LionixCRM config.php file.");
         }
     }
-}
+};
 
-lx.chat.scrollToBottom = function() {
-    var h1 = $('#lxchatcontent')[0].scrollHeight,
-        h2 = $('#lxchatcontent').height();
-    $('#lxchatcontent').scrollTop(h1 - h2);
-}
+lx.chat.scrollToBottom = function () {
+    var h1 = $("#lxchatcontent")[0].scrollHeight,
+        h2 = $("#lxchatcontent").height();
+    $("#lxchatcontent").scrollTop(h1 - h2);
+};
 
-lx.chat.refreshMessagesInterval = function(refresh) {
+lx.chat.refreshMessagesInterval = function (refresh) {
     if (lx.chat.interval_momentjs_ids_list == undefined) {
         lx.chat.interval_momentjs_ids_list = [];
     }
@@ -309,133 +454,174 @@ lx.chat.refreshMessagesInterval = function(refresh) {
         lx.chat.interval_messages_ids_list = [];
     }
     if (refresh) {
-        console.warn('Starting new LionixCRM Smart CHAT refresh messages interval...');
+        console.warn(
+            "Starting new LionixCRM Smart CHAT refresh messages interval..."
+        );
         // chat momentjs
-        lx.chat.interval_momentjs_ids_list.forEach(function(element) {
+        lx.chat.interval_momentjs_ids_list.forEach(function (element) {
             window.clearInterval(element);
         });
-        new_id = window.setInterval(function() {
+        new_id = window.setInterval(function () {
             if (!$("#lxchatcontent").length) {
                 lx.chat.refreshMessagesInterval(false);
             } else {
-                console.warn('Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...', lx.chat.interval_momentjs_ids_list[0]);
-                document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
+                console.warn(
+                    "Refreshing momentjs strings on LionixCRM Smart CHAT, interval id: %s, see you in 15 secs...",
+                    lx.chat.interval_momentjs_ids_list[0]
+                );
+                document.getElementById(
+                    "lxchatcontent"
+                ).innerHTML = lx.chat.messagesArrayToHTML();
             }
         }, 15000);
         lx.chat.interval_momentjs_ids_list.unshift(new_id);
-        console.warn('New LionixCRM momentjs refresh strings interval id set: %s', new_id);
+        console.warn(
+            "New LionixCRM momentjs refresh strings interval id set: %s",
+            new_id
+        );
         // chat messages
-        lx.chat.interval_messages_ids_list.forEach(function(element) {
+        lx.chat.interval_messages_ids_list.forEach(function (element) {
             window.clearInterval(element);
         });
-        new_id = window.setInterval(function() {
-            console.warn('Retrieving messages from database on LionixCRM Smart CHAT, interval id: %s, see you in 5 mins...', lx.chat.interval_messages_ids_list[0]);
+        new_id = window.setInterval(function () {
+            console.warn(
+                "Retrieving messages from database on LionixCRM Smart CHAT, interval id: %s, see you in 5 mins...",
+                lx.chat.interval_messages_ids_list[0]
+            );
             lx.chat.getMessages();
         }, 300000);
         lx.chat.interval_messages_ids_list.unshift(new_id);
-        console.warn('New LionixCRM getMessages interval id set: %s', new_id);
+        console.warn("New LionixCRM getMessages interval id set: %s", new_id);
     } else {
-        lx.chat.interval_momentjs_ids_list.forEach(function(element) {
+        lx.chat.interval_momentjs_ids_list.forEach(function (element) {
             window.clearInterval(element);
         });
-        lx.chat.interval_messages_ids_list.forEach(function(element) {
+        lx.chat.interval_messages_ids_list.forEach(function (element) {
             window.clearInterval(element);
         });
         lx.chat.interval_momentjs_ids_list = undefined;
         lx.chat.interval_messages_ids_list = undefined;
-        console.warn('LionixCRM messages interval stopped');
+        console.warn("LionixCRM messages interval stopped");
     }
-}
+};
 
-lx.chat.validateNewMessage = function() {
+lx.chat.validateNewMessage = function () {
     var userMessage = $("#lxchatnewmsg").val().trim();
-    if (userMessage === '') {
+    if (userMessage === "") {
         toastr["warning"]("Mensaje vacío no permitido", "Smart Chat", {
-            "positionClass": "toast-bottom-center",
-            "showDuration": "0",
-            "hideDuration": "0",
-            "timeOut": "1000",
-            "extendedTimeOut": "0",
-            "progressBar": true,
-            "onShown": function() {
-                $('#lxchatnewmsg').val('');
-                $('#lxchatnewmsg').focus();
-            }
+            positionClass: "toast-bottom-center",
+            showDuration: "0",
+            hideDuration: "0",
+            timeOut: "1000",
+            extendedTimeOut: "0",
+            progressBar: true,
+            onShown: function () {
+                $("#lxchatnewmsg").val("");
+                $("#lxchatnewmsg").focus();
+            },
         });
     } else {
         toastr["success"]("Guardando mensaje...", "Smart Chat", {
-            "positionClass": "toast-bottom-center",
-            "showDuration": "1",
-            "hideDuration": "1",
-            "timeOut": "1",
-            "extendedTimeOut": "1",
-            "onShown": function() {
+            positionClass: "toast-bottom-center",
+            showDuration: "1",
+            hideDuration: "1",
+            timeOut: "1",
+            extendedTimeOut: "1",
+            onShown: function () {
                 lx.chat.saveNewMessage(userMessage);
-                $('#lxchatnewmsg').focus();
-            }
+                $("#lxchatnewmsg").focus();
+            },
         });
     }
-}
+};
 
-lx.chat.getMessages = function() {
+lx.chat.getMessages = function () {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
-    var currentForm = document.forms['DetailView'];
+    var currentForm = document.forms["DetailView"];
     if (!currentForm) {
-        currentForm = document.forms['EditView'];
+        currentForm = document.forms["EditView"];
     }
     var record_id = currentForm.record.value;
     var module_name = currentForm.module.value;
 
     var data = {
-        "method": "lxChat",
-        "module": module_name,
-        "record_id": record_id,
-        "field_name": lx.chat.field,
-        "save": 0
+        method: "lxChat",
+        module: module_name,
+        record_id: record_id,
+        field_name: lx.chat.field,
+        save: 0,
     };
     $.ajax({
         // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function(jqXHR, settings) {
-            console.warn("LxChat Logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax beforeSend');
+        beforeSend: function (jqXHR, settings) {
+            console.warn(
+                "LxChat Logic '%s' '%s' '%s' '%s'",
+                module_name,
+                "lx-chat.js",
+                "lx.chat.getMessages()",
+                "ajax beforeSend"
+            );
             console.warn("beforeSend url:", settings.url);
             console.warn("beforeSend data:", settings.data);
         },
-        url: 'lxajax.php',
-        type: 'POST',
+        url: "lxajax.php",
+        type: "POST",
         data: data,
         // success is a function to be called if the request succeeds.
-        success: function(data, status, jqXHR) {
-            console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax success');
+        success: function (data, status, jqXHR) {
+            console.warn(
+                "LxChat logic '%s' '%s' '%s' '%s'",
+                module_name,
+                "lx-chat.js",
+                "lx.chat.getMessages()",
+                "ajax success"
+            );
             console.warn("success callback:", status);
             console.warn("data:", data);
             $("textarea#" + lx.chat.field).val(data);
-            data = (data == '')
-                ? "[]"
-                : data;
+            data = data == "" ? "[]" : data;
             lx.chat.messagesArray = JSON.parse(data);
-            document.getElementById("lxchatcontent").innerHTML = lx.chat.messagesArrayToHTML();
+            document.getElementById(
+                "lxchatcontent"
+            ).innerHTML = lx.chat.messagesArrayToHTML();
         },
         // error is a function to be called if the request fails.
-        error: function(jqXHR, status, error) {
-            console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax error');
+        error: function (jqXHR, status, error) {
+            console.warn(
+                "LxChat logic '%s' '%s' '%s' '%s'",
+                module_name,
+                "lx-chat.js",
+                "lx.chat.getMessages()",
+                "ajax error"
+            );
             console.warn("error callback:", status);
             console.warn("Function lx.chat.getMessages error:", error);
         }, // end error
         // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        complete: function(jqXHR, status) {
-            console.warn("LxChat logic '%s' '%s' '%s' '%s'", module_name, 'lx-chat.js', 'lx.chat.getMessages()', 'ajax complete');
+        complete: function (jqXHR, status) {
+            console.warn(
+                "LxChat logic '%s' '%s' '%s' '%s'",
+                module_name,
+                "lx-chat.js",
+                "lx.chat.getMessages()",
+                "ajax complete"
+            );
             console.warn("complete status:", status);
             lx.chat.scrollToBottom();
         },
-        datatype: "text"
+        datatype: "text",
     });
     $("#lxchatSave").removeAttr("disabled");
-}
+};
 
 // Observers definitions
-!function() {
-    if ($("#edit_button").length || $("#SAVE").length || $("#SAVE_HEADER").length) {
+!(function () {
+    if (
+        $("#edit_button").length ||
+        $("#SAVE").length ||
+        $("#SAVE_HEADER").length
+    ) {
         // now it ensures that lxchat isn't already present
         if (!$("#lxchat").length) {
             lx.chat.start(false);
@@ -444,11 +630,11 @@ lx.chat.getMessages = function() {
     // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function(mutations) {
+    var observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            var currentForm = document.forms['DetailView'];
+            var currentForm = document.forms["DetailView"];
             if (!currentForm) {
-                currentForm = document.forms['EditView'];
+                currentForm = document.forms["EditView"];
             }
             if (currentForm) {
                 $(document).ready(function () {
@@ -470,7 +656,7 @@ lx.chat.getMessages = function() {
         }
     });
     // Observer target
-    var target = document.querySelector('#content');
+    var target = document.querySelector("#content");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
@@ -478,12 +664,12 @@ lx.chat.getMessages = function() {
             attributes: true,
             childList: true,
             characterData: true,
-            subtree: true
+            subtree: true,
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config);
     }
     // end observer
-}();
+})();
 
 // eof
