@@ -25,7 +25,7 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
                         "EditView",
                         "account_name",
                         "Nombre de Cuenta",
-                        false
+                        true
                     );
                     lx.field.show("account_name", true);
                     break;
