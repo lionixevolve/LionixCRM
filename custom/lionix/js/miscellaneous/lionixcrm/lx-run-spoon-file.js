@@ -5,9 +5,9 @@ lx.lionixCRM.runSpoonFile = async function (
     previewDivId = "preview"
     //* previewDivId is a div showing a message while spoon file is being executed so it needs to be resetted after completion.
 ) {
-    var method = "runSpoonFile";
+    var lxajax_method = "runSpoonFile";
     var data = {
-        method: method,
+        method: lxajax_method,
         file: file,
         answer: answer,
     };
