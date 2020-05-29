@@ -231,61 +231,28 @@ lx.chat.start = async function (forceCheck) {
     }
     if (lx.lionixCRM.config.allow_smartchat) {
         if (!lx.current_user_id) {
-            var currentForm = document.forms["DetailView"];
+            let currentForm = document.forms["DetailView"];
             if (!currentForm) {
                 currentForm = document.forms["EditView"];
             }
-            var record_id = currentForm.record.value;
-            var module_name = currentForm.module.value;
-            var lxajaxdata = {
-                method: "getCurrentUserId",
+            let lxajax_method = "getCurrentUserId";
+            let data = {
+                method: lxajax_method,
             };
-            $.ajax({
-                // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-                beforeSend: function (jqXHR, settings) {
-                    console.warn(
-                        "LxChat Logic '%s' '%s' '%s' '%s'",
-                        module_name,
-                        "lx-chat.js",
-                        "lx.chat.start",
-                        "ajax beforeSend"
-                    );
-                    console.warn("beforeSend callback:", settings.url);
-                },
-                url: "lxajax.php",
-                type: "POST",
-                data: lxajaxdata,
-                // success is a function to be called if the request succeeds.
-                success: function (data, status, jqXHR) {
-                    console.warn(
-                        "LxChat logic '%s' '%s' '%s' '%s'",
-                        module_name,
-                        "lx-chat.js",
-                        "lx.chat.start",
-                        "ajax success"
-                    );
-                    console.warn("success callback:", status);
-                    console.warn("data:", data);
-                    lx.current_user_id = data;
-                    lx.chat.start(false);
-                },
-                // error is a function to be called if the request fails.
-                error: function (jqXHR, status, error) {
-                    console.warn(
-                        "LxChat logic '%s' '%s' '%s' '%s'",
-                        module_name,
-                        "lx-chat.js",
-                        "lx.chat.start",
-                        "ajax error"
-                    );
-                    console.warn("error callback:", status);
-                    console.warn("Function lx.chat.start error:", error);
-                }, // end error
-                // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-                // complete: function(jqXHR, status) {
-                // },
-                datatype: "text",
+            let response = await fetch("lxajax.php", {
+                method: "POST",
+                body: new URLSearchParams(data),
+                headers: new Headers({
+                    "Content-type":
+                        "application/x-www-form-urlencoded; charset=UTF-8",
+                }),
             });
+            data = await response.text().catch((error) => {
+                console.warn("Function lx.chat.start error:", error);
+            });
+            console.warn("data:", data);
+            lx.current_user_id = data;
+            lx.chat.start(false);
         }
         if (!$("#lxchat").length) {
             lx.chat.findFieldToRender();
