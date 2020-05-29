@@ -8,11 +8,11 @@
 // function definitions section
 lx.chat = {};
 lx.chat.field = "";
-lx.chat.saveNewMessage = function (userMessage) {
+lx.chat.saveNewMessage = async function (userMessage) {
     // Save button temporary disabled
     $("#lxchatSave").attr("disabled", true);
     if (userMessage === "") {
-        console.warn("lx.chat.saveNewMessage do not stores empty messages");
+        console.warn("lx.chat.saveNewMessage do not store empty messages");
     } else {
         // message creation
         var m = moment();
@@ -36,76 +36,34 @@ lx.chat.saveNewMessage = function (userMessage) {
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
-
+        let lxajax_method = "lxChat";
         var data = {
-            method: "lxChat",
+            method: lxajax_method,
             module: module_name,
             record_id: record_id,
             field_name: lx.chat.field,
             save: 1,
             chat_c: newMessage,
         };
-        $.ajax({
-            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function (jqXHR, settings) {
-                console.warn(
-                    "LxChat Logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.saveNewMessage()",
-                    "ajax beforeSend"
-                );
-                console.warn("beforeSend url:", settings.url);
-                console.warn("beforeSend data:", settings.data);
-            },
-            url: "lxajax.php",
-            type: "POST",
-            data: data,
-            // success is a function to be called if the request succeeds.
-            success: function (data, status, jqXHR) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.saveNewMessage()",
-                    "ajax success"
-                );
-                console.warn("success callback:", status);
-                console.warn("data:", data);
-                $("#lxchatnewmsg").val("");
-                $("textarea#" + lx.chat.field).val(data);
-                data = data == "" ? "[]" : data;
-                lx.chat.messagesArray = JSON.parse(data);
-                document.getElementById(
-                    "lxchatcontent"
-                ).innerHTML = lx.chat.messagesArrayToHTML();
-            },
-            // error is a function to be called if the request fails.
-            error: function (jqXHR, status, error) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.saveNewMessage()",
-                    "ajax error"
-                );
-                console.warn("error callback:", status);
-                console.warn("Function lx.chat.saveNewMessage error:", error);
-            }, // end error
-            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            complete: function (jqXHR, status) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.saveNewMessage()",
-                    "ajax complete"
-                );
-                console.warn("complete status:", status);
-                lx.chat.scrollToBottom();
-            },
-            datatype: "text",
+        let response = await fetch("lxajax.php", {
+            method: "POST",
+            body: new URLSearchParams(data),
+            headers: new Headers({
+                "Content-type":
+                    "application/x-www-form-urlencoded; charset=UTF-8",
+            }),
         });
+        data = await response.text().catch((error) => {
+            console.error("Function lx.chat.saveNewMessage error:", error);
+        });
+        console.warn("data:", data);
+        $("#lxchatnewmsg").val("");
+        $("textarea#" + lx.chat.field).val(data);
+        data = data == "" ? "[]" : data;
+        lx.chat.messagesArray = JSON.parse(data);
+        document.getElementById(
+            "lxchatcontent"
+        ).innerHTML = lx.chat.messagesArrayToHTML();
     }
     $("#lxchatSave").removeAttr("disabled");
 };
