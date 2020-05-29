@@ -68,7 +68,7 @@ lx.chat.saveNewMessage = async function (userMessage) {
     $("#lxchatSave").removeAttr("disabled");
 };
 
-lx.chat.render = function (givenField) {
+lx.chat.render = async function (givenField) {
     if (!$("#lxchat").length) {
         var currentForm = document.forms["DetailView"];
         if (!currentForm) {
@@ -76,114 +76,67 @@ lx.chat.render = function (givenField) {
         }
         var record_id = currentForm.record.value;
         var module_name = currentForm.module.value;
-
+        let lxajax_method = "lxChat";
         var data = {
-            method: "lxChat",
+            method: lxajax_method,
             module: module_name,
             record_id: record_id,
             field_name: givenField,
         };
-        $.ajax({
-            // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-            beforeSend: function (jqXHR, settings) {
-                console.warn(
-                    "LxChat Logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.render()",
-                    "ajax beforeSend"
-                );
-                console.warn("beforeSend url:", settings.url);
-                console.warn("beforeSend data:", settings.data);
-            },
-            url: "lxajax.php",
-            type: "POST",
-            data: data,
-            // success is a function to be called if the request succeeds.
-            success: function (data, status, jqXHR) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.render()",
-                    "ajax success"
-                );
-                console.warn("success callback:", status);
-                console.warn("data:", data);
-                if (!$("#lxchat").length) {
-                    var currentUser = $("#with-label").text().trim();
-                    //Current lx.chat.field text
-                    data = data == "" ? "[]" : data;
-                    lx.chat.messagesArray = JSON.parse(data);
-                    lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
-                    //Current crm field must be hide
-                    $("#" + givenField).hide();
-                    //lxchat div added
-                    $(
-                        '<div id="lxchat" data-field="' +
-                            givenField +
-                            '"><center><b>LionixCRM Smart CHAT</b></center></div>'
-                    ).insertAfter("#" + givenField);
-                    lx.chat.field = givenField;
-                    $("#lxchat").attr(
-                        "style",
-                        "position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;"
-                    );
-                    $("#lxchat").append(
-                        '<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>'
-                    );
-                    document.getElementById(
-                        "lxchatcontent"
-                    ).innerHTML = lx.chat.messagesArrayToHTML();
-                    //Textarea for new messages added
-                    $(
-                        '<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ' +
-                            currentUser.split(" ")[0] +
-                            '?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>'
-                    ).insertAfter("#lxchat");
-                    $(document).on("keypress", "#lxchatnewmsg", function (
-                        event
-                    ) {
-                        if (event.which == 13 && !event.shiftKey) {
-                            lx.chat.validateNewMessage();
-                        }
-                    });
-                    //Save new messages button added
-                    $(
-                        '<br><input id="lxchatSave" type="button" value="enviar mensaje" />'
-                    ).insertAfter("#lxchatnewmsg");
-                    $(document).on("click", "#lxchatSave", function (event) {
-                        lx.chat.validateNewMessage();
-                    });
-                }
-            },
-            // error is a function to be called if the request fails.
-            error: function (jqXHR, status, error) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.render()",
-                    "ajax error"
-                );
-                console.warn("error callback:", status);
-                console.warn("Function lx.chat.render error:", error);
-            }, // end error
-            // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-            complete: function (jqXHR, status) {
-                console.warn(
-                    "LxChat logic '%s' '%s' '%s' '%s'",
-                    module_name,
-                    "lx-chat.js",
-                    "lx.chat.render()",
-                    "ajax complete"
-                );
-                console.warn("complete status:", status);
-                lx.chat.scrollToBottom();
-                lx.chat.refreshMessagesInterval(true);
-            },
-            datatype: "text",
+        let response = await fetch("lxajax.php", {
+            method: "POST",
+            body: new URLSearchParams(data),
+            headers: new Headers({
+                "Content-type":
+                    "application/x-www-form-urlencoded; charset=UTF-8",
+            }),
         });
+        data = await response.text().catch((error) => {
+            console.warn("Function lx.chat.render error:", error);
+        });
+        console.warn("data:", data);
+        if (!$("#lxchat").length) {
+            var currentUser = $("#with-label").text().trim();
+            //Current lx.chat.field text
+            data = data == "" ? "[]" : data;
+            lx.chat.messagesArray = JSON.parse(data);
+            lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
+            //Current crm field must be hide
+            $(`#${givenField}`).hide();
+            //lxchat div added
+            $(
+                `<div id="lxchat" data-field="${givenField}"><center><b>LionixCRM Smart CHAT</b></center></div>`
+            ).insertAfter("#" + givenField);
+            lx.chat.field = givenField;
+            $("#lxchat").attr(
+                "style",
+                "position:relative; width: 550px; border: 2px solid #829EB5; border-radius:5px; background-color: #A5E8D6;"
+            );
+            $("#lxchat").append(
+                '<div id="lxchatcontent" style="width: 100%; height: 434px; background-color: #E5DDD5; overflow-y: auto;"></div>'
+            );
+            document.getElementById(
+                "lxchatcontent"
+            ).innerHTML = lx.chat.messagesArrayToHTML();
+            //Textarea for new messages added
+            $(
+                `<br><textarea id="lxchatnewmsg" placeholder="¿Quieres compartir alguna novedad, ${
+                    currentUser.split(" ")[0]
+                }?" tabindex="0" title="" cols="80" rows="6" style="width: 550px;height: 90px;background-color: #F6FAFD;"></textarea>`
+            ).insertAfter("#lxchat");
+            $(document).on("keypress", "#lxchatnewmsg", function (event) {
+                if (event.which == 13 && !event.shiftKey) {
+                    lx.chat.validateNewMessage();
+                }
+            });
+            //Save new messages button added
+            $(
+                '<br><input id="lxchatSave" type="button" value="enviar mensaje" />'
+            ).insertAfter("#lxchatnewmsg");
+            $(document).on("click", "#lxchatSave", function (event) {
+                lx.chat.validateNewMessage();
+            });
+        }
     }
 };
 
