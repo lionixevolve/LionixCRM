@@ -133,69 +133,33 @@ lx.opportunity.getnewMainContactCFields = function () {
     }
 };
 
-lx.opportunity.getMainContactDropdown = function (
+lx.opportunity.getMainContactDropdown = async function (
     opportunityId,
     currentValue,
     accountId,
     accountName
 ) {
-    var method = "getOpportunityMainContactList";
-    var data = "method=" + method;
+    let lxajax_method = "getOpportunityMainContactList";
     if (accountName == "") {
         accountId = "";
     }
-    data += "&opportunityId=" + opportunityId;
-    data += "&currentValue=" + currentValue;
-    data += "&accountId=" + accountId;
-    //data += "&use_adodb5="+"1";
-    $.ajax({
-        // beforeSend is a pre-request callback function that can be used to modify the jqXHR.
-        beforeSend: function (jqXHR, settings) {
-            console.warn(
-                "Bussines logic '%s' '%s' '%s' '%s'",
-                "opportunities",
-                "lx-main-contact.js",
-                "lx.opportunity.getMainContactDropdown()",
-                "ajax beforeSend"
-            );
-            console.warn("beforeSend callback:", settings.url);
-        }, //end beforeSend
-        url: "lxajax.php",
-        type: "GET",
-        data: data,
-        // success is a function to be called if the request succeeds.
-        success: function (data, status, jqXHR) {
-            console.warn(
-                "Bussines logic '%s' '%s' '%s' '%s'",
-                "opportunities",
-                "lx-main-contact.js",
-                "lx.opportunity.getMainContactDropdown()",
-                "ajax success"
-            );
-            console.warn("success callback:", status);
-            console.warn("data:", data);
-            $("#maincontact_c").fillSelect($.parseJSON(data));
-        }, // end success
-        // error is a function to be called if the request fails.
-        error: function (jqXHR, status, error) {
-            console.warn(
-                "Bussines logic '%s' '%s' '%s' '%s'",
-                "opportunities",
-                "lx-main-contact.js",
-                "lx.opportunity.getMainContactDropdown()",
-                "ajax error"
-            );
-            console.warn("error callback:", status);
-            console.warn(
-                "Function lx.opportunity.getMainContactDropdown error:",
-                error
-            );
-        }, // end error
-        // complete is a function to be called when the request finishes (after success and error callbacks are executed).
-        // complete: function(jqXHR, status) {
-        // },  end complete
-        datatype: "text",
-    }); // end ajax
+    let data = {
+        method: lxajax_method,
+        opportunityId: opportunityId,
+        currentValue: currentValue,
+        accountId: accountId,
+    };
+    let response = await fetch("lxajax.php", {
+        method: "POST",
+        body: new URLSearchParams(data),
+        headers: new Headers({
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        }),
+    });
+    data = await response.json().catch((error) => {
+        console.error("lx.opportunity.getMainContactDropdown error:", error);
+    });
+    $("#maincontact_c").fillSelect(data);
     lx.opportunity.getnewMainContactCFields();
 };
 
