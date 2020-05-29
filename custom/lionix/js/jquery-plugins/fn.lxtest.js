@@ -3,7 +3,7 @@ console.warn("jQuery plugin $.fn.lxtest added.");
     $.fn.lxtest = function(options) {
         console.warn("lxtest jQuery running");
         // This is the easiest way to have default options.
-        var settings = $.extend({
+        let settings = $.extend({
             // These are the defaults.
             color: "#fff",
             backgroundColor: "#f00",

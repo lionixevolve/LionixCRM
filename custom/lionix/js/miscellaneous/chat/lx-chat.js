@@ -15,7 +15,7 @@ lx.chat.saveNewMessage = async function (userMessage) {
         console.warn("lx.chat.saveNewMessage do not store empty messages");
     } else {
         // message creation
-        var m = moment();
+        let m = moment();
         if (!Array.isArray(lx.chat.messagesArray)) {
             lx.chat.messagesArray = [];
         }
@@ -30,14 +30,14 @@ lx.chat.saveNewMessage = async function (userMessage) {
             })
         );
 
-        var currentForm = document.forms["DetailView"];
+        let currentForm = document.forms["DetailView"];
         if (!currentForm) {
             currentForm = document.forms["EditView"];
         }
-        var record_id = currentForm.record.value;
-        var module_name = currentForm.module.value;
+        let record_id = currentForm.record.value;
+        let module_name = currentForm.module.value;
         let lxajax_method = "lxChat";
-        var data = {
+        let data = {
             method: lxajax_method,
             module: module_name,
             record_id: record_id,
@@ -70,14 +70,14 @@ lx.chat.saveNewMessage = async function (userMessage) {
 
 lx.chat.render = async function (givenField) {
     if (!$("#lxchat").length) {
-        var currentForm = document.forms["DetailView"];
+        let currentForm = document.forms["DetailView"];
         if (!currentForm) {
             currentForm = document.forms["EditView"];
         }
-        var record_id = currentForm.record.value;
-        var module_name = currentForm.module.value;
+        let record_id = currentForm.record.value;
+        let module_name = currentForm.module.value;
         let lxajax_method = "lxChat";
-        var data = {
+        let data = {
             method: lxajax_method,
             module: module_name,
             record_id: record_id,
@@ -96,7 +96,7 @@ lx.chat.render = async function (givenField) {
         });
         console.warn("data:", data);
         if (!$("#lxchat").length) {
-            var currentUser = $("#with-label").text().trim();
+            let currentUser = $("#with-label").text().trim();
             //Current lx.chat.field text
             data = data == "" ? "[]" : data;
             lx.chat.messagesArray = JSON.parse(data);
@@ -142,11 +142,11 @@ lx.chat.render = async function (givenField) {
 
 lx.chat.findFieldToRender = async function () {
     if (!$("#lxchat").length) {
-        var currentForm = document.forms["DetailView"];
+        let currentForm = document.forms["DetailView"];
         if (!currentForm) {
             currentForm = document.forms["EditView"];
         }
-        var record_id = currentForm.record.value;
+        let record_id = currentForm.record.value;
         let lxajax_method = "lxChatGetSmartChatField";
         let data = {
             method: lxajax_method,
@@ -169,7 +169,7 @@ lx.chat.findFieldToRender = async function () {
             );
         } else {
             lx.chat.candidateFieldsArray = JSON.parse(data);
-            for (var i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
+            for (let i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
                 if (
                     $(document).find(`#${lx.chat.candidateFieldsArray[i]}`)
                         .length
@@ -197,7 +197,7 @@ lx.chat.messagesArrayToHTML = function () {
     if (Array.isArray(msgArray)) {
         html = "";
         msgArray.forEach(function (msg, i) {
-            var m = moment(msg.date);
+            let m = moment(msg.date);
             pStyle = msg.currentUser
                 ? 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
                 : 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"'; // their msgs
@@ -265,7 +265,7 @@ lx.chat.start = async function (forceCheck) {
 };
 
 lx.chat.scrollToBottom = function () {
-    var h1 = $("#lxchatcontent")[0].scrollHeight,
+    let h1 = $("#lxchatcontent")[0].scrollHeight,
         h2 = $("#lxchatcontent").height();
     $("#lxchatcontent").scrollTop(h1 - h2);
 };
@@ -330,7 +330,7 @@ lx.chat.refreshMessagesInterval = function (refresh) {
 };
 
 lx.chat.validateNewMessage = function () {
-    var userMessage = $("#lxchatnewmsg").val().trim();
+    let userMessage = $("#lxchatnewmsg").val().trim();
     if (userMessage === "") {
         toastr["warning"]("Mensaje vacío no permitido", "Smart Chat", {
             positionClass: "toast-bottom-center",
@@ -411,9 +411,9 @@ lx.chat.getMessages = async function () {
     // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function (mutations) {
+    let observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            var currentForm = document.forms["DetailView"];
+            let currentForm = document.forms["DetailView"];
             if (!currentForm) {
                 currentForm = document.forms["EditView"];
             }
@@ -437,11 +437,11 @@ lx.chat.getMessages = async function () {
         }
     });
     // Observer target
-    var target = document.querySelector("#content");
+    let target = document.querySelector("#content");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-        var config = {
+        let config = {
             attributes: true,
             childList: true,
             characterData: true,

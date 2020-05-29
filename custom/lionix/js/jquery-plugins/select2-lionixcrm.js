@@ -7,11 +7,11 @@
 !(function() {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function(mutations) {
+    let observer = new MutationObserver(function(mutations) {
         if (mutations) {
             // select2 disabled for specific detailview
             let applySelect2 = true;
-            var crmDetailView = document.forms["DetailView"];
+            let crmDetailView = document.forms["DetailView"];
             if (crmDetailView && !!crmDetailView.module) {
                 switch (crmDetailView.module.value) {
                     case "AOW_WorkFlow":
@@ -20,7 +20,7 @@
                 }
             }
             // select2 disabled for specific editview
-            var crmEditView = document.forms["EditView"];
+            let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 switch (crmEditView.module.value) {
                     case "AOW_WorkFlow":
@@ -61,11 +61,11 @@
         }
     });
     // Observer target
-    var target = document.querySelector("body");
+    let target = document.querySelector("body");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-        var config = {
+        let config = {
             attributes: true,
             childList: true,
             // characterData: true,

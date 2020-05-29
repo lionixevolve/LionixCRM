@@ -3,11 +3,11 @@ console.warn("jQuery plugin $.fn.fillSelect added.");
     $.fn.fillSelect = function(data) {
         return this.clearSelect().each(function() {
             if (this.tagName == 'SELECT') {
-                var dropdownList = this;
+                let dropdownList = this;
                 $.each(data, function(index, optionData) {
-                    var def = (optionData.default) ? true : false;
-                    var sel = (optionData.selected) ? true : false;
-                    var option = new Option(optionData.name, optionData.value, def, sel);
+                    let def = (optionData.default) ? true : false;
+                    let sel = (optionData.selected) ? true : false;
+                    let option = new Option(optionData.name, optionData.value, def, sel);
                     dropdownList.add(option);
                 });
             }

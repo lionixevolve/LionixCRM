@@ -57,7 +57,7 @@ lx.upload.getFileButton = function (element) {
 };
 
 lx.upload.getFileTemplate = async function (element) {
-    var lxajax_method = "uploadFileTemplate";
+    let lxajax_method = "uploadFileTemplate";
     data = {
         method: lxajax_method,
         field_name: element.field_name,
@@ -139,7 +139,7 @@ lx.upload.getFileTemplate = async function (element) {
                     $(
                         `#floating-div-for-upload-${element.field_name}-file`
                     ).css({ height: "260px" });
-                    var percentVal = percentComplete + "%";
+                    let percentVal = percentComplete + "%";
                     $(".lx-bar").width(percentVal);
                     $(".lx-percent").html(percentVal);
                 },
@@ -179,7 +179,7 @@ lx.upload.getFileTemplate = async function (element) {
                         ).css({ width: "235px", height: "200px" });
                         $(`#${element.field_name}-title`).hide();
                         $(`#${element.field_name}-form`).hide();
-                        var percentVal = "100%";
+                        let percentVal = "100%";
                         $(".lx-bar").width(percentVal);
                         $(".lx-percent").html(percentVal);
                         $(`#exit-${element.field_name}-btn`).show();
@@ -229,8 +229,8 @@ lx.upload.getFileFields = async function (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
         }
         if (lx.lionixCRM.config.allow_upload_files_fields) {
-            var execute = false;
-            var crmEditView = document.forms["EditView"];
+            let execute = false;
+            let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 module_name = crmEditView.module.value.toLowerCase();
                 switch (module_name) {
@@ -314,9 +314,9 @@ lx.upload.getFileFields = async function (forceCheck) {
 !(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function (mutations) {
+    let observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            var crmEditView = document.forms["EditView"];
+            let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (lx.lionixCRM.config.debuglx) {
                     console.warn(
@@ -334,11 +334,11 @@ lx.upload.getFileFields = async function (forceCheck) {
         }
     });
     // Observer target
-    var target = document.querySelector("#content");
+    let target = document.querySelector("#content");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-        var config = {
+        let config = {
             attributes: true,
             childList: true,
             // characterData: true,

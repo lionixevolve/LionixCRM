@@ -1,5 +1,5 @@
 // LionixCRM lx javascript object definition
-var lx = {
+let lx = {
     "field": {},
     "upload": {},
     "lionixCRM": {
@@ -72,14 +72,14 @@ lx.lionixCRM.scripts.forEach(function(element) {
         current_script = element;
         noCache = false;
     }
-    var preloadLink = document.createElement("link");
+    let preloadLink = document.createElement("link");
     preloadLink.href = current_script
     preloadLink.rel = "preload";
     preloadLink.as = "script";
     document.head.appendChild(preloadLink);
 });
 //load js on cascade
-var script = document.createElement("script");
+let script = document.createElement("script");
 script.type = "text/javascript";
 script.src = lx.lionixCRM.scripts.shift(); //loadScript.js must always be the first in the array
 document.head.appendChild(script);

@@ -88,9 +88,9 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
 !(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    var observer = new MutationObserver(function (mutations) {
+    let observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            var crmEditView = document.forms["EditView"];
+            let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == "Opportunities") {
                     if (lx.lionixCRM.config.debuglx) {
@@ -110,11 +110,11 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
         }
     });
     // Observer target
-    var target = document.querySelector("#content");
+    let target = document.querySelector("#content");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
-        var config = {
+        let config = {
             attributes: true,
             childList: true,
             // characterData: true,
