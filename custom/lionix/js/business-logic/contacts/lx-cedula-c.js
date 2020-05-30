@@ -101,6 +101,9 @@ lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
             $("#cedula_c_lxajaxed").remove();
+            console.error("Retrieving modules[contacts] properties...");
+            data = await lx.lionixCRM.getConfigOption("modules");
+            console.error("Modules[contacts] successfully retrieved", data);
         }
         if ($("#cedula_c_lxajaxed").length == 0) {
             keyup_status = "disabled";
@@ -161,11 +164,14 @@ lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("Modules[contacts] properties are not present!");
-        console.error("Retrieving modules[contacts] properties...");
-        data = await lx.lionixCRM.getConfigOption("modules");
-        console.error("Modules[contacts] successfully retrieved", data);
-        lx.contact.resultsSearchTSECRHandler(false);
+        console.error(
+            "resultsSearchTSECRHandler",
+            "Modules[contacts] properties are not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.contact.resultsSearchTSECRHandler(false)
+        );
     }
 };
 
@@ -174,6 +180,9 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
             $("#full_name_lxajaxed").remove();
+            console.warn("Retrieving modules[contacts] properties...");
+            data = await lx.lionixCRM.getConfigOption("modules");
+            console.warn("Modules[contacts] successfully retrieved", data);
         }
         if ($("#full_name_lxajaxed").length == 0) {
             keyup_status = "disabled";
@@ -261,11 +270,14 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("Modules[contacts] properties are not present!");
-        console.error("Retrieving modules[contacts] properties...");
-        data = await lx.lionixCRM.getConfigOption("modules");
-        console.error("Modules[contacts] successfully retrieved", data);
-        lx.contact.resultsListDuplicatesHandler(false);
+        console.error(
+            "resultsListDuplicatesHandler",
+            "Modules[contacts] properties are not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.contact.resultsListDuplicatesHandler(false)
+        );
     }
 };
 

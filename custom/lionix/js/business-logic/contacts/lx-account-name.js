@@ -4,6 +4,9 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.business_type = undefined;
             $("#account_name_lxajaxed").remove();
+            console.warn("Retrieving business_type property...");
+            data = await lx.lionixCRM.getConfigOption("business_type");
+            console.warn(`business_type property retrieved, status ${data}`);
         }
         data = lx.lionixCRM.config.business_type.toLowerCase();
         if (
@@ -46,12 +49,13 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("lx.contact.getAccountNameByBusinessType ", error);
-        console.error("business_type property is not present!");
-        console.error("Retrieving business_type property...");
-        data = await lx.lionixCRM.getConfigOption("business_type");
-        console.error("business_type successfully retrieved", data);
-        lx.contact.getAccountNameByBusinessType(false);
+        console.error(
+            "business_type property is not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.contact.getAccountNameByBusinessType(false)
+        );
     }
 }; // end function
 

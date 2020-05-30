@@ -295,6 +295,9 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
             $("#maincontactcedula_c_lxajaxed").remove();
+            console.warn("Retrieving modules[opportunities] properties...");
+            data = await lx.lionixCRM.getConfigOption("modules");
+            console.warn("Modules[opportunities] successfully retrieved", data);
         }
         if ($("#maincontactcedula_c_lxajaxed").length == 0) {
             keyup_status = "disabled";
@@ -364,11 +367,13 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("Modules[contacts] properties are not present!");
-        console.error("Retrieving modules[contacts] properties...");
-        data = await lx.lionixCRM.getConfigOption("modules");
-        console.error("Modules[contacts] successfully retrieved", data);
-        lx.opportunity.resultsSearchTSECRHandler(false);
+        console.error(
+            "Modules[opportunities] properties are not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.opportunity.resultsSearchTSECRHandler(false)
+        );
     }
 };
 
@@ -377,6 +382,9 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
             $("#main_full_name_lxajaxed").remove();
+            console.warn("Retrieving modules[opportunities] properties...");
+            data = await lx.lionixCRM.getConfigOption("modules");
+            console.warn("Modules[opportunities] retrieved", data);
         }
         if ($("#main_full_name_lxajaxed").length == 0) {
             keyup_status = "disabled";
@@ -460,11 +468,13 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("Modules[opportunities] properties are not present!");
-        console.error("Retrieving modules[opportunities] properties...");
-        data = await lx.lionixCRM.getConfigOption("modules");
-        console.error("Modules[opportunities] successfully retrieved", data);
-        lx.opportunity.resultsListDuplicatesHandler(false);
+        console.error(
+            "Modules[opportunities] properties are not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.opportunity.resultsListDuplicatesHandler(false)
+        );
     }
 };
 
@@ -483,13 +493,6 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
                 if (crmEditView.module.value == "Opportunities") {
                     if ($("#maincontact_c").length == 1) {
                         if ($("#maincontact_c_lxajaxed").length == 0) {
-                            console.warn(
-                                "Bussines logic observer '%s' '%s' '%s' '%s'",
-                                "Opportunities",
-                                "lx-main-contact.js",
-                                "!function()",
-                                "initial"
-                            );
                             opid = document.forms["EditView"].record.value;
                             $("#maincontact_c").append(
                                 '<div id="maincontact_c_lxajaxed"/>'

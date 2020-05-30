@@ -4,6 +4,9 @@ lx.lionixCRM.getEnvironment = async function (forceCheck) {
         if (forceCheck) {
             lx.lionixCRM.config.environment = undefined;
             $("#LionixCRM-environment").remove();
+            console.warn("Retrieving environment property...");
+            data = await lx.lionixCRM.getConfigOption("environment");
+            console.warn(`environment property retrieved, status ${data}`);
         }
         if ($("#LionixCRM-environment").length == 0) {
             if (lx.lionixCRM.config.environment.toLowerCase() === "testing") {
@@ -27,11 +30,13 @@ lx.lionixCRM.getEnvironment = async function (forceCheck) {
             console.warn("LionixCRM-environment div indicator already exists.");
         }
     } catch (error) {
-        console.error("Environment property is not present!");
-        console.error("Retrieving environment property...");
-        data = await lx.lionixCRM.getConfigOption("environment");
-        console.error("Environment successfully retrieved", data);
-        lx.lionixCRM.getEnvironment(false);
+        console.error(
+            "environment property is not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.lionixCRM.getEnvironment(false)
+        );
     }
 }; // end function
 
@@ -46,12 +51,6 @@ lx.lionixCRM.getEnvironment = async function (forceCheck) {
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
     let observer = new MutationObserver(function (mutations) {
         if (mutations) {
-            console.warn(
-                "Check environment observer '%s' '%s' '%s'",
-                "environment",
-                "lx-check-crm-environment.js",
-                "!function()"
-            );
             lx.lionixCRM.getEnvironment(false);
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
