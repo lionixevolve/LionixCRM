@@ -7,23 +7,39 @@
 !(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    let observer = new MutationObserver(function (mutations) {
+    let observer = new MutationObserver(async function (mutations) {
         if (mutations) {
-            if (
-                Object.keys(lx.lionixCRM.config).length === 0 &&
-                lx.lionixCRM.config.constructor === Object
-            ) {
-                console.warn(
-                    "Check environment observer '%s' '%s' '%s'",
-                    "all modules",
-                    "lx-lionixcrm-load-config-options.js",
-                    "!function()"
-                );
-                console.warn("Loading all LionixCRM config options...");
-                lx.lionixCRM.getConfigOption("all");
+            let run = true;
+            if (lx.events.lxLoadAllConfigOptions) {
+                if (lx.events.lxLoadAllConfigOptions.status == "ready") {
+                    run = false;
+                }
             }
-            // if needed only once, you can stop observing with observer.disconnect();
-            observer.disconnect();
+            if (run) {
+                if (!lx.events.hasOwnProperty("lxLoadAllConfigOptions")) {
+                    lx.events.lxLoadAllConfigOptions = { status: "send" };
+                }
+
+                if (lx.events.lxLoadAllConfigOptions.status == "send") {
+                    if (
+                        Object.keys(lx.lionixCRM.config).length === 0 &&
+                        lx.lionixCRM.config.constructor === Object
+                    ) {
+                        console.warn("Loading all LionixCRM config options...");
+                        lx.events.lxLoadAllConfigOptions.status = "waiting";
+                        lx.events.lxLoadAllConfigOptions.status = await lx.lionixCRM.getConfigOption(
+                            "all"
+                        );
+                        document.dispatchEvent(
+                            new Event("lxLoadAllConfigOptions")
+                        );
+                    }
+                    if (lx.events.lxLoadAllConfigOptions.status == "ready") {
+                        // if needed only once, you can stop observing with observer.disconnect();
+                        observer.disconnect();
+                    }
+                }
+            }
         }
     });
     // Observer target

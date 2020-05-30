@@ -1,5 +1,6 @@
 // LionixCRM lx javascript object definition
 let lx = {
+    events: {},
     field: {},
     upload: {},
     lionixCRM: {

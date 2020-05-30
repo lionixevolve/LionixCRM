@@ -26,4 +26,5 @@ lx.lionixCRM.getConfigOption = async function (option) {
         }
         console.warn(`LionixCRM option (${option}) updated.`);
     }
+    return "ready";
 };
