@@ -49,7 +49,7 @@ lx.lionixCRM.scripts.push(
     "custom/lionix/js/miscellaneous/lionixcrm/lx-get-config-option.js"
 );
 lx.lionixCRM.scripts.push(
-    "custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js"
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js"
 );
 lx.lionixCRM.scripts.push(
     "custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js"
@@ -68,9 +68,6 @@ lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
-lx.lionixCRM.scripts.push(
-    "custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js"
-);
 lx.lionixCRM.scripts.push(
     "custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js"
 );
@@ -102,6 +99,9 @@ lx.lionixCRM.scripts.push(
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
 lx.lionixCRM.scripts.push(
     "custom/lionix/js/miscellaneous/lionixcrm/lx-run-spoon-file.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js"
 );
 // when developing use the noCache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
