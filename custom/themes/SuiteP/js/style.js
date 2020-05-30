@@ -1,13 +1,13 @@
 // LionixCRM lx javascript object definition
 let lx = {
-    "field": {},
-    "upload": {},
-    "lionixCRM": {
-        "config": {}
+    field: {},
+    upload: {},
+    lionixCRM: {
+        config: {},
     },
-    "account": {},
-    "contact": {},
-    "opportunity": {}
+    account: {},
+    contact: {},
+    opportunity: {},
 };
 // LionixCRM required javascript files array list
 lx.lionixCRM.scripts = new Array();
