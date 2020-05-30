@@ -13,58 +13,127 @@ let lx = {
 lx.lionixCRM.scripts = new Array();
 lx.lionixCRM.css = new Array();
 //SuiteCRM has jQuery preloaded don't include it.
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"); //Must always be first
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js"); //This script allows to leave console.log and friends on production enviroments
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/loadScript.js"
+); //Must always be first
+//This script allows to leave console.log and friends on production enviroments
+lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/ConsoleDummy.min.js");
 // ********** Client only specific files with higher priority
 lx.lionixCRM.scripts.push("custom/lionix/js/styleCustomPriority.js");
 // ********** Client only specific files with higher priority
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment.min.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"); //momentjs x-pseudo usefult for testing
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-do.js"); //momentjs Spanish for Dominican Republic
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"); //momentjs Portuguese for Brazil
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"); //momentjs French for Canada
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-config-option.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-validate-crm-field-callback.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-show-crm-field.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/field/lx-change-visibility-crm-field.js");
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/moment.min.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/moment-timezone-with-data.min.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/locales/x-pseudo.js"
+); //momentjs x-pseudo usefult for testing
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/locales/es-do.js"
+); //momentjs Spanish for Dominican Republic
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/locales/pt-br.js"
+); //momentjs Portuguese for Brazil
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/locales/fr-ca.js"
+); //momentjs French for Canada
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/momentjs/locales/es-cr.js"
+); //LionixCRM Spanish for Costa Rica is based on momentjs es-do locale
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lx-hide-global-search-while-not-working.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-get-config-option.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-load-all-config-options.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/field/lx-validate-crm-field.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/field/lx-validate-crm-field-callback.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/field/lx-show-crm-field.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/field/lx-change-visibility-crm-field.js"
+);
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.clearSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.fillSelect.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/fn.lxtest.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/jquery.form.js");
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/toastr.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-tse-cr-data.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-get-contact-duplicates.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-account-name.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/contacts/lx-cedula-c.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-main-contact.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/opportunities/lx-account-name.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/business-logic/aos-quotes/lx-product-name-size.js");
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-check-crm-environment.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lx-upload-files-in-editview.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-get-tse-cr-data.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-get-contact-duplicates.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/business-logic/contacts/lx-account-name.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/business-logic/contacts/lx-cedula-c.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/business-logic/opportunities/lx-main-contact.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/business-logic/opportunities/lx-account-name.js"
+);
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/business-logic/aos-quotes/lx-product-name-size.js"
+);
 lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2.min.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/jquery-plugins/select2-lionixcrm.js");
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/jquery-plugins/select2-lionixcrm.js"
+);
 lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/chat/lx-chat.js");
-lx.lionixCRM.scripts.push("custom/lionix/js/miscellaneous/lionixcrm/lx-run-spoon-file.js");
+lx.lionixCRM.scripts.push(
+    "custom/lionix/js/miscellaneous/lionixcrm/lx-run-spoon-file.js"
+);
 // when developing use the noCache mode, like this:
 // lx.lionixCRM.scripts.push(["custom/lionix/js/{your-developing-script}",true]);
 // ********** Client only specific files
 lx.lionixCRM.scripts.push("custom/lionix/js/styleCustom.js");
 // LionixCRM required css files array list
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />');
-lx.lionixCRM.css.push('<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />');
-lx.lionixCRM.css.push('<link rel="stylesheet" type="text/css" href="custom/lionix/css/font-awesome-4.7.0/css/font-awesome.min.css" />');
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/spanish-acl-roles.css" />'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/toastr.css" />'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2.min.css" />'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/select2-bootstrap.min.css" />'
+);
+lx.lionixCRM.css.push(
+    '<style type="text/css">select[multiple] ~ .select2-container .select2-results__option[aria-selected=true] {display: none;}</style>'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/floating-div-for-excel-file.css" />'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/progress-bar.css" />'
+);
+lx.lionixCRM.css.push(
+    '<link rel="stylesheet" type="text/css" href="custom/lionix/css/font-awesome-4.7.0/css/font-awesome.min.css" />'
+);
 // preload al LionixCRM required javascript files array list for blazing speed
-lx.lionixCRM.scripts.forEach(function(element) {
+lx.lionixCRM.scripts.forEach(function (element) {
     if (Array.isArray(element)) {
         current_script = element[0];
         noCache = element[1];
@@ -73,7 +142,7 @@ lx.lionixCRM.scripts.forEach(function(element) {
         noCache = false;
     }
     let preloadLink = document.createElement("link");
-    preloadLink.href = current_script
+    preloadLink.href = current_script;
     preloadLink.rel = "preload";
     preloadLink.as = "script";
     document.head.appendChild(preloadLink);
@@ -83,7 +152,7 @@ let script = document.createElement("script");
 script.type = "text/javascript";
 script.src = lx.lionixCRM.scripts.shift(); //loadScript.js must always be the first in the array
 document.head.appendChild(script);
-script.onload = function() {
+script.onload = function () {
     scripts = lx.lionixCRM.scripts;
     function load(i) {
         if (i < scripts.length) {
@@ -94,14 +163,15 @@ script.onload = function() {
                 current_script = scripts[i];
                 noCache = false;
             }
-            lx.lionixCRM.loadScript(current_script, noCache, function() {
+            lx.lionixCRM.loadScript(current_script, noCache, function () {
                 load(++i);
             });
         } else {
-            lx.lionixCRM.css.forEach(function(element) {
-                $('head').append(element);
+            lx.lionixCRM.css.forEach(function (element) {
+                $("head").append(element);
             });
-            $(document).ready(function() { //Primer document ready
+            $(document).ready(function () {
+                //Primer document ready
                 console.warn("You are running jQuery version:", $.fn.jquery);
                 // Add "Metas" option on main nav menu
                 //Any code you may need please added on another scripts.push(file) on the beginning
@@ -109,4 +179,4 @@ script.onload = function() {
         } //fin else *all your scripts have loaded, so go ahead and do what you need to do*
     } //fin load(i)
     load(0);
-} //fin custom/lionix/js/loadScript.js
+}; //fin custom/lionix/js/loadScript.js
