@@ -25,7 +25,7 @@
         }
     });
     // Observer target
-    let target = document.querySelector('#content'); //uncomment to run
+    let target = document.querySelector('body'); //uncomment to run
     if (target == null) {
         //This part if for the Despacho app iFrame
         let target = document.querySelector('#EditView'); //uncomment to run

@@ -89,7 +89,7 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
         }
     });
     // Observer target
-    let target = document.querySelector("#content");
+    let target = document.querySelector("body");
     if (target) {
         // configuration of the observer:
         // NOTE: At the very least, childList, attributes, or characterData must be set to true. Otherwise, "An invalid or illegal string was specified" error is thrown.
