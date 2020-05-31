@@ -24,11 +24,13 @@ lx.upload.getFileButton = function (element) {
                     location.origin + location.pathname
                 )}">${data.note_name}</a></div></br>`
             );
-        $(`#${element.field_name}`)
-            .parent()
-            .append(
-                `<button id="show_${element.field_name}_loader" type="button" class="btn btn-primary btn-sm">+ ${element.button_label}</button>`
-            );
+        $(`#${element.field_name}`).parent().append(
+            `<button id="show_${element.field_name}_loader" type="button" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <i class="fa fa-file" aria-hidden="true"></i>
+                <b>${element.button_label}</b>
+                </button>`
+        );
         $(`#${element.field_name}`)
             .parent()
             .append(
