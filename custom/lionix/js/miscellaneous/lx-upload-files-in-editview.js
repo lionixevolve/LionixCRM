@@ -1,11 +1,11 @@
 // This file containts opportunities bussines logic
 // function definitions section
 lx.upload.getFileButton = function (element) {
-    console.warn("Rendering button for %s field", element.field_name);
-    if ($("#" + element.field_name).length == 0) {
-        console.warn("Field %s not present in EditView", element.field_name);
+    console.warn(`Rendering button for ${element.field_name} field`);
+    if ($(`#${element.field_name}`).length == 0) {
+        console.warn(`Field ${element.field_name} not present in EditView`);
     } else {
-        data = $("#" + element.field_name).val();
+        data = $(`#${element.field_name}`).val();
         if (data == "") {
             data = {
                 note_link: "",
@@ -14,45 +14,35 @@ lx.upload.getFileButton = function (element) {
         } else {
             data = JSON.parse(data);
         }
-        $("#" + element.field_name)
+        $(`#${element.field_name}`)
             .parent()
             .append(
-                '<div id="' +
-                    element.field_name +
-                    '-file-name"><a href="' +
-                    data.note_link.replace(
-                        "index.php",
-                        location.origin + location.pathname
-                    ) +
-                    '">' +
-                    data.note_name +
-                    "</a></div></br>"
+                `<div id="${
+                    element.field_name
+                }-file-name"><a href="${data.note_link.replace(
+                    "index.php",
+                    location.origin + location.pathname
+                )}">${data.note_name}</a></div></br>`
             );
-        $("#" + element.field_name)
+        $(`#${element.field_name}`)
             .parent()
             .append(
-                '<button id="show_' +
-                    element.field_name +
-                    '_loader" type="button" class="btn btn-primary btn-sm">+ ' +
-                    element.button_label +
-                    "</button>"
+                `<button id="show_${element.field_name}_loader" type="button" class="btn btn-primary btn-sm">+ ${element.button_label}</button>`
             );
-        $("#" + element.field_name)
+        $(`#${element.field_name}`)
             .parent()
             .append(
-                '<div id="' +
-                    element.field_name +
-                    '_loader_hook" style="position: relative;"/>'
+                `<div id="${element.field_name}_loader_hook" style="position: relative;"/>`
             );
-        $("#" + element.field_name).prop("readonly", "readonly");
-        $("#" + element.field_name).hide();
-        $("#show_" + element.field_name + "_loader").click(function () {
+        $(`#${element.field_name}`).prop("readonly", "readonly");
+        $(`#${element.field_name}`).hide();
+        $(`#show_${element.field_name}_loader`).click(function () {
             lx.upload.getFileTemplate(element);
-            $("#show_" + element.field_name + "_loader").prop("disabled", true);
-            $("#" + element.field_name).prop("disabled", true);
-            // $('#' + element.field_name).toggle();  to view field
+            $(`#show_${element.field_name}_loader`).prop("disabled", true);
+            $(`#${element.field_name}`).prop("disabled", true);
+            // $(`#${element.field_name}`).toggle();  to view field
         });
-        console.warn("Field " + element.field_name + " rendered.");
+        console.warn(`Field ${element.field_name} rendered.`);
     }
 };
 
@@ -77,7 +67,7 @@ lx.upload.getFileTemplate = async function (element) {
     data = await response.text().catch((error) => {
         console.error("Function lx.upload.getFileTemplate error:", error);
     });
-    $("#floating-div-for-upload-" + element.field_name + "-file").remove();
+    $(`#floating-div-for-upload-${element.field_name}-file`).remove();
     $(`#${element.field_name}_loader_hook`).html(
         `<div id="floating-div-for-upload-${element.field_name}-file" style="display:none" />`
     );
@@ -116,13 +106,7 @@ lx.upload.getFileTemplate = async function (element) {
         $(`#${element.field_name}-form`)
             .ajaxForm({
                 beforeSend: function (jqXHR, settings) {
-                    console.warn(
-                        "Bussines logic '%s' '%s' '%s' '%s'",
-                        "opportunities",
-                        "lx-upload-files-in-detailview.js",
-                        "lx.upload.getFileTemplate()",
-                        "ajaxForm beforeSend"
-                    );
+                    console.warn("ajaxForm beforeSend");
                     console.warn("beforeSend callback:", settings.url);
                     // file to be modified
                     settings.url += "&opportunity_id=" + element.opportunity_id;
@@ -139,19 +123,13 @@ lx.upload.getFileTemplate = async function (element) {
                     $(
                         `#floating-div-for-upload-${element.field_name}-file`
                     ).css({ height: "260px" });
-                    let percentVal = percentComplete + "%";
+                    let percentVal = `${percentComplete}%`;
                     $(".lx-bar").width(percentVal);
                     $(".lx-percent").html(percentVal);
                 },
                 // success is a function to be called if the request succeeds.
                 success: function (data, status, jqXHR) {
-                    console.warn(
-                        "Bussines logic '%s' '%s' '%s' '%s'",
-                        "opportunities",
-                        "lx-upload-files-in-detailview.js",
-                        "lx.upload.getFileTemplate()",
-                        "ajaxForm success"
-                    );
+                    console.warn("ajaxForm success");
                     console.warn("success callback:", status);
                     console.warn("data:", data);
                     data = JSON.parse(data);
@@ -192,13 +170,7 @@ lx.upload.getFileTemplate = async function (element) {
                 }, // success
                 // error is a function to be called if the request fails.
                 error: function (jqXHR, status, error) {
-                    console.error(
-                        "Bussines logic '%s' '%s' '%s' '%s'",
-                        "opportunities",
-                        "lx-upload-files-in-detailview.js",
-                        "lx.upload.getFileTemplate()",
-                        "ajaxForm error"
-                    );
+                    console.error("ajaxForm error");
                     console.error("error callback:", status);
                     console.error(
                         "Function lx.upload.getFileTemplate error:",
@@ -207,13 +179,7 @@ lx.upload.getFileTemplate = async function (element) {
                 }, // end error
                 // complete is a function to be called when the request finishes (after success and error callbacks are executed).
                 complete: function (jqXHR, status) {
-                    console.warn(
-                        "Bussines logic '%s' '%s' '%s' '%s'",
-                        "opportunities",
-                        "lx-upload-files-in-detailview.js",
-                        "lx.upload.getFileTemplate()",
-                        "ajaxForm complete"
-                    );
+                    console.warn("ajaxForm complete");
                     console.warn("complete callback:", status);
                     console.warn("*** finish ***");
                 }, // end complete
@@ -245,8 +211,7 @@ lx.upload.getFileFields = async function (forceCheck) {
                         } else {
                             if (lx.lionixCRM.config.debuglx) {
                                 console.warn(
-                                    "%s module have not upload fields configured.",
-                                    module_name
+                                    `${module_name} module have not upload fields configured.`
                                 );
                             }
                         }
@@ -254,9 +219,7 @@ lx.upload.getFileFields = async function (forceCheck) {
                 }
                 if (execute) {
                     console.warn(
-                        "Rendering upload files fields for " +
-                            crmEditView.module.value +
-                            " module..."
+                        `Rendering upload files fields for ${crmEditView.module.value} module...`
                     );
                     text_fields_to_upload_fields_list.forEach(function (
                         element
@@ -268,16 +231,13 @@ lx.upload.getFileFields = async function (forceCheck) {
                         element
                     ) {
                         if (
-                            $("#show_" + element.field_name + "_loader")
-                                .length == 0
+                            $(`#show_${element.field_name}_loader`).length == 0
                         ) {
                             lx.upload.getFileButton(element);
                         } else {
                             if (lx.lionixCRM.config.debuglx) {
                                 console.warn(
-                                    "Field " +
-                                        element.field_name +
-                                        " was already rendered."
+                                    `Field ${element.field_name} was already rendered.`
                                 );
                             }
                         }
@@ -320,11 +280,7 @@ lx.upload.getFileFields = async function (forceCheck) {
             if (crmEditView && !!crmEditView.module) {
                 if (lx.lionixCRM.config.debuglx) {
                     console.warn(
-                        "Upload files in EditView observer for '%s' current module '%s' '%s' '%s'",
-                        "all modules",
-                        crmEditView.module.value,
-                        "lx-upload-files-in-editview.js",
-                        "!function()"
+                        `Loading upload files fields in ${crmEditView.module.value}...`
                     );
                 }
                 lx.upload.getFileFields(false);

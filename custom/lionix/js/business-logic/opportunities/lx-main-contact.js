@@ -56,9 +56,9 @@ lx.opportunity.maincontact_fields = [
 
 lx.opportunity.clearMainContactCFields = function (duplicate) {
     lx.opportunity.maincontact_fields.forEach(function (element) {
-        $("#" + element.field).val("");
+        $(`#${element.field}`).val("");
         if (duplicate) {
-            $("#" + element.field).css("border", "1px solid #a5e8d6");
+            $(`#${element.field}`).css("border", "1px solid #a5e8d6");
         }
     });
     if (duplicate) {
@@ -175,30 +175,19 @@ lx.opportunity.renderMainContactDuplicates = function (duplicates) {
                     primary_address.email_address = element.email_address;
                 }
             });
-            duplicate_detail = '<li id="' + element.id;
-            duplicate_detail += '" data-account_id="' + element.accounts[0].id;
-            duplicate_detail += '" data-cedula_c="' + element.cedula_c;
-            duplicate_detail += '" data-first_name="' + element.first_name;
-            duplicate_detail += '" data-last_name="' + element.last_name;
-            duplicate_detail += '" data-lastname2_c="' + element.lastname2_c;
-            duplicate_detail += '" data-phone_mobile="' + element.phone_mobile;
-            duplicate_detail += '" data-phone_work="' + element.phone_work;
-            duplicate_detail += '" data-title="' + element.title;
-            duplicate_detail +=
-                '" data-primary_email_address_id="' + primary_address.id;
-            duplicate_detail +=
-                '" data-primary_email_address="' +
-                primary_address.email_address;
+            duplicate_detail = `<li id="${element.id}`;
+            duplicate_detail += `" data-account_id="${element.accounts[0].id}`;
+            duplicate_detail += `" data-cedula_c="${element.cedula_c}`;
+            duplicate_detail += `" data-first_name="${element.first_name}`;
+            duplicate_detail += `" data-last_name="${element.last_name}`;
+            duplicate_detail += `" data-lastname2_c="${element.lastname2_c}`;
+            duplicate_detail += `" data-phone_mobile="${element.phone_mobile}`;
+            duplicate_detail += `" data-phone_work="${element.phone_work}`;
+            duplicate_detail += `" data-title="${element.title}`;
+            duplicate_detail += `" data-primary_email_address_id="${primary_address.id}`;
+            duplicate_detail += `" data-primary_email_address="${primary_address.email_address}`;
             duplicate_detail += '">';
-            duplicate_detail +=
-                element.first_name +
-                " " +
-                element.last_name +
-                " " +
-                element.lastname2_c +
-                " " +
-                element.cedula_c +
-                " ";
+            duplicate_detail += `${element.first_name} ${element.last_name} ${element.lastname2_c} ${element.cedula_c} `;
             element.emails.forEach(function (element) {
                 duplicate_detail += element.email_address + " ";
             });
@@ -209,14 +198,10 @@ lx.opportunity.renderMainContactDuplicates = function (duplicates) {
         });
         newh = duplicates.data.length * 20 + 18; // last 18px bit is for duplicates title
         $(
-            "#main_contact_duplicates_" +
-                duplicates.fieldname +
-                " .yui-ac-content"
-        ).css("height", newh + "px");
+            `#main_contact_duplicates_${duplicates.fieldname} .yui-ac-content`
+        ).css("height", `${newh}px`);
         $(
-            "#main_contact_duplicates_" +
-                duplicates.fieldname +
-                " .yui-ac-content"
+            `#main_contact_duplicates_${duplicates.fieldname} .yui-ac-content`
         ).show(500);
         $(".main_contact_duplicates li").off(
             "mouseover.main_contact_duplicates_list"
@@ -309,18 +294,18 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
                 $("#maincontactcedula_c").on(
                     "keyup.results_search_tsecr",
                     async function () {
-                        if (lx.lionixCRM.config.debuglx) {
-                            console.warn(
-                                "key up ->",
-                                String.fromCharCode(event.which)
-                            );
-                        }
                         if ($(this).val().length != 9) {
                             $("#maincontactfirstname_c").val("");
                             $("#maincontactlastname_c").val("");
                             $("#maincontactlastname2_c").val("");
                         } else {
                             typed_cedula = $(this).val();
+                            console.warn(
+                                `Last key pressed: ${String.fromCharCode(
+                                    event.which
+                                )} typed cédula: %c${typed_cedula}`,
+                                "color: blue"
+                            );
                             tsecrlist = await lx.lionixCRM.getTSECRData({
                                 // Infoticos must be on same database server this SuiteCRM instance.
                                 focusfieldname: this.id,
@@ -349,13 +334,10 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
                 );
             }
             $("#maincontactcedula_c").append(
-                '<div id="maincontactcedula_c_lxajaxed" data-results_search_tsecr="' +
-                    keyup_status +
-                    '"/>'
+                `<div id="maincontactcedula_c_lxajaxed" data-results_search_tsecr="${keyup_status}"/>`
             );
             console.warn(
-                "keyup.results_search_tsecr on #maincontactcedula_c " +
-                    keyup_status
+                `keyup.results_search_tsecr on #maincontactcedula_c ${keyup_status}`
             );
         } else {
             if (lx.lionixCRM.config.debuglx) {
@@ -413,7 +395,7 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
                         )
                     ) {
                         if (
-                            $("#main_contact_duplicates_" + this.id).length == 0
+                            $(`#main_contact_duplicates_${this.id}`).length == 0
                         ) {
                             // width: 750px can be changed in each Client
                             width = lx.lionixCRM.config.modules.opportunities
@@ -422,13 +404,11 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
                                       .results_list_duplicates_width
                                 : 750;
                             $(this).before(
-                                '<div id="main_contact_duplicates_' +
-                                    this.id +
-                                    '" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: ' +
-                                    width +
-                                    'px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' +
-                                    this.id +
-                                    '"></ul></div></div></div>'
+                                `<div id="main_contact_duplicates_${this.id}" class="main_contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;">
+                                    <div class="yui-ac-content" style="width: ${width}px; height: 60px; display: none; ">
+                                        <div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_${this.id}"></ul></div>
+                                    </div>
+                                </div>`
                             );
                         }
                         $(

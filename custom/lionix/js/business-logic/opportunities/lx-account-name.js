@@ -61,9 +61,7 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
             }
             $("#account_name_lxajaxed").remove();
             $("#account_name").append(
-                '<div id="account_name_lxajaxed" data-business_type="' +
-                    data +
-                    '" />'
+                `<div id="account_name_lxajaxed" data-business_type="${data}" />`
             );
             console.warn("account_name_lxajaxed div indicator added.");
         } else {

@@ -12,30 +12,19 @@ lx.contact.renderContactDuplicates = function (duplicates) {
                     primary_address.email_address = element.email_address;
                 }
             });
-            duplicate_detail = '<li id="' + element.id;
-            duplicate_detail += '" data-account_id="' + element.accounts[0].id;
-            duplicate_detail += '" data-cedula_c="' + element.cedula_c;
-            duplicate_detail += '" data-first_name="' + element.first_name;
-            duplicate_detail += '" data-last_name="' + element.last_name;
-            duplicate_detail += '" data-lastname2_c="' + element.lastname2_c;
-            duplicate_detail += '" data-phone_mobile="' + element.phone_mobile;
-            duplicate_detail += '" data-phone_work="' + element.phone_work;
-            duplicate_detail += '" data-title="' + element.title;
-            duplicate_detail +=
-                '" data-primary_email_address_id="' + primary_address.id;
-            duplicate_detail +=
-                '" data-primary_email_address="' +
-                primary_address.email_address;
-            duplicate_detail += '">';
-            duplicate_detail +=
-                element.first_name +
-                " " +
-                element.last_name +
-                " " +
-                element.lastname2_c +
-                " " +
-                element.cedula_c +
-                " ";
+            duplicate_detail = `<li id="${element.id}`;
+            duplicate_detail += `" data-account_id="${element.accounts[0].id}`;
+            duplicate_detail += `" data-cedula_c="${element.cedula_c}`;
+            duplicate_detail += `" data-first_name="${element.first_name}`;
+            duplicate_detail += `" data-last_name="${element.last_name}`;
+            duplicate_detail += `" data-lastname2_c="${element.lastname2_c}`;
+            duplicate_detail += `" data-phone_mobile="${element.phone_mobile}`;
+            duplicate_detail += `" data-phone_work="${element.phone_work}`;
+            duplicate_detail += `" data-title="${element.title}`;
+            duplicate_detail += `" data-primary_email_address_id="${primary_address.id}`;
+            duplicate_detail += `" data-primary_email_address="${primary_address.email_address}`;
+            duplicate_detail += `">`;
+            duplicate_detail += `${element.first_name} ${element.last_name} ${element.lastname2_c} ${element.cedula_c} `;
             element.emails.forEach(function (element) {
                 duplicate_detail += element.email_address + " ";
             });
@@ -48,12 +37,13 @@ lx.contact.renderContactDuplicates = function (duplicates) {
             $(".contact_duplicates ul").append(duplicate_detail);
         });
         newh = duplicates.data.length * 20 + 18; // last 18px bit is for duplicates title
-        $(
-            "#contact_duplicates_" + duplicates.fieldname + " .yui-ac-content"
-        ).css("height", newh + "px");
-        $(
-            "#contact_duplicates_" + duplicates.fieldname + " .yui-ac-content"
-        ).show(500);
+        $(`#contact_duplicates_${duplicates.fieldname} .yui-ac-content`).css(
+            "height",
+            `${newh}px`
+        );
+        $(`#contact_duplicates_${duplicates.fieldname} .yui-ac-content`).show(
+            500
+        );
         $(".contact_duplicates li").off("mouseover.contact_duplicates_list");
         $(".contact_duplicates li").on(
             "mouseover.contact_duplicates_list",
@@ -68,14 +58,10 @@ lx.contact.renderContactDuplicates = function (duplicates) {
             function () {
                 $(".contact_duplicates .yui-ac-content").hide(500);
                 console.warn(
-                    "Redirecting to contacts Editview: - " +
-                        window.location.origin +
-                        window.location.pathname +
-                        "?module=Contacts&return_module=Contacts&action=EditView&record=" +
-                        this.id
+                    `Redirecting to contacts Editview: - ${window.location.origin}${window.location.pathname}?module=Contacts&return_module=Contacts&action=EditView&record=${this.id}`
                 );
                 toastr["info"](
-                    "Redireccionando a " + $(this).data("first_name") + "...",
+                    `Redireccionando a ${$(this).data("first_name")}...`,
                     "Posibles duplicados encontrados",
                     {
                         positionClass: "toast-bottom-center",
@@ -86,11 +72,11 @@ lx.contact.renderContactDuplicates = function (duplicates) {
                         progressBar: true,
                     }
                 );
-                window.location.href =
-                    window.location.origin +
-                    window.location.pathname +
-                    "?module=Contacts&return_module=Contacts&action=EditView&record=" +
-                    this.id;
+                window.location.href = `${
+                    window.location.origin + window.location.pathname
+                }?module=Contacts&return_module=Contacts&action=EditView&record=${
+                    this.id
+                }`;
             }
         );
     }
@@ -113,12 +99,7 @@ lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
                 $("#cedula_c").on(
                     "keyup.results_search_tsecr",
                     async function () {
-                        if (lx.lionixCRM.config.debuglx) {
-                            console.warn(
-                                "key up ->",
-                                String.fromCharCode(event.which)
-                            );
-                        }
+                        console.warn(`key:${String.fromCharCode(event.which)}`);
                         if ($(this).val().length != 9) {
                             $("#first_name").val("");
                             $("#last_name").val("");
@@ -147,21 +128,11 @@ lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
                 );
             }
             $("#cedula_c").append(
-                '<div id="cedula_c_lxajaxed" data-results_search_tsecr="' +
-                    keyup_status +
-                    '"/>'
+                `<div id="cedula_c_lxajaxed" data-results_search_tsecr="${keyup_status}"/>`
             );
             console.warn(
-                "keyup.results_search_tsecr on #cedula_c " + keyup_status
+                `keyup.results_search_tsecr on #cedula_c ${keyup_status}`
             );
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn(
-                    `cedula_c_lxajaxed div indicator already exists and it's [${$(
-                        "#cedula_c_lxajaxed"
-                    ).data("results_search_tsecr")}].`
-                );
-            }
         }
     } catch (error) {
         console.error(
@@ -205,7 +176,7 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
                                 $(fln2).val().length > 2)
                         ) {
                             if (
-                                $("#contact_duplicates_" + this.id).length == 0
+                                $(`#contact_duplicates_${this.id}`).length == 0
                             ) {
                                 // width: 750px can be changed in each Client
                                 width = lx.lionixCRM.config.modules.contacts
@@ -214,13 +185,11 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
                                           .results_list_duplicates_width
                                     : 750;
                                 $(this).before(
-                                    '<div id="contact_duplicates_' +
-                                        this.id +
-                                        '" class="contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;"><div class="yui-ac-content" style="width: ' +
-                                        width +
-                                        'px; height: 60px; display: none; "><div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_' +
-                                        this.id +
-                                        '"></ul></div></div></div>'
+                                    `<div id="contact_duplicates_${this.id}" class="contact_duplicates yui-ac-container" style="position: relative; left: 200px; top:0px;">
+                                        <div class="yui-ac-content" style="width: ${width}px; height: 60px; display: none; ">
+                                            <div class="yui-ac-bd">Posibles duplicados encontrados<ul id="#ul_${this.id}"></ul></div>
+                                        </div>
+                                    </div>`
                                 );
                             }
                             $("#first_name, #last_name, #lastname2_c").off(
@@ -250,24 +219,11 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
                 );
             }
             $("#cedula_c").append(
-                '<div id="full_name_lxajaxed" data-results_list_duplicates="' +
-                    keyup_status +
-                    '"/>'
+                `<div id="full_name_lxajaxed" data-results_list_duplicates="${keyup_status}"/>`
             );
             console.warn(
-                "keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c " +
-                    keyup_status
+                `keypress.results_list_duplicates on #first_name, #last_name and #lastname2_c ${keyup_status}`
             );
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn(
-                    "full_name_lxajaxed div indicator already exists and it's [" +
-                        $("#full_name_lxajaxed").data(
-                            "results_list_duplicates"
-                        ) +
-                        "]."
-                );
-            }
         }
     } catch (error) {
         console.error(
@@ -294,15 +250,6 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
             let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == "Contacts") {
-                    if (lx.lionixCRM.config.debuglx) {
-                        console.warn(
-                            "Bussines logic observer '%s' '%s' '%s' '%s'",
-                            "contacts",
-                            "lx-cedula-c.js",
-                            "!function()",
-                            "initial"
-                        );
-                    }
                     lx.contact.resultsSearchTSECRHandler(false);
                     lx.contact.resultsListDuplicatesHandler(false);
                 }
