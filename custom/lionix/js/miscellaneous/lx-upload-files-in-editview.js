@@ -193,6 +193,9 @@ lx.upload.getFileFields = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
+            console.warn("Retrieving modules[all] properties...");
+            data = await lx.lionixCRM.getConfigOption("modules");
+            console.warn("Modules[all] successfully retrieved", data);
         }
         if (lx.lionixCRM.config.allow_upload_files_fields) {
             let execute = false;
@@ -258,11 +261,13 @@ lx.upload.getFileFields = async function (forceCheck) {
             }
         }
     } catch (error) {
-        console.error("Modules[all] properties are not present!");
-        console.error("Retrieving modules[all] properties...");
-        data = await lx.lionixCRM.getConfigOption("modules");
-        console.warn("Modules[all] successfully retrieved", data);
-        lx.upload.getFileFields(false);
+        console.error(
+            "Modules[all] properties are not present!",
+            "Waiting for LionixCRM config options..."
+        );
+        document.addEventListener("lxLoadAllConfigOptions", () =>
+            lx.upload.getFileFields(false)
+        );
     }
 }; // end function
 
