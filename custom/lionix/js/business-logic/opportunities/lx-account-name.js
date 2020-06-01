@@ -65,14 +65,10 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
             $("#account_name").append(
                 `<div id="account_name_lxajaxed" data-business_type="${data}" />`
             );
-            console.warn("account_name_lxajaxed div indicator added.");
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn(
-                    "account_name_lxajaxed div indicator already exists:",
-                    $("#account_name_lxajaxed").data("business_type")
-                );
-            }
+            console.warn(
+                "DIV indicator added %caccount_name_lxajaxed",
+                "color: blue"
+            );
         }
     } catch (error) {
         console.error(
@@ -98,15 +94,6 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
             let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == "Opportunities") {
-                    if (lx.lionixCRM.config.debuglx) {
-                        console.warn(
-                            "Bussines logic observer '%s' '%s' '%s' '%s'",
-                            "Opportunities",
-                            "lx-account-name.js",
-                            "!function()",
-                            "initial"
-                        );
-                    }
                     lx.opportunity.getAccountNameByBusinessType(false);
                 }
             }
