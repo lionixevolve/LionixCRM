@@ -44,7 +44,8 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
                         "EditView",
                         "account_name",
                         "Nombre de Cuenta",
-                        true
+                        true,
+                        "lx.opportunity.getAccountNameByBusinessType"
                     );
                     $("#maincontact_c").on(
                         "change.lx-hide-account-name",
@@ -53,7 +54,8 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
                                 "EditView",
                                 "account_name",
                                 "Nombre de Cuenta",
-                                true
+                                true,
+                                "lx.opportunity.getAccountNameByBusinessType"
                             );
                         }
                     );
