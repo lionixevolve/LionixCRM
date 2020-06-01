@@ -35,6 +35,11 @@
                         );
                     }
                     if (lx.events.lxLoadAllConfigOptions.status == "ready") {
+                        console.warn(
+                            "Observer on %clx-load-all-config-options.js %cdisconnected",
+                            "color:blue",
+                            "color:red"
+                        );
                         // if needed only once, you can stop observing with observer.disconnect();
                         observer.disconnect();
                     }
