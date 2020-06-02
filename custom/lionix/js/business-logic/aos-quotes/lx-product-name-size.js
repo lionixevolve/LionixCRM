@@ -11,16 +11,33 @@
             let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == "AOS_Quotes") {
-                    if ($("input[name^='product_name']").length) {
-                        // input field size
-                        $("input[name^='product_name']").css("width", "400px");
-                        // search bar below input field
+                    if (!!$("input[name^='product_name']").length) {
+                        // input field size changes only once when added to the form
+                        $("input[name^='product_name']")
+                            .filter(function () {
+                                if ($(this).css("width") != "400px") {
+                                    console.warn(
+                                        `Input ${$(this).attr(
+                                            "id"
+                                        )} product_name current size %c${$(
+                                            this
+                                        ).css("width")}`,
+                                        "color: blue"
+                                    );
+                                    console.warn(
+                                        `Input ${$(this).attr(
+                                            "id"
+                                        )} size set to %c400px %clx-product-name-size.js`,
+                                        "color: blue",
+                                        "color: green"
+                                    );
+                                }
+                                return $(this).css("width") != "400px";
+                            })
+                            .css("width", "400px");
+                        // search bar below input field must be changed every time it appears
+                        // observer must check attributes for this one
                         $(".yui-ac-content").css("width", "600px");
-                        console.warn(
-                            `Inputs product_name{#} size set to %c400px %clx-product-name-size.js`,
-                            "color: blue",
-                            "color: green"
-                        );
                         // if needed only once, you can stop observing with observer.disconnect();
                         // observer.disconnect();
                     }
@@ -31,7 +48,7 @@
     // Observer target
     let target = document.querySelector("body"); //uncomment to run
     if (target == null) {
-        //This part if for the Despacho app iFrame
+        //This part is for iFrame apps
         let target = document.querySelector("#EditView"); //uncomment to run
     }
     // configuration of the observer:
