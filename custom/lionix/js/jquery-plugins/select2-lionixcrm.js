@@ -4,10 +4,10 @@
 // (function(){})(); // like above but more parens.
 // (function(){}()); // Douglas Crockford's style when you need function results.
 // Further reading: http://javascript.crockford.com/code.html and look for invoked immediately
-!(function() {
+!(function () {
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    let observer = new MutationObserver(function(mutations) {
+    let observer = new MutationObserver(function (mutations) {
         if (mutations) {
             // select2 disabled for specific detailview
             let applySelect2 = true;
@@ -39,19 +39,21 @@
                 applySelect2 = false;
             }
             // select2 disabled for importation forms
-            if ($('#importstep3').length) {
+            if ($("#importstep3").length) {
                 applySelect2 = false;
             }
             // select2 applied
             if (applySelect2) {
-                $('select:not([class^="select2"],[class^="datetimecombo_time"])').each(function(index) {
+                $(
+                    'select:not([class^="select2"],[class^="datetimecombo_time"])'
+                ).each(function (index) {
                     if (!$(this).hasClass("select2-hidden-accessible")) {
                         $(this).select2({
                             closeOnSelect: false,
                             dropdownAutoWidth: "true",
                             width: "auto", //mucho más ancho
                             theme: "bootstrap",
-                            dropdownParent: $(this).closest("div")
+                            dropdownParent: $(this).closest("div"),
                         });
                     }
                 });
@@ -69,7 +71,7 @@
             attributes: true,
             childList: true,
             // characterData: true,
-            subtree: true
+            subtree: true,
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config); // uncomment to run

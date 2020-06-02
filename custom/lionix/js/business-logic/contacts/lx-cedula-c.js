@@ -99,13 +99,18 @@ lx.contact.resultsSearchTSECRHandler = async function (forceCheck) {
                 $("#cedula_c").on(
                     "keyup.results_search_tsecr",
                     async function () {
-                        console.warn(`key:${String.fromCharCode(event.which)}`);
                         if ($(this).val().length != 9) {
                             $("#first_name").val("");
                             $("#last_name").val("");
                             $("#lastname2_c").val("");
                         } else {
                             typed_cedula = $(this).val();
+                            console.warn(
+                                `Last key pressed: ${String.fromCharCode(
+                                    event.which
+                                )} typed cédula: %c${typed_cedula}`,
+                                "color: blue"
+                            );
                             tsecrlist = await lx.lionixCRM.getTSECRData({
                                 // Infoticos must be on same database server this SuiteCRM instance.
                                 focusfieldname: this.id,
