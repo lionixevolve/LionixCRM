@@ -6,7 +6,7 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
             $("#account_name_lxajaxed").remove();
             console.warn("Retrieving business_type property...");
             data = await lx.lionixCRM.getConfigOption("business_type");
-            console.warn("business_type successfully retrieved", data);
+            console.warn(`business_type property retrieved, status ${data}`);
         }
         data = lx.lionixCRM.config.business_type.toLowerCase();
         if (
@@ -19,7 +19,8 @@ lx.opportunity.getAccountNameByBusinessType = async function (forceCheck) {
                         "EditView",
                         "account_name",
                         "Nombre de Cuenta",
-                        false
+                        false,
+                        "lx.opportunity.getAccountNameByBusinessType"
                     );
                     $("#maincontact_c").on(
                         "change.lx-hide-account-name",

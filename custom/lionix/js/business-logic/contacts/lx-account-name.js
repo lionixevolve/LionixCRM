@@ -19,7 +19,8 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
                         "EditView",
                         "account_name",
                         "Nombre de Cuenta",
-                        false
+                        false,
+                        "lx.contact.getAccountNameByBusinessType"
                     );
                     lx.field.show("account_name", false);
                     break;
@@ -28,7 +29,8 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
                         "EditView",
                         "account_name",
                         "Nombre de Cuenta",
-                        true
+                        true,
+                        "lx.contact.getAccountNameByBusinessType"
                     );
                     lx.field.show("account_name", true);
                     break;
@@ -39,14 +41,10 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
                     data +
                     '" />'
             );
-            console.warn("account_name_lxajaxed div indicator added.");
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn(
-                    "account_name_lxajaxed div indicator already exists:",
-                    $("#account_name_lxajaxed").data("business_type")
-                );
-            }
+            console.warn(
+                "DIV indicator added %caccount_name_lxajaxed",
+                "color: blue"
+            );
         }
     } catch (error) {
         console.error(
@@ -72,15 +70,6 @@ lx.contact.getAccountNameByBusinessType = async function (forceCheck) {
             let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (crmEditView.module.value == "Contacts") {
-                    if (lx.lionixCRM.config.debuglx) {
-                        console.warn(
-                            "Bussines logic observer '%s' '%s' '%s' '%s'",
-                            "contacts",
-                            "lx-account-name.js",
-                            "!function()",
-                            "initial"
-                        );
-                    }
                     lx.contact.getAccountNameByBusinessType(false);
                 }
             }
