@@ -258,9 +258,8 @@ lx.chat.start = async function (forceCheck) {
             lx.chat.findFieldToRender();
         }
     } else {
-        if (lx.lionixCRM.config.debuglx) {
-            console.warn("smartchat is disabled in LionixCRM config.php file.");
-        }
+        lx.events.lxChat = { status: "disabled" };
+        console.warn("smartchat is disabled in LionixCRM config.php file.");
     }
 };
 
@@ -418,22 +417,35 @@ lx.chat.getMessages = async function () {
                 currentForm = document.forms["EditView"];
             }
             if (currentForm) {
-                $(document).ready(function () {
-                    // if #edit_button exists is a detailview, else if a #SAVE or #SAVE_HEADER button exists is a editview
-                    if (
-                        $("#edit_button").length ||
-                        $("#SAVE").length ||
-                        $("#SAVE_HEADER").length
-                    ) {
-                        // now it ensures that lxchat isn't already present
-                        if (!$("#lxchat").length) {
-                            lx.chat.start(false);
-                        }
+                if (!lx.events.hasOwnProperty("lxChat")) {
+                    lx.events.lxChat = {
+                        status: "send",
+                    };
+                }
+                if (lx.events.lxChat.status == "disabled") {
+                    console.warn(
+                        "Observer on %clx-chat.js %cdisconnected",
+                        "color:blue",
+                        "color:red"
+                    );
+                    // if needed only once, you can stop observing with observer.disconnect();
+                    observer.disconnect();
+                    lx.observers.disconnected += 1;
+                    lx.observers.observing -= 1;
+                    console.warn("lx.observers", lx.observers);
+                }
+                // if #edit_button exists is a detailview, else if a #SAVE or #SAVE_HEADER button exists is a editview
+                if (
+                    $("#edit_button").length ||
+                    $("#SAVE").length ||
+                    $("#SAVE_HEADER").length
+                ) {
+                    // now it ensures that lxchat isn't already present
+                    if (!$("#lxchat").length) {
+                        lx.chat.start(false);
                     }
-                });
+                }
             }
-            // if needed only once, you can stop observing with observer.disconnect();
-            // observer.disconnect();
         }
     });
     // Observer target
