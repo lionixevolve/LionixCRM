@@ -219,6 +219,8 @@ lx.upload.getFileFields = async function (forceCheck) {
                             if (text_fields_to_upload_fields_list.length) {
                                 execute = true;
                             } else {
+                                lx.events.lxUploadFilesInEditview.status =
+                                    "ready";
                                 if (lx.lionixCRM.config.debuglx) {
                                     console.warn(
                                         `${module_name} module have not upload fields configured.`
@@ -256,7 +258,7 @@ lx.upload.getFileFields = async function (forceCheck) {
                             }
                         });
                         //All buttons rendered.
-                        lx.events.lxUploadFilesInEditview = "ready";
+                        lx.events.lxUploadFilesInEditview.status = "ready";
                     }
                 } else {
                     if (lx.lionixCRM.config.debuglx) {
