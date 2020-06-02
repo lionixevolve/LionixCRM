@@ -52,8 +52,16 @@ lx.lionixCRM.getEnvironment = async function (forceCheck) {
     let observer = new MutationObserver(function (mutations) {
         if (mutations) {
             lx.lionixCRM.getEnvironment(false);
+            console.warn(
+                "Observer on %clx-check-crm-environment.js %cdisconnected",
+                "color:blue",
+                "color:red"
+            );
             // if needed only once, you can stop observing with observer.disconnect();
             observer.disconnect();
+            lx.observers.disconnected += 1;
+            lx.observers.observing -= 1;
+            console.warn("lx.observers", lx.observers);
         }
     });
     // Observer target
@@ -69,6 +77,8 @@ lx.lionixCRM.getEnvironment = async function (forceCheck) {
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config);
+        lx.observers.created += 1;
+        lx.observers.observing += 1;
     }
     // end observer
 })();

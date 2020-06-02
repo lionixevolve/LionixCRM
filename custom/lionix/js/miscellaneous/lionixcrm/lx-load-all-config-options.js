@@ -42,6 +42,9 @@
                         );
                         // if needed only once, you can stop observing with observer.disconnect();
                         observer.disconnect();
+                        lx.observers.disconnected += 1;
+                        lx.observers.observing -= 1;
+                        console.warn("lx.observers", lx.observers);
                     }
                 }
             }
@@ -60,6 +63,8 @@
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config);
+        lx.observers.created += 1;
+        lx.observers.observing += 1;
     }
     // end observer
 })();

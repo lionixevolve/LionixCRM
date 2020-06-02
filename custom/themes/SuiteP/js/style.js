@@ -1,5 +1,10 @@
 // LionixCRM lx javascript object definition
 let lx = {
+    observers: {
+        created: 0,
+        observing: 0,
+        disconnected: 0,
+    },
     events: {},
     field: {},
     upload: {},

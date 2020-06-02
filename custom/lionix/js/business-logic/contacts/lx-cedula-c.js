@@ -271,6 +271,8 @@ lx.contact.resultsListDuplicatesHandler = async function (forceCheck) {
         };
         // pass in the target node, as well as the observer options
         observer.observe(target, config);
+        lx.observers.created += 1;
+        lx.observers.observing += 1;
     }
     // end observer
 })();
