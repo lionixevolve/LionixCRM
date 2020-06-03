@@ -339,14 +339,6 @@ lx.opportunity.resultsSearchTSECRHandler = async function (forceCheck) {
             console.warn(
                 `keyup.results_search_tsecr on #maincontactcedula_c ${keyup_status}`
             );
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn(
-                    `maincontactcedula_c_lxajaxed div indicator already exists and it's [${$(
-                        "#maincontactcedula_c_lxajaxed"
-                    ).data("results_search_tsecr")}].`
-                );
-            }
         }
     } catch (error) {
         console.error(
@@ -437,15 +429,6 @@ lx.opportunity.resultsListDuplicatesHandler = async function (forceCheck) {
                 `<div id="main_full_name_lxajaxed" data-results_list_duplicates="${keyup_status}"/>`
             );
             console.warn(`keypress.results_list_duplicates ${keyup_status}`);
-        } else {
-            if (lx.lionixCRM.config.debuglx) {
-                console.warn("main_full_name_lxajaxed div already exists");
-                console.warn(
-                    $("#main_full_name_lxajaxed").data(
-                        "results_list_duplicates"
-                    )
-                );
-            }
         }
     } catch (error) {
         console.error(
