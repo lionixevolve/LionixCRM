@@ -200,58 +200,68 @@ lx.upload.getFileFields = async function (forceCheck) {
             data = await lx.lionixCRM.getConfigOption("modules");
             console.warn("Modules[all] successfully retrieved", data);
         }
-        run = true;
-        if (lx.events.lxUploadFilesInEditview.status == "none") {
+        let run = true;
+        if (
+            lx.lionixCRM.config.allow_upload_files_fields == undefined ||
+            !!$("#upload_files_in_editview_rendered").length
+        ) {
             run = false;
         }
         if (run) {
             if (lx.lionixCRM.config.allow_upload_files_fields) {
                 let execute = false;
                 let crmEditView = document.forms["EditView"];
-                if (crmEditView && !!crmEditView.module) {
-                    module_name = crmEditView.module.value.toLowerCase();
-                    console.warn(
-                        `Loading upload files fields in ${crmEditView.module.value}...`
+                module_name = crmEditView.module.value.toLowerCase();
+                console.warn(
+                    `Loading upload files fields in ${crmEditView.module.value}...`
+                );
+                switch (module_name) {
+                    case "accounts":
+                    case "contacts":
+                    case "opportunities":
+                        text_fields_to_upload_fields_list =
+                            lx.lionixCRM.config.modules[module_name]
+                                .upload_files_fields;
+                        if (text_fields_to_upload_fields_list.length) {
+                            execute = true;
+                        } else {
+                            $("#content").append(
+                                '<div id="upload_files_in_editview_rendered"/>'
+                            );
+                            console.warn(
+                                `... ${module_name} module have not upload fields configured.`
+                            );
+                        }
+                        break;
+                }
+                if (execute) {
+                    //Adding module data to each field...
+                    text_fields_to_upload_fields_list.forEach(function (
+                        element
+                    ) {
+                        element.module_name = crmEditView.module.value;
+                        element.record_id = crmEditView.record.value;
+                    });
+                    //... rendering upload button for each field
+                    text_fields_to_upload_fields_list.forEach(function (
+                        element
+                    ) {
+                        if (
+                            $(`#show_${element.field_name}_loader`).length == 0
+                        ) {
+                            console.warn(
+                                `Rendering upload files fields for ${crmEditView.module.value} module...`
+                            );
+                            lx.upload.getFileButton(element);
+                        }
+                    });
+                    //All buttons rendered.
+                    $("#content").append(
+                        '<div id="upload_files_in_editview_rendered"/>'
                     );
-                    switch (module_name) {
-                        case "accounts":
-                        case "contacts":
-                        case "opportunities":
-                            text_fields_to_upload_fields_list =
-                                lx.lionixCRM.config.modules[module_name]
-                                    .upload_files_fields;
-                            if (text_fields_to_upload_fields_list.length) {
-                                execute = true;
-                            }
-                            break;
-                    }
-                    if (execute) {
-                        //Adding module data to each field...
-                        text_fields_to_upload_fields_list.forEach(function (
-                            element
-                        ) {
-                            element.module_name = crmEditView.module.value;
-                            element.record_id = crmEditView.record.value;
-                        });
-                        //... rendering upload button for each field
-                        text_fields_to_upload_fields_list.forEach(function (
-                            element
-                        ) {
-                            if (
-                                $(`#show_${element.field_name}_loader`)
-                                    .length == 0
-                            ) {
-                                console.warn(
-                                    `Rendering upload files fields for ${crmEditView.module.value} module...`
-                                );
-                                lx.upload.getFileButton(element);
-                            }
-                        });
-                        //All buttons rendered.
-                        console.warn(
-                            `... all upload files fields for ${crmEditView.module.value} rendered.`
-                        );
-                    }
+                    console.warn(
+                        `... all upload files fields for ${crmEditView.module.value} rendered.`
+                    );
                 }
             } else {
                 lx.events.lxUploadFilesInEditview.status = "none";
