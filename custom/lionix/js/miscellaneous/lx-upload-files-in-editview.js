@@ -195,6 +195,7 @@ lx.upload.getFileFields = async function (forceCheck) {
     try {
         if (forceCheck) {
             lx.lionixCRM.config.modules = undefined;
+            $("#upload_files_in_editview_rendered").remove();
             console.warn("Retrieving modules[all] properties...");
             data = await lx.lionixCRM.getConfigOption("modules");
             console.warn("Modules[all] successfully retrieved", data);
@@ -267,6 +268,9 @@ lx.upload.getFileFields = async function (forceCheck) {
         document.addEventListener("lxLoadAllConfigOptions", () =>
             lx.upload.getFileFields(false)
         );
+        if (forceCheck) {
+            lx.upload.getFileFields(false);
+        }
     }
 }; // end function
 
