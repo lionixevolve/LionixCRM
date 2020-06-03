@@ -200,7 +200,7 @@ lx.upload.getFileFields = async function (forceCheck) {
             console.warn("Modules[all] successfully retrieved", data);
         }
         run = true;
-        if (lx.events.lxUploadFilesInEditview.status == "ready") {
+        if (lx.events.lxUploadFilesInEditview.status == "none") {
             run = false;
         }
         if (run) {
@@ -209,6 +209,9 @@ lx.upload.getFileFields = async function (forceCheck) {
                 let crmEditView = document.forms["EditView"];
                 if (crmEditView && !!crmEditView.module) {
                     module_name = crmEditView.module.value.toLowerCase();
+                    console.warn(
+                        `Loading upload files fields in ${crmEditView.module.value}...`
+                    );
                     switch (module_name) {
                         case "accounts":
                         case "contacts":
@@ -218,14 +221,6 @@ lx.upload.getFileFields = async function (forceCheck) {
                                     .upload_files_fields;
                             if (text_fields_to_upload_fields_list.length) {
                                 execute = true;
-                            } else {
-                                lx.events.lxUploadFilesInEditview.status =
-                                    "ready";
-                                if (lx.lionixCRM.config.debuglx) {
-                                    console.warn(
-                                        `${module_name} module have not upload fields configured.`
-                                    );
-                                }
                             }
                             break;
                     }
@@ -249,30 +244,19 @@ lx.upload.getFileFields = async function (forceCheck) {
                                     `Rendering upload files fields for ${crmEditView.module.value} module...`
                                 );
                                 lx.upload.getFileButton(element);
-                            } else {
-                                if (lx.lionixCRM.config.debuglx) {
-                                    console.warn(
-                                        `Field ${element.field_name} was already rendered.`
-                                    );
-                                }
                             }
                         });
                         //All buttons rendered.
-                        lx.events.lxUploadFilesInEditview.status = "ready";
-                    }
-                } else {
-                    if (lx.lionixCRM.config.debuglx) {
                         console.warn(
-                            "We are not in an EditView lx.upload.getFileFields cannot run."
+                            `... all upload files fields for ${crmEditView.module.value} rendered.`
                         );
                     }
                 }
             } else {
-                if (lx.lionixCRM.config.debuglx) {
-                    console.warn(
-                        "Upload files fields are disabled in LionixCRM config.php file."
-                    );
-                }
+                lx.events.lxUploadFilesInEditview.status = "none";
+                console.warn(
+                    "Upload files fields are disabled in LionixCRM config.php file."
+                );
             }
         }
     } catch (error) {
@@ -299,15 +283,24 @@ lx.upload.getFileFields = async function (forceCheck) {
             let crmEditView = document.forms["EditView"];
             if (crmEditView && !!crmEditView.module) {
                 if (!lx.events.hasOwnProperty("lxUploadFilesInEditview")) {
-                    lx.events.lxUploadFilesInEditview = { status: "send" };
+                    lx.events.lxUploadFilesInEditview = {
+                        status: "send",
+                    };
+                }
+                if (lx.events.lxUploadFilesInEditview.status == "none") {
                     console.warn(
-                        `Loading upload files fields in ${crmEditView.module.value}...`
+                        "Observer on %clx-upload-files-in-editview.js %cdisconnected",
+                        "color:blue",
+                        "color:red"
                     );
+                    // if needed only once, you can stop observing with observer.disconnect();
+                    observer.disconnect();
+                    lx.observers.disconnected += 1;
+                    lx.observers.observing -= 1;
+                    console.warn("lx.observers", lx.observers);
                 }
                 lx.upload.getFileFields(false);
             }
-            // if needed only once, you can stop observing with observer.disconnect();
-            // observer.disconnect();
         }
     });
     // Observer target
