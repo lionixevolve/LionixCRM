@@ -203,6 +203,7 @@ lx.upload.getFileFields = async function (forceCheck) {
         let run = true;
         if (
             lx.lionixCRM.config.allow_upload_files_fields == undefined ||
+            lx.events.lxUploadFilesInEditview.status == "disabled" ||
             !!$("#upload_files_in_editview_rendered").length
         ) {
             run = false;
@@ -264,7 +265,7 @@ lx.upload.getFileFields = async function (forceCheck) {
                     );
                 }
             } else {
-                lx.events.lxUploadFilesInEditview.status = "none";
+                lx.events.lxUploadFilesInEditview.status = "disabled";
                 console.warn(
                     "Upload files fields are disabled in LionixCRM config.php file."
                 );
@@ -301,7 +302,7 @@ lx.upload.getFileFields = async function (forceCheck) {
                         status: "send",
                     };
                 }
-                if (lx.events.lxUploadFilesInEditview.status == "none") {
+                if (lx.events.lxUploadFilesInEditview.status == "disabled") {
                     console.warn(
                         "Observer on %clx-upload-files-in-editview.js %cdisconnected",
                         "color:blue",
