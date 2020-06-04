@@ -191,7 +191,7 @@ lx.chat.findFieldToRender = async function () {
                             );
                         }
                     } else {
-                        lx.chat.render(lx.chat.candidateFieldsArray[i]);
+                        await lx.chat.render(lx.chat.candidateFieldsArray[i]);
                     }
                 }
             }
@@ -249,7 +249,7 @@ lx.chat.start = async function () {
                 });
             }
             if (!$("#lxchat").length) {
-                lx.chat.findFieldToRender();
+                await lx.chat.findFieldToRender();
             }
         } else {
             lx.events.lxChat.status = "disabled";
@@ -395,7 +395,7 @@ lx.chat.getMessages = async function () {
     // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
-    let observer = new MutationObserver(function (mutations) {
+    let observer = new MutationObserver(async function (mutations) {
         if (mutations) {
             let currentForm = document.forms["DetailView"];
             if (!currentForm) {
@@ -427,7 +427,7 @@ lx.chat.getMessages = async function () {
                 ) {
                     // now it ensures that lxchat isn't already present
                     if (!$("#lxchat").length) {
-                        lx.chat.start();
+                        await lx.chat.start();
                     }
                 }
             }
