@@ -44,7 +44,7 @@ lx.upload.getFileButton = function (element) {
             $(`#${element.field_name}`).prop("disabled", true);
             // $(`#${element.field_name}`).toggle();  to view field
         });
-        console.warn(`Field ${element.field_name} rendered.`);
+        console.warn(`Field ${element.field_name} rendered`);
     }
 };
 
@@ -67,7 +67,7 @@ lx.upload.getFileTemplate = async function (element) {
         }),
     });
     data = await response.text().catch((error) => {
-        console.error("Function lx.upload.getFileTemplate error:", error);
+        console.error("lxajax.php uploadFileTemplate error:", error);
     });
     $(`#floating-div-for-upload-${element.field_name}-file`).remove();
     $(`#${element.field_name}_loader_hook`).html(
@@ -213,9 +213,6 @@ lx.upload.getFileFields = async function (forceCheck) {
                 let execute = false;
                 let crmEditView = document.forms["EditView"];
                 module_name = crmEditView.module.value.toLowerCase();
-                console.warn(
-                    `Loading upload files fields in ${crmEditView.module.value}...`
-                );
                 switch (module_name) {
                     case "accounts":
                     case "contacts":
@@ -230,12 +227,15 @@ lx.upload.getFileFields = async function (forceCheck) {
                                 '<div id="upload_files_in_editview_rendered"/>'
                             );
                             console.warn(
-                                `... ${module_name} module have not upload fields configured.`
+                                `${module_name} module have not upload fields configured`
                             );
                         }
                         break;
                 }
                 if (execute) {
+                    console.warn(
+                        `Starting to render upload files fields for ${crmEditView.module.value} module...`
+                    );
                     //Adding module data to each field...
                     text_fields_to_upload_fields_list.forEach(function (
                         element
@@ -250,9 +250,6 @@ lx.upload.getFileFields = async function (forceCheck) {
                         if (
                             $(`#show_${element.field_name}_loader`).length == 0
                         ) {
-                            console.warn(
-                                `Rendering upload files fields for ${crmEditView.module.value} module...`
-                            );
                             lx.upload.getFileButton(element);
                         }
                     });
@@ -267,7 +264,7 @@ lx.upload.getFileFields = async function (forceCheck) {
             } else {
                 lx.events.lxUploadFilesInEditview.status = "disabled";
                 console.warn(
-                    "Upload files fields are disabled in LionixCRM config.php file."
+                    "Upload files fields are disabled in LionixCRM config.php file"
                 );
             }
         }
