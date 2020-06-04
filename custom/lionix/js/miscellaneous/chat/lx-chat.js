@@ -29,7 +29,6 @@ lx.chat.saveNewMessage = async function (userMessage) {
                 return { id: e.id, msg: e.msg, date: e.date };
             })
         );
-
         let currentForm = document.forms["DetailView"];
         if (!currentForm) {
             currentForm = document.forms["EditView"];
@@ -56,11 +55,11 @@ lx.chat.saveNewMessage = async function (userMessage) {
         data = await response.text().catch((error) => {
             console.error("Function lx.chat.saveNewMessage error:", error);
         });
-        console.warn("data:", data);
         $("#lxchatnewmsg").val("");
-        $("textarea#" + lx.chat.field).val(data);
+        $(`textarea#${lx.chat.field}`).val(data);
         data = data == "" ? "[]" : data;
         lx.chat.messagesArray = JSON.parse(data);
+        console.warn("Message stored:", lx.chat.messagesArray);
         document.getElementById(
             "lxchatcontent"
         ).innerHTML = lx.chat.messagesArrayToHTML();
@@ -94,19 +93,19 @@ lx.chat.render = async function (givenField) {
         data = await response.text().catch((error) => {
             console.warn("Function lx.chat.render error:", error);
         });
-        console.warn("data:", data);
         if (!$("#lxchat").length) {
             let currentUser = $("#with-label").text().trim();
             //Current lx.chat.field text
             data = data == "" ? "[]" : data;
             lx.chat.messagesArray = JSON.parse(data);
+            console.warn("lx.chat.render messages:", lx.chat.messagesArray);
             lx.chat.fieldtext = lx.chat.messagesArrayToHTML();
             //Current crm field must be hide
             $(`#${givenField}`).hide();
             //lxchat div added
             $(
-                `<div id="lxchat" data-field="${givenField}"><center><b>LionixCRM Smart CHAT</b></center></div>`
-            ).insertAfter("#" + givenField);
+                `<div id="lxchat" class="lxchat" data-field="${givenField}"><center><b>LionixCRM Smart CHAT</b></center></div>`
+            ).insertAfter(`#${givenField}`);
             lx.chat.field = givenField;
             $("#lxchat").attr(
                 "style",
@@ -136,6 +135,8 @@ lx.chat.render = async function (givenField) {
             $(document).on("click", "#lxchatSave", function (event) {
                 lx.chat.validateNewMessage();
             });
+            let msg = "Smartchat fields rendered";
+            console.warn(`lxChatGetSmartChatField: ${msg}`);
         }
     }
 };
@@ -194,13 +195,6 @@ lx.chat.findFieldToRender = async function () {
                     }
                 }
             }
-            if (!$(".lxchat").length) {
-                let msg = "Smartchat fields processed";
-                console.warn(`lxChatGetSmartChatField: ${msg}`);
-                $(
-                    `<div id="lxchat" class="lxchat" data-render="${msg}"></div>`
-                ).insertAfter(`.tab-content:first`);
-            }
         }
     }
 };
@@ -215,22 +209,9 @@ lx.chat.messagesArrayToHTML = function () {
             pStyle = msg.currentUser
                 ? 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #DCF8C6;" align="right"' //my msgs
                 : 'style="white-space: pre; word-wrap: break-word; border: 1px solid #829EB5; background-color: #F6FAFD;"'; // their msgs
-            html +=
-                '<p id="lxchatmsg' +
-                i +
-                '"' +
-                pStyle +
-                ">" +
-                "<b>" +
-                msg.fullName +
-                "</b>" +
-                "</br>" +
-                msg.msg +
-                "</br>" +
-                "<i>" +
-                m.calendar() +
-                "</i>" +
-                "</p>";
+            html += `<p id="lxchatmsg${i}"${pStyle}><b>${
+                msg.fullName
+            }</b></br>${msg.msg}</br><i>${m.calendar()}</i></p>`;
         });
     }
     return html;
@@ -399,8 +380,8 @@ lx.chat.getMessages = async function () {
     data = await response.text().catch((error) => {
         console.warn("Function lx.chat.getMessages error:", error);
     });
-    console.warn("data:", data);
-    $("textarea#" + lx.chat.field).val(data);
+    console.warn("getMessages data:", data);
+    $(`textarea#${lx.chat.field}`).val(data);
     data = data == "" ? "[]" : data;
     lx.chat.messagesArray = JSON.parse(data);
     document.getElementById(
