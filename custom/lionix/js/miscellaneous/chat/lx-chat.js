@@ -137,6 +137,7 @@ lx.chat.render = async function (givenField) {
                 lx.chat.validateNewMessage();
             });
             lx.chat.scrollToBottom();
+            lx.chat.refreshMessagesInterval(true);
             let msg = "Smartchat fields rendered";
             console.warn(`lxChatGetSmartChatField: ${msg}`);
         }
