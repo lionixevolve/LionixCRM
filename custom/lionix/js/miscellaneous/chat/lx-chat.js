@@ -178,11 +178,18 @@ lx.chat.findFieldToRender = async function () {
             lx.chat.candidateFieldsArray = JSON.parse(data);
             for (let i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
                 if (
-                    $(document).find(`#${lx.chat.candidateFieldsArray[i]}`)
+                    !!$(document).find(`#${lx.chat.candidateFieldsArray[i]}`)
                         .length
                 ) {
-                    if (!record_id) {
+                    if (!$(".lxchat").length && !record_id) {
                         //Chat field must be hidden on new records
+                        console.warn(
+                            `Hidding field ${lx.chat.candidateFieldsArray[i]}...`
+                        );
+                        let msg = `...field ${lx.chat.candidateFieldsArray[i]} hidden on new records`;
+                        $(
+                            `<div id="lxchat" class="lxchat" data-render="${msg}" ></div>`
+                        ).insertAfter(`.tab-content:first`);
                         if (
                             $(`#${lx.chat.candidateFieldsArray[i]}`).is(
                                 ":visible"
@@ -192,6 +199,7 @@ lx.chat.findFieldToRender = async function () {
                                 lx.chat.candidateFieldsArray[i],
                                 false
                             );
+                            console.warn(msg);
                         }
                     } else {
                         await lx.chat.render(lx.chat.candidateFieldsArray[i]);
