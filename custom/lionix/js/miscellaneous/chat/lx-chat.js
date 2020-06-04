@@ -63,6 +63,7 @@ lx.chat.saveNewMessage = async function (userMessage) {
         document.getElementById(
             "lxchatcontent"
         ).innerHTML = lx.chat.messagesArrayToHTML();
+        lx.chat.scrollToBottom();
     }
     $("#lxchatSave").removeAttr("disabled");
 };
@@ -135,6 +136,7 @@ lx.chat.render = async function (givenField) {
             $(document).on("click", "#lxchatSave", function (event) {
                 lx.chat.validateNewMessage();
             });
+            lx.chat.scrollToBottom();
             let msg = "Smartchat fields rendered";
             console.warn(`lxChatGetSmartChatField: ${msg}`);
         }
@@ -387,6 +389,7 @@ lx.chat.getMessages = async function () {
     document.getElementById(
         "lxchatcontent"
     ).innerHTML = lx.chat.messagesArrayToHTML();
+    lx.chat.scrollToBottom();
     $("#lxchatSave").removeAttr("disabled");
 };
 
