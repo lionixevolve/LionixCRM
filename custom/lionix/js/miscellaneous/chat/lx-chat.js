@@ -160,13 +160,16 @@ lx.chat.findFieldToRender = async function () {
             }),
         });
         data = await response.text().catch((error) => {
-            console.warn("Function lx.chat.findFieldToRender error:", error);
+            console.error("lxajax.php lxChatGetSmartChatField error:", error);
         });
-        console.warn("data:", data);
-        if (data == "") {
-            console.warn(
-                "lxChatGetSmartChatField: lxchat doesn't render when smartchat configuration isn't present on your LionixCRM config.php file"
-            );
+        if (data == "[]") {
+            if (!$(".lxchat").length) {
+                let msg = "smartchat fields configuration not found";
+                console.warn(`lxChatGetSmartChatField: ${msg}`);
+                $(
+                    `<div id="lxchat" class="lxchat" data-render="${msg}" ></div>`
+                ).insertAfter(`.tab-content:first`);
+            }
         } else {
             lx.chat.candidateFieldsArray = JSON.parse(data);
             for (let i = 0; i < lx.chat.candidateFieldsArray.length; i++) {
@@ -175,17 +178,28 @@ lx.chat.findFieldToRender = async function () {
                         .length
                 ) {
                     if (!record_id) {
-                        console.warn(
-                            "lxChatGetSmartChatField: lxchat doesn't render when record_id isn't present"
-                        );
-                        lx.field.show(lx.chat.candidateFieldsArray[i], false);
-                        $(
-                            '<div id="lxchat" data-render="lxchat does not render when record_id is not present" ></div>'
-                        ).insertAfter(`#${lx.chat.candidateFieldsArray[i]}`);
+                        //Chat field must be hidden on new records
+                        if (
+                            $(`#${lx.chat.candidateFieldsArray[i]}`).is(
+                                ":visible"
+                            )
+                        ) {
+                            lx.field.show(
+                                lx.chat.candidateFieldsArray[i],
+                                false
+                            );
+                        }
                     } else {
                         lx.chat.render(lx.chat.candidateFieldsArray[i]);
                     }
                 }
+            }
+            if (!$(".lxchat").length) {
+                let msg = "Smartchat fields processed";
+                console.warn(`lxChatGetSmartChatField: ${msg}`);
+                $(
+                    `<div id="lxchat" class="lxchat" data-render="${msg}"></div>`
+                ).insertAfter(`.tab-content:first`);
             }
         }
     }
