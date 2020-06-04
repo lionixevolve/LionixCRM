@@ -222,44 +222,44 @@ lx.chat.messagesArrayToHTML = function () {
     return html;
 };
 
-lx.chat.start = async function (forceCheck) {
-    if (forceCheck) {
-        console.warn("Retrieving allow_smartchat property...");
-        data = await lx.lionixCRM.getConfigOption("allow_smartchat");
-        console.warn("allow_smartchat successfully retrieved", data);
-        lx.chat.start(false);
+lx.chat.start = async function () {
+    let run = true;
+    if (lx.lionixCRM.config.allow_smartchat == undefined) {
+        document.addEventListener("lxLoadAllConfigOptions", () => {
+            lx.chat.start();
+        });
+        run = false;
     }
-    if (lx.lionixCRM.config.allow_smartchat) {
-        if (!lx.current_user_id) {
-            let currentForm = document.forms["DetailView"];
-            if (!currentForm) {
-                currentForm = document.forms["EditView"];
+    if (run) {
+        if (lx.lionixCRM.config.allow_smartchat) {
+            if (!lx.current_user_id) {
+                let currentForm = document.forms["DetailView"];
+                if (!currentForm) {
+                    currentForm = document.forms["EditView"];
+                }
+                let lxajax_method = "getCurrentUserId";
+                let data = {
+                    method: lxajax_method,
+                };
+                let response = await fetch("lxajax.php", {
+                    method: "POST",
+                    body: new URLSearchParams(data),
+                    headers: new Headers({
+                        "Content-type":
+                            "application/x-www-form-urlencoded; charset=UTF-8",
+                    }),
+                });
+                lx.current_user_id = await response.text().catch((error) => {
+                    console.error("lxajax.php getCurrentUserId error:", error);
+                });
             }
-            let lxajax_method = "getCurrentUserId";
-            let data = {
-                method: lxajax_method,
-            };
-            let response = await fetch("lxajax.php", {
-                method: "POST",
-                body: new URLSearchParams(data),
-                headers: new Headers({
-                    "Content-type":
-                        "application/x-www-form-urlencoded; charset=UTF-8",
-                }),
-            });
-            data = await response.text().catch((error) => {
-                console.warn("Function lx.chat.start error:", error);
-            });
-            console.warn("data:", data);
-            lx.current_user_id = data;
-            lx.chat.start(false);
+            if (!$("#lxchat").length) {
+                lx.chat.findFieldToRender();
+            }
+        } else {
+            lx.events.lxChat.status = "disabled";
+            console.warn("smartchat is disabled in LionixCRM config.php file.");
         }
-        if (!$("#lxchat").length) {
-            lx.chat.findFieldToRender();
-        }
-    } else {
-        lx.events.lxChat = { status: "disabled" };
-        console.warn("smartchat is disabled in LionixCRM config.php file.");
     }
 };
 
@@ -397,16 +397,6 @@ lx.chat.getMessages = async function () {
 
 // Observers definitions
 !(function () {
-    if (
-        $("#edit_button").length ||
-        $("#SAVE").length ||
-        $("#SAVE_HEADER").length
-    ) {
-        // now it ensures that lxchat isn't already present
-        if (!$("#lxchat").length) {
-            lx.chat.start(false);
-        }
-    }
     // On other modules
     // create an observer instance
     // https://developer.mozilla.org/en/docs/Web/API/MutationObserver
@@ -442,7 +432,7 @@ lx.chat.getMessages = async function () {
                 ) {
                     // now it ensures that lxchat isn't already present
                     if (!$("#lxchat").length) {
-                        lx.chat.start(false);
+                        lx.chat.start();
                     }
                 }
             }
