@@ -2708,3 +2708,7 @@ $GLOBALS['app_list_strings']['opportunity_lostdetail_list'] = array(
     'Inventory' => 'Inventory',
     'CancelledByClient' => 'Cancelled by client',
 );
+$GLOBALS['app_list_strings']['vat_list']=array (
+  '13.0' => '13%',
+  '0.0' => '0%',
+);
