@@ -3103,9 +3103,9 @@ eoq;
                 if ($v->is_personal) {
                     $foundInPersonalAccounts = true;
                     break;
-                }
-                $foundInGroupAccounts = true;
-                // else
+                } else {
+                    $foundInGroupAccounts = true;
+                } // else
             } // if
         } // foreach
 
@@ -3514,10 +3514,11 @@ eoq;
             fclose($fh);
 
             return true;
-        }
-        $GLOBALS['log']->debug("EMAILUI: Could not write cache file [ {$file} ]");
+        } else {
+            $GLOBALS['log']->debug("EMAILUI: Could not write cache file [ {$file} ]");
 
-        return false;
+            return false;
+        }
     }
 
     /**
