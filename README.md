@@ -13,12 +13,12 @@ También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empres
   <img width="180px" height="41px" src="https://suitecrm.com/wp-content/uploads/2017/12/logo.png" align="right" />
 </a>
 
-# SuiteCRM 7.10.25
+# SuiteCRM 7.11.13
 
-[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=7.10.x)](https://travis-ci.org/salesagility/SuiteCRM)
-[![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/7.10.x/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/7.10.x)
+[![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=hotfix)](https://travis-ci.org/salesagility/SuiteCRM)
+[![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/suitecrm/Lobby)
-[![LICENSE](https://img.shields.io/github/license/suitecrm/suitecrm.svg)](https://github.com/salesagility/suitecrm/blob/master/LICENSE.txt)
+[![LICENSE](https://img.shields.io/github/license/suitecrm/suitecrm.svg)](https://github.com/salesagility/suitecrm/blob/hotfix/LICENSE.txt)
 [![GitHub contributors](https://img.shields.io/github/contributors/salesagility/suitecrm)](https://github.com/salesagility/SuiteCRM/graphs/contributors)
 [![Twitter](https://img.shields.io/twitter/follow/suitecrm.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=suitecrm)
 
@@ -57,7 +57,6 @@ This project exists thanks to all the people who [contribute](https://github.com
 
 You wanna buy the **core team** a coffee :coffee: or beer :beer:?
 Then consider a small [donation](https://opencollective.com/SuiteCRM/contribute) to help fuel our activities :heart:
-
 
 ### Security ###
 

@@ -94,9 +94,8 @@ class ViewBackups extends SugarView
         
             $backup_dir = $_REQUEST['backup_dir'];
             $backup_zip = $_REQUEST['backup_zip'];
-            if (strpos($backup_dir, 'phar://') !== false) {
+            if (strpos($backup_dir, 'phar://') === 0) {
                 $errors[] = $mod_strings['LBL_BACKUP_DIRECTORY_WRITABLE'];
-
                 return $errors;
             }
             if ($run == "confirm") {
@@ -131,11 +130,13 @@ class ViewBackups extends SugarView
                     $run = "confirmed";
                     $input_disabled = "readonly";
                 }
-            } elseif ($run == "confirmed") {
-                ini_set("memory_limit", "-1");
-                ini_set("max_execution_time", "0");
-                zip_dir(".", "$backup_dir/$backup_zip");
-                $run = "done";
+            } else {
+                if ($run == "confirmed") {
+                    ini_set("memory_limit", "-1");
+                    ini_set("max_execution_time", "0");
+                    zip_dir(".", "$backup_dir/$backup_zip");
+                    $run = "done";
+                }
             }
         }
         if (count($errors) > 0) {
