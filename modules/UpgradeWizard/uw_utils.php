@@ -42,8 +42,6 @@ if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
 
-include_once __DIR__ . '/../../include/Imap/ImapHandlerFactory.php';
-
 /**
  * Implodes some parts of version with specified delimiter, beta & rc parts are removed all time
  *
@@ -615,7 +613,7 @@ function commitHandleReminders($skippedFiles, $path='')
         if ($_REQUEST['addTaskReminder'] == 'remind') {
             logThis('Adding Task for admin for manual merge.', $path);
 
-            $task = new Task();
+            $task = BeanFactory::newBean('Tasks');
             $task->name = $mod_strings['LBL_UW_COMMIT_ADD_TASK_NAME'];
             $task->description = $desc;
             $task->date_due = $nowDate;
@@ -632,7 +630,7 @@ function commitHandleReminders($skippedFiles, $path='')
         if ($_REQUEST['addEmailReminder'] == 'remind') {
             logThis('Sending Reminder for admin for manual merge.', $path);
 
-            $email = new Email();
+            $email = BeanFactory::newBean('Emails');
             $email->assigned_user_id = $current_user->id;
             $email->name = $mod_strings['LBL_UW_COMMIT_ADD_TASK_NAME'];
             $email->description = $desc;
@@ -965,6 +963,10 @@ function getValidPatchName($returnFull = true)
          * Edge-case: manual upgrade with a FTP of a patch; UH table has no entry for it.  Assume nothing. :( */
         if (0 == count($md5_matches)) {
             $target_manifest = remove_file_extension($upgrade_content) . '-manifest.php';
+            if(!file_exists($target_manifest) || !is_readable($target_manifest)){
+                logThis("*** Error, Cannot read manifest [ {$upgrade_content} ]");
+                continue;
+            }
             require_once($target_manifest);
 
             if (empty($manifest['version'])) {
@@ -1175,9 +1177,7 @@ function checkSystemCompliance()
     }
 
     // imap
-    $imapFactory = new ImapHandlerFactory();
-    $imap = $imapFactory->getImapHandler();
-    if ($imap->isAvailable()) {
+    if (function_exists('imap_open')) {
         $ret['imapStatus'] = "<b><span class=go>{$installer_mod_strings['LBL_CHECKSYS_OK']}</span></b>";
     } else {
         $ret['imapStatus'] = "<b><span class=go>{$installer_mod_strings['ERR_CHECKSYS_IMAP']}</span></b>";
@@ -2711,35 +2711,26 @@ function checkFiles($files, $echo=false)
 
     $isWindows = is_windows();
     foreach ($files as $file) {
-        if ($isWindows) {
-            if (!is_writable_windows($file)) {
-                logThis('WINDOWS: File ['.$file.'] not readable - saving for display');
-                // don't warn yet - we're going to use this to check against replacement files
-                // aw: commented out; it's a hack to allow upgrade wizard to continue on windows... will fix later
-                /*$filesNotWritable[$i] = $file;
-                $filesNWPerms[$i] = substr(sprintf('%o',fileperms($file)), -4);
-                $filesOut .= "<tr>".
-                                "<td><span class='error'>{$file}</span></td>".
-                                "<td>{$filesNWPerms[$i]}</td>".
-                                "<td>".$mod_strings['ERR_UW_CANNOT_DETERMINE_USER']."</td>".
-                                "<td>".$mod_strings['ERR_UW_CANNOT_DETERMINE_GROUP']."</td>".
-                              "</tr>";*/
+        if (!is_writable($file)) {
+            logThis('File ['.$file.'] not writable - saving for display');
+            $filesNotWritable[$i] = $file;
+            $perms = substr(sprintf('%o', fileperms($file)), -4);
+            $owner = fileowner($file);
+            $group = filegroup($file);
+            if (!$isWindows && function_exists('posix_getpwuid')) {
+                $ownerData = posix_getpwuid($owner);
+                $owner = !empty($ownerData) ? $ownerData['name'] : $owner;
             }
-        } else {
-            if (!is_writable($file)) {
-                logThis('File ['.$file.'] not writable - saving for display');
-                // don't warn yet - we're going to use this to check against replacement files
-                $filesNotWritable[$i] = $file;
-                $filesNWPerms[$i] = substr(sprintf('%o', fileperms($file)), -4);
-                $owner = function_exists('posix_getpwuid') ? posix_getpwuid(fileowner($file)) : $mod_strings['ERR_UW_CANNOT_DETERMINE_USER'];
-                $group = function_exists('posix_getgrgid') ? posix_getgrgid(filegroup($file)) : $mod_strings['ERR_UW_CANNOT_DETERMINE_GROUP'];
-                $filesOut .= "<tr>".
-                    "<td><span class='error'>{$file}</span></td>".
-                    "<td>{$filesNWPerms[$i]}</td>".
-                    "<td>".$owner['name']."</td>".
-                    "<td>".$group['name']."</td>".
-                    "</tr>";
+            if (!$isWindows && function_exists('posix_getgrgid')) {
+                $groupData = posix_getgrgid($group);
+                $group = !empty($groupData) ? $groupData['name'] : $group;
             }
+            $filesOut .= "<tr>" .
+                "<td><span class='error'>{$file}</span></td>" .
+                "<td>{$perms}</td>" .
+                "<td>{$owner}</td>" .
+                "<td>{$group}</td>" .
+                "</tr>";
         }
         $i++;
     }
@@ -3292,7 +3283,7 @@ function upgradeUserPreferences()
     $db = DBManagerFactory::getInstance();
     $result = $db->query("SELECT id FROM users where deleted = '0'");
     while ($row = $db->fetchByAssoc($result)) {
-        $current_user = new User();
+        $current_user = BeanFactory::newBean('Users');
         $current_user->retrieve($row['id']);
 
         // get the user's name locale format, check if it's in our list, add it if it's not, keep it as user's default
@@ -3595,7 +3586,7 @@ function upgradeModulesForTeam()
         if (!$assoc = DBManagerFactory::getInstance()->fetchByAssoc($results2)) {
             //if team does not exist, then lets create the team for this user
             $team = new Team();
-            $user = new User();
+            $user = BeanFactory::newBean('Users');
             $user->retrieve($row['id']);
             $team->new_user_created($user);
             $team_id = $team->id;
@@ -3907,7 +3898,7 @@ function update_iframe_dashlets()
         $assigned_user_id = $row['assigned_user_id'];
         $record_id = $row['id'];
 
-        $current_user = new User();
+        $current_user = BeanFactory::newBean('Users');
         $current_user->retrieve($row['assigned_user_id']);
 
         if (!empty($content['dashlets']) && !empty($content['pages'])) {
@@ -4576,25 +4567,6 @@ function whetherNeedToSkipDir($dir, $skipDirs)
             return true;
         }
     }
-    return false;
-}
-
-/**
- * Whether directory exists within list of directories, matching only beginning of path
- * @param string $dir dir to be checked
- * @param array $dirsArray the list of directories to check
- * @return boolean
- */
-function dirInArray($dir, $dirsArray)
-{
-    $dir = clean_path($dir);
-    foreach ($dirsArray as $aDir) {
-        // Match the substring only at the beginning of the path:
-        if (strpos($dir, getcwd() . '/' . $aDir) === 0) {
-            return true;
-        }
-    }
-
     return false;
 }
 
