@@ -1,4 +1,5 @@
 lx.lionixCRM.getContactDuplicates = async function (searchObject) {
+    console.warn("Starting search for contact duplicates...", searchObject);
     let lxajax_method = "getContactDuplicates";
     let data = {
         method: lxajax_method,
