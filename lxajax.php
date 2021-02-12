@@ -470,7 +470,7 @@ class LxAJAX extends LxAJAXCustom
             $note->new_with_id = true;
             $note->name = $data['document_name'];
             $note->filename = $data['document_name'];
-            $note->file_mime_type = $data['mime'];
+            $note->file_mime_type = $data['original_file_mime_type'];
             $note->assigned_user_id = $user_id;
             $note->parent_type = $parentType;
             $note->parent_id = $parentId;
