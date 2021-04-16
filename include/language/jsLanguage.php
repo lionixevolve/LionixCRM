@@ -100,10 +100,12 @@ EOQ;
 
         $cacheDir = create_cache_directory('jsLanguage/' . $moduleDir . '/');
 
-        if ($fh = @fopen($cacheDir . $lang . '.js', 'wb')) {
+        //LIONIX replaced fopen for sugar_fopen
+        if ($fh = @sugar_fopen($cacheDir . $lang . '.js', 'wb')) {
             fwrite($fh, $str);
             fclose($fh);
         }
+        //LIONIX replaced fopen for sugar_fopen
 
         if ($return) {
             return $str;
