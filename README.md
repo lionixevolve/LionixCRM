@@ -13,7 +13,7 @@ También atendemos a las MiPyMEs (acrónimo de "micro, pequeña y mediana empres
   <img width="180px" height="41px" src="https://suitecrm.com/wp-content/uploads/2017/12/logo.png" align="right" />
 </a>
 
-# SuiteCRM 7.11.15
+# SuiteCRM 7.11.19
 
 [![Build Status](https://travis-ci.org/salesagility/SuiteCRM.svg?branch=hotfix)](https://travis-ci.org/salesagility/SuiteCRM)
 [![codecov](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix/graph/badge.svg)](https://codecov.io/gh/salesagility/SuiteCRM/branch/hotfix)
@@ -47,7 +47,7 @@ There are lots of ways to [contribute](https://docs.suitecrm.com/community/) to 
 * [Contribute bug fixes](https://docs.suitecrm.com/community/contributing-code/bugs/)
 * Help [translate](https://docs.suitecrm.com/community/contributing-to-docs/contributing-to-translation/) language packs
 * [Write and improve](https://docs.suitecrm.com/community/contributing-to-docs/) SuiteCRM documentation
-* [Signing CLA](https://www.clahub.com/agreements/salesagility/SuiteCRM) - Only needs to be done once for all PRs and contributions.
+* Signing CLA - Only needs to be done once for all PRs and contributions.
 
 
 ### Code Contributors

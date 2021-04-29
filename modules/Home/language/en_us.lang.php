@@ -180,6 +180,9 @@ $mod_strings = array(
     'LBL_ABOUT_SUITE' => 'About SuiteCRM',
     'LBL_PARTNERS' => 'Partners',
     'LBL_FEATURING' => 'AOS, AOW, AOR, AOP, AOE and Reschedule modules by SalesAgility.',
+    'LBL_EDIT_ALL_RECURRENCES' => 'Edit All Recurrences',
+    'LBL_REMOVE_ALL_RECURRENCES' => 'Delete All Recurrences',
+    'LBL_CONFIRM_REMOVE' => 'Are you sure you want to remove the record?',
 
     'LBL_CONTRIBUTOR_SUITECRM' => 'SuiteCRM - Open source CRM for the world',
     'LBL_CONTRIBUTOR_SECURITY_SUITE' => 'SecuritySuite by Jason Eggers',
@@ -246,6 +249,8 @@ $mod_strings = array(
     'LBL_ELASTIC_SEARCH_EXCEPTION_END_MESSAGE' => 'Contact an administrator if the problem persists. More information available in the logs.',
 
     'LBL_ELASTIC_SEARCH_DEFAULT' => 'No results matching your search criteria. Try broadening your search.',
+
+    'LNK_TASK_VIEW' => 'View Task',
 
     'LBL_CONTRIBUTOR_LIONIXCRM' => 'LionixCRM - Open source CRM for SMEs - CRM de código abierto para las PyMEs',
     'LBL_ABOUT_LIONIXCRM' => 'About LionixCRM',
