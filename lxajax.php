@@ -361,7 +361,7 @@ class LxAJAX extends LxAJAXCustom
                 </form>
                 <br/>
                 <!-- div preview is handled afterwards by jQuery -->
-                <div id="preview_'.$this->data['field_name'].'" align="center" style="color: navy; font-size: 17px;" />
+                <div id="preview_' . $this->data['field_name'] . '" align="center" style="color: navy; font-size: 17px;"></div>
                 <br/>
                 <center>
                     <button type="button" class="btn btn-primary btn-sm" id="upload-'.$this->data['field_name'].'-btn">Subir</button>
