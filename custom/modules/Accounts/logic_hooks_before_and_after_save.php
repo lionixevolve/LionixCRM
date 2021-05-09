@@ -17,7 +17,7 @@ class LXAccountsBeforeAndAfterSaveMethods
     public function setExampleWithPreviousDataValidationAS(&$bean, $event, $arguments)
     {
         // call on changed records only
-        if (isset(self::$fetchedRow[$bean->id])) {
+        if (!empty(self::$fetchedRow[$bean->id])) {
             // execute changed record business process
             if ($bean->sales_stage != self::$fetchedRow[$bean->id]['sales_stage']) {
                 $query = "
@@ -31,7 +31,7 @@ class LXAccountsBeforeAndAfterSaveMethods
             }
         }
         // call on new records only
-        if (!isset(self::$fetchedRow[$bean->id])) {
+        if (empty(self::$fetchedRow[$bean->id])) {
             // execute new record business process
             if ($bean->sales_stage == 'some-custom-stage') {
                 $query = "

@@ -17,7 +17,7 @@ class LXContactsBeforeAndAfterSaveMethods
     public function setExampleWithPreviousDataValidationAS(&$bean, $event, $arguments)
     {
         // call on changed records only
-        if (isset(self::$fetchedRow[$bean->id])) {
+        if (!empty(self::$fetchedRow[$bean->id])) {
             // execute changed record business process
             if ($bean->sales_stage != self::$fetchedRow[$bean->id]['sales_stage']) {
                 $query = "
@@ -31,7 +31,7 @@ class LXContactsBeforeAndAfterSaveMethods
             }
         }
         // call on new records only
-        if (!isset(self::$fetchedRow[$bean->id])) {
+        if (empty(self::$fetchedRow[$bean->id])) {
             // execute new record business process
             if ($bean->sales_stage == 'some-custom-stage') {
                 $query = "
@@ -67,7 +67,7 @@ class LXContactsBeforeAndAfterSaveMethods
     public function setAccountAS(&$bean, $event, $arguments)
     {
         global $sugar_config;
-        if ($sugar_config['lionixcrm']['business_type']=='b2c') {
+        if ($sugar_config['lionixcrm']['business_type'] == 'b2c') {
             $newAccount = BeanFactory::newBean('Accounts');
             if (!empty($bean->account_id)) {
                 $query = "

@@ -16,7 +16,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setStatusCBS(&$bean, $event, $arguments)
     {
         if (empty($bean->status_c)) {
-            $bean->status_c = $bean->sales_stage.'_new';
+            $bean->status_c = $bean->sales_stage . '_new';
         }
     }
 
@@ -24,7 +24,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setExampleWithPreviousDataValidationAS(&$bean, $event, $arguments)
     {
         // call on changed records only
-        if (isset(self::$fetchedRow[$bean->id])) {
+        if (!empty(self::$fetchedRow[$bean->id])) {
             // execute changed record business process
             if ($bean->sales_stage != self::$fetchedRow[$bean->id]['sales_stage']) {
                 $query = "
@@ -38,7 +38,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
             }
         }
         // call on new records only
-        if (!isset(self::$fetchedRow[$bean->id])) {
+        if (empty(self::$fetchedRow[$bean->id])) {
             // execute new record business process
             if ($bean->sales_stage == 'some-custom-stage') {
                 $query = "
@@ -56,7 +56,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setPreviousSalesStageCAS(&$bean, $event, $arguments)
     {
         // call on changed records only
-        if (isset(self::$fetchedRow[$bean->id])) {
+        if (!empty(self::$fetchedRow[$bean->id])) {
             // execute changed record business process
             if ($bean->sales_stage != self::$fetchedRow[$bean->id]['sales_stage']) {
                 $previoussalesstage = self::$fetchedRow[$bean->id]['sales_stage'];
@@ -80,8 +80,8 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
         global $sugar_config;
         $bean->custom_fields->retrieve();
 
-        if ($bean->maincontact_c=='new') {
-            if (($sugar_config['lionixcrm']['business_type']=='b2c') && empty($bean->account_id)) {
+        if ($bean->maincontact_c == 'new') {
+            if (($sugar_config['lionixcrm']['business_type'] == 'b2c') && empty($bean->account_id)) {
                 $newAccount = BeanFactory::newBean('Accounts');
                 $newAccount->name = trim("{$bean->maincontactfirstname_c} {$bean->maincontactlastname_c} {$bean->maincontactlastname2_c}");
                 $newAccount->tipocedula_c = 'NACIONAL';
