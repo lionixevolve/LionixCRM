@@ -78,8 +78,7 @@ class LXOpportunitiesBeforeAndAfterSaveMethods
     public function setMainContactCAS(&$bean, $event, $arguments)
     {
         global $sugar_config;
-        $bean->custom_fields->retrieve();
-
+        // $bean->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
         if ($bean->maincontact_c == 'new') {
             if (($sugar_config['lionixcrm']['business_type'] == 'b2c') && empty($bean->account_id)) {
                 $newAccount = BeanFactory::newBean('Accounts');

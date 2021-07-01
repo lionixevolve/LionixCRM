@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
@@ -265,7 +266,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
     /**
      * Constructor
      */
-    public function __construct($init=true)
+    public function __construct($init = true)
     {
         parent::__construct();
         // Admin Config Setting
@@ -277,7 +278,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
     /**
      * @deprecated deprecated since version 7.6, PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code, use __construct instead
      */
-    public function jjwg_Maps($init=true)
+    public function jjwg_Maps($init = true)
     {
         $deprecatedMessage = 'PHP4 Style Constructors are deprecated and will be remove in 7.8, please update your code';
         if (isset($GLOBALS['log'])) {
@@ -351,9 +352,11 @@ class jjwg_Maps extends jjwg_Maps_sugar
             }
 
             // Integer Settings
-            $int_settings = array('geocoding_limit', 'google_geocoding_limit',
+            $int_settings = array(
+                'geocoding_limit', 'google_geocoding_limit',
                 'map_markers_limit', 'map_default_distance', 'export_addresses_limit',
-                'map_clusterer_grid_size', 'map_clusterer_max_zoom');
+                'map_clusterer_grid_size', 'map_clusterer_max_zoom'
+            );
             foreach ($int_settings as $setting) {
                 if (isset($rev[$setting]) && is_numeric($rev[$setting])) {
                     $this->settings[$setting] = (int) $rev[$setting];
@@ -460,11 +463,13 @@ class jjwg_Maps extends jjwg_Maps_sugar
             }
 
             // Integer Settings
-            $int_settings = array('geocoding_limit', 'google_geocoding_limit',
+            $int_settings = array(
+                'geocoding_limit', 'google_geocoding_limit',
                 'map_markers_limit', 'map_default_distance', 'export_addresses_limit',
                 'map_clusterer_grid_size', 'map_clusterer_max_zoom',
                 'address_cache_get_enabled', 'address_cache_save_enabled',
-                'logic_hooks_enabled', 'allow_approximate_location_type');
+                'logic_hooks_enabled', 'allow_approximate_location_type'
+            );
             foreach ($int_settings as $setting) {
                 if (isset($data[$setting]) && is_numeric(trim($data[$setting]))) {
                     $admin->saveSetting($category, $setting, (int) trim($data[$setting]));
@@ -558,23 +563,21 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function updateGeocodeInfo(&$bean, $after_save = false)
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($bean->id) || empty($bean->object_name) || empty($bean->module_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $bean->object_name: '.$bean->object_name);
+        $GLOBALS['log']->info(__METHOD__ . ' $bean->object_name: ' . $bean->object_name);
 
         // Make sure we have the custom fields in our $bean
-        if ($after_save === true) {
-            $bean->custom_fields->retrieve();
-        }
+        // if ($after_save === true) { $bean->custom_fields->retrieve(); }  // it seems that this method is no longer requiered. LionixCRM
         $this->logGeocodeInfo($bean);
 
         // Define the Address Info based on the new bean data
         // $bean_data is not fetched_row data, but rather the properties of the bean as an array
         $bean_data = get_object_vars($bean);
         $aInfo = $this->defineMapsAddress($bean->object_name, $bean_data);
-        $GLOBALS['log']->debug(__METHOD__.' $aInfo: '.print_r($aInfo, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' $aInfo: ' . print_r($aInfo, true));
 
         // If the related Account address has changed then reset the geocode values
         if (isset($aInfo['address']) && $aInfo['address'] != $bean->fetched_row['jjwg_maps_address_c']) {
@@ -586,7 +589,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
             // Check Cache, if address is set
             if (!empty($aInfo['address']) && is_object($this->jjwg_Address_Cache)) {
                 $aInfoCache = $this->jjwg_Address_Cache->getAddressCacheInfo($aInfo);
-                $GLOBALS['log']->debug(__METHOD__.' $aInfoCache: '.print_r($aInfoCache, true));
+                $GLOBALS['log']->debug(__METHOD__ . ' $aInfoCache: ' . print_r($aInfoCache, true));
                 if (!empty($aInfoCache['address'])) {
                     $aInfo = $aInfoCache;
                 }
@@ -617,17 +620,17 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function updateRelatedMeetingsGeocodeInfo(&$bean)
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($bean->id) || empty($bean->object_name) || empty($bean->module_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $bean->object_name: '.$bean->object_name);
+        $GLOBALS['log']->info(__METHOD__ . ' $bean->object_name: ' . $bean->object_name);
 
         // Check to see if address info is already set, or redefine
         $bean_data = get_object_vars($bean);
         $aInfo = $this->defineMapsAddress($bean->object_name, $bean_data);
-        $GLOBALS['log']->debug(__METHOD__.' $bean_data: '.print_r($bean_data, true));
-        $GLOBALS['log']->debug(__METHOD__.' $aInfo: '.$aInfo);
+        $GLOBALS['log']->debug(__METHOD__ . ' $bean_data: ' . print_r($bean_data, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' $aInfo: ' . $aInfo);
 
         // If needed, check the Address Cache Module for Geocode Info
         if (!is_object($this->jjwg_Address_Cache)) {
@@ -636,7 +639,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
         // Check Cache, if address is set
         if (!empty($aInfo['address']) && is_object($this->jjwg_Address_Cache)) {
             $aInfoCache = $this->jjwg_Address_Cache->getAddressCacheInfo($aInfo);
-            $GLOBALS['log']->debug(__METHOD__.' $aInfoCache: '.$aInfoCache);
+            $GLOBALS['log']->debug(__METHOD__ . ' $aInfoCache: ' . $aInfoCache);
             if (!empty($aInfoCache['address'])) {
                 $aInfo = $aInfoCache;
             }
@@ -649,10 +652,10 @@ class jjwg_Maps extends jjwg_Maps_sugar
 
         // Find the Related Meetings by parent_type & parent_id (this relationship is special)
         $query = "SELECT meetings.id, meetings_cstm.id_c FROM meetings " .
-                " LEFT JOIN meetings_cstm ON meetings.id = meetings_cstm.id_c " .
-                " WHERE meetings.deleted = 0 AND " .
-                " meetings.parent_type = '" . $this->db->quote($bean->module_name) . "' AND " .
-                " meetings.parent_id = '" . $this->db->quote($bean->id) . "'";
+            " LEFT JOIN meetings_cstm ON meetings.id = meetings_cstm.id_c " .
+            " WHERE meetings.deleted = 0 AND " .
+            " meetings.parent_type = '" . $this->db->quote($bean->module_name) . "' AND " .
+            " meetings.parent_id = '" . $this->db->quote($bean->id) . "'";
         $result = $this->db->query($query);
 
         while ($row = $this->db->fetchByAssoc($result)) {
@@ -660,17 +663,17 @@ class jjwg_Maps extends jjwg_Maps_sugar
             if (!empty($row['id_c'])) {
                 // Update Custom Fields
                 $query = "UPDATE meetings_cstm SET" .
-                        " jjwg_maps_lat_c = '" . $latQ . "'," .
-                        " jjwg_maps_lng_c = '" . $lngQ . "'," .
-                        " jjwg_maps_geocode_status_c = '".$statusQ."'," .
-                        " jjwg_maps_address_c = '" . $addressQ . "'" .
-                        " WHERE id_c = '" . $idQ . "'";
+                    " jjwg_maps_lat_c = '" . $latQ . "'," .
+                    " jjwg_maps_lng_c = '" . $lngQ . "'," .
+                    " jjwg_maps_geocode_status_c = '" . $statusQ . "'," .
+                    " jjwg_maps_address_c = '" . $addressQ . "'" .
+                    " WHERE id_c = '" . $idQ . "'";
                 $update_result = $this->db->query($query);
             } else {
                 // Insert Custom Fields
                 $query = "INSERT INTO meetings_cstm" .
-                        " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
-                        " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '".$statusQ."', '" . $addressQ . "') ";
+                    " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
+                    " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '" . $statusQ . "', '" . $addressQ . "') ";
                 $insert_result = $this->db->query($query);
             }
         }
@@ -690,21 +693,21 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function updateMeetingGeocodeInfo(&$bean)
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($bean->object_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $bean->object_name: '.$bean->object_name);
+        $GLOBALS['log']->info(__METHOD__ . ' $bean->object_name: ' . $bean->object_name);
 
         // Make sure we have the custom fields in our $bean
-        $bean->custom_fields->retrieve();
+        // $bean->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
         $this->logGeocodeInfo($bean);
 
         // Define the Address Info based on the new bean data
         // $bean_data is not fetched_row data, but rather the properties of the bean as an array
         $bean_data = get_object_vars($bean);
         $aInfo = $this->defineMapsAddress($bean->object_name, $bean_data);
-        $GLOBALS['log']->debug(__METHOD__.' $aInfo: '.print_r($aInfo, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' $aInfo: ' . print_r($aInfo, true));
 
         // If the related Account address has changed then reset the geocode values
         if (isset($aInfo['address']) && $aInfo['address'] != $bean->fetched_row['jjwg_maps_address_c']) {
@@ -716,7 +719,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
             // Check Cache, if address is set
             if (!empty($aInfo['address']) && is_object($this->jjwg_Address_Cache)) {
                 $aInfoCache = $this->jjwg_Address_Cache->getAddressCacheInfo($aInfo);
-                $GLOBALS['log']->debug(__METHOD__.' $aInfoCache: '.print_r($aInfoCache, true));
+                $GLOBALS['log']->debug(__METHOD__ . ' $aInfoCache: ' . print_r($aInfoCache, true));
                 if (!empty($aInfoCache['address'])) {
                     $aInfo = $aInfoCache;
                 }
@@ -736,11 +739,11 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function updateGeocodeInfoByAssocQuery($table_name, $display, $aInfo = array())
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($display['id']) || empty($table_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $display[\'id\']: '.$display['id']);
+        $GLOBALS['log']->info(__METHOD__ . ' $display[\'id\']: ' . $display['id']);
 
         if (!(in_array($table_name, $this->settings['valid_geocode_tables']))) {
             return false;
@@ -752,26 +755,26 @@ class jjwg_Maps extends jjwg_Maps_sugar
         $addressQ = (!empty($aInfo['address'])) ? $this->db->quote($aInfo['address']) : '';
 
         // Find record by id
-        $query = "SELECT ".$table_name.".id, ".$table_name."_cstm.id_c FROM ".$table_name." " .
-                " LEFT JOIN ".$table_name."_cstm ON ".$table_name.".id = ".$table_name."_cstm.id_c " .
-                " WHERE ".$table_name.".deleted = 0 AND ".$table_name.".id = '" . $idQ . "'";
+        $query = "SELECT " . $table_name . ".id, " . $table_name . "_cstm.id_c FROM " . $table_name . " " .
+            " LEFT JOIN " . $table_name . "_cstm ON " . $table_name . ".id = " . $table_name . "_cstm.id_c " .
+            " WHERE " . $table_name . ".deleted = 0 AND " . $table_name . ".id = '" . $idQ . "'";
         $result = $this->db->query($query);
         $row = $this->db->fetchByAssoc($result);
 
         if (!empty($row['id_c'])) {
             // Update Custom Fields
             $query = "UPDATE " . $table_name . "_cstm SET" .
-                    " jjwg_maps_lat_c = '" . $latQ . "'," .
-                    " jjwg_maps_lng_c = '" . $lngQ . "'," .
-                    " jjwg_maps_geocode_status_c = '".$statusQ."'," .
-                    " jjwg_maps_address_c = '" . $addressQ . "'" .
-                    " WHERE id_c = '" . $idQ . "'";
+                " jjwg_maps_lat_c = '" . $latQ . "'," .
+                " jjwg_maps_lng_c = '" . $lngQ . "'," .
+                " jjwg_maps_geocode_status_c = '" . $statusQ . "'," .
+                " jjwg_maps_address_c = '" . $addressQ . "'" .
+                " WHERE id_c = '" . $idQ . "'";
             $update_result = $this->db->query($query);
         } else {
             // Insert Custom Fields
             $query = "INSERT INTO " . $table_name . "_cstm" .
-                    " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
-                    " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '".$statusQ."', '" . $addressQ . "') ";
+                " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
+                " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '" . $statusQ . "', '" . $addressQ . "') ";
             $insert_result = $this->db->query($query);
         }
     }
@@ -785,11 +788,11 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function updateGeocodeInfoByBeanQuery(&$bean, $aInfo = array())
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($bean->id) || empty($bean->object_name) || empty($bean->table_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $bean->object_name: '.$bean->object_name);
+        $GLOBALS['log']->info(__METHOD__ . ' $bean->object_name: ' . $bean->object_name);
 
         $table_name = $bean->table_name;
         if (!(in_array($table_name, $this->settings['valid_geocode_tables']))) {
@@ -802,26 +805,26 @@ class jjwg_Maps extends jjwg_Maps_sugar
         $addressQ = (!empty($aInfo['address'])) ? $this->db->quote($aInfo['address']) : '';
 
         // Find record by id
-        $query = "SELECT ".$table_name.".id, ".$table_name."_cstm.id_c FROM ".$table_name." " .
-                " LEFT JOIN ".$table_name."_cstm ON ".$table_name.".id = ".$table_name."_cstm.id_c " .
-                " WHERE ".$table_name.".deleted = 0 AND ".$table_name.".id = '" . $idQ . "'";
+        $query = "SELECT " . $table_name . ".id, " . $table_name . "_cstm.id_c FROM " . $table_name . " " .
+            " LEFT JOIN " . $table_name . "_cstm ON " . $table_name . ".id = " . $table_name . "_cstm.id_c " .
+            " WHERE " . $table_name . ".deleted = 0 AND " . $table_name . ".id = '" . $idQ . "'";
         $result = $this->db->query($query);
         $row = $this->db->fetchByAssoc($result);
 
         if (!empty($row['id_c'])) {
             // Update Custom Fields
             $query = "UPDATE " . $table_name . "_cstm SET" .
-                    " jjwg_maps_lat_c = '" . $latQ . "'," .
-                    " jjwg_maps_lng_c = '" . $lngQ . "'," .
-                    " jjwg_maps_geocode_status_c = '".$statusQ."'," .
-                    " jjwg_maps_address_c = '" . $addressQ . "'" .
-                    " WHERE id_c = '" . $idQ . "'";
+                " jjwg_maps_lat_c = '" . $latQ . "'," .
+                " jjwg_maps_lng_c = '" . $lngQ . "'," .
+                " jjwg_maps_geocode_status_c = '" . $statusQ . "'," .
+                " jjwg_maps_address_c = '" . $addressQ . "'" .
+                " WHERE id_c = '" . $idQ . "'";
             $update_result = $this->db->query($query);
         } else {
             // Insert Custom Fields
             $query = "INSERT INTO " . $table_name . "_cstm" .
-                    " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
-                    " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '".$statusQ."', '" . $addressQ . "') ";
+                " (id_c, jjwg_maps_lat_c, jjwg_maps_lng_c, jjwg_maps_geocode_status_c, jjwg_maps_address_c)" .
+                " VALUES ('" . $idQ . "', '" . $latQ . "', '" . $lngQ . "', '" . $statusQ . "', '" . $addressQ . "') ";
             $insert_result = $this->db->query($query);
         }
     }
@@ -834,11 +837,11 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function deleteAllGeocodeInfoByBeanQuery(&$bean)
     {
-        $GLOBALS['log']->info(__METHOD__.' START');
+        $GLOBALS['log']->info(__METHOD__ . ' START');
         if (empty($bean->object_name) || empty($bean->table_name)) {
             return false;
         }
-        $GLOBALS['log']->info(__METHOD__.' $bean->object_name: '.$bean->object_name);
+        $GLOBALS['log']->info(__METHOD__ . ' $bean->object_name: ' . $bean->object_name);
 
         $table_name = $bean->table_name;
         if (!(in_array($table_name, $this->settings['valid_geocode_tables']))) {
@@ -847,11 +850,11 @@ class jjwg_Maps extends jjwg_Maps_sugar
 
         // Update Fields to NULL
         $query = "UPDATE " . $table_name . "_cstm SET" .
-                " jjwg_maps_lat_c = NULL," .
-                " jjwg_maps_lng_c = NULL," .
-                " jjwg_maps_geocode_status_c = NULL," .
-                " jjwg_maps_address_c = NULL" .
-                " WHERE 1=1";
+            " jjwg_maps_lat_c = NULL," .
+            " jjwg_maps_lng_c = NULL," .
+            " jjwg_maps_geocode_status_c = NULL," .
+            " jjwg_maps_address_c = NULL" .
+            " WHERE 1=1";
         $update_result = $this->db->query($query);
     }
 
@@ -872,26 +875,26 @@ class jjwg_Maps extends jjwg_Maps_sugar
         // Find the Items to Geocode
         // Assume there is no address at 0,0; it's in the Atlantic Ocean
         $where_conds = "(" .
-                "(" . $table_name . "_cstm.jjwg_maps_lat_c = 0 AND " .
-                "" . $table_name . "_cstm.jjwg_maps_lng_c = 0)" .
-                " OR " .
-                "(" . $table_name . "_cstm.jjwg_maps_lat_c IS NULL AND " .
-                "" . $table_name . "_cstm.jjwg_maps_lng_c IS NULL)" .
-                ")" .
-                " AND " .
-                "(" . $table_name . "_cstm.jjwg_maps_geocode_status_c = '' OR " .
-                "" . $table_name . "_cstm.jjwg_maps_geocode_status_c IS NULL)";
+            "(" . $table_name . "_cstm.jjwg_maps_lat_c = 0 AND " .
+            "" . $table_name . "_cstm.jjwg_maps_lng_c = 0)" .
+            " OR " .
+            "(" . $table_name . "_cstm.jjwg_maps_lat_c IS NULL AND " .
+            "" . $table_name . "_cstm.jjwg_maps_lng_c IS NULL)" .
+            ")" .
+            " AND " .
+            "(" . $table_name . "_cstm.jjwg_maps_geocode_status_c = '' OR " .
+            "" . $table_name . "_cstm.jjwg_maps_geocode_status_c IS NULL)";
         // Limit to only one result
         if (@is_guid($id)) {
-            $where_conds .= " AND id = '".$id."'";
+            $where_conds .= " AND id = '" . $id . "'";
         }
         // Create Simple Query
         // Note: Do not use create_new_list_query() or process_list_query()
         // as they will typically exceeded memory allowed.
         $query = "SELECT " . $table_name . ".*, " . $table_name . "_cstm.* FROM " . $table_name .
-                " LEFT JOIN " . $table_name . "_cstm " .
-                " ON " . $table_name . ".id = " . $table_name . "_cstm.id_c " .
-                " WHERE " . $table_name . ".deleted = 0 AND " . $where_conds;
+            " LEFT JOIN " . $table_name . "_cstm " .
+            " ON " . $table_name . ".id = " . $table_name . "_cstm.id_c " .
+            " WHERE " . $table_name . ".deleted = 0 AND " . $where_conds;
         $display_result = $this->db->limitQuery($query, 0, $limit);
 
         return $display_result;
@@ -905,8 +908,8 @@ class jjwg_Maps extends jjwg_Maps_sugar
      */
     public function getGoogleMapsGeocode($address, $return_full_array = false, $allow_approximate = true)
     {
-        $GLOBALS['log']->debug(__METHOD__.' START');
-        $GLOBALS['log']->info(__METHOD__.' $address: '.$address);
+        $GLOBALS['log']->debug(__METHOD__ . ' START');
+        $GLOBALS['log']->info(__METHOD__ . ' $address: ' . $address);
 
         /* allow_approximate_location_type - overrides only to true */
         if (!empty($this->settings['allow_approximate_location_type'])) {
@@ -924,9 +927,9 @@ class jjwg_Maps extends jjwg_Maps_sugar
         }
         // Add Address Parameter
         $request_url = $base_url . "&address=" . urlencode($address);
-        $request_url.="&key=".urlencode($this->settings['google_maps_api_key']);
+        $request_url .= "&key=" . urlencode($this->settings['google_maps_api_key']);
 
-        $GLOBALS['log']->info(__METHOD__.' cURL Request URL: '.$request_url);
+        $GLOBALS['log']->info(__METHOD__ . ' cURL Request URL: ' . $request_url);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $request_url);
@@ -959,13 +962,13 @@ class jjwg_Maps extends jjwg_Maps_sugar
         $ch_errno = curl_errno($ch);
         $ch_error = curl_error($ch);
         if (!empty($ch_errno) || !empty($ch_error)) {
-            $GLOBALS['log']->error(__METHOD__.' cURL Error: #'.$ch_errno.' - '.$ch_error);
+            $GLOBALS['log']->error(__METHOD__ . ' cURL Error: #' . $ch_errno . ' - ' . $ch_error);
         }
 
         curl_close($ch);
-        $GLOBALS['log']->debug(__METHOD__.' $json_contents: '.$json_contents);
+        $GLOBALS['log']->debug(__METHOD__ . ' $json_contents: ' . $json_contents);
         $googlemaps = json_decode($json_contents, true);
-        $GLOBALS['log']->debug(__METHOD__.' $googlemaps: '. (is_array($googlemaps) ? '[Array]' : $googlemaps));
+        $GLOBALS['log']->debug(__METHOD__ . ' $googlemaps: ' . (is_array($googlemaps) ? '[Array]' : $googlemaps));
 
         /**
          * https://developers.google.com/maps/documentation/geocoding/#Results
@@ -980,7 +983,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
         if (!empty($googlemaps) && isset($googlemaps['status'])) {
             if ($googlemaps['status'] == 'OVER_QUERY_LIMIT') {
                 // Debug: Log Over Limit
-                $GLOBALS['log']->warn(__METHOD__.' Google Maps API Status of OVER_QUERY_LIMIT: Over Your Quota');
+                $GLOBALS['log']->warn(__METHOD__ . ' Google Maps API Status of OVER_QUERY_LIMIT: Over Your Quota');
             } elseif (!$allow_approximate && $googlemaps['results'][0]['geometry']['location_type'] == 'APPROXIMATE') {
                 // Consider 'APPROXIMATE' to be similar to 'ZERO_RESULTS'
                 @$aInfo = array(
@@ -1001,10 +1004,10 @@ class jjwg_Maps extends jjwg_Maps_sugar
         }
 
         if ($return_full_array) {
-            $GLOBALS['log']->debug(__METHOD__.' $googlemaps: '.print_r($googlemaps, true));
+            $GLOBALS['log']->debug(__METHOD__ . ' $googlemaps: ' . print_r($googlemaps, true));
             return $googlemaps;
         } else {
-            $GLOBALS['log']->debug(__METHOD__.' $aInfo: '.print_r($aInfo, true));
+            $GLOBALS['log']->debug(__METHOD__ . ' $aInfo: ' . print_r($aInfo, true));
             return $aInfo;
         }
     }
@@ -1035,9 +1038,9 @@ class jjwg_Maps extends jjwg_Maps_sugar
         $parent_type = '';
         $parent_id = '';
 
-        $GLOBALS['log']->debug(__METHOD__.' START');
-        $GLOBALS['log']->debug(__METHOD__.' $object_name: '.$object_name);
-        $GLOBALS['log']->debug(__METHOD__.' $display: '.print_r($display, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' START');
+        $GLOBALS['log']->debug(__METHOD__ . ' $object_name: ' . $object_name);
+        $GLOBALS['log']->debug(__METHOD__ . ' $display: ' . print_r($display, true));
 
         // Field naming is different in some modules.
         // Some modules do not have an address, so a related account needs to be found first.
@@ -1056,9 +1059,9 @@ class jjwg_Maps extends jjwg_Maps_sugar
 
             // Find Account - Assume only one related Account
             $query = "SELECT accounts.*, accounts_cstm.* FROM accounts LEFT JOIN accounts_cstm ON accounts.id = accounts_cstm.id_c " .
-                    " LEFT JOIN accounts_opportunities ON accounts.id = accounts_opportunities.account_id AND accounts_opportunities.deleted = 0 " .
-                    " WHERE accounts.deleted = 0 AND accounts_opportunities.opportunity_id = '" . $display['id'] . "'";
-            $GLOBALS['log']->debug(__METHOD__.' Opportunity to Account');
+                " LEFT JOIN accounts_opportunities ON accounts.id = accounts_opportunities.account_id AND accounts_opportunities.deleted = 0 " .
+                " WHERE accounts.deleted = 0 AND accounts_opportunities.opportunity_id = '" . $display['id'] . "'";
+            $GLOBALS['log']->debug(__METHOD__ . ' Opportunity to Account');
             $result = $this->db->limitQuery($query, 0, 1);
             $fields = $this->db->fetchByAssoc($result);
 
@@ -1077,17 +1080,17 @@ class jjwg_Maps extends jjwg_Maps_sugar
             }
 
             $query = "SELECT accounts.*, accounts_cstm.* FROM accounts LEFT JOIN accounts_cstm ON accounts.id = accounts_cstm.id_c " .
-                    " WHERE accounts.deleted = 0 AND id = '" . $displayAccountId . "'";
-            $GLOBALS['log']->debug(__METHOD__.' Case to Account');
+                " WHERE accounts.deleted = 0 AND id = '" . $displayAccountId . "'";
+            $GLOBALS['log']->debug(__METHOD__ . ' Case to Account');
             $result = $this->db->limitQuery($query, 0, 1);
             $fields = $this->db->fetchByAssoc($result);
 
             // If Account is not found; Find many to many Account - Assume only one related Account
             if (empty($fields)) {
                 $query = "SELECT accounts.*, accounts_cstm.* FROM accounts LEFT JOIN accounts_cstm ON accounts.id = accounts_cstm.id_c " .
-                        " LEFT JOIN accounts_cases ON accounts.id = accounts_cases.account_id AND accounts_cases.deleted = 0 " .
-                        " WHERE accounts.deleted = 0 AND accounts_cases.case_id = '" . $display['id'] . "'";
-                $GLOBALS['log']->debug(__METHOD__.' Case to Accounts');
+                    " LEFT JOIN accounts_cases ON accounts.id = accounts_cases.account_id AND accounts_cases.deleted = 0 " .
+                    " WHERE accounts.deleted = 0 AND accounts_cases.case_id = '" . $display['id'] . "'";
+                $GLOBALS['log']->debug(__METHOD__ . ' Case to Accounts');
                 $result = $this->db->limitQuery($query, 0, 1);
                 $fields = $this->db->fetchByAssoc($result);
             }
@@ -1099,18 +1102,18 @@ class jjwg_Maps extends jjwg_Maps_sugar
 
             // Check relationship from Project to Account - Assume only one related Account
             $query = "SELECT accounts.*, accounts_cstm.* FROM accounts LEFT JOIN accounts_cstm ON accounts.id = accounts_cstm.id_c " .
-                    " LEFT JOIN projects_accounts ON accounts.id = projects_accounts.account_id AND projects_accounts.deleted = 0 " .
-                    " WHERE accounts.deleted = 0 AND projects_accounts.project_id = '" . $display['id'] . "'";
-            $GLOBALS['log']->debug(__METHOD__.' Project to Account');
+                " LEFT JOIN projects_accounts ON accounts.id = projects_accounts.account_id AND projects_accounts.deleted = 0 " .
+                " WHERE accounts.deleted = 0 AND projects_accounts.project_id = '" . $display['id'] . "'";
+            $GLOBALS['log']->debug(__METHOD__ . ' Project to Account');
             $result = $this->db->limitQuery($query, 0, 1);
             $fields = $this->db->fetchByAssoc($result);
 
             if (empty($fields)) {
                 // Find Opportunity - Assuming that the Project was created from an Opportunity (Closed Won) Detial View
                 $query = "SELECT opportunities.*, opportunities_cstm.* FROM opportunities LEFT JOIN opportunities_cstm ON opportunities.id = opportunities_cstm.id_c " .
-                        " LEFT JOIN projects_opportunities ON opportunities.id = projects_opportunities.opportunity_id AND projects_opportunities.deleted = 0 " .
-                        " WHERE opportunities.deleted = 0 AND projects_opportunities.project_id = '" . $display['id'] . "'";
-                $GLOBALS['log']->debug(__METHOD__.' Project to Opportunity');
+                    " LEFT JOIN projects_opportunities ON opportunities.id = projects_opportunities.opportunity_id AND projects_opportunities.deleted = 0 " .
+                    " WHERE opportunities.deleted = 0 AND projects_opportunities.project_id = '" . $display['id'] . "'";
+                $GLOBALS['log']->debug(__METHOD__ . ' Project to Opportunity');
                 $result = $this->db->limitQuery($query, 0, 1);
                 $opportunity = $this->db->fetchByAssoc($result);
                 if ($opportunity === false) {
@@ -1119,9 +1122,9 @@ class jjwg_Maps extends jjwg_Maps_sugar
                 } else {
                     // Find Account - Assume only one related Account for the Opportunity
                     $query = "SELECT accounts.*, accounts_cstm.* FROM accounts LEFT JOIN accounts_cstm ON accounts.id = accounts_cstm.id_c " .
-                            " LEFT JOIN accounts_opportunities ON accounts.id = accounts_opportunities.account_id AND accounts_opportunities.deleted = 0 " .
-                            " WHERE accounts.deleted = 0 AND accounts_opportunities.opportunity_id = '" . $opportunity['id'] . "'";
-                    $GLOBALS['log']->debug(__METHOD__.' Opportunity to Account');
+                        " LEFT JOIN accounts_opportunities ON accounts.id = accounts_opportunities.account_id AND accounts_opportunities.deleted = 0 " .
+                        " WHERE accounts.deleted = 0 AND accounts_opportunities.opportunity_id = '" . $opportunity['id'] . "'";
+                    $GLOBALS['log']->debug(__METHOD__ . ' Opportunity to Account');
                     $result = $this->db->limitQuery($query, 0, 1);
                     $fields = $this->db->fetchByAssoc($result);
                 }
@@ -1134,8 +1137,8 @@ class jjwg_Maps extends jjwg_Maps_sugar
 
             // Find Meeting - Flex Relate Fields: meetings.parent_type and meetings.parent_id
             $query = "SELECT meetings.*, meetings_cstm.* FROM meetings LEFT JOIN meetings_cstm ON meetings.id = meetings_cstm.id_c " .
-                    " WHERE meetings.deleted = 0 AND meetings.id = '" . $display['id'] . "'";
-            $GLOBALS['log']->debug(__METHOD__.' Meeting');
+                " WHERE meetings.deleted = 0 AND meetings.id = '" . $display['id'] . "'";
+            $GLOBALS['log']->debug(__METHOD__ . ' Meeting');
             $result = $this->db->limitQuery($query, 0, 1);
             $meeting = $this->db->fetchByAssoc($result);
 
@@ -1146,48 +1149,52 @@ class jjwg_Maps extends jjwg_Maps_sugar
                 $parent_type = $meeting['parent_type'];
                 $parent_id = $meeting['parent_id'];
             }
-            $GLOBALS['log']->debug(__METHOD__.' Meeting $parent_type: '.$parent_type);
-            $GLOBALS['log']->debug(__METHOD__.' Meeting $parent_id: '.$parent_id);
+            $GLOBALS['log']->debug(__METHOD__ . ' Meeting $parent_type: ' . $parent_type);
+            $GLOBALS['log']->debug(__METHOD__ . ' Meeting $parent_id: ' . $parent_id);
 
             // If the parent_type is valid module to geocode
-            if (in_array($parent_type, array_keys($this->settings['valid_geocode_modules']))
-                    && !empty($parent_id) && $parent_type != 'Meeting') {
+            if (
+                in_array($parent_type, array_keys($this->settings['valid_geocode_modules']))
+                && !empty($parent_id) && $parent_type != 'Meeting'
+            ) {
 
                 // Define parent object
                 $parent = get_module_info($parent_type);
                 $parent->retrieve($parent_id);
-                $parent->custom_fields->retrieve();
+                // $parent->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $fields = $parent->fetched_row;
 
-                $GLOBALS['log']->debug(__METHOD__.' Meeting $parent->object_name: '.$parent->object_name);
-                $GLOBALS['log']->debug(__METHOD__.' Meeting $parent->fetched_row: '.print_r($parent->fetched_row, true));
+                $GLOBALS['log']->debug(__METHOD__ . ' Meeting $parent->object_name: ' . $parent->object_name);
+                $GLOBALS['log']->debug(__METHOD__ . ' Meeting $parent->fetched_row: ' . print_r($parent->fetched_row, true));
 
                 // Call this defineMapsAddress for parent which will look at other relationships
                 $aInfo = $this->defineMapsAddress($parent->object_name, $parent->fetched_row);
                 // return $aInfo
-                $GLOBALS['log']->debug(__METHOD__.' Meeting $address Found $aInfo: '.print_r($aInfo, true));
+                $GLOBALS['log']->debug(__METHOD__ . ' Meeting $address Found $aInfo: ' . print_r($aInfo, true));
                 return $aInfo;
             }
         }
 
 
         // If related account address has already been geocoded
-        if (!empty($address) && !is_bool($fields) && $fields['jjwg_maps_geocode_status_c'] == 'OK' &&
-                !empty($fields['jjwg_maps_lat_c']) && !empty($fields['jjwg_maps_lng_c'])) {
+        if (
+            !empty($address) && !is_bool($fields) && $fields['jjwg_maps_geocode_status_c'] == 'OK' &&
+            !empty($fields['jjwg_maps_lat_c']) && !empty($fields['jjwg_maps_lng_c'])
+        ) {
             $aInfo = array(
                 'address' => $address,
                 'status' => 'OK',
                 'lat' => $fields['jjwg_maps_lat_c'],
                 'lng' => $fields['jjwg_maps_lng_c']
             );
-            $GLOBALS['log']->debug(__METHOD__.' OK Array Found $aInfo: '.print_r($aInfo, true));
+            $GLOBALS['log']->debug(__METHOD__ . ' OK Array Found $aInfo: ' . print_r($aInfo, true));
             return $aInfo;
-        // elseif return address only - if defined
+            // elseif return address only - if defined
         } elseif (!empty($address)) {
             $aInfo = array(
                 'address' => $address,
             );
-            $GLOBALS['log']->debug(__METHOD__.' $address Found $aInfo: '.print_r($aInfo, true));
+            $GLOBALS['log']->debug(__METHOD__ . ' $address Found $aInfo: ' . print_r($aInfo, true));
             return $aInfo;
         } else {
             return false;
@@ -1205,7 +1212,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
         if (!in_array($type, array('billing', 'shipping', 'primary', 'alt', 'custom', 'address'))) {
             $type = 'billing';
         }
-        $GLOBALS['log']->debug(__METHOD__.' $type: '.print_r($type, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' $type: ' . print_r($type, true));
         $address_fields = array('billing_address_street', 'billing_address_city', 'billing_address_state', 'billing_address_postalcode', 'billing_address_country');
         $address_parts = array();
         switch ($type) {
@@ -1225,7 +1232,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
                 $address_fields = array('address_street', 'address_city', 'address_state', 'address_postalcode', 'address_country');
                 break;
         }
-        $GLOBALS['log']->debug(__METHOD__.' $address_fields: '.print_r($address_fields, true));
+        $GLOBALS['log']->debug(__METHOD__ . ' $address_fields: ' . print_r($address_fields, true));
         foreach ($address_fields as $field) {
             if (!isset($display[$field])) {
                 $display[$field] = '';
@@ -1238,7 +1245,7 @@ class jjwg_Maps extends jjwg_Maps_sugar
             $address = implode(', ', $address_parts);
             $address = preg_replace('/[\n\r]+/', ' ', trim($address));
             $address = preg_replace("/[\t\s]+/", ' ', $address);
-            $GLOBALS['log']->debug(__METHOD__.' $address: '.print_r($address, true));
+            $GLOBALS['log']->debug(__METHOD__ . ' $address: ' . print_r($address, true));
             return trim($address);
         } else {
             return false;
@@ -1274,13 +1281,13 @@ class jjwg_Maps extends jjwg_Maps_sugar
             'fetched_row', 'parent_id', 'parent_type', 'last_parent_id', 'rel_fields_before_value'
         );
         $log_output = array();
-        foreach (get_object_vars($bean) as $key=>$value) {
+        foreach (get_object_vars($bean) as $key => $value) {
             if (in_array($key, $log_keys)) {
                 $log_output[$key] = $value;
             }
         }
         ksort($log_output);
-        $GLOBALS['log']->info(__METHOD__.' $log_output: '.print_r($log_output, true));
+        $GLOBALS['log']->info(__METHOD__ . ' $log_output: ' . print_r($log_output, true));
     }
 }
 
@@ -1299,7 +1306,7 @@ function getProspectLists()
     $result = DBManagerFactory::getInstance()->query($query, false);
 
     $list = array();
-    $list['']='';
+    $list[''] = '';
     while (($row = DBManagerFactory::getInstance()->fetchByAssoc($result)) != null) {
         $list[$row['id']] = $row['name'];
     }

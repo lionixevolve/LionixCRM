@@ -52,7 +52,7 @@ class CasesJjwg_MapsLogicHook
             $focus = get_module_info($arguments['module']);
             if (!empty($arguments['id'])) {
                 $focus->retrieve($arguments['id']);
-                $focus->custom_fields->retrieve();
+                // $focus->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($focus, true);
                 if ($focus->jjwg_maps_address_c != $focus->fetched_row['jjwg_maps_address_c']) {
                     $focus->save(false);
@@ -69,7 +69,7 @@ class CasesJjwg_MapsLogicHook
             $focus = get_module_info($arguments['module']);
             if (!empty($arguments['id'])) {
                 $focus->retrieve($arguments['id']);
-                $focus->custom_fields->retrieve();
+                // $focus->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($focus, true);
                 if ($focus->jjwg_maps_address_c != $focus->fetched_row['jjwg_maps_address_c']) {
                     $focus->save(false);

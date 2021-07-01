@@ -45,7 +45,7 @@ class AccountsJjwg_MapsLogicHook
             require_once('modules/Project/Project.php');
             $projects = $bean->get_linked_beans('project', 'Project');
             foreach ($projects as $project) {
-                $project->custom_fields->retrieve();
+                // $project->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($project, true);
                 if ($project->jjwg_maps_address_c != $project->fetched_row['jjwg_maps_address_c']) {
                     $project->save(false);
@@ -62,7 +62,7 @@ class AccountsJjwg_MapsLogicHook
             require_once('modules/Opportunities/Opportunity.php');
             $opportunities = $bean->get_linked_beans('opportunities', 'Opportunity');
             foreach ($opportunities as $opportunity) {
-                $opportunity->custom_fields->retrieve();
+                // $opportunity->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($opportunity, true);
                 if ($opportunity->jjwg_maps_address_c != $opportunity->fetched_row['jjwg_maps_address_c']) {
                     $opportunity->save(false);
@@ -79,7 +79,7 @@ class AccountsJjwg_MapsLogicHook
             require_once('modules/Cases/Case.php');
             $cases = $bean->get_linked_beans('cases', 'aCase');
             foreach ($cases as $case) {
-                $case->custom_fields->retrieve();
+                // $case->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($case, true);
                 if ($case->jjwg_maps_address_c != $case->fetched_row['jjwg_maps_address_c']) {
                     $case->save(false);
@@ -104,7 +104,7 @@ class AccountsJjwg_MapsLogicHook
             $focus = get_module_info($arguments['module']);
             if (!empty($arguments['id'])) {
                 $focus->retrieve($arguments['id']);
-                $focus->custom_fields->retrieve();
+                // $focus->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($focus, true);
                 if ($focus->jjwg_maps_address_c != $focus->fetched_row['jjwg_maps_address_c']) {
                     $focus->save(false);
@@ -121,7 +121,7 @@ class AccountsJjwg_MapsLogicHook
             $focus = get_module_info($arguments['module']);
             if (!empty($arguments['id'])) {
                 $focus->retrieve($arguments['id']);
-                $focus->custom_fields->retrieve();
+                // $focus->custom_fields->retrieve(); // it seems that this method is no longer requiered. LionixCRM
                 $this->jjwg_Maps->updateGeocodeInfo($focus, true);
                 if ($focus->jjwg_maps_address_c != $focus->fetched_row['jjwg_maps_address_c']) {
                     $focus->save(false);
