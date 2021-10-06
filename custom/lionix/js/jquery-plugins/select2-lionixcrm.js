@@ -34,7 +34,8 @@
                 /module=ModuleBuilder/.test(window.location.search) ||
                 /module=Studio/.test(window.location.search) ||
                 /module=Administration/.test(window.location.search) ||
-                /module%3DACLRoles/.test(window.location.href)
+                /module%3DACLRoles/.test(window.location.href) ||
+                /module=Project/.test(window.location.href)
             ) {
                 applySelect2 = false;
             }
