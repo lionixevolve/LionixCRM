@@ -50,11 +50,11 @@
 <div class="p_login">
 
 	<div class="p_login_top">
-
-		<a title="SuiteCRM" href="http://www.suitecrm.com">SuiteCRM</a>
-
+		
+		<a title="SuiteCRM" href="https://www.suitecrm.com">SuiteCRM</a>
+		
 	</div>
-
+    
     <div class="p_login_middle">
         {if $LOGIN_ERROR_MESSAGE}
             <p align='center' class='error'>{$LOGIN_ERROR_MESSAGE}</p>
@@ -62,7 +62,7 @@
 
 
     <div id="loginform">
-
+        
         <form class="form-signin" role="form" action="index.php" method="post" name="DetailView" id="form"
               onsubmit="return document.getElementById('cant_login').value == ''" autocomplete="off">
             <div class="companylogo">{$LOGIN_IMAGE}</div>
@@ -115,7 +115,7 @@
                 <a href='javascript:void(0)'>{sugar_translate module="Users" label="LBL_LOGIN_FORGOT_PASSWORD"}</a>
             </div>
         </form>
-
+        
         <form class="form-signin passform" role="form" action="index.php" method="post" name="DetailView" id="form" name="fp_form" id="fp_form" autocomplete="off">
             <div id="forgot_password_dialog" style="display:none">
                 <input type="hidden" name="entryPoint" value="GeneratePassword">
@@ -142,15 +142,19 @@
                        value="{sugar_translate module="Users" label="LBL_LOGIN_SUBMIT"}" autocomplete="off">
             </div>
         </form>
-
+        
     </div>
     </div>
-
+    
     <div class="p_login_bottom">
-        <a id="evolved_by" style="cursor:pointer; text-decoration:none; color:#534d64; font-size:12px; margin: 0 20px 0 5px;" onMouseOver="this.style.color='#B55F5D'" onMouseOut="this.style.color='#534d64'">&copy; Evolved by LionixCRM</a>
-        <a id="admin_options">&copy; Supercharged by SuiteCRM</a>
-        <a id="powered_by">&copy; Powered By SugarCRM</a>
-	</div>
 
+    		<a id="admin_options">&copy; Supercharged by SuiteCRM</a>
+            <a id="powered_by">&copy; Powered By SugarCRM</a>
+    	
+	</div>
+    
 </div>
 <!-- End login container -->
+
+
+

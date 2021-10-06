@@ -35,7 +35,7 @@
     "consolidation/robo": "^1.4",
     "elasticsearch/elasticsearch": "^5.3",
     "ezyang/htmlpurifier": "^4.10",
-    "google/apiclient": "^2.0",
+    "google/apiclient": "^2.7",
     "google/recaptcha": "^1.1",
     "gymadarasz/ace": "^1.2",
     "gymadarasz/imagesloaded": "^4.1",
@@ -76,7 +76,7 @@
     "friendsofphp/php-cs-fixer": "^2.15",
     "fzaninotto/faker": "^1.6",
     "jeroendesloovere/vcard": "v1.5",
-    "leafo/scssphp": "^0.7.7",
+    "leafo/scssphp": "^0.8.4",
     "mikey179/vfsstream": "1.6.*",
     "mockery/mockery": "^1.1.0"
   },
@@ -110,6 +110,9 @@
     ]
   },
   "extra": {
+    "google/apiclient-services": [
+      "Calendar"
+    ],
     "merge-plugin": {
       "include": [
         "composer.ext.json",
@@ -121,10 +124,7 @@
       "merge-dev": true,
       "merge-extra": false,
       "merge-extra-deep": false,
-      "merge-scripts": false,
-      "google/apiclient-services": [
-        "Calendar"
-      ]
+      "merge-scripts": false
     }
   }
 }
